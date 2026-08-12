@@ -1,0 +1,2900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foamia — Wash Tech for Car Wash Owners</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --pine: #000000;
+      --pine-2: #0A0A0A;
+      --pine-3: #141414;
+      --lime: #9BCB2B;
+      /* Softened from #A8DE2E for black bg contrast */
+      --lime-dark: #81AC20;
+      --paper: #000000;
+      --paper-2: #111111;
+      --ink: #FFFFFF;
+      --muted: #A0A0A0;
+      --white: #F4F6EE;
+      /* Warmed up off-white */
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      --radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    .display {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width:640px) {
+      .wrap {
+        padding: 0 20px;
+      }
+    }
+
+    button,
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      border-radius: 100px;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn-lime {
+      background: var(--lime);
+      color: var(--pine);
+      padding: 15px 30px;
+      font-size: 15px;
+      box-shadow: 0 10px 24px rgba(168, 222, 46, 0.35);
+    }
+
+    .btn-lime:hover {
+      background: var(--lime-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: var(--white);
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+
+    .btn-dark {
+      background: var(--pine);
+      color: var(--white);
+      padding: 15px 30px;
+      font-size: 15px;
+    }
+
+    .btn-dark:hover {
+      background: var(--pine-2);
+      transform: translateY(-2px);
+    }
+
+    /* reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== NAV ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: color .15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-login {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .burger {
+      display: none;
+      background: none;
+      color: var(--white);
+      font-size: 22px;
+    }
+
+    @media (max-width:900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .burger {
+        display: block;
+      }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      background: var(--pine);
+      padding: 150px 0 0;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      position: relative;
+    }
+
+    .phone-stage {
+      position: relative;
+    }
+
+    .phone {
+      position: relative;
+      z-index: 4;
+    }
+
+    .hero-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      /* bumped z-index to stay above scrim */
+    }
+
+    /* Text legibility scrim */
+    .hero-inner::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      bottom: -150px;
+      left: -50vw;
+      right: 45%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.65) 60%, transparent 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      color: var(--white);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--lime);
+    }
+
+    .hero p.lead {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 460px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 54px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats div b {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .hero-stats div span {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 13px;
+    }
+
+    /* phone mockup */
+    .phone-stage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      padding: 40px 0 0;
+    }
+
+    .phone {
+      width: 270px;
+      height: 552px;
+      background: #0b0b0c;
+      border-radius: 42px;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+      position: relative;
+      z-index: 3;
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 22px;
+      background: #0b0b0c;
+      border-radius: 0 0 16px 16px;
+      z-index: 5;
+    }
+
+    .phone-screen {
+      background: var(--pine-3);
+      width: 100%;
+      height: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 20px 4px;
+      font-size: 11px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .app-topbar {
+      padding: 14px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .app-topbar .hi {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .app-topbar .name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--pine-3);
+    }
+
+    .app-card-hero {
+      margin: 0 18px 14px;
+      background: var(--pine);
+      border-radius: 16px;
+      padding: 16px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card-hero .lbl {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .app-card-hero .val {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .app-card-hero .grow {
+      font-size: 11px;
+      color: var(--lime);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .mini-stats {
+      display: flex;
+      gap: 10px;
+      margin: 0 18px 14px;
+    }
+
+    .mini-stat {
+      flex: 1;
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .mini-stat .lbl {
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mini-stat .val {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      margin-top: 2px;
+    }
+
+    .list-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0 18px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .booking-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 18px 8px;
+      padding: 10px 12px;
+      background: var(--paper);
+      border-radius: 12px;
+    }
+
+    .booking-row .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    .booking-row .info {
+      flex: 1;
+    }
+
+    .booking-row .info .t1 {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .booking-row .info .t2 {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .booking-row .time {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--pine);
+    }
+
+    .glow {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 222, 46, 0.28), transparent 70%);
+      top: 10%;
+      right: -10%;
+      z-index: 1;
+      filter: blur(10px);
+    }
+
+    /* ===== 3D HERO (Three.js) ===== */
+    .three-hero {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .three-hero canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .three-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 1;
+      letter-spacing: 0.04em;
+      transition: opacity .4s ease;
+    }
+
+    .three-loading.hidden {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .three-hero {
+        display: none;
+      }
+    }
+
+    /* ===== SCROLL WASH SEQUENCE ===== */
+    .wave-divider {
+      position: relative;
+      width: 100%;
+      height: 110px;
+      margin-top: 60px;
+      z-index: 5;
+    }
+
+    .wave-divider svg {
+      position: absolute;
+      bottom: -1px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .wash-scroll {
+      position: relative;
+      height: 380vh;
+      background: #000;
+    }
+
+    .wash-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wash-sticky::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 55vh;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .wash-canvas-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .wash-canvas-wrap canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .wash-caption {
+      position: absolute;
+      left: 8%;
+      bottom: 14%;
+      z-index: 3;
+      text-align: left;
+      max-width: 640px;
+      padding: 0;
+    }
+
+    .wash-stage {
+      display: none;
+      animation: cinematicFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .wash-stage.active {
+      display: block;
+    }
+
+    .wash-stage .sec-eyebrow {
+      letter-spacing: 0.15em;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--lime);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .wash-stage h2 {
+      color: var(--white);
+      font-size: 52px;
+      margin: 0 0 14px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .wash-stage p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    @keyframes cinematicFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(24px);
+        filter: blur(4px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    .wash-progress {
+      position: absolute;
+      right: 36px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wash-progress span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transition: background .3s ease, transform .3s ease;
+    }
+
+    .wash-progress span.on {
+      background: var(--lime);
+      transform: scale(1.3);
+    }
+
+    @media (max-width:700px) {
+      .wash-progress {
+        display: none;
+      }
+    }
+
+    .wash-scroll-hint {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      animation: hintbounce 1.8s ease-in-out infinite;
+    }
+
+    .wash-scroll-hint.hide {
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    @keyframes hintbounce {
+
+      0%,
+      100% {
+        transform: translate(-50%, 0);
+      }
+
+      50% {
+        transform: translate(-50%, 6px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wash-scroll {
+        height: auto;
+      }
+
+      .wash-sticky {
+        position: relative;
+      }
+
+      .wash-canvas-wrap {
+        display: none;
+      }
+    }
+
+    /* ===== LOGO STRIP ===== */
+    .logo-strip {
+      background: var(--paper);
+      padding: 44px 0;
+      border-bottom: 1px solid var(--paper-2);
+    }
+
+    .logo-strip p {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+      opacity: 0.55;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    section {
+      padding: 100px 0;
+    }
+
+    .sec-head {
+      max-width: 600px;
+      margin-bottom: 60px;
+    }
+
+    .sec-eyebrow {
+      color: var(--lime-dark);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .sec-head h2 {
+      font-size: 38px;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .sec-head p {
+      color: var(--muted);
+      font-size: 16.5px;
+      line-height: 1.6;
+    }
+
+    .center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== 3D MOBILE SCROLL FEATURES ===== */
+    .mobile-3d-scroll-sec {
+      height: 280vh;
+      /* Shorter scroll room to reduce empty runway */
+      background: var(--pine-2);
+      /* Darker bg to make phone pop */
+      position: relative;
+      z-index: 10;
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 2000px;
+      overflow: hidden;
+    }
+
+    .scene-3d {
+      width: 340px;
+      height: 720px;
+      transform-style: preserve-3d;
+      --scroll: 0;
+      /* Updated by JS */
+      /* Tilt sequence: 
+       0.0 -> 0.1: Ramp up to 65deg
+       0.1 -> 0.8: Hold 52deg while cards are read
+       0.8 -> 0.9: Ramp down to 0deg (vertical) for a clean ending! */
+      --tilt: calc(max(0, min(1, (var(--scroll) - 0.0) * 10)) - max(0, min(1, (var(--scroll) - 0.8) * 10)));
+      transform: rotateX(calc(var(--tilt) * 52deg)) rotateZ(calc(var(--tilt) * -16deg));
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .phone-mockup {
+      width: 100%;
+      height: 100%;
+      border-radius: 44px;
+      background: #0a0a0a;
+      border: 12px solid #1a1a1a;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 2px #333;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 30px;
+      background: #1a1a1a;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      z-index: 10;
+    }
+
+    .phone-header {
+      padding: 60px 30px 20px;
+      transform: translateZ(1px);
+      /* keep above phone bg */
+    }
+
+    .phone-header h2 {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 6px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .phone-header p {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    .cards-stack {
+      position: absolute;
+      top: 180px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform-style: preserve-3d;
+
+      /* 1. Fan out progress (0 to 1) - start sooner */
+      --fan-out: calc(max(0, min(1, (var(--scroll) - 0.02) * 15)));
+
+      /* 2. Reading progress cycles through cards (-1 to 6) - start sooner */
+      --progress: calc(-1 + max(0, min(7, (var(--scroll) - 0.08) * 12)));
+
+      transform: translateZ(10px);
+      /* Base lift off glass */
+    }
+
+    .feature-card {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      height: 180px;
+      background: linear-gradient(135deg, rgba(255, 245, 248, 0.95) 0%, rgba(240, 250, 255, 0.95) 50%, rgba(245, 255, 245, 0.95) 100%);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 1);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      /* Calculate stack fanned position 
+       (Fanning along the phone's local Y axis so it matches the physical 3D orientation) */
+      --fanned-x: 0px;
+      --fanned-y: calc(var(--i) * -110px);
+      --fanned-z: calc(110px - var(--i) * 20px);
+      /* All cards > 0 so they are IN FRONT of phone glass */
+
+      /* Interpolate from flat to fanned */
+      --flat-z: calc(var(--i) * -4px);
+      /* Enforce DOM occlusion order even when flat */
+      --stack-x: calc(var(--fan-out) * var(--fanned-x));
+      --stack-y: calc(var(--i) * 24px + var(--fan-out) * (var(--fanned-y) - var(--i) * 24px));
+      --stack-z: calc(var(--flat-z) + var(--fan-out) * (var(--fanned-z) - var(--flat-z)));
+
+      /* Reading Sequence Logic */
+      --dist: calc(var(--progress) - var(--i));
+
+      /* Lifts towards camera (0 to 1) */
+      --lift-progress: calc(max(0, min(1, var(--dist) + 1)));
+
+      /* Flies past camera over user's head (0 to 1) */
+      --fly-past: calc(max(0, min(1, var(--dist))));
+
+      /* Calculate current positions.
+       Using mathematically flawless screen-space projection offsets to keep the 
+       active card perfectly centered regardless of the 65deg X and -25deg Z parent tilts! */
+      --active-x: -406px;
+      --active-y: 870px;
+      --active-z: 250px;
+
+      --current-x: calc(var(--stack-x) + var(--lift-progress) * (var(--active-x) - var(--stack-x)) + var(--fly-past) * 0px);
+
+      --current-z: calc(var(--stack-z) + var(--lift-progress) * (var(--active-z) - var(--stack-z)) + var(--fly-past) * 500px);
+
+      --current-y: calc(var(--stack-y) + var(--lift-progress) * (var(--active-y) - var(--stack-y)) + var(--fly-past) * -1000px);
+
+      /* Untwist ONLY when lifting out of the stack */
+      --untwist: var(--lift-progress);
+
+      transform:
+        translateX(var(--current-x)) translateY(var(--current-y)) translateZ(var(--current-z)) rotateZ(calc(var(--untwist) * 16deg)) rotateX(calc(var(--untwist) * -52deg)) scale(calc(1 + var(--untwist) * 0.15));
+
+      opacity: calc(1 - var(--fly-past) * 4);
+      /* Fades out instantly as you scroll past */
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, opacity 0.4s ease;
+    }
+
+    .card-chip {
+      position: absolute;
+      top: 24px;
+      right: 20px;
+      width: 38px;
+      height: 26px;
+      background: linear-gradient(135deg, #e0e0e0, #f8f8f8, #c0c0c0);
+      border-radius: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    .card-chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.08) 35%, transparent 35%),
+        linear-gradient(0deg, transparent 40%, rgba(0, 0, 0, 0.08) 40%, rgba(0, 0, 0, 0.08) 45%, transparent 45%);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(168, 222, 46, 0.3) 0%, rgba(129, 172, 32, 0.3) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 18px;
+      color: var(--pine);
+    }
+
+    .feature-card h3 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #111;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-card p {
+      color: #444;
+      font-weight: 500;
+      font-size: 14.5px;
+      line-height: 1.4;
+    }
+
+    @media (max-width:900px) {
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width:640px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== BRANCHING TREE TIMELINE ANIMATION ===== */
+    .steps-section {
+      background: #060706;
+      color: var(--white);
+      padding: 120px 0 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tree-timeline-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 60px auto 0;
+      padding: 40px 0;
+    }
+
+    .tree-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .tree-path-bg {
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .tree-path-active {
+      stroke: var(--lime);
+      stroke-width: 3.5;
+      fill: none;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 8px rgba(155, 203, 43, 0.7));
+    }
+
+    .tree-root-pulse {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--lime) 0%, rgba(155, 203, 43, 0.4) 60%, transparent 100%);
+      box-shadow: 0 0 30px var(--lime), 0 0 60px var(--lime);
+      z-index: 3;
+      animation: rootGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes rootGlow {
+      0% {
+        transform: translateX(-50%) scale(0.9);
+        box-shadow: 0 0 20px var(--lime);
+      }
+
+      100% {
+        transform: translateX(-50%) scale(1.15);
+        box-shadow: 0 0 45px var(--lime);
+      }
+    }
+
+    .tree-cards-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 70px;
+    }
+
+    .tree-step-row {
+      display: flex;
+      width: 100%;
+      position: relative;
+    }
+
+    .tree-step-row.left {
+      justify-content: flex-start;
+    }
+
+    .tree-step-row.right {
+      justify-content: flex-end;
+    }
+
+    .tree-card {
+      width: 44%;
+      background: rgba(18, 22, 18, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px 28px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      opacity: 0.25;
+      transform: translateY(30px) scale(0.95);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .tree-step-row.active .tree-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      border-color: rgba(155, 203, 43, 0.45);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(155, 203, 43, 0.15);
+    }
+
+    .tree-card-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.6);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 16px;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.4s ease;
+    }
+
+    .tree-step-row.active .tree-card-num {
+      background: var(--lime);
+      color: var(--pine);
+      border-color: var(--lime);
+      box-shadow: 0 0 20px rgba(155, 203, 43, 0.6);
+    }
+
+    .tree-card h3 {
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .tree-card p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .tree-node-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all 0.4s ease;
+      z-index: 4;
+    }
+
+    .tree-step-row.left .tree-node-dot {
+      right: -7px;
+    }
+
+    .tree-step-row.right .tree-node-dot {
+      left: -7px;
+    }
+
+    .tree-step-row.active .tree-node-dot {
+      background: var(--lime);
+      border-color: #ffffff;
+      box-shadow: 0 0 20px var(--lime);
+      transform: translateY(-50%) scale(1.4);
+    }
+
+    @media (max-width: 850px) {
+
+      .tree-svg,
+      .tree-root-pulse {
+        display: none;
+      }
+
+      .tree-step-row.left,
+      .tree-step-row.right {
+        justify-content: center;
+      }
+
+      .tree-card {
+        width: 100%;
+        opacity: 1;
+        transform: none;
+      }
+
+      .tree-node-dot {
+        display: none;
+      }
+    }
+
+    /* ===== USE CASES 3D PERSPECTIVE STAGE ===== */
+    .usecases-3d-sec {
+      background: #080a08;
+      padding: 120px 0 140px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .usecase-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .usecase-3d-stage {
+      position: relative;
+      margin-top: 60px;
+      perspective: 1200px;
+      perspective-origin: 50% 30%;
+      padding: 30px 10px;
+    }
+
+    .usecase-grid-3d {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      transform-style: preserve-3d;
+      transform: rotateX(12deg) rotateY(-2deg) rotateZ(0deg);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .usecase-card-3d {
+      background: rgba(18, 22, 18, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 36px 30px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform: translateZ(0px) scale(0.95);
+      opacity: 0.55;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        box-shadow 0.4s ease,
+        background 0.4s ease;
+    }
+
+    .usecase-card-3d:hover,
+    .usecase-card-3d.active {
+      opacity: 1;
+      transform: translateZ(50px) translateY(-12px) scale(1.03);
+      border-color: rgba(155, 203, 43, 0.7);
+      background: rgba(22, 28, 22, 0.9);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(155, 203, 43, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .card-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .card-badge-icon {
+      font-size: 22px;
+      opacity: 0.8;
+    }
+
+    .usecase-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .usecase-card-3d.active .usecase-tag,
+    .usecase-tag.highlight {
+      background: rgba(155, 203, 43, 0.18);
+      color: var(--lime);
+      border-color: rgba(155, 203, 43, 0.4);
+    }
+
+    .usecase-card-3d h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .usecase-card-3d p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 15px;
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: 28px;
+    }
+
+    .card-footer-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
+    }
+
+    .card-footer-link .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .usecase-card-3d.active .card-footer-link {
+      color: var(--lime);
+    }
+
+    .usecase-card-3d.active .card-footer-link .arrow {
+      transform: translateX(4px);
+    }
+
+    /* Animated Cursor */
+    .usecase-cursor {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      z-index: 10;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1), top 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    /* Nav Dots */
+    .usecase-nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .usecase-nav-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .usecase-nav-dots .dot.active {
+      background: var(--lime);
+      transform: scale(1.4);
+      box-shadow: 0 0 12px var(--lime);
+    }
+
+    @media (max-width: 900px) {
+      .usecase-grid-3d {
+        grid-template-columns: 1fr;
+        transform: none;
+      }
+
+      .usecase-card-3d {
+        transform: none !important;
+        opacity: 1;
+      }
+
+      .usecase-cursor {
+        display: none;
+      }
+    }
+
+    /* ===== TESTIMONIAL / STATS ===== */
+    .proof {
+      background: linear-gradient(135deg, #9BCB2B 0%, #81AC20 100%);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-bubbles-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .proof-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .proof blockquote {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--pine);
+      line-height: 1.4;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .proof cite {
+      font-style: normal;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 15px;
+      display: inline-block;
+    }
+
+    .proof-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .proof-stat {
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 20px;
+      padding: 24px 20px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .proof-stat:hover {
+      transform: translateY(-6px);
+      background: rgba(0, 0, 0, 0.14);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .proof-stat b {
+      font-family: 'Poppins', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--pine);
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .proof-stat span {
+      font-size: 13.5px;
+      color: rgba(0, 0, 0, 0.75);
+      font-weight: 700;
+    }
+
+    @media (max-width:800px) {
+      .proof-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== CTA BANNER ===== */
+    .cta-banner {
+      background: var(--paper);
+      padding: 100px 0;
+    }
+
+    .cta-box {
+      background: rgba(14, 16, 14, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 32px;
+      padding: 72px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+      transform: scale(0.96);
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-box.in {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .cta-box h2 {
+      color: var(--white);
+      font-size: 38px;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .cta-box p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 36px;
+      font-size: 17px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-box .hero-ctas {
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .cta-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(155, 203, 43, 0.28), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: left 0.15s ease-out, top 0.15s ease-out;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .magnetic-btn {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+    }
+
+    /* ===== FAQ ===== */
+    .faq {
+      background: var(--paper);
+      padding: 100px 0 120px;
+    }
+
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 22px 28px;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(155, 203, 43, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .faq-item.open {
+      background: rgba(155, 203, 43, 0.06);
+      border-color: rgba(155, 203, 43, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(155, 203, 43, 0.1);
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--white);
+    }
+
+    .faq-q .plus {
+      font-size: 24px;
+      color: var(--lime);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .faq-item.open .plus {
+      transform: rotate(45deg);
+      color: var(--lime);
+    }
+
+    .faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow: hidden;
+    }
+
+    .faq-a-inner {
+      overflow: hidden;
+    }
+
+    .faq-item.open .faq-a {
+      grid-template-rows: 1fr;
+      padding-top: 14px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--pine);
+      color: rgba(255, 255, 255, 0.6);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-grid h4 {
+      color: var(--white);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-grid ul li {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-grid ul li a:hover {
+      color: var(--lime);
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      margin-top: 14px;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width:800px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a class="logo" href="#">
+        <img src="Foamia%20Logo-Light.png" alt="Foamia Wash Tech">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#use-cases">Use cases</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="nav-login" href="#">Log in</a>
+        <button class="btn btn-lime">Get a demo</button>
+      </div>
+      <button class="burger">☰</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="glow"></div>
+
+    <div id="three-hero" class="three-hero"></div>
+
+    <div class="hero-inner">
+      <div class="reveal in">
+        <span class="eyebrow">Built for car wash owners</span>
+        <h1>Run your wash.<br>Not your <span>paperwork.</span></h1>
+        <p class="lead">Foamia puts bookings, memberships, staff and payments in one dashboard — so you spend your day
+          on the forecourt, not the spreadsheet.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-lime">Get a demo</button>
+          <button class="btn btn-outline">See how it works ↓</button>
+        </div>
+        <div class="hero-stats">
+          <div><b>12,400+</b><span>Washes booked monthly</span></div>
+          <div><b>340+</b><span>Wash centres on Foamia</span></div>
+          <div><b>4.8★</b><span>Avg. owner rating</span></div>
+        </div>
+      </div>
+
+      <div class="phone-stage reveal in">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="status-bar"><span>10:32</span><span>●●● 4G ▮</span></div>
+            <div class="app-topbar">
+              <div>
+                <div class="hi">Good morning,</div>
+                <div class="name">Ravi's Auto Spa</div>
+              </div>
+              <div class="avatar"></div>
+            </div>
+            <div class="app-card-hero">
+              <div class="lbl">Today's revenue</div>
+              <div class="val">₹18,240</div>
+              <div class="grow">▲ 22% vs yesterday</div>
+            </div>
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="lbl">Bookings</div>
+                <div class="val">27</div>
+              </div>
+              <div class="mini-stat">
+                <div class="lbl">Members</div>
+                <div class="val">146</div>
+              </div>
+            </div>
+            <div class="list-title">Upcoming bookings</div>
+            <div class="booking-row"><span class="dot"></span>
+              <div class="info">
+                <div class="t1">Anoop K. — Sedan wash</div>
+                <div class="t2">Bay 2 · Full wash</div>
+              </div>
+              <div class="time">10:45</div>
+            </div>
+            <div class="booking-row"><span class="dot"></span>
+              <div class="info">
+                <div class="t1">Fathima R. — SUV detail</div>
+                <div class="t2">Bay 1 · Premium</div>
+              </div>
+              <div class="time">11:15</div>
+            </div>
+            <div class="booking-row"><span class="dot"></span>
+              <div class="info">
+                <div class="t1">Sujith M. — Bike wash</div>
+                <div class="t2">Bay 3 · Express</div>
+              </div>
+              <div class="time">11:30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <!-- Symmetrical glowing wave line for a clean transition on black backgrounds -->
+        <path d="M0,60 C360,120 1080,0 1440,60" fill="none" stroke="var(--lime)" stroke-width="2"
+          style="filter: drop-shadow(0px 0px 8px var(--lime)); opacity: 0.8;"></path>
+      </svg>
+    </div>
+  </section>
+
+  <section class="wash-scroll" id="washScroll">
+    <div class="wash-sticky">
+      <div id="wash-canvas-wrap" class="wash-canvas-wrap"></div>
+
+      <div class="wash-caption">
+        <div class="wash-stage active" data-stage="0">
+          <span class="sec-eyebrow">01 &mdash; Book</span>
+          <h2>Your wash. Your time.</h2>
+          <p>Pick a service, choose your time, and let us handle the rest.</p>
+        </div>
+        <div class="wash-stage" data-stage="1">
+          <span class="sec-eyebrow">02 &mdash; Foam</span>
+          <h2>Dirt doesn't stand a chance.</h2>
+          <p>Powerful foam breaks down dirt and grime.</p>
+        </div>
+        <div class="wash-stage" data-stage="2">
+          <span class="sec-eyebrow">03 &mdash; Deep Clean</span>
+          <h2>Every detail. Spotless.</h2>
+          <p>Deep cleaning that leaves nothing behind.</p>
+        </div>
+        <div class="wash-stage" data-stage="3">
+          <span class="sec-eyebrow">04 &mdash; Shine</span>
+          <h2>Leave looking brand new.</h2>
+          <p>A flawless finish you'll notice immediately.</p>
+        </div>
+      </div>
+
+      <div class="wash-progress">
+        <span data-i="0" class="on"></span><span data-i="1"></span><span data-i="2"></span><span data-i="3"></span>
+      </div>
+      <div class="wash-scroll-hint">Scroll to wash ↓</div>
+    </div>
+  </section>
+
+  <div class="logo-strip">
+    <p>Trusted by wash centres across Kerala &amp; beyond</p>
+    <div class="logo-row">
+      <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car
+        Care</span><span>QuickShine</span><span>WashPoint</span>
+    </div>
+  </div>
+
+  <section class="mobile-3d-scroll-sec" id="features">
+    <div class="sticky-container">
+      <div class="scene-3d">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-header">
+            <h2>Foamia System</h2>
+            <p>Everything the forecourt needs, packed into one platform.</p>
+          </div>
+          <div class="cards-stack">
+            <div class="feature-card" style="--i: 0;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">📅</div>
+              <h3>Online booking</h3>
+              <p>Customers book a slot and a bay from their phone.</p>
+            </div>
+            <div class="feature-card" style="--i: 1;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">🚗</div>
+              <h3>Profiles</h3>
+              <p>Every visit and preference saved automatically.</p>
+            </div>
+            <div class="feature-card" style="--i: 2;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">♻️</div>
+              <h3>Packages</h3>
+              <p>Sell unlimited-wash and package plans effortlessly.</p>
+            </div>
+            <div class="feature-card" style="--i: 3;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">👷</div>
+              <h3>Scheduling</h3>
+              <p>Assign bays and staff per shift without double-booking.</p>
+            </div>
+            <div class="feature-card" style="--i: 4;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">💳</div>
+              <h3>Payments</h3>
+              <p>Accept UPI, cards or cash at checkout on the spot.</p>
+            </div>
+            <div class="feature-card" style="--i: 5;">
+              <div class="card-chip"></div>
+              <div class="feature-icon">📊</div>
+              <h3>Dashboard</h3>
+              <p>Revenue and staff performance from a single login.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps-section" id="how-it-works">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="sec-eyebrow" style="color:var(--lime);">Getting started</span>
+        <h2 style="color:var(--white);">Live in a week, not a quarter</h2>
+        <p style="color:rgba(255,255,255,0.7);">Foamia's onboarding team sets up your first centre with you, in this
+          order.</p>
+      </div>
+
+      <div class="tree-timeline-container" id="treeContainer">
+        <svg class="tree-svg" id="treeSvg">
+          <!-- Faint Background Track Paths -->
+          <path class="tree-path-bg" id="stemBgPath" />
+          <path class="tree-path-bg" id="b1BgPath" />
+          <path class="tree-path-bg" id="b2BgPath" />
+          <path class="tree-path-bg" id="b3BgPath" />
+          <path class="tree-path-bg" id="b4BgPath" />
+
+          <!-- Glowing Active Paths -->
+          <path class="tree-path-active main-stem" id="stemActivePath" />
+          <path class="tree-path-active branch-path" id="b1ActivePath" />
+          <path class="tree-path-active branch-path" id="b2ActivePath" />
+          <path class="tree-path-active branch-path" id="b3ActivePath" />
+          <path class="tree-path-active branch-path" id="b4ActivePath" />
+        </svg>
+
+        <!-- Pulsing Root Circle at Start -->
+        <div class="tree-root-pulse"></div>
+
+        <div class="tree-cards-wrapper">
+          <!-- Step 1: Left -->
+          <div class="tree-step-row left" data-step="1">
+            <div class="tree-card">
+              <span class="tree-card-num">1</span>
+              <h3>Set up your centre</h3>
+              <p>Add your bays, services and pricing — Foamia's team helps with the first setup call.</p>
+              <div class="tree-node-dot"></div>
+            </div>
+          </div>
+
+          <!-- Step 2: Right -->
+          <div class="tree-step-row right" data-step="2">
+            <div class="tree-card">
+              <span class="tree-card-num">2</span>
+              <h3>Invite your staff</h3>
+              <p>Each attendant gets a login to see their bay's queue and mark washes complete.</p>
+              <div class="tree-node-dot"></div>
+            </div>
+          </div>
+
+          <!-- Step 3: Left -->
+          <div class="tree-step-row left" data-step="3">
+            <div class="tree-card">
+              <span class="tree-card-num">3</span>
+              <h3>Share your booking link</h3>
+              <p>Put it on WhatsApp, Instagram or your storefront — customers book straight into your queue.</p>
+              <div class="tree-node-dot"></div>
+            </div>
+          </div>
+
+          <!-- Step 4: Right -->
+          <div class="tree-step-row right" data-step="4">
+            <div class="tree-card">
+              <span class="tree-card-num">4</span>
+              <h3>Watch it on your dashboard</h3>
+              <p>Revenue, bookings and member renewals update live from your first day.</p>
+              <div class="tree-node-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="usecases-3d-sec" id="use-cases">
+    <div class="usecase-bg-grid"></div>
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="sec-eyebrow">Use cases</span>
+        <h2>Built to flex with how you run your wash</h2>
+        <p>From a single manual bay to a multi-location chain, Foamia scales with the way you actually operate.</p>
+      </div>
+
+      <!-- 3D Perspective Stage -->
+      <div class="usecase-3d-stage" id="usecaseStage">
+        <!-- Animated Floating Cursor Pointer -->
+        <div class="usecase-cursor" id="usecaseCursor">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5.5 3.5L18.5 12L12 14.5L8.5 21L5.5 3.5Z" fill="#9BCB2B" stroke="#000" stroke-width="1.5"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <div class="usecase-grid-3d">
+          <div class="usecase-card-3d active" data-index="0">
+            <div class="card-inner">
+              <div class="card-header">
+                <span class="usecase-tag">Single centre</span>
+                <span class="card-badge-icon">📍</span>
+              </div>
+              <h3>Independent wash owners</h3>
+              <p>Replace the notebook and the walk-in queue with online bookings and a clear daily revenue view.</p>
+              <div class="card-footer-link">
+                <span>Discover by Inventory View</span>
+                <span class="arrow">→</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="usecase-card-3d" data-index="1">
+            <div class="card-inner">
+              <div class="card-header">
+                <span class="usecase-tag highlight">Multi-location</span>
+                <span class="card-badge-icon">🏢</span>
+              </div>
+              <h3>Growing chains</h3>
+              <p>Compare bay utilisation and revenue across every centre from one owner login — no separate spreadsheets
+                per site.</p>
+              <div class="card-footer-link">
+                <span>Discover by Query Builder</span>
+                <span class="arrow">→</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="usecase-card-3d" data-index="2">
+            <div class="card-inner">
+              <div class="card-header">
+                <span class="usecase-tag">Mobile &amp; on-demand</span>
+                <span class="card-badge-icon">🚚</span>
+              </div>
+              <h3>Doorstep detailing</h3>
+              <p>Route mobile detailing requests to the nearest available team and track jobs from booking to
+                completion.</p>
+              <div class="card-footer-link">
+                <span>Discover by Saved Queries</span>
+                <span class="arrow">→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation dots for direct selection -->
+      <div class="usecase-nav-dots" id="usecaseNavDots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" id="proofSec">
+    <canvas class="proof-bubbles-canvas" id="proofBubblesCanvas"></canvas>
+    <div class="wrap proof-inner">
+      <div class="reveal">
+        <blockquote>"We stopped losing bookings to missed calls. Foamia's queue fills itself, and I finally see today's
+          revenue without asking my cashier."</blockquote>
+        <cite>— Owner, Ravi's Auto Spa, Thrissur</cite>
+      </div>
+      <div class="proof-stats reveal" id="proofStats">
+        <div class="proof-stat" data-target="35" data-suffix="%">
+          <b class="stat-num">0%</b>
+          <span>Fewer missed bookings</span>
+        </div>
+        <div class="proof-stat" data-target="3.2" data-suffix="×" data-decimals="1">
+          <b class="stat-num">0.0×</b>
+          <span>Faster checkout</span>
+        </div>
+        <div class="proof-stat" data-target="98" data-suffix="%">
+          <b class="stat-num">0%</b>
+          <span>Membership renewal rate</span>
+        </div>
+        <div class="proof-stat">
+          <b>&lt;1 wk</b>
+          <span>Time to go live</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="wrap">
+      <div class="cta-box reveal" id="ctaBox">
+        <div class="cta-glow" id="ctaGlow"></div>
+        <h2>Ready to see your wash on Foamia?</h2>
+        <p>Book a 20-minute walkthrough — we'll set up your first centre live on the call.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-lime magnetic-btn">Get a demo</button>
+          <button class="btn btn-outline magnetic-btn" style="border-color:rgba(255,255,255,0.3);">Talk to
+            sales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="sec-eyebrow" style="color:var(--lime);">FAQ</span>
+        <h2>Questions owners usually ask</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>Do I need new hardware to use Foamia?</span><span class="plus">+</span></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">No. Foamia runs on any phone or tablet — owner, staff and customer apps all work on
+              devices you already have.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>Can I manage more than one wash centre?</span><span class="plus">+</span></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes — the owner dashboard shows every centre you run, with the option to drill into
+              one location at a time.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>What payment methods does Foamia support?</span><span class="plus">+</span></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">UPI, cards and cash are all supported at checkout, and every payment is logged
+              automatically to your daily report.</div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>How long does setup take?</span><span class="plus">+</span></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Most centres are live within a week. Our onboarding team helps you add your bays,
+              services and staff on a setup call.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#"><img src="Foamia%20Logo-Light.png" alt="Foamia Wash Tech"></a>
+          <p>The dashboard for car wash owners — bookings, staff, memberships and payments, in one place.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#use-cases">Use cases</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#">Help centre</a></li>
+            <li><a href="#">Log in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Foamia Wash Tech. All rights reserved.</span>
+        <span>Privacy · Terms</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+
+    // faq accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // feature card hover glow & 2D/3D tilt
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mx', x + 'px');
+        card.style.setProperty('--my', y + 'px');
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+        card.style.setProperty('--rx', rotateX + 'deg');
+        card.style.setProperty('--ry', rotateY + 'deg');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  </script>
+
+  <script>
+    // Mobile 3D Scroll Scene
+    const mobileSec = document.querySelector('.mobile-3d-scroll-sec');
+    const scene = document.querySelector('.scene-3d');
+
+    if (mobileSec && scene) {
+      window.addEventListener('scroll', () => {
+        const rect = mobileSec.getBoundingClientRect();
+        const scrollHeight = rect.height - window.innerHeight;
+
+        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+          let progress = -rect.top / scrollHeight;
+          progress = Math.max(0, Math.min(1, progress));
+          scene.style.setProperty('--scroll', progress.toFixed(3));
+        }
+      }, { passive: true });
+    }
+  </script>
+
+  <script>
+    // Hero 3D Interactive Wash Engine
+    window.addEventListener('DOMContentLoaded', function () {
+      const carImg = new Image();
+      carImg.src = 'frames/ezgif-frame-001.jpg'; // First frame of the BMW
+
+      // --- 1. HERO SECTION 3D SHOWCASE ENGINE ---
+      (function initHero3D() {
+        const container = document.getElementById('three-hero');
+        const loadingEl = document.getElementById('three-loading');
+        if (!container) return;
+
+        const canvas = document.createElement('canvas');
+        container.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        let width = 0, height = 0;
+        function resize() {
+          width = container.clientWidth || window.innerWidth;
+          height = container.clientHeight || 600;
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.scale(dpr, dpr);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // 3D Parallax Mouse Control
+        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+        window.addEventListener('mousemove', (e) => {
+          targetX = (e.clientX / window.innerWidth - 0.5) * 40;
+          targetY = (e.clientY / window.innerHeight - 0.5) * 25;
+        });
+
+        // 3D Floating Soap Bubbles
+        const bubbles = Array.from({ length: 28 }, () => ({
+          x: Math.random(),
+          y: Math.random(),
+          z: 0.2 + Math.random() * 0.8,
+          radius: 6 + Math.random() * 22,
+          speedY: 0.2 + Math.random() * 0.55,
+          wobble: Math.random() * Math.PI * 2,
+          opacity: 0.3 + Math.random() * 0.55
+        }));
+
+        let start = null;
+        function renderHero(timestamp) {
+          if (!start) start = timestamp;
+          const elapsed = (timestamp - start) / 1000;
+
+          // Smooth lerp mouse parallax
+          mouseX += (targetX - mouseX) * 0.06;
+          mouseY += (targetY - mouseY) * 0.06;
+
+          ctx.clearRect(0, 0, width, height);
+
+          // 3D Radial Stage Light
+          const cx = width * 0.64 + mouseX * 0.5;
+          const cy = height * 0.48 + mouseY * 0.5;
+          const radGlow = ctx.createRadialGradient(cx, cy, 20, cx, cy, width * 0.44);
+          radGlow.addColorStop(0, 'rgba(168, 222, 46, 0.25)');
+          radGlow.addColorStop(0.5, 'rgba(14, 43, 36, 0.15)');
+          radGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          ctx.fillStyle = radGlow;
+          ctx.fillRect(0, 0, width, height);
+
+          // Render 3D Soap Bubbles (Background Layer)
+          bubbles.forEach(b => {
+            if (b.z < 0.6) {
+              const bx = b.x * width + Math.sin(elapsed * 1.5 + b.wobble) * 16 + mouseX * b.z * 0.3;
+              const by = ((b.y * height - elapsed * b.speedY * 30) % height + height) % height + mouseY * b.z * 0.3;
+
+              ctx.beginPath();
+              ctx.arc(bx, by, b.radius * b.z, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.18})`;
+              ctx.fill();
+              ctx.strokeStyle = `rgba(168, 222, 46, ${b.opacity * 0.6})`;
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          });
+
+          // Render User's Exact Car Image with 3D Depth Parallax
+          if (carImg.complete && carImg.naturalWidth > 0) {
+            if (loadingEl && !loadingEl.classList.contains('hidden')) {
+              loadingEl.classList.add('hidden');
+            }
+
+            const aspect = carImg.naturalWidth / carImg.naturalHeight;
+            let carW = Math.min(width * 0.8, 1200);
+            let carH = carW / aspect;
+
+            const floatY = Math.sin(elapsed * 1.2) * 8;
+            // Shift right to move the busy grille off the text
+            const carX = width * 0.58 - carW / 2 + mouseX;
+            const carY = height * 0.5 - carH / 2 + floatY + mouseY;
+
+            ctx.save();
+
+            // 3D Soft Ground Shadow
+            ctx.beginPath();
+            ctx.ellipse(carX + carW * 0.65, carY + carH * 0.85, carW * 0.25, carH * 0.1, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            ctx.filter = 'blur(14px)';
+            ctx.fill();
+            ctx.filter = 'none';
+
+            // Draw User's Exact Green Sports Car Image normally (opaque)
+            ctx.drawImage(carImg, carX, carY, carW, carH);
+
+            // Create a black vignette to feather the edges of the JPEG into the black background
+            const vignette = ctx.createRadialGradient(
+              carX + carW / 2, carY + carH / 2, carW * 0.25,
+              carX + carW / 2, carY + carH / 2, carW * 0.5
+            );
+            vignette.addColorStop(0, 'rgba(0,0,0,0)');
+            vignette.addColorStop(0.75, 'rgba(0,0,0,0.85)');
+            vignette.addColorStop(1, 'rgba(0,0,0,1)');
+
+            ctx.fillStyle = vignette;
+            ctx.fillRect(carX - 2, carY - 2, carW + 4, carH + 4); // slightly larger to ensure edge coverage
+
+            ctx.restore();
+          }
+
+          // Render 3D Soap Bubbles (Foreground Layer)
+          bubbles.forEach(b => {
+            if (b.z >= 0.6) {
+              const bx = b.x * width + Math.sin(elapsed * 1.5 + b.wobble) * 16 + mouseX * b.z * 0.6;
+              const by = ((b.y * height - elapsed * b.speedY * 30) % height + height) % height + mouseY * b.z * 0.6;
+
+              ctx.beginPath();
+              ctx.arc(bx, by, b.radius * b.z, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.25})`;
+              ctx.fill();
+              ctx.strokeStyle = `rgba(168, 222, 46, ${b.opacity * 0.8})`;
+              ctx.lineWidth = 1.6;
+              ctx.stroke();
+
+              // Bubble Specular Highlight
+              ctx.beginPath();
+              ctx.arc(bx - b.radius * 0.3 * b.z, by - b.radius * 0.3 * b.z, b.radius * 0.25 * b.z, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.9})`;
+              ctx.fill();
+            }
+          });
+
+          requestAnimationFrame(renderHero);
+        }
+        requestAnimationFrame(renderHero);
+      })();
+
+      // --- 2. SCROLL WASH FRAME-BASED ANIMATION ENGINE ---
+      (function initWashFrameSequence() {
+        const section = document.getElementById('washScroll');
+        const container = document.getElementById('wash-canvas-wrap');
+        if (!section || !container) return;
+
+        const canvas = document.createElement('canvas');
+        container.appendChild(canvas);
+        const ctx = canvas.getContext('2d', { alpha: false });
+
+        let width = 0, height = 0;
+        function resize() {
+          width = container.clientWidth || window.innerWidth;
+          height = container.clientHeight || window.innerHeight;
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.scale(dpr, dpr);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const stageEls = document.querySelectorAll('.wash-stage');
+        const dotEls = document.querySelectorAll('.wash-progress span');
+        const hintEl = document.querySelector('.wash-scroll-hint');
+        let currentStage = -1;
+
+        function setStage(i) {
+          if (i === currentStage) return;
+          currentStage = i;
+          stageEls.forEach(el => el.classList.toggle('active', Number(el.dataset.stage) === i));
+          dotEls.forEach(el => el.classList.toggle('on', Number(el.dataset.i) === i));
+        }
+
+        function getProgress() {
+          const rect = section.getBoundingClientRect();
+          const scrollable = section.offsetHeight - window.innerHeight;
+          if (scrollable <= 0) return 0;
+          return Math.min(1, Math.max(0, -rect.top / scrollable));
+        }
+
+        let progress = 0;
+        let targetFrameFloat = 0;
+        let currentFrameFloat = 0;
+        let frames = [];
+        let isLoaded = false;
+
+        window.addEventListener('scroll', () => {
+          progress = getProgress();
+          if (frames.length > 0) {
+            targetFrameFloat = progress * (frames.length - 1);
+          }
+        }, { passive: true });
+
+        // Dynamic Frame Probe & Preload Function
+        async function loadFrames() {
+          const possibleDirs = ['frames/', 'ezgif-4c82f664436689bd-jpg/'];
+          const possiblePrefixes = ['ezgif-frame-', 'frame-', 'frame_', ''];
+          const possibleExts = ['.jpg', '.jpeg', '.png', '.webp'];
+
+          let workingPattern = null;
+
+          // Probe pattern for frame 1
+          for (const dir of possibleDirs) {
+            for (const prefix of possiblePrefixes) {
+              for (const ext of possibleExts) {
+                for (const padLen of [3, 2, 1]) {
+                  const numStr = String(1).padStart(padLen, '0');
+                  const url = `${dir}${prefix}${numStr}${ext}`;
+                  const ok = await new Promise(res => {
+                    const img = new Image();
+                    img.onload = () => res(true);
+                    img.onerror = () => res(false);
+                    img.src = url;
+                  });
+                  if (ok) {
+                    workingPattern = { dir, prefix, ext, padLen };
+                    break;
+                  }
+                }
+                if (workingPattern) break;
+              }
+              if (workingPattern) break;
+            }
+            if (workingPattern) break;
+          }
+
+          if (!workingPattern) {
+            workingPattern = { dir: 'frames/', prefix: 'ezgif-frame-', ext: '.jpg', padLen: 3 };
+          }
+
+          // Probe total frame count sequentially
+          let frameIndex = 1;
+          let consecutiveFailures = 0;
+          const loaded = [];
+
+          while (frameIndex <= 300 && consecutiveFailures < 2) {
+            const numStr = String(frameIndex).padStart(workingPattern.padLen, '0');
+            const url = `${workingPattern.dir}${workingPattern.prefix}${numStr}${workingPattern.ext}`;
+
+            try {
+              const img = await new Promise((res, rej) => {
+                const i = new Image();
+                i.onload = () => res(i);
+                i.onerror = () => rej();
+                i.src = url;
+              });
+              loaded.push(img);
+              consecutiveFailures = 0;
+            } catch (e) {
+              consecutiveFailures++;
+            }
+            frameIndex++;
+          }
+
+          return loaded;
+        }
+
+        loadFrames().then(loaded => {
+          if (loaded.length > 0) {
+            frames = loaded;
+            isLoaded = true;
+            targetFrameFloat = progress * (frames.length - 1);
+            currentFrameFloat = targetFrameFloat;
+          }
+        });
+
+        function render() {
+          // Smooth linear interpolation (lerp) for Apple-style scroll fluidness
+          currentFrameFloat += (targetFrameFloat - currentFrameFloat) * 0.15;
+          if (Math.abs(targetFrameFloat - currentFrameFloat) < 0.001) {
+            currentFrameFloat = targetFrameFloat;
+          }
+
+          // Sync captions and stage indicator
+          const p4 = progress * 4;
+          const stage = Math.min(3, Math.floor(p4));
+          setStage(stage);
+
+          if (hintEl) hintEl.classList.toggle('hide', progress > 0.04);
+
+          // Draw black background
+          ctx.fillStyle = '#000';
+          ctx.fillRect(0, 0, width, height);
+
+          if (isLoaded && frames.length > 0) {
+            const frameIndex = Math.min(frames.length - 1, Math.max(0, Math.round(currentFrameFloat)));
+            const img = frames[frameIndex];
+
+            if (img && img.complete && img.naturalWidth > 0) {
+              const aspect = img.naturalWidth / img.naturalHeight;
+
+              // Full width covering the entire screen (object-fit: cover equivalent)
+              let carW = width;
+              let carH = width / aspect;
+
+              if (carH < height) {
+                carH = height;
+                carW = carH * aspect;
+              }
+
+              const carX = (width - carW) / 2;
+              const carY = (height - carH) / 2;
+
+              // Draw the real photorealistic frame image
+              ctx.drawImage(img, carX, carY, carW, carH);
+            }
+          }
+
+          requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+      })();
+
+      // --- 3. BRANCHING TREE TIMELINE SCROLL ANIMATION ---
+      (function initTreeTimeline() {
+        const container = document.getElementById('treeContainer');
+        const svg = document.getElementById('treeSvg');
+        if (!container || !svg) return;
+
+        const rows = Array.from(container.querySelectorAll('.tree-step-row'));
+
+        // SVG elements
+        const stemBg = document.getElementById('stemBgPath');
+        const stemActive = document.getElementById('stemActivePath');
+
+        const bBgPaths = [
+          document.getElementById('b1BgPath'),
+          document.getElementById('b2BgPath'),
+          document.getElementById('b3BgPath'),
+          document.getElementById('b4BgPath')
+        ];
+
+        const bActivePaths = [
+          document.getElementById('b1ActivePath'),
+          document.getElementById('b2ActivePath'),
+          document.getElementById('b3ActivePath'),
+          document.getElementById('b4ActivePath')
+        ];
+
+        let lengths = { stem: 0, branches: [0, 0, 0, 0] };
+
+        function calculatePaths() {
+          const containerRect = container.getBoundingClientRect();
+          const W = containerRect.width;
+          const H = containerRect.height;
+          const centerX = W / 2;
+
+          // Stem path from top 0 to bottom H
+          const stemD = `M ${centerX} 0 L ${centerX} ${H}`;
+          stemBg.setAttribute('d', stemD);
+          stemActive.setAttribute('d', stemD);
+
+          lengths.stem = stemActive.getTotalLength();
+          stemActive.style.strokeDasharray = lengths.stem;
+          stemActive.style.strokeDashoffset = lengths.stem;
+
+          // Compute each branch curve
+          rows.forEach((row, i) => {
+            const card = row.querySelector('.tree-card');
+            const cardRect = card.getBoundingClientRect();
+
+            const isLeft = row.classList.contains('left');
+            let dotX = isLeft
+              ? (cardRect.right - containerRect.left)
+              : (cardRect.left - containerRect.left);
+            let dotY = (cardRect.top + cardRect.height / 2) - containerRect.top;
+
+            // Stem connection point is slightly above dotY for smooth organic branch curves
+            let stemY = Math.max(0, dotY - 50);
+
+            // Bezier curve out from center stem to card dot
+            const branchD = `M ${centerX} ${stemY} C ${centerX} ${dotY - 20}, ${dotX} ${dotY - 20}, ${dotX} ${dotY}`;
+
+            bBgPaths[i].setAttribute('d', branchD);
+            bActivePaths[i].setAttribute('d', branchD);
+
+            const bLength = bActivePaths[i].getTotalLength();
+            lengths.branches[i] = bLength;
+            bActivePaths[i].style.strokeDasharray = bLength;
+            bActivePaths[i].style.strokeDashoffset = bLength;
+          });
+        }
+
+        calculatePaths();
+        window.addEventListener('resize', calculatePaths);
+
+        function updateOnScroll() {
+          const containerRect = container.getBoundingClientRect();
+          const viewH = window.innerHeight;
+
+          // Calculate scroll progress through tree section (0 to 1)
+          const startThreshold = viewH * 0.75;
+          const endThreshold = viewH * 0.25;
+
+          const totalDist = containerRect.height + startThreshold - endThreshold;
+          const currentDist = startThreshold - containerRect.top;
+
+          let progress = Math.max(0, Math.min(1, currentDist / totalDist));
+
+          // Draw main stem matching progress (top to bottom)
+          const stemOffset = lengths.stem * (1 - progress);
+          stemActive.style.strokeDashoffset = stemOffset;
+
+          const H = containerRect.height;
+          rows.forEach((row, i) => {
+            const card = row.querySelector('.tree-card');
+            const cardRect = card.getBoundingClientRect();
+            let dotY = (cardRect.top + cardRect.height / 2) - containerRect.top;
+            let stemY = Math.max(0, dotY - 50);
+
+            const stemPointProgress = stemY / H;
+
+            if (progress >= stemPointProgress) {
+              const branchProg = Math.min(1, (progress - stemPointProgress) / 0.1);
+              const bOffset = lengths.branches[i] * (1 - branchProg);
+              bActivePaths[i].style.strokeDashoffset = bOffset;
+
+              if (branchProg >= 0.7) {
+                row.classList.add('active');
+              } else {
+                row.classList.remove('active');
+              }
+            } else {
+              bActivePaths[i].style.strokeDashoffset = lengths.branches[i];
+              row.classList.remove('active');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', updateOnScroll, { passive: true });
+        updateOnScroll();
+      })();
+
+      // --- 4. USE CASES 3D STAGE & CURSOR ANIMATION ---
+      (function initUseCase3DStage() {
+        const stage = document.getElementById('usecaseStage');
+        const grid = stage ? stage.querySelector('.usecase-grid-3d') : null;
+        const cards = stage ? Array.from(stage.querySelectorAll('.usecase-card-3d')) : [];
+        const cursor = document.getElementById('usecaseCursor');
+        const dots = Array.from(document.querySelectorAll('#usecaseNavDots .dot'));
+        if (!stage || !grid || cards.length === 0) return;
+
+        let activeIdx = 0;
+        let autoTimer = null;
+
+        function activateCard(index, moveCursor = true) {
+          activeIdx = index;
+
+          cards.forEach((card, i) => {
+            card.classList.toggle('active', i === index);
+          });
+
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+
+          // Shift stage rotation angle slightly to focus active card in 3D
+          const rotY = (index === 0) ? 6 : (index === 1) ? -2 : -10;
+          const rotX = (index === 1) ? 14 : 10;
+          grid.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+
+          // Move virtual cursor onto active card
+          if (cursor && moveCursor && cards[index]) {
+            const stageRect = stage.getBoundingClientRect();
+            const cardRect = cards[index].getBoundingClientRect();
+
+            const targetX = (cardRect.left - stageRect.left) + cardRect.width * 0.7;
+            const targetY = (cardRect.top - stageRect.top) + cardRect.height * 0.75;
+
+            cursor.style.left = targetX + 'px';
+            cursor.style.top = targetY + 'px';
+            cursor.style.opacity = '1';
+          }
+        }
+
+        // Initialize Card 0
+        setTimeout(() => activateCard(0), 300);
+
+        // Click handlers
+        cards.forEach((card, i) => {
+          card.addEventListener('click', () => {
+            activateCard(i);
+            resetAutoTimer();
+          });
+        });
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            activateCard(i);
+            resetAutoTimer();
+          });
+        });
+
+        // Auto rotate every 3.5 seconds
+        function startAutoTimer() {
+          autoTimer = setInterval(() => {
+            const nextIdx = (activeIdx + 1) % cards.length;
+            activateCard(nextIdx);
+          }, 3500);
+        }
+
+        function resetAutoTimer() {
+          if (autoTimer) clearInterval(autoTimer);
+          startAutoTimer();
+        }
+
+        // Scroll trigger: sync scroll progress to card focus
+        window.addEventListener('scroll', () => {
+          const stageRect = stage.getBoundingClientRect();
+          const viewH = window.innerHeight;
+
+          if (stageRect.top < viewH * 0.7 && stageRect.bottom > viewH * 0.3) {
+            const progress = Math.max(0, Math.min(1, (viewH * 0.7 - stageRect.top) / (viewH * 0.4)));
+            const scrollIdx = Math.min(cards.length - 1, Math.floor(progress * cards.length));
+            if (scrollIdx !== activeIdx && !stage.matches(':hover')) {
+              activateCard(scrollIdx);
+            }
+          }
+        }, { passive: true });
+      })();
+
+      // --- 5. STATS NUMBER COUNTER & AMBIENT BUBBLES ---
+      (function initProofSection() {
+        const proofSec = document.getElementById('proofSec');
+        const canvas = document.getElementById('proofBubblesCanvas');
+        if (!proofSec) return;
+
+        // Ambient Bubbles Canvas
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          let W = 0, H = 0;
+          function resize() {
+            W = canvas.width = proofSec.clientWidth;
+            H = canvas.height = proofSec.clientHeight;
+          }
+          resize();
+          window.addEventListener('resize', resize);
+
+          const bubbles = Array.from({ length: 18 }, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: 6 + Math.random() * 18,
+            speedY: 0.3 + Math.random() * 0.5,
+            opacity: 0.15 + Math.random() * 0.25
+          }));
+
+          function drawBubbles() {
+            ctx.clearRect(0, 0, W, H);
+            bubbles.forEach(b => {
+              b.y -= b.speedY;
+              if (b.y < -20) { b.y = H + 20; b.x = Math.random() * W; }
+              ctx.beginPath();
+              ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(0, 0, 0, ${b.opacity})`;
+              ctx.fill();
+            });
+            requestAnimationFrame(drawBubbles);
+          }
+          requestAnimationFrame(drawBubbles);
+        }
+
+        // Number Counter Observer
+        const statsContainer = document.getElementById('proofStats');
+        if (!statsContainer) return;
+
+        let animated = false;
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting && !animated) {
+            animated = true;
+            const statItems = statsContainer.querySelectorAll('.proof-stat[data-target]');
+
+            statItems.forEach(item => {
+              const target = parseFloat(item.dataset.target);
+              const suffix = item.dataset.suffix || '';
+              const decimals = parseInt(item.dataset.decimals || '0', 10);
+              const numEl = item.querySelector('.stat-num');
+              if (!numEl) return;
+
+              const duration = 1800; // ms
+              const startTime = performance.now();
+
+              function updateNum(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                // Ease out cubic
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentVal = (easeProgress * target).toFixed(decimals);
+
+                numEl.textContent = currentVal + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(updateNum);
+                }
+              }
+              requestAnimationFrame(updateNum);
+            });
+          }
+        }, { threshold: 0.3 });
+
+        observer.observe(statsContainer);
+      })();
+
+      // --- 6. CTA BANNER CURSOR SPOTLIGHT & MAGNETIC BUTTONS ---
+      (function initCtaInteractions() {
+        const ctaBox = document.getElementById('ctaBox');
+        const ctaGlow = document.getElementById('ctaGlow');
+        if (!ctaBox || !ctaGlow) return;
+
+        ctaBox.addEventListener('mousemove', (e) => {
+          const rect = ctaBox.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          ctaGlow.style.left = x + 'px';
+          ctaGlow.style.top = y + 'px';
+        });
+
+        ctaBox.addEventListener('mouseleave', () => {
+          ctaGlow.style.left = '50%';
+          ctaGlow.style.top = '50%';
+        });
+
+        // Magnetic button hover effect
+        const magBtns = ctaBox.querySelectorAll('.magnetic-btn');
+        magBtns.forEach(btn => {
+          btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+          });
+          btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0px, 0px)';
+          });
+        });
+      })();
+    });
+  </script>
+
+</body>
+
+</html>

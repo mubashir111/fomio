@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foamia — Wash Tech for Car Wash Owners</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --pine:#0E2B24;
+    --pine-2:#123930;
+    --pine-3:#1B4A3F;
+    --lime:#A8DE2E;
+    --lime-dark:#8BC122;
+    --paper:#F4F6EE;
+    --paper-2:#EAEEDF;
+    --ink:#153027;
+    --muted:#5C7268;
+    --white:#FFFFFF;
+    --shadow: 0 20px 50px rgba(14,43,36,0.16);
+    --radius: 20px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  button, .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    border:none;
+    border-radius:100px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-lime{
+    background:var(--lime);
+    color:var(--pine);
+    padding:15px 30px;
+    font-size:15px;
+    box-shadow:0 10px 24px rgba(168,222,46,0.35);
+  }
+  .btn-lime:hover{background:var(--lime-dark); transform:translateY(-2px);}
+  .btn-outline{
+    background:transparent;
+    border:1.5px solid rgba(255,255,255,0.35);
+    color:var(--white);
+    padding:14px 28px;
+    font-size:15px;
+  }
+  .btn-outline:hover{border-color:var(--lime); color:var(--lime);}
+  .btn-dark{
+    background:var(--pine);
+    color:var(--white);
+    padding:15px 30px;
+    font-size:15px;
+  }
+  .btn-dark:hover{background:var(--pine-2); transform:translateY(-2px);}
+
+  /* reveal animation */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(14,43,36,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1160px; margin:0 auto;
+  }
+  .logo{
+    display:inline-flex; align-items:center; text-decoration:none;
+  }
+  .logo img{
+    height:42px; width:auto; display:block;
+  }
+  .nav-links{display:flex; gap:34px; align-items:center;}
+  .nav-links a{
+    color:rgba(255,255,255,0.75); font-size:14.5px; font-weight:500;
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-login{color:rgba(255,255,255,0.8); font-size:14.5px; font-weight:600;}
+  .burger{display:none; background:none; color:var(--white); font-size:22px;}
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:var(--pine);
+    padding:150px 0 0;
+    overflow:hidden;
+  }
+  .hero-inner{position:relative;}
+  .phone-stage{position:relative;}
+  .phone{position:relative; z-index:4;}
+  .hero-inner{
+    max-width:1160px; margin:0 auto; padding:0 32px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--lime); font-weight:700; font-size:13px;
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--lime); display:inline-block;}
+  .hero h1{
+    font-size:56px; color:var(--white); margin-bottom:22px;
+  }
+  .hero h1 span{color:var(--lime);}
+  .hero p.lead{
+    font-size:18px; color:rgba(255,255,255,0.72); max-width:460px; margin-bottom:36px; line-height:1.6;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-bottom:54px; flex-wrap:wrap;}
+  .hero-stats{display:flex; gap:40px; flex-wrap:wrap;}
+  .hero-stats div b{
+    display:block; font-family:'Poppins',sans-serif; font-size:26px; color:var(--white); font-weight:800;
+  }
+  .hero-stats div span{color:rgba(255,255,255,0.55); font-size:13px;}
+
+  /* phone mockup */
+  .phone-stage{position:relative; display:flex; justify-content:center; padding:40px 0 0;}
+  .phone{
+    width:270px; height:552px; background:#0b0b0c; border-radius:42px;
+    padding:12px; box-shadow:0 40px 80px rgba(0,0,0,0.45);
+    position:relative; z-index:3;
+  }
+  .phone::before{
+    content:''; position:absolute; top:12px; left:50%; transform:translateX(-50%);
+    width:120px; height:22px; background:#0b0b0c; border-radius:0 0 16px 16px; z-index:5;
+  }
+  .phone-screen{
+    background:var(--white); width:100%; height:100%; border-radius:32px;
+    overflow:hidden; position:relative; display:flex; flex-direction:column;
+  }
+  .status-bar{
+    display:flex; justify-content:space-between; padding:14px 20px 4px; font-size:11px; color:var(--ink); font-weight:600;
+  }
+  .app-topbar{
+    padding:14px 18px 16px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .app-topbar .hi{font-size:11px; color:var(--muted);}
+  .app-topbar .name{font-family:'Poppins',sans-serif; font-weight:700; font-size:15px;}
+  .avatar{width:30px; height:30px; border-radius:50%; background:var(--pine-3);}
+  .app-card-hero{
+    margin:0 18px 14px; background:var(--pine); border-radius:16px; padding:16px;
+    color:var(--white); position:relative; overflow:hidden;
+  }
+  .app-card-hero .lbl{font-size:10px; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:0.08em;}
+  .app-card-hero .val{font-family:'Poppins',sans-serif; font-size:24px; font-weight:800; margin-top:4px;}
+  .app-card-hero .grow{font-size:11px; color:var(--lime); margin-top:6px; font-weight:600;}
+  .mini-stats{display:flex; gap:10px; margin:0 18px 14px;}
+  .mini-stat{flex:1; background:var(--paper); border-radius:12px; padding:10px 12px;}
+  .mini-stat .lbl{font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;}
+  .mini-stat .val{font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; margin-top:2px;}
+  .list-title{font-size:11px; font-weight:700; color:var(--muted); margin:0 18px 8px; text-transform:uppercase; letter-spacing:0.05em;}
+  .booking-row{
+    display:flex; align-items:center; gap:10px; margin:0 18px 8px; padding:10px 12px;
+    background:var(--paper); border-radius:12px;
+  }
+  .booking-row .dot{width:8px; height:8px; border-radius:50%; background:var(--lime);}
+  .booking-row .info{flex:1;}
+  .booking-row .info .t1{font-size:12px; font-weight:700;}
+  .booking-row .info .t2{font-size:10px; color:var(--muted);}
+  .booking-row .time{font-size:10px; font-weight:700; color:var(--pine);}
+
+  .glow{
+    position:absolute; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(168,222,46,0.28), transparent 70%);
+    top:10%; right:-10%; z-index:1; filter:blur(10px);
+  }
+
+  /* ===== 3D HERO (Three.js) ===== */
+  .three-hero{
+    position:absolute; inset:0; z-index:2; pointer-events:none;
+  }
+  .three-hero canvas{ display:block; width:100%; height:100%; }
+  .three-loading{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    color:rgba(255,255,255,0.4); font-size:13px; font-weight:600; z-index:1;
+    letter-spacing:0.04em; transition:opacity .4s ease;
+  }
+  .three-loading.hidden{ opacity:0; }
+  @media (prefers-reduced-motion: reduce){
+    .three-hero{ display:none; }
+  }
+
+  /* ===== SCROLL WASH SEQUENCE ===== */
+  .wave-divider{
+    position:relative; width:100%; height:110px; margin-top:60px;
+  }
+  .wave-divider svg{position:absolute; bottom:-1px; width:100%; height:100%;}
+
+  .wash-scroll{ position:relative; height:340vh; background:var(--pine); }
+  .wash-sticky{
+    position:sticky; top:0; height:100vh; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .wash-canvas-wrap{ position:absolute; inset:0; z-index:1; }
+  .wash-canvas-wrap canvas{ display:block; width:100%; height:100%; }
+
+  .wash-caption{
+    position:absolute; left:50%; bottom:12%; transform:translateX(-50%);
+    z-index:3; text-align:center; max-width:520px; padding:0 24px;
+  }
+  .wash-stage{
+    display:none; animation:fadeUp .5s ease both;
+  }
+  .wash-stage.active{ display:block; }
+  .wash-stage h2{ color:var(--white); font-size:30px; margin:10px 0 10px; }
+  .wash-stage p{ color:rgba(255,255,255,0.65); font-size:15.5px; line-height:1.6; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  .wash-progress{
+    position:absolute; right:36px; top:50%; transform:translateY(-50%);
+    z-index:3; display:flex; flex-direction:column; gap:12px;
+  }
+  .wash-progress span{
+    width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .wash-progress span.on{ background:var(--lime); transform:scale(1.3); }
+  @media (max-width:700px){ .wash-progress{ display:none; } }
+
+  .wash-scroll-hint{
+    position:absolute; top:6%; left:50%; transform:translateX(-50%);
+    z-index:3; color:rgba(255,255,255,0.4); font-size:12px; font-weight:600;
+    letter-spacing:0.06em; text-transform:uppercase;
+    animation:hintbounce 1.8s ease-in-out infinite;
+  }
+  .wash-scroll-hint.hide{ opacity:0; transition:opacity .4s ease; }
+  @keyframes hintbounce{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+  @media (prefers-reduced-motion: reduce){
+    .wash-scroll{ height:auto; }
+    .wash-sticky{ position:relative; }
+    .wash-canvas-wrap{ display:none; }
+  }
+
+  /* ===== LOGO STRIP ===== */
+  .logo-strip{background:var(--paper); padding:44px 0; border-bottom:1px solid var(--paper-2);}
+  .logo-strip p{text-align:center; color:var(--muted); font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:26px;}
+  .logo-row{display:flex; justify-content:center; gap:56px; flex-wrap:wrap; opacity:0.55; font-family:'Poppins',sans-serif; font-weight:700; color:var(--muted); font-size:15px;}
+
+  /* ===== SECTION HEADERS ===== */
+  section{padding:100px 0;}
+  .sec-head{max-width:600px; margin-bottom:60px;}
+  .sec-eyebrow{color:var(--lime-dark); font-weight:700; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; display:block;}
+  .sec-head h2{font-size:38px; margin-bottom:16px; color:var(--pine);}
+  .sec-head p{color:var(--muted); font-size:16.5px; line-height:1.6;}
+  .center{text-align:center; margin-left:auto; margin-right:auto;}
+
+  /* ===== FEATURES ===== */
+  .features{background:var(--paper);}
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .feature-card{
+    background:var(--white); border-radius:var(--radius); padding:32px 28px;
+    border:1px solid var(--paper-2);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .feature-card:hover{transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent;}
+  .feature-icon{
+    width:48px; height:48px; border-radius:14px; background:var(--pine);
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+    font-size:20px; color:var(--lime);
+  }
+  .feature-card h3{font-size:18px; margin-bottom:10px; color:var(--pine);}
+  .feature-card p{color:var(--muted); font-size:14.5px; line-height:1.6;}
+
+  @media (max-width:900px){.feature-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:640px){.feature-grid{grid-template-columns:1fr;}}
+
+  /* ===== ONBOARDING STEPS ===== */
+  .steps-section{background:var(--pine); color:var(--white); position:relative;}
+  .steps-section .sec-head p{color:rgba(255,255,255,0.6);}
+  .steps-section .sec-head h2{color:var(--white);}
+  .steps-row{display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;}
+  .step{padding:0 20px 0 0; position:relative;}
+  .step-num{
+    font-family:'Poppins',sans-serif; font-size:15px; font-weight:800; color:var(--lime);
+    width:40px; height:40px; border:1.5px solid rgba(168,222,46,0.4); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  }
+  .step h3{font-size:17px; margin-bottom:10px;}
+  .step p{color:rgba(255,255,255,0.6); font-size:14px; line-height:1.6;}
+  .step-line{
+    position:absolute; top:20px; left:40px; right:-20px; height:1px;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 6px, transparent 6px 12px);
+  }
+  .step:last-child .step-line{display:none;}
+  @media (max-width:900px){.steps-row{grid-template-columns:1fr 1fr; row-gap:44px;} .step-line{display:none;}}
+  @media (max-width:560px){.steps-row{grid-template-columns:1fr;}}
+
+  /* ===== USE CASES ===== */
+  .usecases{background:var(--paper);}
+  .usecase-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .usecase-card{
+    border-radius:var(--radius); padding:34px 28px; background:var(--white);
+    border:1px solid var(--paper-2); display:flex; flex-direction:column; gap:14px;
+  }
+  .usecase-card.highlight{background:var(--pine); border-color:var(--pine); color:var(--white);}
+  .usecase-card.highlight p{color:rgba(255,255,255,0.65);}
+  .usecase-tag{
+    align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    padding:5px 12px; border-radius:100px; background:var(--paper-2); color:var(--pine);
+  }
+  .usecase-card.highlight .usecase-tag{background:rgba(168,222,46,0.16); color:var(--lime);}
+  .usecase-card h3{font-size:19px;}
+  .usecase-card p{color:var(--muted); font-size:14.5px; line-height:1.6;}
+  @media (max-width:900px){.usecase-grid{grid-template-columns:1fr;}}
+
+  /* ===== TESTIMONIAL / STATS ===== */
+  .proof{
+    background:var(--lime); padding:70px 0; position:relative; overflow:hidden;
+  }
+  .proof-inner{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .proof blockquote{
+    font-family:'Poppins',sans-serif; font-size:24px; font-weight:700; color:var(--pine);
+    line-height:1.4; margin-bottom:18px;
+  }
+  .proof cite{font-style:normal; font-weight:600; color:var(--pine-2); font-size:14px;}
+  .proof-stats{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  .proof-stat b{font-family:'Poppins',sans-serif; font-size:34px; font-weight:800; color:var(--pine); display:block;}
+  .proof-stat span{font-size:13px; color:var(--pine-2); font-weight:600;}
+  @media (max-width:800px){.proof-inner{grid-template-columns:1fr;}}
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner{
+    background:var(--paper); padding:90px 0;
+  }
+  .cta-box{
+    background:var(--pine); border-radius:28px; padding:64px 50px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-box h2{color:var(--white); font-size:34px; margin-bottom:14px;}
+  .cta-box p{color:rgba(255,255,255,0.65); margin-bottom:32px; font-size:16px;}
+  .cta-box .hero-ctas{justify-content:center;}
+  .cta-glow{position:absolute; width:300px; height:300px; background:radial-gradient(circle, rgba(168,222,46,0.35), transparent 70%); border-radius:50%; top:-100px; right:-60px;}
+
+  /* ===== FAQ ===== */
+  .faq{background:var(--paper);}
+  .faq-list{max-width:760px; margin:0 auto;}
+  .faq-item{
+    border-bottom:1px solid var(--paper-2); padding:22px 0; cursor:pointer;
+  }
+  .faq-q{display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:16px; color:var(--pine);}
+  .faq-q .plus{font-size:20px; color:var(--lime-dark); transition:transform .25s ease; font-weight:400;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s ease;
+    color:var(--muted); font-size:14.5px; line-height:1.7;
+  }
+  .faq-item.open .faq-a{max-height:200px; padding-top:14px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--pine); color:rgba(255,255,255,0.6); padding:60px 0 30px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
+  .footer-grid h4{color:var(--white); font-size:14px; margin-bottom:16px;}
+  .footer-grid ul li{margin-bottom:10px; font-size:14px;}
+  .footer-grid ul li a:hover{color:var(--lime);}
+  .footer-brand p{font-size:14px; margin-top:14px; max-width:260px; line-height:1.6;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.1); padding-top:24px;
+    display:flex; justify-content:space-between; font-size:13px; flex-wrap:wrap; gap:10px;
+  }
+  @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="#">
+      <img src="Foamia Logo-Light.png" alt="Foamia Wash Tech" onerror="this.src='Foamia Logo.png'">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#use-cases">Use cases</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="nav-login" href="#">Log in</a>
+      <button class="btn btn-lime">Get a demo</button>
+    </div>
+    <button class="burger">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="glow"></div>
+
+  <div id="three-hero" class="three-hero"></div>
+  <div id="three-loading" class="three-loading">Loading 3D scene…</div>
+
+  <div class="hero-inner">
+    <div class="reveal in">
+      <span class="eyebrow">Built for car wash owners</span>
+      <h1>Run your wash.<br>Not your <span>paperwork.</span></h1>
+      <p class="lead">Foamia puts bookings, memberships, staff and payments in one dashboard — so you spend your day on the forecourt, not the spreadsheet.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-lime">Get a demo</button>
+        <button class="btn btn-outline">See how it works ↓</button>
+      </div>
+      <div class="hero-stats">
+        <div><b>12,400+</b><span>Washes booked monthly</span></div>
+        <div><b>340+</b><span>Wash centres on Foamia</span></div>
+        <div><b>4.8★</b><span>Avg. owner rating</span></div>
+      </div>
+    </div>
+
+    <div class="phone-stage reveal in">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="status-bar"><span>10:32</span><span>●●● 4G ▮</span></div>
+          <div class="app-topbar">
+            <div><div class="hi">Good morning,</div><div class="name">Ravi's Auto Spa</div></div>
+            <div class="avatar"></div>
+          </div>
+          <div class="app-card-hero">
+            <div class="lbl">Today's revenue</div>
+            <div class="val">₹18,240</div>
+            <div class="grow">▲ 22% vs yesterday</div>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="lbl">Bookings</div><div class="val">27</div></div>
+            <div class="mini-stat"><div class="lbl">Members</div><div class="val">146</div></div>
+          </div>
+          <div class="list-title">Upcoming bookings</div>
+          <div class="booking-row"><span class="dot"></span><div class="info"><div class="t1">Anoop K. — Sedan wash</div><div class="t2">Bay 2 · Full wash</div></div><div class="time">10:45</div></div>
+          <div class="booking-row"><span class="dot"></span><div class="info"><div class="t1">Fathima R. — SUV detail</div><div class="t2">Bay 1 · Premium</div></div><div class="time">11:15</div></div>
+          <div class="booking-row"><span class="dot"></span><div class="info"><div class="t1">Sujith M. — Bike wash</div><div class="t2">Bay 3 · Express</div></div><div class="time">11:30</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,64 C240,120 480,10 720,50 C960,90 1200,20 1440,64 L1440,120 L0,120 Z" fill="#A8DE2E" opacity="0.5"></path>
+      <path d="M0,80 C240,30 480,110 720,70 C960,30 1200,100 1440,80 L1440,120 L0,120 Z" fill="#F4F6EE"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="wash-scroll" id="washScroll">
+  <div class="wash-sticky">
+    <div id="wash-canvas-wrap" class="wash-canvas-wrap"></div>
+
+    <div class="wash-caption">
+      <div class="wash-stage active" data-stage="0">
+        <span class="sec-eyebrow" style="color:#A8DE2E;">Step one</span>
+        <h2>Booked in seconds</h2>
+        <p>Customers pick a slot and a bay — no calls, no notebook.</p>
+      </div>
+      <div class="wash-stage" data-stage="1">
+        <span class="sec-eyebrow" style="color:#A8DE2E;">Step two</span>
+        <h2>Washed, tracked live</h2>
+        <p>Staff mark progress as it happens — you see it update on your dashboard in real time.</p>
+      </div>
+      <div class="wash-stage" data-stage="2">
+        <span class="sec-eyebrow" style="color:#A8DE2E;">Step three</span>
+        <h2>Spotless. Every time.</h2>
+        <p>Payment, receipt and revenue logged automatically the moment the wash is done.</p>
+      </div>
+    </div>
+
+    <div class="wash-progress">
+      <span data-i="0" class="on"></span><span data-i="1"></span><span data-i="2"></span>
+    </div>
+    <div class="wash-scroll-hint">Scroll to wash ↓</div>
+  </div>
+</section>
+
+<div class="logo-strip">
+  <p>Trusted by wash centres across Kerala &amp; beyond</p>
+  <div class="logo-row">
+    <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car Care</span><span>QuickShine</span><span>WashPoint</span>
+  </div>
+</div>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Platform</span>
+      <h2>Everything the front desk and the forecourt need</h2>
+      <p>One login for owners, one app for staff, one link for customers — Foamia keeps them in sync automatically.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">📅</div>
+        <h3>Online booking</h3>
+        <p>Customers book a slot and a bay from their phone. No more calls interrupting the wash line.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🚗</div>
+        <h3>Customer &amp; vehicle profiles</h3>
+        <p>Every visit, vehicle and preference saved automatically — so staff know the car before it pulls in.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">♻️</div>
+        <h3>Membership &amp; packages</h3>
+        <p>Sell unlimited-wash and package plans, and let Foamia handle renewals and usage limits for you.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">👷</div>
+        <h3>Staff &amp; bay scheduling</h3>
+        <p>Assign bays and staff per shift, track who washed what, and avoid double-booking a bay.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">💳</div>
+        <h3>Payments, on the spot</h3>
+        <p>Accept UPI, cards or cash at checkout, with every transaction logged to the day's report automatically.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <h3>Owner dashboard</h3>
+        <p>Revenue, footfall and staff performance — for one centre or a chain — from a single secure login.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps-section" id="how-it-works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow" style="color:#A8DE2E;">Getting started</span>
+      <h2>Live in a week, not a quarter</h2>
+      <p>Foamia's onboarding team sets up your first centre with you, in this order.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Set up your centre</h3>
+        <p>Add your bays, services and pricing — Foamia's team helps with the first setup call.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Invite your staff</h3>
+        <p>Each attendant gets a login to see their bay's queue and mark washes complete.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Share your booking link</h3>
+        <p>Put it on WhatsApp, Instagram or your storefront — customers book straight into your queue.</p>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <h3>Watch it on your dashboard</h3>
+        <p>Revenue, bookings and member renewals update live from your first day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="usecases" id="use-cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Use cases</span>
+      <h2>Built to flex with how you run your wash</h2>
+      <p>From a single manual bay to a multi-location chain, Foamia scales with the way you actually operate.</p>
+    </div>
+    <div class="usecase-grid">
+      <div class="usecase-card reveal">
+        <span class="usecase-tag">Single centre</span>
+        <h3>Independent wash owners</h3>
+        <p>Replace the notebook and the walk-in queue with online bookings and a clear daily revenue view.</p>
+      </div>
+      <div class="usecase-card highlight reveal">
+        <span class="usecase-tag">Multi-location</span>
+        <h3>Growing chains</h3>
+        <p>Compare bay utilisation and revenue across every centre from one owner login — no separate spreadsheets per site.</p>
+      </div>
+      <div class="usecase-card reveal">
+        <span class="usecase-tag">Mobile &amp; on-demand</span>
+        <h3>Doorstep detailing</h3>
+        <p>Route mobile detailing requests to the nearest available team and track jobs from booking to completion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap proof-inner">
+    <div class="reveal">
+      <blockquote>"We stopped losing bookings to missed calls. Foamia's queue fills itself, and I finally see today's revenue without asking my cashier."</blockquote>
+      <cite>— Owner, Ravi's Auto Spa, Thrissur</cite>
+    </div>
+    <div class="proof-stats reveal">
+      <div class="proof-stat"><b>35%</b><span>Fewer missed bookings</span></div>
+      <div class="proof-stat"><b>3.2×</b><span>Faster checkout</span></div>
+      <div class="proof-stat"><b>98%</b><span>Membership renewal rate</span></div>
+      <div class="proof-stat"><b>&lt;1 wk</b><span>Time to go live</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div class="cta-glow"></div>
+      <h2>Ready to see your wash on Foamia?</h2>
+      <p>Book a 20-minute walkthrough — we'll set up your first centre live on the call.</p>
+      <div class="hero-ctas"><button class="btn btn-lime">Get a demo</button><button class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);">Talk to sales</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="sec-eyebrow">FAQ</span>
+      <h2>Questions owners usually ask</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Do I need new hardware to use Foamia?</span><span class="plus">+</span></div>
+        <div class="faq-a">No. Foamia runs on any phone or tablet — owner, staff and customer apps all work on devices you already have.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>Can I manage more than one wash centre?</span><span class="plus">+</span></div>
+        <div class="faq-a">Yes — the owner dashboard shows every centre you run, with the option to drill into one location at a time.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>What payment methods does Foamia support?</span><span class="plus">+</span></div>
+        <div class="faq-a">UPI, cards and cash are all supported at checkout, and every payment is logged automatically to your daily report.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>How long does setup take?</span><span class="plus">+</span></div>
+        <div class="faq-a">Most centres are live within a week. Our onboarding team helps you add your bays, services and staff on a setup call.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#"><img src="Foamia Logo-Light.png" alt="Foamia Wash Tech" onerror="this.src='Foamia Logo.png'"></a>
+        <p>The dashboard for car wash owners — bookings, staff, memberships and payments, in one place.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#use-cases">Use cases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Help centre</a></li>
+          <li><a href="#">Log in</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Foamia Wash Tech. All rights reserved.</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // faq accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+<script>
+// Hybrid 3D Interactive Wash Engine using User's Exact Green Sports Car Image (car-transparent.png / 64420.jpg)
+window.addEventListener('DOMContentLoaded', function() {
+  const carImg = new Image();
+  carImg.src = 'car-transparent.png';
+  carImg.onerror = function() {
+    carImg.src = '64420.jpg';
+  };
+
+  // --- 1. HERO SECTION 3D SHOWCASE ENGINE ---
+  (function initHero3D() {
+    const container = document.getElementById('three-hero');
+    const loadingEl = document.getElementById('three-loading');
+    if (!container) return;
+
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let width = 0, height = 0;
+    function resize() {
+      width = container.clientWidth || window.innerWidth;
+      height = container.clientHeight || 600;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // 3D Parallax Mouse Control
+    let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+    window.addEventListener('mousemove', (e) => {
+      targetX = (e.clientX / window.innerWidth - 0.5) * 40;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 25;
+    });
+
+    // 3D Floating Soap Bubbles
+    const bubbles = Array.from({ length: 28 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      z: 0.2 + Math.random() * 0.8,
+      radius: 6 + Math.random() * 22,
+      speedY: 0.2 + Math.random() * 0.55,
+      wobble: Math.random() * Math.PI * 2,
+      opacity: 0.3 + Math.random() * 0.55
+    }));
+
+    let start = null;
+    function renderHero(timestamp) {
+      if (!start) start = timestamp;
+      const elapsed = (timestamp - start) / 1000;
+
+      // Smooth lerp mouse parallax
+      mouseX += (targetX - mouseX) * 0.06;
+      mouseY += (targetY - mouseY) * 0.06;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 3D Radial Stage Light
+      const cx = width * 0.64 + mouseX * 0.5;
+      const cy = height * 0.48 + mouseY * 0.5;
+      const radGlow = ctx.createRadialGradient(cx, cy, 20, cx, cy, width * 0.44);
+      radGlow.addColorStop(0, 'rgba(168, 222, 46, 0.25)');
+      radGlow.addColorStop(0.5, 'rgba(14, 43, 36, 0.15)');
+      radGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = radGlow;
+      ctx.fillRect(0, 0, width, height);
+
+      // Render 3D Soap Bubbles (Background Layer)
+      bubbles.forEach(b => {
+        if (b.z < 0.6) {
+          const bx = b.x * width + Math.sin(elapsed * 1.5 + b.wobble) * 16 + mouseX * b.z * 0.3;
+          const by = ((b.y * height - elapsed * b.speedY * 30) % height + height) % height + mouseY * b.z * 0.3;
+          
+          ctx.beginPath();
+          ctx.arc(bx, by, b.radius * b.z, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.18})`;
+          ctx.fill();
+          ctx.strokeStyle = `rgba(168, 222, 46, ${b.opacity * 0.6})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+      });
+
+      // Render User's Exact Car Image with 3D Depth Parallax
+      if (carImg.complete && carImg.naturalWidth > 0) {
+        if (loadingEl && !loadingEl.classList.contains('hidden')) {
+          loadingEl.classList.add('hidden');
+        }
+
+        const aspect = carImg.naturalWidth / carImg.naturalHeight;
+        let carW = Math.min(width * 0.54, 660);
+        let carH = carW / aspect;
+
+        const floatY = Math.sin(elapsed * 1.2) * 8;
+        const carX = width * 0.64 - carW / 2 + mouseX;
+        const carY = height * 0.48 - carH / 2 + floatY + mouseY;
+
+        // 3D Soft Ground Shadow
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(carX + carW * 0.5, carY + carH * 0.88, carW * 0.42, carH * 0.12, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.filter = 'blur(14px)';
+        ctx.fill();
+        ctx.restore();
+
+        // Draw User's Exact Green Sports Car Image
+        ctx.drawImage(carImg, carX, carY, carW, carH);
+      }
+
+      // Render 3D Soap Bubbles (Foreground Layer)
+      bubbles.forEach(b => {
+        if (b.z >= 0.6) {
+          const bx = b.x * width + Math.sin(elapsed * 1.5 + b.wobble) * 16 + mouseX * b.z * 0.6;
+          const by = ((b.y * height - elapsed * b.speedY * 30) % height + height) % height + mouseY * b.z * 0.6;
+          
+          ctx.beginPath();
+          ctx.arc(bx, by, b.radius * b.z, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.25})`;
+          ctx.fill();
+          ctx.strokeStyle = `rgba(168, 222, 46, ${b.opacity * 0.8})`;
+          ctx.lineWidth = 1.6;
+          ctx.stroke();
+
+          // Bubble Specular Highlight
+          ctx.beginPath();
+          ctx.arc(bx - b.radius * 0.3 * b.z, by - b.radius * 0.3 * b.z, b.radius * 0.25 * b.z, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${b.opacity * 0.9})`;
+          ctx.fill();
+        }
+      });
+
+      requestAnimationFrame(renderHero);
+    }
+    requestAnimationFrame(renderHero);
+  })();
+
+  // --- 2. SCROLL WASH 3D ANIMATION ENGINE WITH USER'S CAR ---
+  (function initWash3D() {
+    const section = document.getElementById('washScroll');
+    const container = document.getElementById('wash-canvas-wrap');
+    if (!section || !container) return;
+
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let width = 0, height = 0;
+    function resize() {
+      width = container.clientWidth || window.innerWidth;
+      height = container.clientHeight || window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const stageEls = document.querySelectorAll('.wash-stage');
+    const dotEls = document.querySelectorAll('.wash-progress span');
+    const hintEl = document.querySelector('.wash-scroll-hint');
+    let currentStage = -1;
+
+    function setStage(i) {
+      if (i === currentStage) return;
+      currentStage = i;
+      stageEls.forEach(el => el.classList.toggle('active', Number(el.dataset.stage) === i));
+      dotEls.forEach(el => el.classList.toggle('on', Number(el.dataset.i) === i));
+    }
+
+    function getProgress() {
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return 0;
+      return Math.min(1, Math.max(0, -rect.top / scrollable));
+    }
+
+    let progress = 0;
+    window.addEventListener('scroll', () => { progress = getProgress(); }, { passive: true });
+
+    // Volumetric foam particles over user's car
+    const foamParticles = Array.from({ length: 70 }, () => ({
+      relX: 0.08 + Math.random() * 0.84,
+      relY: 0.18 + Math.random() * 0.62,
+      radius: 8 + Math.random() * 24,
+      wobble: Math.random() * Math.PI * 2
+    }));
+
+    // Water jet droplets
+    const droplets = Array.from({ length: 55 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      len: 14 + Math.random() * 30,
+      speed: 16 + Math.random() * 24
+    }));
+
+    // Diamond ceramic sparkles
+    const sparkles = Array.from({ length: 22 }, () => ({
+      relX: 0.12 + Math.random() * 0.76,
+      relY: 0.2 + Math.random() * 0.55,
+      size: 14 + Math.random() * 26,
+      phase: Math.random() * Math.PI * 2
+    }));
+
+    let start = null;
+    function renderWash(timestamp) {
+      if (!start) start = timestamp;
+      const elapsed = (timestamp - start) / 1000;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const p3 = progress * 3;
+      const stage = Math.min(2, Math.floor(p3));
+      const localT = Math.min(1, p3 - stage);
+      setStage(stage);
+
+      if (hintEl) hintEl.classList.toggle('hide', progress > 0.04);
+
+      if (carImg.complete && carImg.naturalWidth > 0) {
+        const aspect = carImg.naturalWidth / carImg.naturalHeight;
+        let carW = Math.min(width * 0.75, 890);
+        let carH = carW / aspect;
+
+        const carX = width * 0.5 - carW / 2;
+        const carY = height * 0.44 - carH / 2 + Math.sin(elapsed * 1.4) * 6;
+
+        // 3D Stage Spotlight Glow
+        const glowRad = ctx.createRadialGradient(width / 2, carY + carH / 2, 40, width / 2, carY + carH / 2, carW * 0.62);
+        glowRad.addColorStop(0, 'rgba(168, 222, 46, 0.24)');
+        glowRad.addColorStop(0.6, 'rgba(14, 43, 36, 0.12)');
+        glowRad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = glowRad;
+        ctx.fillRect(0, 0, width, height);
+
+        // Ground Shadow
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(width / 2, carY + carH * 0.88, carW * 0.46, carH * 0.14, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.58)';
+        ctx.filter = 'blur(16px)';
+        ctx.fill();
+        ctx.restore();
+
+        // Draw User's Exact Green Sports Car Image
+        ctx.drawImage(carImg, carX, carY, carW, carH);
+
+        // STAGE 0: 3D FOAM CANNON SPRAY & SUDS LATHER
+        if (stage === 0 || (stage === 1 && localT < 0.6)) {
+          const foamAlpha = stage === 0 ? Math.min(1, localT * 1.5) : (1 - localT * 1.6);
+          const sweepX = carX + (stage === 0 ? localT : 1) * carW;
+
+          if (stage === 0) {
+            // Metallic Sprayer Arch Line
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(sweepX, carY - 70);
+            ctx.lineTo(sweepX, carY + carH + 40);
+            ctx.strokeStyle = 'rgba(168, 222, 46, 0.88)';
+            ctx.lineWidth = 5;
+            ctx.setLineDash([8, 8]);
+            ctx.stroke();
+
+            // Foam Spray Jet Cone
+            const coneGrad = ctx.createLinearGradient(sweepX, carY - 50, sweepX + 90, carY + carH);
+            coneGrad.addColorStop(0, 'rgba(255, 255, 255, 0.78)');
+            coneGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = coneGrad;
+            ctx.beginPath();
+            ctx.moveTo(sweepX, carY - 50);
+            ctx.lineTo(sweepX - 60, carY + carH);
+            ctx.lineTo(sweepX + 100, carY + carH);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+
+          // Volumetric Soap Suds on Car
+          foamParticles.forEach(fp => {
+            const fpx = carX + fp.relX * carW;
+            const fpy = carY + fp.relY * carH;
+
+            if (fpx <= sweepX + 35) {
+              ctx.beginPath();
+              ctx.arc(fpx + Math.sin(elapsed * 2.2 + fp.wobble) * 3.5, fpy, fp.radius, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${foamAlpha * 0.9})`;
+              ctx.fill();
+              ctx.strokeStyle = `rgba(220, 245, 230, ${foamAlpha * 0.95})`;
+              ctx.lineWidth = 2;
+              ctx.stroke();
+            }
+          });
+        }
+
+        // STAGE 1: 3D HIGH-PRESSURE WATER RINSE
+        if (stage === 1 || (stage === 2 && localT < 0.3)) {
+          const rinseAlpha = stage === 1 ? 1 : (1 - localT * 3);
+          const rinseX = carX + localT * carW;
+
+          // Water Jet Bar Arch
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(rinseX, carY - 90);
+          ctx.lineTo(rinseX, carY + carH + 50);
+          ctx.strokeStyle = `rgba(155, 226, 245, ${rinseAlpha * 0.95})`;
+          ctx.lineWidth = 6;
+          ctx.shadowColor = '#9be2f5';
+          ctx.shadowBlur = 20;
+          ctx.stroke();
+          ctx.restore();
+
+          // Water droplets cascading down
+          droplets.forEach(d => {
+            const dx = carX + d.x * carW;
+            const dy = carY + ((d.y * carH + elapsed * d.speed * 22) % (carH + 40));
+            ctx.beginPath();
+            ctx.moveTo(dx, dy);
+            ctx.lineTo(dx - 3.5, dy + d.len);
+            ctx.strokeStyle = `rgba(174, 230, 245, ${rinseAlpha * 0.72})`;
+            ctx.lineWidth = 2.4;
+            ctx.stroke();
+          });
+        }
+
+        // STAGE 2: DIAMOND CERAMIC SHINE & STARBURST FLARES
+        if (stage === 2) {
+          const shineAlpha = Math.min(1, localT * 1.5);
+
+          // Sweeping Gloss Flare
+          const flareX = carX + (localT % 1) * carW;
+          const flareGrad = ctx.createLinearGradient(flareX - 70, carY, flareX + 70, carY + carH);
+          flareGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+          flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${shineAlpha * 0.7})`);
+          flareGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+          ctx.fillStyle = flareGrad;
+          ctx.beginPath();
+          ctx.moveTo(flareX - 50, carY - 25);
+          ctx.lineTo(flareX + 90, carY - 25);
+          ctx.lineTo(flareX + 30, carY + carH + 25);
+          ctx.lineTo(flareX - 110, carY + carH + 25);
+          ctx.closePath();
+          ctx.fill();
+
+          // Starburst Sparkles
+          sparkles.forEach(sp => {
+            const sx = carX + sp.relX * carW;
+            const sy = carY + sp.relY * carH;
+            const size = sp.size * (0.6 + 0.4 * Math.sin(elapsed * 4.5 + sp.phase));
+            const spAlpha = shineAlpha * (0.5 + 0.5 * Math.sin(elapsed * 4.5 + sp.phase));
+
+            ctx.save();
+            ctx.translate(sx, sy);
+            ctx.rotate(elapsed * 1.4);
+
+            ctx.beginPath();
+            ctx.moveTo(-size, 0); ctx.lineTo(size, 0);
+            ctx.moveTo(0, -size); ctx.lineTo(0, size);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${spAlpha})`;
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, size * 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(168, 222, 46, ${spAlpha * 0.9})`;
+            ctx.fill();
+            ctx.restore();
+          });
+        }
+      }
+
+      requestAnimationFrame(renderWash);
+    }
+    requestAnimationFrame(renderWash);
+  })();
+});
+</script>
+
+</body>
+</html>
