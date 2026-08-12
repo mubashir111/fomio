@@ -818,10 +818,8 @@
 
     /* ===== 3D MOBILE SCROLL FEATURES ===== */
     .mobile-3d-scroll-sec {
-      height: 280vh;
-      /* Shorter scroll room to reduce empty runway */
+      height: 300vh;
       background: var(--pine-2);
-      /* Darker bg to make phone pop */
       position: relative;
       z-index: 10;
     }
@@ -833,34 +831,55 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      perspective: 2000px;
+      perspective: 1600px;
       overflow: hidden;
     }
 
     .scene-3d {
-      width: 340px;
-      height: 720px;
+      width: 300px;
+      height: 630px;
+      max-height: 82vh;
+      margin: 0 auto;
       transform-style: preserve-3d;
+      transform-origin: center center;
       --scroll: 0;
-      /* Updated by JS */
-      /* Tilt sequence: 
-       0.0 -> 0.1: Ramp up to 65deg
-       0.1 -> 0.8: Hold 52deg while cards are read
-       0.8 -> 0.9: Ramp down to 0deg (vertical) for a clean ending! */
-      --tilt: calc(max(0, min(1, (var(--scroll) - 0.0) * 10)) - max(0, min(1, (var(--scroll) - 0.8) * 10)));
-      transform: rotateX(calc(var(--tilt) * 52deg)) rotateZ(calc(var(--tilt) * -16deg));
+      /* Gentle 12° tilt kept intact */
+      --tilt: calc(max(0, min(1, (var(--scroll) - 0.0) * 10)) - max(0, min(1, (var(--scroll) - 0.78) * 6)));
+      transform: rotateX(calc(var(--tilt) * 12deg)) rotateZ(calc(var(--tilt) * -5deg));
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .phone-mockup {
       width: 100%;
       height: 100%;
-      border-radius: 44px;
-      background: #0a0a0a;
-      border: 12px solid #1a1a1a;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 2px #333;
+      border-radius: 40px;
+      background: #0d0f0d;
+      border: 10px solid #1a1e1a;
+      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
       position: relative;
       transform-style: preserve-3d;
+    }
+
+    /* HARD SCREEN CLIP: Clips any card that overshoots screen bounds */
+    .phone-screen-clip {
+      position: absolute;
+      inset: 0;
+      border-radius: 30px;
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    /* TOP SCREEN MASK & NOTCH: Rendered ON TOP (z-index 45 & 50) */
+    .phone-top-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #0d0f0d;
+      z-index: 45;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
     }
 
     .phone-notch {
@@ -868,151 +887,81 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 140px;
-      height: 30px;
-      background: #1a1a1a;
-      border-bottom-left-radius: 18px;
-      border-bottom-right-radius: 18px;
-      z-index: 10;
+      width: 120px;
+      height: 24px;
+      background: #1a1e1a;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      z-index: 50;
     }
 
     .phone-header {
-      padding: 60px 30px 20px;
+      padding: 52px 20px 10px;
       transform: translateZ(1px);
-      /* keep above phone bg */
+      position: relative;
+      z-index: 40;
+      opacity: calc(1 - max(0, min(1, (var(--scroll) - 0.02) * 8)));
+      transition: opacity 0.3s ease;
     }
 
     .phone-header h2 {
-      font-size: 28px;
+      font-size: 22px;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
     .phone-header p {
-      font-size: 14px;
+      font-size: 12.5px;
       color: #888;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .cards-stack {
       position: absolute;
-      top: 180px;
+      top: 140px;
       left: 0;
       right: 0;
       bottom: 0;
       transform-style: preserve-3d;
-
-      /* 1. Fan out progress (0 to 1) - start sooner */
-      --fan-out: calc(max(0, min(1, (var(--scroll) - 0.02) * 15)));
-
-      /* 2. Reading progress cycles through cards (-1 to 6) - start sooner */
-      --progress: calc(-1 + max(0, min(7, (var(--scroll) - 0.08) * 12)));
-
-      transform: translateZ(10px);
-      /* Base lift off glass */
+      z-index: 20;
     }
 
     .feature-card {
       position: absolute;
-      left: 20px;
-      right: 20px;
-      height: 180px;
-      background: linear-gradient(135deg, rgba(255, 245, 248, 0.95) 0%, rgba(240, 250, 255, 0.95) 50%, rgba(245, 255, 245, 0.95) 100%);
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 1);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      top: 0;
+      left: 16px;
+      width: calc(100% - 32px);
+      height: 135px;
+      background: linear-gradient(135deg, rgba(255, 245, 248, 0.96) 0%, rgba(240, 250, 255, 0.96) 50%, rgba(245, 255, 245, 0.96) 100%);
+      border-radius: 16px;
+      padding: 16px 16px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), inset 0 1.5px 1.5px rgba(255, 255, 255, 1);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-
-      /* Calculate stack fanned position 
-       (Fanning along the phone's local Y axis so it matches the physical 3D orientation) */
-      --fanned-x: 0px;
-      --fanned-y: calc(var(--i) * -110px);
-      --fanned-z: calc(110px - var(--i) * 20px);
-      /* All cards > 0 so they are IN FRONT of phone glass */
-
-      /* Interpolate from flat to fanned */
-      --flat-z: calc(var(--i) * -4px);
-      /* Enforce DOM occlusion order even when flat */
-      --stack-x: calc(var(--fan-out) * var(--fanned-x));
-      --stack-y: calc(var(--i) * 24px + var(--fan-out) * (var(--fanned-y) - var(--i) * 24px));
-      --stack-z: calc(var(--flat-z) + var(--fan-out) * (var(--fanned-z) - var(--flat-z)));
-
-      /* Reading Sequence Logic */
-      --dist: calc(var(--progress) - var(--i));
-
-      /* Lifts towards camera (0 to 1) */
-      --lift-progress: calc(max(0, min(1, var(--dist) + 1)));
-
-      /* Flies past camera over user's head (0 to 1) */
-      --fly-past: calc(max(0, min(1, var(--dist))));
-
-      /* Calculate current positions.
-       Using mathematically flawless screen-space projection offsets to keep the 
-       active card perfectly centered regardless of the 65deg X and -25deg Z parent tilts! */
-      --active-x: -406px;
-      --active-y: 870px;
-      --active-z: 250px;
-
-      --current-x: calc(var(--stack-x) + var(--lift-progress) * (var(--active-x) - var(--stack-x)) + var(--fly-past) * 0px);
-
-      --current-z: calc(var(--stack-z) + var(--lift-progress) * (var(--active-z) - var(--stack-z)) + var(--fly-past) * 500px);
-
-      --current-y: calc(var(--stack-y) + var(--lift-progress) * (var(--active-y) - var(--stack-y)) + var(--fly-past) * -1000px);
-
-      /* Untwist ONLY when lifting out of the stack */
-      --untwist: var(--lift-progress);
-
-      transform:
-        translateX(var(--current-x)) translateY(var(--current-y)) translateZ(var(--current-z)) rotateZ(calc(var(--untwist) * 16deg)) rotateX(calc(var(--untwist) * -52deg)) scale(calc(1 + var(--untwist) * 0.15));
-
-      opacity: calc(1 - var(--fly-past) * 4);
-      /* Fades out instantly as you scroll past */
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, opacity 0.4s ease;
-    }
-
-    .card-chip {
-      position: absolute;
-      top: 24px;
-      right: 20px;
-      width: 38px;
-      height: 26px;
-      background: linear-gradient(135deg, #e0e0e0, #f8f8f8, #c0c0c0);
-      border-radius: 6px;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9);
-      overflow: hidden;
-    }
-
-    .card-chip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, transparent 30%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.08) 35%, transparent 35%),
-        linear-gradient(0deg, transparent 40%, rgba(0, 0, 0, 0.08) 40%, rgba(0, 0, 0, 0.08) 45%, transparent 45%);
+      will-change: transform, opacity;
+      transition: transform 0.15s ease-out, opacity 0.15s ease-out;
     }
 
     .feature-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
       background: linear-gradient(135deg, rgba(168, 222, 46, 0.3) 0%, rgba(129, 172, 32, 0.3) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
-      font-size: 18px;
+      margin-bottom: 8px;
+      font-size: 15px;
       color: var(--pine);
     }
 
     .feature-card h3 {
-      font-size: 19px;
+      font-size: 16px;
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: #111;
       letter-spacing: -0.02em;
     }
@@ -1020,8 +969,8 @@
     .feature-card p {
       color: #444;
       font-weight: 500;
-      font-size: 14.5px;
-      line-height: 1.4;
+      font-size: 12.5px;
+      line-height: 1.35;
     }
 
     @media (max-width:900px) {
@@ -1857,47 +1806,44 @@
     <div class="sticky-container">
       <div class="scene-3d">
         <div class="phone-mockup">
+          <div class="phone-top-mask"></div>
           <div class="phone-notch"></div>
           <div class="phone-header">
             <h2>Foamia System</h2>
             <p>Everything the forecourt needs, packed into one platform.</p>
           </div>
-          <div class="cards-stack">
-            <div class="feature-card" style="--i: 0;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">📅</div>
-              <h3>Online booking</h3>
-              <p>Customers book a slot and a bay from their phone.</p>
-            </div>
-            <div class="feature-card" style="--i: 1;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">🚗</div>
-              <h3>Profiles</h3>
-              <p>Every visit and preference saved automatically.</p>
-            </div>
-            <div class="feature-card" style="--i: 2;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">♻️</div>
-              <h3>Packages</h3>
-              <p>Sell unlimited-wash and package plans effortlessly.</p>
-            </div>
-            <div class="feature-card" style="--i: 3;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">👷</div>
-              <h3>Scheduling</h3>
-              <p>Assign bays and staff per shift without double-booking.</p>
-            </div>
-            <div class="feature-card" style="--i: 4;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">💳</div>
-              <h3>Payments</h3>
-              <p>Accept UPI, cards or cash at checkout on the spot.</p>
-            </div>
-            <div class="feature-card" style="--i: 5;">
-              <div class="card-chip"></div>
-              <div class="feature-icon">📊</div>
-              <h3>Dashboard</h3>
-              <p>Revenue and staff performance from a single login.</p>
+          <div class="phone-screen-clip">
+            <div class="cards-stack">
+              <div class="feature-card" style="--i: 0;">
+                <div class="feature-icon">📅</div>
+                <h3>Online booking</h3>
+                <p>Customers book a slot and a bay from their phone.</p>
+              </div>
+              <div class="feature-card" style="--i: 1;">
+                <div class="feature-icon">🚗</div>
+                <h3>Profiles</h3>
+                <p>Every visit and preference saved automatically.</p>
+              </div>
+              <div class="feature-card" style="--i: 2;">
+                <div class="feature-icon">♻️</div>
+                <h3>Packages</h3>
+                <p>Sell unlimited-wash and package plans effortlessly.</p>
+              </div>
+              <div class="feature-card" style="--i: 3;">
+                <div class="feature-icon">👷</div>
+                <h3>Scheduling</h3>
+                <p>Assign bays and staff per shift without double-booking.</p>
+              </div>
+              <div class="feature-card" style="--i: 4;">
+                <div class="feature-icon">💳</div>
+                <h3>Payments</h3>
+                <p>Accept UPI, cards or cash at checkout on the spot.</p>
+              </div>
+              <div class="feature-card" style="--i: 5;">
+                <div class="feature-icon">📊</div>
+                <h3>Dashboard</h3>
+                <p>Revenue and staff performance from a single login.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2220,9 +2166,11 @@
   </script>
 
   <script>
-    // Mobile 3D Scroll Scene
+    // Mobile 3D Scroll Scene - Strict Single-Card Visibility & Z-Index Engine
     const mobileSec = document.querySelector('.mobile-3d-scroll-sec');
     const scene = document.querySelector('.scene-3d');
+    const phoneHeader = document.querySelector('.phone-header');
+    const featureCards = document.querySelectorAll('.mobile-3d-scroll-sec .feature-card');
 
     if (mobileSec && scene) {
       window.addEventListener('scroll', () => {
@@ -2233,6 +2181,68 @@
           let progress = -rect.top / scrollHeight;
           progress = Math.max(0, Math.min(1, progress));
           scene.style.setProperty('--scroll', progress.toFixed(3));
+
+          // 3. Header visibility:hidden toggle after opacity reaches 0
+          if (phoneHeader) {
+            const headerOpacity = Math.max(0, 1 - progress * 14);
+            phoneHeader.style.opacity = headerOpacity.toFixed(2);
+            phoneHeader.style.visibility = headerOpacity <= 0 ? 'hidden' : 'visible';
+          }
+
+          const numCards = featureCards.length;
+          const rawActiveIndex = progress * numCards;
+
+          featureCards.forEach((card, index) => {
+            const start = index / numCards;
+            const end = (index + 1) / numCards;
+            const distFromActive = Math.abs(index - rawActiveIndex);
+
+            // 4. Dynamic Z-Index: Active card sits on top of everything
+            const zIndex = Math.round(100 - distFromActive * 15);
+            card.style.zIndex = zIndex;
+
+            let y, scale, opacity;
+
+            if (progress < start) {
+              // 1. HARD OPACITY FLOOR = 0 for unreached cards
+              y = 120 + (index - rawActiveIndex) * 12;
+              scale = 0.95;
+              opacity = 0;
+              card.style.pointerEvents = 'none';
+            } else if (progress >= start && progress <= end) {
+              // 2. SHORT CROSSFADE: 10% fade in, 80% OPAQUE HOLD, 10% fade out
+              const localProgress = (progress - start) / (end - start);
+
+              if (localProgress < 0.10) {
+                const t = localProgress / 0.10;
+                y = 120 * (1 - t) + 15 * t;
+                scale = 0.95 * (1 - t) + 1.0 * t;
+                opacity = t;
+                card.style.pointerEvents = 'none';
+              } else if (localProgress <= 0.90) {
+                // 100% OPAQUE READABLE HOLD - ZERO COMPETITION
+                y = 15;
+                scale = 1.0;
+                opacity = 1.0;
+                card.style.pointerEvents = 'auto';
+              } else {
+                const t = (localProgress - 0.90) / 0.10;
+                y = 15 * (1 - t) + (-140) * t;
+                scale = 1.0 * (1 - t) + 0.92 * t;
+                opacity = 1.0 - t;
+                card.style.pointerEvents = 'none';
+              }
+            } else {
+              // 1. HARD OPACITY FLOOR = 0 for passed cards
+              y = -140;
+              scale = 0.90;
+              opacity = 0;
+              card.style.pointerEvents = 'none';
+            }
+
+            card.style.transform = `translateY(${y.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+            card.style.opacity = opacity.toFixed(2);
+          });
         }
       }, { passive: true });
     }
