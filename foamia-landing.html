@@ -844,35 +844,164 @@
 
     /* ===== 3D MOBILE SCROLL FEATURES ===== */
     .mobile-3d-scroll-sec {
-      height: 170vh;
-      background: var(--pine-2);
+      height: 200vh;
+      background: #060806;
       position: relative;
       z-index: 10;
+      overflow: hidden;
     }
 
-    .sticky-container {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+    .features-bg-ambient {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .features-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 25%, transparent 80%);
+    }
+
+    .features-glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.6;
+    }
+
+    .features-glow-orb.orb-center {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(155, 203, 43, 0.28) 0%, rgba(129, 172, 32, 0.08) 55%, transparent 75%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .features-glow-orb.orb-top {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(194, 240, 72, 0.18) 0%, transparent 70%);
+      top: 15%;
+      right: 12%;
+    }
+
+    /* Floating Ambient Tech Badges around 3D Phone Stage */
+    .floating-badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(18, 22, 18, 0.82);
+      border: 1px solid rgba(155, 203, 43, 0.3);
+      backdrop-filter: blur(16px);
+      padding: 12px 18px;
+      border-radius: 16px;
+      color: var(--white);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(155, 203, 43, 0.15);
+      z-index: 3;
+    }
+
+    .floating-badge .icon {
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      perspective: 1600px;
-      overflow: hidden;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(155, 203, 43, 0.15);
+      border: 1px solid rgba(155, 203, 43, 0.35);
+    }
+
+    .floating-badge b {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .floating-badge span {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
+    }
+
+    .badge-left-1 {
+      top: 22%;
+      left: 7%;
+      animation: floatSmooth 6s ease-in-out infinite;
+    }
+
+    .badge-right-1 {
+      top: 26%;
+      right: 7%;
+      animation: floatSmooth 7s ease-in-out infinite 1s;
+    }
+
+    .badge-left-2 {
+      bottom: 22%;
+      left: 9%;
+      animation: floatSmooth 6.5s ease-in-out infinite 0.5s;
+    }
+
+    .badge-right-2 {
+      bottom: 20%;
+      right: 9%;
+      animation: floatSmooth 7.5s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes floatSmooth {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (max-width: 1024px) {
+      .floating-badge {
+        display: none;
+      }
+    }
+
+    /* Phone fixed-center wrapper — toggled by JS when section is in pinning range */
+    .sticky-container {
+      position: relative;
+      height: 100vh;
+    }
+
+    .scene-3d-fixed-wrap {
+      position: fixed;
+      /* Center within the visible area BELOW the 75px fixed navbar */
+      top: calc(50% + 37px);   /* 37px = half of navbar height, shifts center down */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .scene-3d-fixed-wrap.is-pinned {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .scene-3d {
       width: 300px;
-      height: 630px;
-      max-height: 82vh;
+      /* Reduced height with 80px breathing room above and below the device */
+      height: clamp(400px, calc(100vh - 150px), 575px);
       margin: 0 auto;
       transform-style: preserve-3d;
       transform-origin: center center;
-      --scroll: 0;
-      /* Gentle 12° tilt kept intact */
-      --tilt: calc(max(0, min(1, (var(--scroll) - 0.0) * 10)) - max(0, min(1, (var(--scroll) - 0.78) * 6)));
-      transform: rotateX(calc(var(--tilt) * 12deg)) rotateZ(calc(var(--tilt) * -5deg));
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .phone-mockup {
@@ -883,7 +1012,6 @@
       border: 10px solid #1a1e1a;
       box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
       position: relative;
-      transform-style: preserve-3d;
     }
 
     /* HARD SCREEN CLIP: Clips any card that overshoots screen bounds */
@@ -892,6 +1020,8 @@
       inset: 0;
       border-radius: 30px;
       overflow: hidden;
+      clip-path: inset(0 round 30px);
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
       z-index: 20;
     }
 
@@ -923,7 +1053,6 @@
 
     .phone-header {
       padding: 52px 20px 10px;
-      transform: translateZ(1px);
       position: relative;
       z-index: 40;
       opacity: calc(1 - max(0, min(1, (var(--scroll) - 0.02) * 8)));
@@ -946,18 +1075,15 @@
 
     .cards-stack {
       position: absolute;
-      top: 140px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      transform-style: preserve-3d;
+      inset: 0;
       z-index: 20;
     }
 
     .feature-card {
       position: absolute;
-      top: 0;
+      top: 50%;
       left: 16px;
+      margin-top: -67px;
       width: calc(100% - 32px);
       height: 135px;
       background: linear-gradient(135deg, rgba(255, 245, 248, 0.96) 0%, rgba(240, 250, 255, 0.96) 50%, rgba(245, 255, 245, 0.96) 100%);
@@ -1412,6 +1538,23 @@
       overflow: hidden;
     }
 
+
+
+    .proof-wave-top, .proof-wave-bottom {
+      width: 100%;
+      line-height: 0;
+      position: relative;
+      z-index: 5;
+      overflow: hidden;
+      margin: -1px 0;
+    }
+
+    .proof-wave-top svg, .proof-wave-bottom svg {
+      width: 100%;
+      height: 48px;
+      display: block;
+    }
+
     .proof-bubbles-canvas {
       position: absolute;
       inset: 0;
@@ -1832,7 +1975,47 @@
   </div>
 
   <section class="mobile-3d-scroll-sec" id="features">
+    <div class="features-bg-ambient">
+      <div class="features-grid-overlay"></div>
+      <div class="features-glow-orb orb-center"></div>
+      <div class="features-glow-orb orb-top"></div>
+      
+      <!-- Floating Ambient Tech Badges around 3D Phone -->
+      <div class="floating-badge badge-left-1">
+        <span class="icon">⚡</span>
+        <div>
+          <b>3.2× Faster Checkout</b>
+          <span>Single-tap UPI billing</span>
+        </div>
+      </div>
+
+      <div class="floating-badge badge-right-1">
+        <span class="icon">📊</span>
+        <div>
+          <b>Live Bay Analytics</b>
+          <span>Real-time utilization</span>
+        </div>
+      </div>
+
+      <div class="floating-badge badge-left-2">
+        <span class="icon">📲</span>
+        <div>
+          <b>Automated Alerts</b>
+          <span>WhatsApp notifications</span>
+        </div>
+      </div>
+
+      <div class="floating-badge badge-right-2">
+        <span class="icon">🛡️</span>
+        <div>
+          <b>Multi-Location Sync</b>
+          <span>All centres in one view</span>
+        </div>
+      </div>
+    </div>
+
     <div class="sticky-container">
+      <div class="scene-3d-fixed-wrap">
       <div class="scene-3d">
         <div class="phone-mockup">
           <div class="phone-top-mask"></div>
@@ -1876,14 +2059,17 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div><!-- /.scene-3d -->
+      </div><!-- /.scene-3d-fixed-wrap -->
+    </div><!-- /.sticky-container -->
   </section>
+
+
 
   <section class="steps-section" id="how-it-works">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="sec-eyebrow" style="color:var(--lime);">Getting started</span>
+        <span class="sec-eyebrow" style="color:var(--lime);">02 &mdash; Onboarding</span>
         <h2 style="color:var(--white);">Live in a week, not a quarter</h2>
         <p style="color:rgba(255,255,255,0.7);">Foamia's onboarding team sets up your first centre with you, in this
           order.</p>
@@ -1954,11 +2140,13 @@
     </div>
   </section>
 
+
+
   <section class="usecases-3d-sec" id="use-cases">
     <div class="usecase-bg-grid"></div>
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="sec-eyebrow">Use cases</span>
+        <span class="sec-eyebrow">03 &mdash; Business Use Cases</span>
         <h2>Built to flex with how you run your wash</h2>
         <p>From a single manual bay to a multi-location chain, Foamia scales with the way you actually operate.</p>
       </div>
@@ -2032,9 +2220,18 @@
     </div>
   </section>
 
+  <div class="proof-wave-top">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none">
+      <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z" fill="#81AC20"></path>
+    </svg>
+  </div>
+
   <section class="proof" id="proofSec">
     <canvas class="proof-bubbles-canvas" id="proofBubblesCanvas"></canvas>
     <div class="wrap proof-inner">
+      <div class="reveal" style="grid-column: 1 / -1; text-align: center; margin-bottom: 24px;">
+        <span class="sec-eyebrow" style="color:var(--pine); font-weight:800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">04 &mdash; Proven Results</span>
+      </div>
       <div class="reveal">
         <blockquote>"We stopped losing bookings to missed calls. Foamia's queue fills itself, and I finally see today's
           revenue without asking my cashier."</blockquote>
@@ -2061,6 +2258,12 @@
     </div>
   </section>
 
+  <div class="proof-wave-bottom">
+    <svg viewBox="0 0 1440 48" preserveAspectRatio="none">
+      <path d="M0,0 L1440,0 L1440,48 C960,0 480,0 0,48 Z" fill="#000000"></path>
+    </svg>
+  </div>
+
   <section class="cta-banner">
     <div class="wrap">
       <div class="cta-box reveal" id="ctaBox">
@@ -2076,10 +2279,12 @@
     </div>
   </section>
 
+
+
   <section class="faq" id="faq">
     <div class="wrap">
       <div class="sec-head center reveal">
-        <span class="sec-eyebrow" style="color:var(--lime);">FAQ</span>
+        <span class="sec-eyebrow" style="color:var(--lime);">05 &mdash; FAQ</span>
         <h2>Questions owners usually ask</h2>
       </div>
       <div class="faq-list">
@@ -2198,18 +2403,27 @@
     // Mobile 3D Scroll Scene - Strict Single-Card Visibility & Z-Index Engine
     const mobileSec = document.querySelector('.mobile-3d-scroll-sec');
     const scene = document.querySelector('.scene-3d');
+    const wrapEl = document.querySelector('.scene-3d-fixed-wrap');
     const phoneHeader = document.querySelector('.phone-header');
     const featureCards = document.querySelectorAll('.mobile-3d-scroll-sec .feature-card');
 
-    if (mobileSec && scene) {
+    if (mobileSec && scene && wrapEl) {
       window.addEventListener('scroll', () => {
         const rect = mobileSec.getBoundingClientRect();
         const scrollHeight = rect.height - window.innerHeight;
+
+        // Toggle fixed-center pinning: only pin when section is actively scrolling
+        const shouldPin = rect.top <= 0 && rect.bottom >= window.innerHeight;
+        wrapEl.classList.toggle('is-pinned', shouldPin);
 
         if (rect.top <= window.innerHeight && rect.bottom >= 0) {
           let progress = -rect.top / scrollHeight;
           progress = Math.max(0, Math.min(1, progress));
           scene.style.setProperty('--scroll', progress.toFixed(3));
+
+          // Reset any stale transform/opacity — card animations handle their own opacity
+          scene.style.opacity = '1';
+          scene.style.transform = 'none';
 
           // 3. Header visibility:hidden toggle after opacity reaches 0
           if (phoneHeader) {
@@ -2217,6 +2431,7 @@
             phoneHeader.style.opacity = headerOpacity.toFixed(2);
             phoneHeader.style.visibility = headerOpacity <= 0 ? 'hidden' : 'visible';
           }
+
 
           const numCards = featureCards.length;
           const rawActiveIndex = progress * numCards;
@@ -2229,42 +2444,44 @@
             // 4. Dynamic Z-Index: Active card sits on top of everything
             const zIndex = Math.round(100 - distFromActive * 15);
             card.style.zIndex = zIndex;
+            card.style.webkitMaskImage = 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)';
 
             let y, scale, opacity;
 
             if (progress < start) {
-              // 1. HARD OPACITY FLOOR = 0 for unreached cards
-              y = 120 + (index - rawActiveIndex) * 12;
+              // Unreached card: hidden near top
+              y = -120;
               scale = 0.95;
               opacity = 0;
               card.style.pointerEvents = 'none';
             } else if (progress >= start && progress <= end) {
-              // 2. SHORT CROSSFADE: 10% fade in, 80% OPAQUE HOLD, 10% fade out
               const localProgress = (progress - start) / (end - start);
 
-              if (localProgress < 0.10) {
-                const t = localProgress / 0.10;
-                y = 120 * (1 - t) + 15 * t;
+              if (localProgress < 0.15) {
+                // Entry: glides down into DEAD-CENTER position
+                const t = localProgress / 0.15;
+                y = -120 * (1 - t) + 0 * t;
                 scale = 0.95 * (1 - t) + 1.0 * t;
                 opacity = t;
                 card.style.pointerEvents = 'none';
-              } else if (localProgress <= 0.90) {
-                // 100% OPAQUE READABLE HOLD - ZERO COMPETITION
-                y = 15;
+              } else if (localProgress <= 0.80) {
+                // DEAD-CENTER READABLE HOLD in exact middle of phone screen
+                y = 0;
                 scale = 1.0;
                 opacity = 1.0;
                 card.style.pointerEvents = 'auto';
               } else {
-                const t = (localProgress - 0.90) / 0.10;
-                y = 15 * (1 - t) + (-140) * t;
-                scale = 1.0 * (1 - t) + 0.92 * t;
-                opacity = 1.0 - t;
+                // Exit: glides DOWNWARDS towards bottom of phone screen
+                const t = (localProgress - 0.80) / 0.20;
+                y = 0 * (1 - t) + 150 * t;
+                scale = 1.0 * (1 - t) + 0.96 * t;
+                opacity = Math.max(0, 1.0 - t * 1.4);
                 card.style.pointerEvents = 'none';
               }
             } else {
-              // 1. HARD OPACITY FLOOR = 0 for passed cards
-              y = -140;
-              scale = 0.90;
+              // Passed card: hidden safely near bottom of phone screen
+              y = 150;
+              scale = 0.96;
               opacity = 0;
               card.style.pointerEvents = 'none';
             }
