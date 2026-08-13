@@ -577,7 +577,7 @@
 
     .wash-scroll {
       position: relative;
-      height: 380vh;
+      height: 180vh;
       background: #000;
     }
 
@@ -818,7 +818,7 @@
 
     /* ===== 3D MOBILE SCROLL FEATURES ===== */
     .mobile-3d-scroll-sec {
-      height: 300vh;
+      height: 170vh;
       background: var(--pine-2);
       position: relative;
       z-index: 10;
@@ -1954,7 +1954,7 @@
               <h3>Independent wash owners</h3>
               <p>Replace the notebook and the walk-in queue with online bookings and a clear daily revenue view.</p>
               <div class="card-footer-link">
-                <span>Discover by Inventory View</span>
+                <span>Explore Single-Bay POS Setup</span>
                 <span class="arrow">→</span>
               </div>
             </div>
@@ -1970,7 +1970,7 @@
               <p>Compare bay utilisation and revenue across every centre from one owner login — no separate spreadsheets
                 per site.</p>
               <div class="card-footer-link">
-                <span>Discover by Query Builder</span>
+                <span>View Multi-Centre Dashboard</span>
                 <span class="arrow">→</span>
               </div>
             </div>
@@ -1986,7 +1986,7 @@
               <p>Route mobile detailing requests to the nearest available team and track jobs from booking to
                 completion.</p>
               <div class="card-footer-link">
-                <span>Discover by Saved Queries</span>
+                <span>Explore Doorstep Dispatching</span>
                 <span class="arrow">→</span>
               </div>
             </div>
@@ -2296,8 +2296,16 @@
           opacity: 0.3 + Math.random() * 0.55
         }));
 
+        let isHeroVisible = true;
+        const heroObserver = new IntersectionObserver((entries) => {
+          isHeroVisible = entries[0].isIntersecting;
+          if (isHeroVisible) requestAnimationFrame(renderHero);
+        }, { threshold: 0.05 });
+        heroObserver.observe(container);
+
         let start = null;
         function renderHero(timestamp) {
+          if (!isHeroVisible) return;
           if (!start) start = timestamp;
           const elapsed = (timestamp - start) / 1000;
 
@@ -2452,7 +2460,18 @@
         let frames = [];
         let isLoaded = false;
 
+        let isWashVisible = true;
+        const washObserver = new IntersectionObserver((entries) => {
+          const wasVisible = isWashVisible;
+          isWashVisible = entries[0].isIntersecting;
+          if (isWashVisible && !wasVisible) {
+            requestAnimationFrame(render);
+          }
+        }, { threshold: 0.05 });
+        washObserver.observe(section);
+
         window.addEventListener('scroll', () => {
+          if (!isWashVisible) return;
           progress = getProgress();
           if (frames.length > 0) {
             targetFrameFloat = progress * (frames.length - 1);
@@ -2529,10 +2548,13 @@
             isLoaded = true;
             targetFrameFloat = progress * (frames.length - 1);
             currentFrameFloat = targetFrameFloat;
+            if (isWashVisible) requestAnimationFrame(render);
           }
         });
 
         function render() {
+          if (!isWashVisible) return;
+
           // Smooth linear interpolation (lerp) for Apple-style scroll fluidness
           currentFrameFloat += (targetFrameFloat - currentFrameFloat) * 0.15;
           if (Math.abs(targetFrameFloat - currentFrameFloat) < 0.001) {
@@ -2711,6 +2733,8 @@
 
         let activeIdx = 0;
         let autoTimer = null;
+        let isHovered = false;
+        let isVisible = false;
 
         function activateCard(index, moveCursor = true) {
           activeIdx = index;
@@ -2745,6 +2769,51 @@
         // Initialize Card 0
         setTimeout(() => activateCard(0), 300);
 
+        function startAutoTimer() {
+          stopAutoTimer();
+          if (!isVisible || isHovered) return;
+          autoTimer = setInterval(() => {
+            if (!isHovered && isVisible) {
+              const nextIdx = (activeIdx + 1) % cards.length;
+              activateCard(nextIdx);
+            }
+          }, 3500);
+        }
+
+        function stopAutoTimer() {
+          if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+          }
+        }
+
+        function resetAutoTimer() {
+          stopAutoTimer();
+          startAutoTimer();
+        }
+
+        // Hover pause/resume
+        stage.addEventListener('mouseenter', () => {
+          isHovered = true;
+          stopAutoTimer();
+        });
+
+        stage.addEventListener('mouseleave', () => {
+          isHovered = false;
+          startAutoTimer();
+        });
+
+        // IntersectionObserver gating for timer execution
+        const observer = new IntersectionObserver((entries) => {
+          isVisible = entries[0].isIntersecting;
+          if (isVisible) {
+            startAutoTimer();
+          } else {
+            stopAutoTimer();
+          }
+        }, { threshold: 0.1 });
+        observer.observe(stage);
+
         // Click handlers
         cards.forEach((card, i) => {
           card.addEventListener('click', () => {
@@ -2760,29 +2829,20 @@
           });
         });
 
-        // Auto rotate every 3.5 seconds
-        function startAutoTimer() {
-          autoTimer = setInterval(() => {
-            const nextIdx = (activeIdx + 1) % cards.length;
-            activateCard(nextIdx);
-          }, 3500);
-        }
-
-        function resetAutoTimer() {
-          if (autoTimer) clearInterval(autoTimer);
-          startAutoTimer();
-        }
-
-        // Scroll trigger: sync scroll progress to card focus
+        // Scroll trigger: sync scroll progress to card focus, resetting timer to prevent mid-scroll ticks
+        let lastScrollIdx = -1;
         window.addEventListener('scroll', () => {
+          if (!isVisible || isHovered) return;
           const stageRect = stage.getBoundingClientRect();
           const viewH = window.innerHeight;
 
           if (stageRect.top < viewH * 0.7 && stageRect.bottom > viewH * 0.3) {
             const progress = Math.max(0, Math.min(1, (viewH * 0.7 - stageRect.top) / (viewH * 0.4)));
             const scrollIdx = Math.min(cards.length - 1, Math.floor(progress * cards.length));
-            if (scrollIdx !== activeIdx && !stage.matches(':hover')) {
+            if (scrollIdx !== activeIdx && scrollIdx !== lastScrollIdx) {
+              lastScrollIdx = scrollIdx;
               activateCard(scrollIdx);
+              resetAutoTimer();
             }
           }
         }, { passive: true });
@@ -2813,7 +2873,15 @@
             opacity: 0.15 + Math.random() * 0.25
           }));
 
+          let isBubbleVisible = true;
+          const bubbleObserver = new IntersectionObserver((entries) => {
+            isBubbleVisible = entries[0].isIntersecting;
+            if (isBubbleVisible) requestAnimationFrame(drawBubbles);
+          }, { threshold: 0.05 });
+          bubbleObserver.observe(proofSec);
+
           function drawBubbles() {
+            if (!isBubbleVisible) return;
             ctx.clearRect(0, 0, W, H);
             bubbles.forEach(b => {
               b.y -= b.speedY;
