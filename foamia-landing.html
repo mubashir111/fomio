@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foamia — Wash Tech for Car Wash Owners</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
       --pine: #000000;
@@ -36,20 +36,22 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--paper);
       color: var(--ink);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1,
     h2,
     h3,
     .display {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 800;
-      letter-spacing: -0.01em;
-      line-height: 1.05;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
     }
 
     a {
@@ -80,8 +82,9 @@
 
     button,
     .btn {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
+      letter-spacing: -0.01em;
       cursor: pointer;
       border: none;
       border-radius: 100px;
@@ -269,9 +272,10 @@
       align-items: center;
       gap: 8px;
       color: var(--lime);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 22px;
     }
@@ -286,16 +290,24 @@
     }
 
     .hero h1 {
-      font-size: 56px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(42px, 5.5vw, 62px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
       color: var(--white);
       margin-bottom: 22px;
+      line-height: 1.05;
     }
 
-    .hero h1 span {
-      color: var(--lime);
+    .hero h1 span,
+    .sec-head h2 span {
+      background: linear-gradient(135deg, #C2F048 0%, #9BCB2B 60%, #FFFFFF 120%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p.lead {
+      font-family: 'Inter', sans-serif;
       font-size: 18px;
       color: rgba(255, 255, 255, 0.72);
       max-width: 460px;
@@ -318,15 +330,18 @@
 
     .hero-stats div b {
       display: block;
-      font-family: 'Poppins', sans-serif;
-      font-size: 26px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
       color: var(--white);
       font-weight: 800;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
     }
 
     .hero-stats div span {
       color: rgba(255, 255, 255, 0.55);
       font-size: 13px;
+      font-weight: 500;
     }
 
     /* phone mockup */
@@ -394,9 +409,10 @@
     }
 
     .app-topbar .name {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 15px;
+      letter-spacing: -0.01em;
     }
 
     .avatar {
@@ -424,10 +440,12 @@
     }
 
     .app-card-hero .val {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 24px;
       font-weight: 800;
+      letter-spacing: -0.03em;
       margin-top: 4px;
+      font-variant-numeric: tabular-nums;
     }
 
     .app-card-hero .grow {
@@ -458,10 +476,12 @@
     }
 
     .mini-stat .val {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 15px;
+      letter-spacing: -0.02em;
       margin-top: 2px;
+      font-variant-numeric: tabular-nums;
     }
 
     .list-title {
@@ -772,10 +792,12 @@
       gap: 56px;
       flex-wrap: wrap;
       opacity: 0.55;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
+      letter-spacing: 0.04em;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
+      text-transform: uppercase;
     }
 
     /* ===== SECTION HEADERS ===== */
@@ -789,22 +811,26 @@
     }
 
     .sec-eyebrow {
-      color: var(--lime-dark);
+      color: var(--lime);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 14px;
       display: block;
     }
 
     .sec-head h2 {
-      font-size: 38px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(30px, 4vw, 42px);
+      letter-spacing: -0.03em;
       margin-bottom: 16px;
       color: var(--white);
     }
 
     .sec-head p {
+      font-family: 'Inter', sans-serif;
       color: var(--muted);
       font-size: 16.5px;
       line-height: 1.6;
@@ -1105,7 +1131,7 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       color: rgba(255, 255, 255, 0.6);
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
       font-size: 15px;
       margin-bottom: 16px;
@@ -1403,18 +1429,19 @@
     }
 
     .proof blockquote {
-      font-family: 'Poppins', sans-serif;
-      font-size: 26px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(20px, 3vw, 26px);
       font-weight: 700;
       color: var(--pine);
-      line-height: 1.4;
+      line-height: 1.35;
       margin-bottom: 20px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.025em;
     }
 
     .proof cite {
+      font-family: 'Inter', sans-serif;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 600;
       color: rgba(0, 0, 0, 0.7);
       font-size: 15px;
       display: inline-block;
@@ -1442,9 +1469,11 @@
     }
 
     .proof-stat b {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 38px;
       font-weight: 800;
+      letter-spacing: -0.035em;
+      font-variant-numeric: tabular-nums;
       color: var(--pine);
       display: block;
       line-height: 1.1;
