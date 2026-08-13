@@ -1795,31 +1795,31 @@
 
       <div class="wash-caption">
         <div class="wash-stage active" data-stage="0">
-          <span class="sec-eyebrow">01 &mdash; Book</span>
-          <h2>Your wash. Your time.</h2>
-          <p>Pick a service, choose your time, and let us handle the rest.</p>
+          <span class="sec-eyebrow">01 &mdash; Operator Access</span>
+          <h2>Secure Multi-Role Login.</h2>
+          <p>Single tap access for managers, cashiers, and bay technicians.</p>
         </div>
         <div class="wash-stage" data-stage="1">
-          <span class="sec-eyebrow">02 &mdash; Foam</span>
-          <h2>Dirt doesn't stand a chance.</h2>
-          <p>Powerful foam breaks down dirt and grime.</p>
+          <span class="sec-eyebrow">02 &mdash; Operations Hub</span>
+          <h2>Live Control Center.</h2>
+          <p>Track real-time active washes, pending queues, and daily revenue.</p>
         </div>
         <div class="wash-stage" data-stage="2">
-          <span class="sec-eyebrow">03 &mdash; Deep Clean</span>
-          <h2>Every detail. Spotless.</h2>
-          <p>Deep cleaning that leaves nothing behind.</p>
+          <span class="sec-eyebrow">03 &mdash; Service Workflow</span>
+          <h2>Bay Ticket Management.</h2>
+          <p>Assign service tickets, track wash progress, and notify staff.</p>
         </div>
         <div class="wash-stage" data-stage="3">
-          <span class="sec-eyebrow">04 &mdash; Shine</span>
-          <h2>Leave looking brand new.</h2>
-          <p>A flawless finish you'll notice immediately.</p>
+          <span class="sec-eyebrow">04 &mdash; Express Checkout</span>
+          <h2>Single-Bay POS Grid.</h2>
+          <p>Instant touch-optimized billing, payment collection, and digital receipts.</p>
         </div>
       </div>
 
       <div class="wash-progress">
         <span data-i="0" class="on"></span><span data-i="1"></span><span data-i="2"></span><span data-i="3"></span>
       </div>
-      <div class="wash-scroll-hint">Scroll to wash ↓</div>
+
     </div>
   </section>
 
@@ -2509,7 +2509,7 @@
 
         // Dynamic Frame Probe & Preload Function
         async function loadFrames() {
-          const possibleDirs = ['frames/', 'ezgif-4c82f664436689bd-jpg/'];
+          const possibleDirs = ['ezgif-15d96e7d0373b453-jpg/', 'ezgif-580c7f780e730fe5-jpg/', 'frames/'];
           const possiblePrefixes = ['ezgif-frame-', 'frame-', 'frame_', ''];
           const possibleExts = ['.jpg', '.jpeg', '.png', '.webp'];
 
@@ -2541,7 +2541,7 @@
           }
 
           if (!workingPattern) {
-            workingPattern = { dir: 'frames/', prefix: 'ezgif-frame-', ext: '.jpg', padLen: 3 };
+            workingPattern = { dir: 'ezgif-15d96e7d0373b453-jpg/', prefix: 'ezgif-frame-', ext: '.jpg', padLen: 3 };
           }
 
           // Probe total frame count sequentially
@@ -2590,9 +2590,10 @@
             currentFrameFloat = targetFrameFloat;
           }
 
-          // Sync captions and stage indicator
-          const p4 = progress * 4;
-          const stage = Math.min(3, Math.floor(p4));
+          // Sync captions and stage indicator with the exact rendered frame on canvas
+          const totalFrames = (frames.length > 1) ? (frames.length - 1) : 1;
+          const currentRatio = isLoaded ? (currentFrameFloat / totalFrames) : progress;
+          const stage = Math.min(3, Math.floor(currentRatio * 4));
           setStage(stage);
 
           if (hintEl) hintEl.classList.toggle('hide', progress > 0.04);
