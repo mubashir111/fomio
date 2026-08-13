@@ -2412,8 +2412,9 @@
         const rect = mobileSec.getBoundingClientRect();
         const scrollHeight = rect.height - window.innerHeight;
 
-        // Toggle fixed-center pinning: only pin when section is actively scrolling
-        const shouldPin = rect.top <= 0 && rect.bottom >= window.innerHeight;
+        // Only pin phone when section top has scrolled above the navbar (actively pinning)
+        // NOT while section is still below the viewport entering from the bottom
+        const shouldPin = rect.top <= 85 && rect.bottom > window.innerHeight;
         wrapEl.classList.toggle('is-pinned', shouldPin);
 
         if (rect.top <= window.innerHeight && rect.bottom >= 0) {
@@ -2449,29 +2450,31 @@
             let y, scale, opacity;
 
             if (progress < start) {
-              // Unreached card: hidden near top
-              y = -120;
-              scale = 0.95;
-              opacity = 0;
-              card.style.pointerEvents = 'none';
+              if (index === 0) {
+                // First card: always show it immediately when section enters — no hidden state
+                y = 0; scale = 1.0; opacity = 1.0;
+                card.style.pointerEvents = 'auto';
+              } else {
+                // Other unreached cards: hidden above
+                y = -120; scale = 0.95; opacity = 0;
+                card.style.pointerEvents = 'none';
+              }
             } else if (progress >= start && progress <= end) {
               const localProgress = (progress - start) / (end - start);
 
-              if (localProgress < 0.15) {
-                // Entry: glides down into DEAD-CENTER position
+              if (localProgress < 0.15 && index > 0) {
+                // Entry animation (only for cards 1+, not card 0)
                 const t = localProgress / 0.15;
                 y = -120 * (1 - t) + 0 * t;
                 scale = 0.95 * (1 - t) + 1.0 * t;
                 opacity = t;
                 card.style.pointerEvents = 'none';
               } else if (localProgress <= 0.80) {
-                // DEAD-CENTER READABLE HOLD in exact middle of phone screen
-                y = 0;
-                scale = 1.0;
-                opacity = 1.0;
+                // DEAD-CENTER hold
+                y = 0; scale = 1.0; opacity = 1.0;
                 card.style.pointerEvents = 'auto';
               } else {
-                // Exit: glides DOWNWARDS towards bottom of phone screen
+                // Exit: glides DOWNWARDS
                 const t = (localProgress - 0.80) / 0.20;
                 y = 0 * (1 - t) + 150 * t;
                 scale = 1.0 * (1 - t) + 0.96 * t;
@@ -2479,10 +2482,8 @@
                 card.style.pointerEvents = 'none';
               }
             } else {
-              // Passed card: hidden safely near bottom of phone screen
-              y = 150;
-              scale = 0.96;
-              opacity = 0;
+              // Passed card: hidden below
+              y = 150; scale = 0.96; opacity = 0;
               card.style.pointerEvents = 'none';
             }
 
