@@ -224,7 +224,7 @@
     .hero {
       position: relative;
       background: var(--pine);
-      padding: 75px 0 0;
+      padding: 120px 0 0;
       overflow: hidden;
     }
 
@@ -1941,6 +1941,77 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+    @media (max-width:900px) {
+      /* Hero Section */
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 60px;
+      }
+      .hero-inner::before {
+        display: none;
+      }
+      .three-hero {
+        display: none;
+      }
+      .hero h1 {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: clamp(38px, 9vw, 48px);
+      }
+      .hero p.lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-ctas, .hero-stats {
+        justify-content: center;
+      }
+      .phone-stage {
+        padding-top: 20px;
+      }
+
+      /* Features Section (3D Mobile Scroll) */
+      .phone-mockup-wrapper {
+        transform: translateX(-50%) scale(0.85);
+      }
+      .cards-stack {
+        transform: scale(0.85);
+      }
+      
+      /* Tree Timeline */
+      .tree-step-row.left,
+      .tree-step-row.right {
+        justify-content: flex-end;
+        text-align: left;
+        padding-left: 50px;
+      }
+      .tree-step-row.left .tree-node-dot,
+      .tree-step-row.right .tree-node-dot {
+        left: -32px;
+        right: auto;
+      }
+      .tree-root-pulse {
+        left: 20px !important;
+        transform: translateX(-50%);
+      }
+
+      /* Use Cases */
+      .usecase-3d-stage {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .usecase-panel {
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 20px;
+      }
+      
+      /* Footer */
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
   </style>
 </head>
 
@@ -3027,7 +3098,8 @@
           const containerRect = container.getBoundingClientRect();
           const W = containerRect.width;
           const H = containerRect.height;
-          const centerX = W / 2;
+          const isMobile = window.innerWidth <= 900;
+          const centerX = isMobile ? 20 : W / 2;
 
           // Stem path from top 0 to bottom H
           const stemD = `M ${centerX} 0 L ${centerX} ${H}`;
@@ -3043,7 +3115,7 @@
             const card = row.querySelector('.tree-card');
             const cardRect = card.getBoundingClientRect();
 
-            const isLeft = row.classList.contains('left');
+            const isLeft = row.classList.contains('left') && !isMobile;
             let dotX = isLeft
               ? (cardRect.right - containerRect.left)
               : (cardRect.left - containerRect.left);
