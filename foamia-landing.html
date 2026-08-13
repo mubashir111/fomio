@@ -875,7 +875,7 @@
 
     .features-sec-head p {
       font-size: 16px;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
       max-width: 420px;
       margin: 0 auto;
       line-height: 1.6;
@@ -892,7 +892,7 @@
     .features-grid-overlay {
       position: absolute;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
       background-size: 60px 60px;
@@ -992,8 +992,15 @@
     }
 
     @keyframes floatSmooth {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
     }
 
     @media (max-width: 1024px) {
@@ -1011,7 +1018,8 @@
     .scene-3d-fixed-wrap {
       position: fixed;
       /* Center within the visible area BELOW the 75px fixed navbar */
-      top: calc(50% + 37px);   /* 37px = half of navbar height, shifts center down */
+      top: calc(50% + 37px);
+      /* 37px = half of navbar height, shifts center down */
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
@@ -1070,10 +1078,11 @@
     }
 
     .phone-header {
-      padding: 30px 16px 12px;  /* 30px clears the 22px notch + 8px gap */
+      padding: 30px 16px 12px;
+      /* 30px clears the 22px notch + 8px gap */
       position: relative;
       z-index: 40;
-      background: linear-gradient(180deg, rgba(13,15,13,1) 0%, rgba(13,15,13,0.95) 60%, transparent 100%);
+      background: linear-gradient(180deg, rgba(13, 15, 13, 1) 0%, rgba(13, 15, 13, 0.95) 60%, transparent 100%);
       border-top-left-radius: 28px;
       border-top-right-radius: 28px;
     }
@@ -1129,7 +1138,7 @@
 
     .phone-app-sub {
       font-size: 11.5px;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255, 255, 255, 0.85);
       font-family: 'Plus Jakarta Sans', sans-serif;
       margin-top: 6px;
       padding: 0 4px;
@@ -1157,7 +1166,7 @@
     .phone-screen-label-text {
       font-size: 10px;
       font-weight: 700;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       font-family: 'Plus Jakarta Sans', sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -1186,7 +1195,7 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
     }
 
@@ -1267,7 +1276,8 @@
       position: relative;
       max-width: 1000px;
       margin: 60px auto 0;
-      padding: 40px 0 120px; /* Extends SVG canvas down so line draws further */
+      padding: 40px 0 120px;
+      /* Extends SVG canvas down so line draws further */
     }
 
     .tree-svg {
@@ -1657,7 +1667,8 @@
 
 
 
-    .proof-wave-top, .proof-wave-bottom {
+    .proof-wave-top,
+    .proof-wave-bottom {
       width: 100%;
       line-height: 0;
       position: relative;
@@ -1666,7 +1677,8 @@
       margin: -1px 0;
     }
 
-    .proof-wave-top svg, .proof-wave-bottom svg {
+    .proof-wave-top svg,
+    .proof-wave-bottom svg {
       width: 100%;
       height: 48px;
       display: block;
@@ -1941,31 +1953,40 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
     @media (max-width:900px) {
+
       /* Hero Section */
       .hero-inner {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 60px;
       }
+
       .hero-inner::before {
         display: none;
       }
+
       .three-hero {
         display: none;
       }
+
       .hero h1 {
         margin-left: auto;
         margin-right: auto;
         font-size: clamp(38px, 9vw, 48px);
       }
+
       .hero p.lead {
         margin-left: auto;
         margin-right: auto;
       }
-      .hero-ctas, .hero-stats {
+
+      .hero-ctas,
+      .hero-stats {
         justify-content: center;
       }
+
       .phone-stage {
         padding-top: 20px;
       }
@@ -1974,10 +1995,11 @@
       .phone-mockup-wrapper {
         transform: translateX(-50%) scale(0.85);
       }
+
       .cards-stack {
         transform: scale(0.85);
       }
-      
+
       /* Tree Timeline */
       .tree-step-row.left,
       .tree-step-row.right {
@@ -1985,11 +2007,13 @@
         text-align: left;
         padding-left: 50px;
       }
+
       .tree-step-row.left .tree-node-dot,
       .tree-step-row.right .tree-node-dot {
         left: -32px;
         right: auto;
       }
+
       .tree-root-pulse {
         left: 20px !important;
         transform: translateX(-50%);
@@ -2000,12 +2024,13 @@
         flex-direction: column;
         gap: 30px;
       }
+
       .usecase-panel {
         width: 100%;
         max-width: 320px;
         margin-bottom: 20px;
       }
-      
+
       /* Footer */
       .footer-grid {
         grid-template-columns: 1fr;
@@ -2032,7 +2057,7 @@
         <a class="nav-login" href="#">Log in</a>
         <button class="btn btn-lime">Get a demo</button>
       </div>
-      <button class="burger">☰</button>
+      <!-- <button class="burger">☰</button> -->
     </nav>
   </header>
 
@@ -2164,7 +2189,7 @@
       <div class="features-grid-overlay"></div>
       <div class="features-glow-orb orb-center"></div>
       <div class="features-glow-orb orb-top"></div>
-      
+
       <!-- Floating Ambient Tech Badges around 3D Phone -->
       <div class="floating-badge badge-left-1">
         <span class="icon">⚡</span>
@@ -2202,75 +2227,75 @@
     <div class="sticky-container">
 
       <div class="scene-3d-fixed-wrap">
-      <div class="scene-3d">
-        <div class="phone-mockup">
-          <div class="phone-top-mask"></div>
-          <div class="phone-notch"></div>
-          <div class="phone-header">
-            <div class="phone-status-bar">
-              <span class="phone-status-time">9:41</span>
-              <div class="phone-status-icons">
-                <span>▲▲▲</span>
-                <span>WiFi</span>
-                <span>🔋</span>
+        <div class="scene-3d">
+          <div class="phone-mockup">
+            <div class="phone-top-mask"></div>
+            <div class="phone-notch"></div>
+            <div class="phone-header">
+              <div class="phone-status-bar">
+                <span class="phone-status-time">9:41</span>
+                <div class="phone-status-icons">
+                  <span>▲▲▲</span>
+                  <span>WiFi</span>
+                  <span>🔋</span>
+                </div>
+              </div>
+              <div class="phone-app-bar">
+                <img src="Foamia%20Logo-Light.png" alt="Foamia" class="phone-app-logo">
+                <span class="phone-app-badge">● LIVE</span>
+              </div>
+              <p class="phone-app-sub">Everything your forecourt needs, one app.</p>
+            </div>
+            <div class="phone-screen-clip">
+              <!-- In-phone label: tells user what this section is -->
+              <div class="phone-screen-label">
+                <span class="phone-screen-label-text">App Features</span>
+                <span class="phone-screen-counter" id="phoneFeatureCounter">01 / 06</span>
+              </div>
+              <div class="cards-stack">
+                <div class="feature-card" style="--i: 0;">
+                  <div class="feature-icon">📅</div>
+                  <h3>Online booking</h3>
+                  <p>Customers book a slot and a bay from their phone.</p>
+                </div>
+                <div class="feature-card" style="--i: 1;">
+                  <div class="feature-icon">🚗</div>
+                  <h3>Profiles</h3>
+                  <p>Every visit and preference saved automatically.</p>
+                </div>
+                <div class="feature-card" style="--i: 2;">
+                  <div class="feature-icon">♻️</div>
+                  <h3>Packages</h3>
+                  <p>Sell unlimited-wash and package plans effortlessly.</p>
+                </div>
+                <div class="feature-card" style="--i: 3;">
+                  <div class="feature-icon">👷</div>
+                  <h3>Scheduling</h3>
+                  <p>Assign bays and staff per shift without double-booking.</p>
+                </div>
+                <div class="feature-card" style="--i: 4;">
+                  <div class="feature-icon">💳</div>
+                  <h3>Payments</h3>
+                  <p>Accept UPI, cards or cash at checkout on the spot.</p>
+                </div>
+                <div class="feature-card" style="--i: 5;">
+                  <div class="feature-icon">📊</div>
+                  <h3>Dashboard</h3>
+                  <p>Revenue and staff performance from a single login.</p>
+                </div>
+              </div>
+              <!-- Dot progress indicator at phone screen bottom -->
+              <div class="phone-dot-indicator" id="phoneDotIndicator">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </div>
-            <div class="phone-app-bar">
-              <img src="Foamia%20Logo-Light.png" alt="Foamia" class="phone-app-logo">
-              <span class="phone-app-badge">● LIVE</span>
-            </div>
-            <p class="phone-app-sub">Everything your forecourt needs, one app.</p>
           </div>
-          <div class="phone-screen-clip">
-            <!-- In-phone label: tells user what this section is -->
-            <div class="phone-screen-label">
-              <span class="phone-screen-label-text">App Features</span>
-              <span class="phone-screen-counter" id="phoneFeatureCounter">01 / 06</span>
-            </div>
-            <div class="cards-stack">
-              <div class="feature-card" style="--i: 0;">
-                <div class="feature-icon">📅</div>
-                <h3>Online booking</h3>
-                <p>Customers book a slot and a bay from their phone.</p>
-              </div>
-              <div class="feature-card" style="--i: 1;">
-                <div class="feature-icon">🚗</div>
-                <h3>Profiles</h3>
-                <p>Every visit and preference saved automatically.</p>
-              </div>
-              <div class="feature-card" style="--i: 2;">
-                <div class="feature-icon">♻️</div>
-                <h3>Packages</h3>
-                <p>Sell unlimited-wash and package plans effortlessly.</p>
-              </div>
-              <div class="feature-card" style="--i: 3;">
-                <div class="feature-icon">👷</div>
-                <h3>Scheduling</h3>
-                <p>Assign bays and staff per shift without double-booking.</p>
-              </div>
-              <div class="feature-card" style="--i: 4;">
-                <div class="feature-icon">💳</div>
-                <h3>Payments</h3>
-                <p>Accept UPI, cards or cash at checkout on the spot.</p>
-              </div>
-              <div class="feature-card" style="--i: 5;">
-                <div class="feature-icon">📊</div>
-                <h3>Dashboard</h3>
-                <p>Revenue and staff performance from a single login.</p>
-              </div>
-            </div>
-            <!-- Dot progress indicator at phone screen bottom -->
-            <div class="phone-dot-indicator" id="phoneDotIndicator">
-              <span class="active"></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </div><!-- /.scene-3d -->
+        </div><!-- /.scene-3d -->
       </div><!-- /.scene-3d-fixed-wrap -->
     </div><!-- /.sticky-container -->
   </section>
@@ -2441,7 +2466,9 @@
     <canvas class="proof-bubbles-canvas" id="proofBubblesCanvas"></canvas>
     <div class="wrap proof-inner">
       <div class="reveal" style="grid-column: 1 / -1; text-align: center; margin-bottom: 24px;">
-        <span class="sec-eyebrow" style="color:var(--pine); font-weight:800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">04 &mdash; Proven Results</span>
+        <span class="sec-eyebrow"
+          style="color:var(--pine); font-weight:800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">04
+          &mdash; Proven Results</span>
       </div>
       <div class="reveal">
         <blockquote>"We stopped losing bookings to missed calls. Foamia's queue fills itself, and I finally see today's
