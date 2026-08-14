@@ -850,11 +850,10 @@
 
     /* ===== 3D MOBILE SCROLL FEATURES ===== */
     .mobile-3d-scroll-sec {
-      height: 230vh;
+      height: 400vh;
       background: #060806;
       position: relative;
       z-index: 10;
-      overflow: hidden;
     }
 
     .features-sec-head {
@@ -1015,27 +1014,20 @@
       }
     }
 
-    /* Phone fixed-center wrapper — toggled by JS when section is in pinning range */
+    /* Phone fixed-center wrapper */
     .sticky-container {
-      position: relative;
-      height: 100vh;
+      position: absolute;
+      inset: 0;
     }
 
     .scene-3d-fixed-wrap {
-      position: fixed;
-      /* Center within the visible area BELOW the 75px fixed navbar */
-      top: calc(50% + 37px);
-      /* 37px = half of navbar height, shifts center down */
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 2;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-
-    .scene-3d-fixed-wrap.is-pinned {
-      opacity: 1;
       pointer-events: auto;
     }
 
