@@ -2972,79 +2972,44 @@
           }
         }, { passive: true });
 
-        // Dynamic Frame Probe & Preload Function
-        async function loadFrames() {
-          const possibleDirs = ['ezgif-15d96e7d0373b453-jpg/', 'ezgif-580c7f780e730fe5-jpg/', 'frames/'];
-          const possiblePrefixes = ['ezgif-frame-', 'frame-', 'frame_', ''];
-          const possibleExts = ['.jpg', '.jpeg', '.png', '.webp'];
+        // Fast parallel frame loading
+        function loadFramesFast() {
+          const dir = 'ezgif-15d96e7d0373b453-jpg/';
+          const prefix = 'ezgif-frame-';
+          const ext = '.jpg';
+          const padLen = 3;
+          const maxFrames = 100; // Known total frames
+          
+          frames = new Array(maxFrames);
+          let loadedCount = 0;
 
-          let workingPattern = null;
-
-          // Probe pattern for frame 1
-          for (const dir of possibleDirs) {
-            for (const prefix of possiblePrefixes) {
-              for (const ext of possibleExts) {
-                for (const padLen of [3, 2, 1]) {
-                  const numStr = String(1).padStart(padLen, '0');
-                  const url = `${dir}${prefix}${numStr}${ext}`;
-                  const ok = await new Promise(res => {
-                    const img = new Image();
-                    img.onload = () => res(true);
-                    img.onerror = () => res(false);
-                    img.src = url;
-                  });
-                  if (ok) {
-                    workingPattern = { dir, prefix, ext, padLen };
-                    break;
-                  }
-                }
-                if (workingPattern) break;
+          for (let i = 1; i <= maxFrames; i++) {
+            const numStr = String(i).padStart(padLen, '0');
+            const url = `${dir}${prefix}${numStr}${ext}`;
+            const img = new Image();
+            
+            img.onload = () => {
+              frames[i - 1] = img;
+              loadedCount++;
+              
+              // Start rendering as soon as the first frame loads
+              if (i === 1 || (!isLoaded && loadedCount > 0)) {
+                isLoaded = true;
+                targetFrameFloat = progress * (frames.length - 1);
+                currentFrameFloat = targetFrameFloat;
+                if (isWashVisible) requestAnimationFrame(render);
               }
-              if (workingPattern) break;
-            }
-            if (workingPattern) break;
+            };
+            // Ignore errors for individual frames
+            img.onerror = () => {
+              console.warn(`Failed to load frame ${i}`);
+            };
+            
+            img.src = url;
           }
-
-          if (!workingPattern) {
-            workingPattern = { dir: 'ezgif-15d96e7d0373b453-jpg/', prefix: 'ezgif-frame-', ext: '.jpg', padLen: 3 };
-          }
-
-          // Probe total frame count sequentially
-          let frameIndex = 1;
-          let consecutiveFailures = 0;
-          const loaded = [];
-
-          while (frameIndex <= 300 && consecutiveFailures < 2) {
-            const numStr = String(frameIndex).padStart(workingPattern.padLen, '0');
-            const url = `${workingPattern.dir}${workingPattern.prefix}${numStr}${workingPattern.ext}`;
-
-            try {
-              const img = await new Promise((res, rej) => {
-                const i = new Image();
-                i.onload = () => res(i);
-                i.onerror = () => rej();
-                i.src = url;
-              });
-              loaded.push(img);
-              consecutiveFailures = 0;
-            } catch (e) {
-              consecutiveFailures++;
-            }
-            frameIndex++;
-          }
-
-          return loaded;
         }
 
-        loadFrames().then(loaded => {
-          if (loaded.length > 0) {
-            frames = loaded;
-            isLoaded = true;
-            targetFrameFloat = progress * (frames.length - 1);
-            currentFrameFloat = targetFrameFloat;
-            if (isWashVisible) requestAnimationFrame(render);
-          }
-        });
+        loadFramesFast();
 
         function render() {
           if (!isWashVisible) return;
@@ -3069,7 +3034,17 @@
 
           if (isLoaded && frames.length > 0) {
             const frameIndex = Math.min(frames.length - 1, Math.max(0, Math.round(currentFrameFloat)));
-            const img = frames[frameIndex];
+            let img = frames[frameIndex];
+
+            // Fallback to closest loaded frame to prevent flickering during fast scroll
+            if (!img || !img.complete || img.naturalWidth === 0) {
+              for (let i = frameIndex; i >= 0; i--) {
+                if (frames[i] && frames[i].complete && frames[i].naturalWidth > 0) {
+                  img = frames[i];
+                  break;
+                }
+              }
+            }
 
             if (img && img.complete && img.naturalWidth > 0) {
               const aspect = img.naturalWidth / img.naturalHeight;
