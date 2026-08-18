@@ -2037,10 +2037,78 @@
         gap: 40px;
       }
     }
+    /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--pine);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.6s;
+    }
+
+    #preloader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid rgba(155, 203, 43, 0.1);
+      border-top-color: var(--lime);
+      animation: spin 1s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+      position: relative;
+    }
+
+    .loader-spinner::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-bottom-color: var(--lime-dark);
+      animation: spin 1.5s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite reverse;
+    }
+
+    .loader-logo {
+      height: 30px;
+      object-fit: contain;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(168, 222, 46, 0.4)); }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <img src="Foamia Logo-Light.png" alt="Foamia" class="loader-logo">
+    </div>
+  </div>
 
   <header>
     <nav>
@@ -3441,6 +3509,15 @@
           });
         });
       })();
+      // --- PRELOADER REMOVAL ---
+      window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          setTimeout(() => {
+            preloader.classList.add('loaded');
+          }, 300); // Slight delay for smooth effect
+        }
+      });
     });
   </script>
 
