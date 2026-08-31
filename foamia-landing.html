@@ -1618,7 +1618,6 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       will-change: transform, opacity;
-      transition: transform 0.15s ease-out, opacity 0.15s ease-out;
     }
 
     .feature-icon {
@@ -3309,93 +3308,127 @@
     const phoneDots = document.querySelectorAll('#phoneDotIndicator span');
 
     if (mobileSec && scene && wrapEl) {
+      let targetProgress = 0;
+      let currentProgress = 0;
+      let isAnimating = false;
+
+      function update3DScroll() {
+        // Lerp progress for smooth scrolling inertia
+        currentProgress += (targetProgress - currentProgress) * 0.08;
+        if (Math.abs(targetProgress - currentProgress) < 0.0001) {
+          currentProgress = targetProgress;
+          isAnimating = false;
+        } else {
+          isAnimating = true;
+        }
+
+        scene.style.setProperty('--scroll', currentProgress.toFixed(3));
+
+        // Reset any stale transform/opacity
+        scene.style.opacity = '1';
+        scene.style.transform = 'none';
+
+        const numCards = featureCards.length;
+        const rawActiveIndex = currentProgress * numCards;
+        const activeCardIndex = Math.min(numCards - 1, Math.floor(rawActiveIndex));
+
+        // Update in-phone counter and dot indicator
+        if (phoneCounterEl) {
+          phoneCounterEl.textContent = `${String(activeCardIndex + 1).padStart(2, '0')} / ${String(numCards).padStart(2, '0')}`;
+        }
+        if (phoneDots.length) {
+          phoneDots.forEach((dot, i) => dot.classList.toggle('active', i === activeCardIndex));
+        }
+
+        featureCards.forEach((card, index) => {
+          const start = index / numCards;
+          const end = (index + 1) / numCards;
+          const distFromActive = Math.abs(index - rawActiveIndex);
+
+          // Dynamic Z-Index: Active card sits on top of everything
+          const zIndex = Math.round(100 - distFromActive * 15);
+          card.style.zIndex = zIndex;
+          card.style.webkitMaskImage = 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)';
+
+          let y, scale, opacity;
+
+          if (currentProgress < start) {
+            if (index === 0) {
+              // First card: always show it immediately when section enters — no hidden state
+              y = 0; scale = 1.0; opacity = 1.0;
+              card.style.pointerEvents = 'auto';
+            } else {
+              // Other unreached cards: hidden above
+              y = -120; scale = 0.95; opacity = 0;
+              card.style.pointerEvents = 'none';
+            }
+          } else if (currentProgress >= start && currentProgress <= end) {
+            const localProgress = (currentProgress - start) / (end - start);
+
+            if (localProgress < 0.15 && index > 0) {
+              // Entry animation (only for cards 1+, not card 0)
+              const t = localProgress / 0.15;
+              y = -120 * (1 - t) + 0 * t;
+              scale = 0.95 * (1 - t) + 1.0 * t;
+              opacity = t;
+              card.style.pointerEvents = 'none';
+            } else if (localProgress <= 0.80) {
+              // DEAD-CENTER hold
+              y = 0; scale = 1.0; opacity = 1.0;
+              card.style.pointerEvents = 'auto';
+            } else {
+              // Exit: glides DOWNWARDS
+              const t = (localProgress - 0.80) / 0.20;
+              y = 0 * (1 - t) + 150 * t;
+              scale = 1.0 * (1 - t) + 0.96 * t;
+              opacity = Math.max(0, 1.0 - t * 1.4);
+              card.style.pointerEvents = 'none';
+            }
+          } else {
+            // Passed card: hidden below
+            y = 150; scale = 0.96; opacity = 0;
+            card.style.pointerEvents = 'none';
+          }
+
+          card.style.transform = `translateY(${y.toFixed(1)}px) scale(${scale.toFixed(3)})`;
+          card.style.opacity = opacity.toFixed(2);
+        });
+
+        if (isAnimating) {
+          requestAnimationFrame(update3DScroll);
+        }
+      }
+
       window.addEventListener('scroll', () => {
         const rect = mobileSec.getBoundingClientRect();
         const scrollHeight = rect.height - window.innerHeight;
 
         // Only pin phone when section top has scrolled above the navbar (actively pinning)
-        // NOT while section is still below the viewport entering from the bottom
         const shouldPin = rect.top <= 85 && rect.bottom > window.innerHeight;
         wrapEl.classList.toggle('is-pinned', shouldPin);
 
         if (rect.top <= window.innerHeight && rect.bottom >= 0) {
           let progress = -rect.top / scrollHeight;
           progress = Math.max(0, Math.min(1, progress));
-          scene.style.setProperty('--scroll', progress.toFixed(3));
+          targetProgress = progress;
 
-          // Reset any stale transform/opacity — card animations handle their own opacity
-          scene.style.opacity = '1';
-          scene.style.transform = 'none';
-
-
-
-          const numCards = featureCards.length;
-          const rawActiveIndex = progress * numCards;
-          const activeCardIndex = Math.min(numCards - 1, Math.floor(rawActiveIndex));
-
-          // Update in-phone counter and dot indicator
-          if (phoneCounterEl) {
-            phoneCounterEl.textContent = `${String(activeCardIndex + 1).padStart(2, '0')} / ${String(numCards).padStart(2, '0')}`;
+          if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(update3DScroll);
           }
-          if (phoneDots.length) {
-            phoneDots.forEach((dot, i) => dot.classList.toggle('active', i === activeCardIndex));
-          }
-
-          featureCards.forEach((card, index) => {
-            const start = index / numCards;
-            const end = (index + 1) / numCards;
-            const distFromActive = Math.abs(index - rawActiveIndex);
-
-            // 4. Dynamic Z-Index: Active card sits on top of everything
-            const zIndex = Math.round(100 - distFromActive * 15);
-            card.style.zIndex = zIndex;
-            card.style.webkitMaskImage = 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)';
-
-            let y, scale, opacity;
-
-            if (progress < start) {
-              if (index === 0) {
-                // First card: always show it immediately when section enters — no hidden state
-                y = 0; scale = 1.0; opacity = 1.0;
-                card.style.pointerEvents = 'auto';
-              } else {
-                // Other unreached cards: hidden above
-                y = -120; scale = 0.95; opacity = 0;
-                card.style.pointerEvents = 'none';
-              }
-            } else if (progress >= start && progress <= end) {
-              const localProgress = (progress - start) / (end - start);
-
-              if (localProgress < 0.15 && index > 0) {
-                // Entry animation (only for cards 1+, not card 0)
-                const t = localProgress / 0.15;
-                y = -120 * (1 - t) + 0 * t;
-                scale = 0.95 * (1 - t) + 1.0 * t;
-                opacity = t;
-                card.style.pointerEvents = 'none';
-              } else if (localProgress <= 0.80) {
-                // DEAD-CENTER hold
-                y = 0; scale = 1.0; opacity = 1.0;
-                card.style.pointerEvents = 'auto';
-              } else {
-                // Exit: glides DOWNWARDS
-                const t = (localProgress - 0.80) / 0.20;
-                y = 0 * (1 - t) + 150 * t;
-                scale = 1.0 * (1 - t) + 0.96 * t;
-                opacity = Math.max(0, 1.0 - t * 1.4);
-                card.style.pointerEvents = 'none';
-              }
-            } else {
-              // Passed card: hidden below
-              y = 150; scale = 0.96; opacity = 0;
-              card.style.pointerEvents = 'none';
-            }
-
-            card.style.transform = `translateY(${y.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-            card.style.opacity = opacity.toFixed(2);
-          });
         }
       }, { passive: true });
+
+      // Run initial update
+      const rect = mobileSec.getBoundingClientRect();
+      const scrollHeight = rect.height - window.innerHeight;
+      if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+        let progress = -rect.top / scrollHeight;
+        progress = Math.max(0, Math.min(1, progress));
+        targetProgress = progress;
+        currentProgress = progress;
+        update3DScroll();
+      }
     }
   </script>
 
@@ -3520,17 +3553,42 @@
             // Draw User's Exact Green Sports Car Image normally (opaque)
             ctx.drawImage(carImg, carX, carY, carW, carH);
 
-            // Create a black vignette to feather the edges of the JPEG into the black background
-            const vignette = ctx.createRadialGradient(
-              carX + carW / 2, carY + carH / 2, carW * 0.25,
-              carX + carW / 2, carY + carH / 2, carW * 0.5
-            );
-            vignette.addColorStop(0, 'rgba(0,0,0,0)');
-            vignette.addColorStop(0.75, 'rgba(0,0,0,0.85)');
-            vignette.addColorStop(1, 'rgba(0,0,0,1)');
+            // Fade Left Edge smoothly to black and then back to transparent outside
+            const fadeOutDist = 150;
+            const leftGradW = fadeOutDist + carW * 0.25;
+            const leftGrad = ctx.createLinearGradient(carX - fadeOutDist, 0, carX + carW * 0.25, 0);
+            leftGrad.addColorStop(0, 'rgba(0,0,0,0)');
+            leftGrad.addColorStop(fadeOutDist / leftGradW, 'rgba(0,0,0,1)');
+            leftGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = leftGrad;
+            ctx.fillRect(carX - fadeOutDist, carY - fadeOutDist, leftGradW, carH + fadeOutDist * 2);
 
-            ctx.fillStyle = vignette;
-            ctx.fillRect(carX - 2, carY - 2, carW + 4, carH + 4); // slightly larger to ensure edge coverage
+            // Fade Right Edge smoothly to black and then back to transparent outside
+            const rightGradW = carW * 0.25 + fadeOutDist;
+            const rightGrad = ctx.createLinearGradient(carX + carW * 0.75, 0, carX + carW + fadeOutDist, 0);
+            rightGrad.addColorStop(0, 'rgba(0,0,0,0)');
+            rightGrad.addColorStop((carW * 0.25) / rightGradW, 'rgba(0,0,0,1)');
+            rightGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = rightGrad;
+            ctx.fillRect(carX + carW * 0.75, carY - fadeOutDist, rightGradW, carH + fadeOutDist * 2);
+
+            // Fade Top Edge smoothly to black and then back to transparent outside
+            const topGradH = fadeOutDist + carH * 0.25;
+            const topGrad = ctx.createLinearGradient(0, carY - fadeOutDist, 0, carY + carH * 0.25);
+            topGrad.addColorStop(0, 'rgba(0,0,0,0)');
+            topGrad.addColorStop(fadeOutDist / topGradH, 'rgba(0,0,0,1)');
+            topGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = topGrad;
+            ctx.fillRect(carX - fadeOutDist, carY - fadeOutDist, carW + fadeOutDist * 2, topGradH);
+
+            // Fade Bottom Edge smoothly to black and then back to transparent outside
+            const bottomGradH = carH * 0.25 + fadeOutDist;
+            const bottomGrad = ctx.createLinearGradient(0, carY + carH * 0.75, 0, carY + carH + fadeOutDist);
+            bottomGrad.addColorStop(0, 'rgba(0,0,0,0)');
+            bottomGrad.addColorStop((carH * 0.25) / bottomGradH, 'rgba(0,0,0,1)');
+            bottomGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = bottomGrad;
+            ctx.fillRect(carX - fadeOutDist, carY + carH * 0.75, carW + fadeOutDist * 2, bottomGradH);
 
             ctx.restore();
           }
@@ -3751,7 +3809,7 @@
           if (!isWashVisible) return;
 
           // Smooth linear interpolation (lerp) for Apple-style scroll fluidness
-          currentFrameFloat += (targetFrameFloat - currentFrameFloat) * 0.15;
+          currentFrameFloat += (targetFrameFloat - currentFrameFloat) * 0.07;
           if (Math.abs(targetFrameFloat - currentFrameFloat) < 0.001) {
             currentFrameFloat = targetFrameFloat;
           }
