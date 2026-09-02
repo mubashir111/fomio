@@ -112,7 +112,8 @@
       stroke-width: 2;
     }
 
-    .phone-status-icons svg.status-icon, .status-bar svg.status-icon {
+    .phone-status-icons svg.status-icon,
+    .status-bar svg.status-icon {
       width: 11px;
       height: 11px;
       stroke: currentColor;
@@ -555,6 +556,74 @@
       pointer-events: none;
     }
 
+    /* Hero Eyebrow Badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(155, 203, 43, 0.08);
+      border: 1px solid rgba(155, 203, 43, 0.32);
+      padding: 6px 16px 6px 12px;
+      border-radius: 100px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #e2f898;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 24px rgba(155, 203, 43, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-badge:hover {
+      border-color: var(--lime);
+      transform: translateY(-1px);
+    }
+
+    .hero-badge .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lime);
+      position: relative;
+      box-shadow: 0 0 8px var(--lime);
+    }
+
+    .hero-badge .pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid var(--lime);
+      animation: pulseRadar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes pulseRadar {
+      0% {
+        transform: scale(0.6);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    .hero-badge .badge-tag {
+      background: var(--lime);
+      color: var(--pine);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      margin-left: 2px;
+    }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -583,7 +652,7 @@
       font-weight: 800;
       letter-spacing: -0.035em;
       color: var(--white);
-      margin-bottom: 30px;
+      margin-bottom: 26px;
       line-height: 1.05;
     }
 
@@ -599,7 +668,7 @@
       font-size: 18px;
       color: rgba(255, 255, 255, 0.55);
       max-width: 460px;
-      margin-bottom: 44px;
+      margin-bottom: 38px;
       line-height: 1.65;
     }
 
@@ -611,51 +680,75 @@
     .hero-ctas {
       display: flex;
       gap: 14px;
-      margin-bottom: 54px;
+      margin-bottom: 36px;
       flex-wrap: wrap;
     }
 
+    .btn-glow {
+      position: relative;
+    }
+
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 100px;
+      background: var(--lime);
+      opacity: 0.35;
+      filter: blur(10px);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-glow:hover::after {
+      opacity: 0.7;
+    }
+
+    /* Hero Clean 3-Card Stats */
     .hero-stats {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+      max-width: 530px;
     }
 
     .hero-stats .hero-stat-item {
-      flex: 1;
-      min-width: 150px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 18px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 18px;
       border-radius: 18px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .hero-stats .hero-stat-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(155, 203, 43, 0.35);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(155, 203, 43, 0.15);
+      transform: translateY(-3px);
+      border-color: rgba(155, 203, 43, 0.4);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), 0 0 20px rgba(155, 203, 43, 0.15);
     }
 
-    .hero-stats div b {
+    .hero-stats .hero-stat-item b {
       display: block;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 28px;
+      font-size: 26px;
       color: var(--white);
       font-weight: 800;
       letter-spacing: -0.03em;
+      line-height: 1.15;
       font-variant-numeric: tabular-nums;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
-    .hero-stats div span {
+    .hero-stats .hero-stat-item span {
+      display: block;
+      font-size: 12px;
       color: rgba(255, 255, 255, 0.55);
-      font-size: 13px;
       font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
     }
 
     /* phone mockup */
@@ -842,6 +935,199 @@
       font-size: 10px;
       font-weight: 700;
       color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Hero Phone Mode Switcher */
+    .phone-tab-bar {
+      display: flex;
+      gap: 6px;
+      padding: 0 16px 12px;
+    }
+
+    .phone-tab-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .phone-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
+    .phone-tab-btn.active {
+      background: var(--lime);
+      color: var(--pine);
+      border-color: var(--lime);
+      box-shadow: 0 4px 14px rgba(155, 203, 43, 0.35);
+    }
+
+    .phone-tab-panel {
+      display: none;
+      flex-direction: column;
+      animation: fadeInHeroPanel 0.25s ease-out;
+    }
+
+    .phone-tab-panel.active {
+      display: flex;
+    }
+
+    @keyframes fadeInHeroPanel {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating Holographic Micro-Badges */
+    .floating-hero-badge {
+      position: absolute;
+      z-index: 10;
+      background: rgba(12, 14, 12, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 14px;
+      padding: 9px 13px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 20px rgba(155, 203, 43, 0.14);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-hero-badge.badge-left {
+      top: 14%;
+      left: -48px;
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    .floating-hero-badge.badge-right {
+      bottom: 22%;
+      right: -48px;
+      animation: floatReverse 6s ease-in-out infinite;
+    }
+
+    .floating-hero-badge.badge-bottom {
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: floatSlow 7s ease-in-out infinite;
+    }
+
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-7px) rotate(0.6deg);
+      }
+    }
+
+    @keyframes floatReverse {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(7px) rotate(-0.6deg);
+      }
+    }
+
+    .badge-icon-wrap {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: rgba(155, 203, 43, 0.12);
+      border: 1px solid rgba(155, 203, 43, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--lime);
+      flex-shrink: 0;
+    }
+
+    .badge-texts .badge-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .badge-texts .badge-sub {
+      font-size: 9.5px;
+      color: var(--lime);
+      font-weight: 600;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+
+    .badge-bar {
+      width: 70px;
+      height: 3.5px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .badge-bar-fill {
+      height: 100%;
+      width: 85%;
+      background: linear-gradient(90deg, #9BCB2B, #C2F048);
+      border-radius: 4px;
+      animation: shimmerBar 2s infinite linear;
+    }
+
+    @keyframes shimmerBar {
+      0% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    .phone-glow-platform {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 28px;
+      background: radial-gradient(ellipse, rgba(155, 203, 43, 0.45) 0%, transparent 75%);
+      filter: blur(10px);
+      z-index: 1;
+      pointer-events: none;
     }
 
     .glow {
@@ -1262,6 +1548,7 @@
       0% {
         transform: translateX(0);
       }
+
       100% {
         transform: translateX(-50%);
       }
@@ -1889,7 +2176,8 @@
       line-height: 1.6;
     }
 
-    .tree-card p strong, .usecase-card-3d p strong {
+    .tree-card p strong,
+    .usecase-card-3d p strong {
       color: rgba(255, 255, 255, 0.95);
       font-weight: 600;
     }
@@ -2151,9 +2439,11 @@
       .usecase-cursor {
         display: none;
       }
-    }    /* ===== TESTIMONIAL / STATS ===== */
+    }
+
+    /* ===== TESTIMONIAL / PROVEN RESULTS ===== */
     .proof {
-      background: linear-gradient(135deg, #0A0D0A 0%, #030403 60%, #000000 100%);
+      background: linear-gradient(135deg, #070907 0%, #030403 60%, #000000 100%);
       padding: 100px 0;
       position: relative;
       overflow: hidden;
@@ -2187,43 +2477,143 @@
 
     .proof-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
       align-items: center;
       position: relative;
       z-index: 2;
     }
 
-    .proof blockquote {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(20px, 3vw, 26px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.35;
-      margin-bottom: 20px;
-      letter-spacing: -0.025em;
+    .proof-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 12px;
     }
 
-    .proof cite {
-      font-family: 'Inter', sans-serif;
-      font-style: normal;
+    .proof-heading {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: var(--white);
+      margin-top: 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .proof-quote-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 36px 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .proof-quote-card:hover {
+      border-color: rgba(155, 203, 43, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .quote-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(155, 203, 43, 0.12);
+      border: 1px solid rgba(155, 203, 43, 0.3);
+      color: var(--lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .proof blockquote {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(17px, 2.2vw, 21px);
       font-weight: 600;
-      color: var(--muted);
+      color: var(--white);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      letter-spacing: -0.015em;
+    }
+
+    .proof blockquote strong {
+      color: var(--lime);
+      font-weight: 700;
+    }
+
+    .proof-author-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .proof-author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(155, 203, 43, 0.3), rgba(0, 0, 0, 0.8));
+      border: 1.5px solid var(--lime);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .proof-author-info {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .proof-author-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
       font-size: 15px;
-      display: inline-block;
+      color: var(--white);
+      font-style: normal;
+      display: block;
+    }
+
+    .proof-author-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .proof-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(155, 203, 43, 0.1);
+      border: 1px solid rgba(155, 203, 43, 0.25);
+      border-radius: 100px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lime);
+      margin-left: auto;
     }
 
     .proof-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 16px;
     }
 
     .proof-stat {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 20px;
-      padding: 24px 20px;
+      padding: 22px 18px;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -2231,35 +2621,48 @@
     }
 
     .proof-stat:hover {
-      transform: translateY(-6px);
-      background: rgba(155, 203, 43, 0.06);
+      transform: translateY(-4px);
+      background: rgba(155, 203, 43, 0.05);
       border-color: rgba(155, 203, 43, 0.35);
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(155, 203, 43, 0.15);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 20px rgba(155, 203, 43, 0.12);
     }
 
-    .proof-stat b {
+    .stat-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .proof-stat b,
+    .proof-stat .stat-num {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 38px;
+      font-size: 32px;
       font-weight: 800;
       letter-spacing: -0.035em;
       font-variant-numeric: tabular-nums;
       color: var(--lime);
       display: block;
       line-height: 1.1;
-      margin-bottom: 4px;
       text-shadow: 0 0 12px rgba(155, 203, 43, 0.3);
     }
 
+    .stat-trend {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(155, 203, 43, 0.12);
+      border: 1px solid rgba(155, 203, 43, 0.25);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
     .proof-stat span {
-      font-size: 13.5px;
+      font-size: 12.5px;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 600;
-    } }
-
-    @media (max-width:800px) {
-      .proof-inner {
-        grid-template-columns: 1fr;
-      }
+      line-height: 1.4;
+      display: block;
     }
 
     /* ===== CTA BANNER ===== */
@@ -2455,10 +2858,14 @@
     @media (max-width:900px) {
 
       /* Hero Section */
+      .hero {
+        padding: 100px 0 30px;
+      }
+
       .hero-inner {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 60px;
+        gap: 40px;
       }
 
       .hero-inner::before {
@@ -2466,27 +2873,60 @@
       }
 
       .three-hero {
-        display: none;
+        display: block;
+        opacity: 0.55;
       }
 
       .hero h1 {
         margin-left: auto;
         margin-right: auto;
-        font-size: clamp(38px, 9vw, 48px);
+        font-size: clamp(34px, 8.5vw, 48px);
+        margin-bottom: 18px;
       }
 
       .hero p.lead {
         margin-left: auto;
         margin-right: auto;
+        font-size: 15.5px;
+        line-height: 1.6;
+        margin-bottom: 28px;
+        max-width: 500px;
       }
 
-      .hero-ctas,
-      .hero-stats {
+      .hero-ctas {
         justify-content: center;
+        margin-bottom: 26px;
+        gap: 12px;
+      }
+
+      .hero-stats {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 480px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .hero-stats .hero-stat-item {
+        padding: 12px 10px;
+        text-align: center;
+        border-radius: 14px;
+      }
+
+      .hero-stats .hero-stat-item b {
+        font-size: 20px;
+        margin-bottom: 2px;
+      }
+
+      .hero-stats .hero-stat-item span {
+        font-size: 10.5px;
       }
 
       .phone-stage {
-        padding-top: 20px;
+        padding-top: 15px;
+        margin: 0 auto;
+        max-width: 100%;
       }
 
       /* Features Section (3D Mobile Scroll) */
@@ -2529,12 +2969,172 @@
         margin-bottom: 20px;
       }
 
+      /* Proven Results / Testimonials */
+      .proof {
+        padding: 70px 0;
+      }
+
+      .proof-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .proof-quote-card {
+        padding: 26px 22px;
+        border-radius: 20px;
+      }
+
+      .proof blockquote {
+        font-size: 17px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+
+      .proof-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .proof-stat {
+        padding: 16px 14px;
+        border-radius: 16px;
+      }
+
+      .proof-stat b,
+      .proof-stat .stat-num {
+        font-size: 26px;
+      }
+
+      .proof-stat span {
+        font-size: 11.5px;
+      }
+
       /* Footer */
       .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
       }
     }
+
+    @media (max-width:480px) {
+      .hero {
+        padding: 85px 0 20px;
+      }
+
+      .hero-badge {
+        font-size: 10.5px;
+        padding: 5px 12px 5px 10px;
+        gap: 6px;
+      }
+
+      .hero-badge .badge-tag {
+        font-size: 9px;
+        padding: 1px 5px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+        line-height: 1.1;
+      }
+
+      .hero p.lead {
+        font-size: 14.5px;
+      }
+
+      .hero-stats {
+        gap: 8px;
+        max-width: 360px;
+      }
+
+      .hero-stats .hero-stat-item {
+        padding: 10px 6px;
+        border-radius: 12px;
+      }
+
+      .hero-stats .hero-stat-item b {
+        font-size: 17px;
+        margin-bottom: 2px;
+      }
+
+      .hero-stats .hero-stat-item span {
+        font-size: 9.5px;
+      }
+
+      .phone {
+        width: 255px;
+        height: 520px;
+        border-radius: 38px;
+      }
+
+      .proof {
+        padding: 55px 0;
+      }
+
+      .proof-inner {
+        gap: 20px;
+      }
+
+      .proof-heading {
+        font-size: 24px;
+      }
+
+      .proof-quote-card {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .proof blockquote {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      .proof-author-wrap {
+        gap: 10px;
+        padding-top: 14px;
+      }
+
+      .proof-author-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+      }
+
+      .proof-author-name {
+        font-size: 14px;
+      }
+
+      .proof-author-desc {
+        font-size: 11.5px;
+      }
+
+      .proof-verified-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+        margin-left: 0;
+        margin-top: 4px;
+      }
+
+      .proof-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .proof-stat {
+        padding: 14px 12px;
+        border-radius: 14px;
+      }
+
+      .proof-stat b,
+      .proof-stat .stat-num {
+        font-size: 24px;
+      }
+
+      .proof-stat span {
+        font-size: 11px;
+      }
+    }
+
     /* Preloader Styles */
     #preloader {
       position: fixed;
@@ -2588,12 +3188,24 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; transform: scale(0.95); }
-      50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(168, 222, 46, 0.4)); }
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 10px rgba(168, 222, 46, 0.4));
+      }
     }
   </style>
 </head>
@@ -2647,7 +3259,7 @@
     </div>
   </div>
 
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="glow"></div>
     <div class="hero-grid-overlay"></div>
 
@@ -2656,14 +3268,17 @@
     </div>
 
     <div class="hero-inner">
-      <div>
-        <span class="eyebrow reveal in" style="transition-delay: 0s;">Built for car wash owners</span>
+      <div class="hero-content">
+        <div class="eyebrow reveal in" style="transition-delay: 0s;">Built for Car Wash Owners</div>
         <h1 class="reveal in" style="transition-delay: 0.1s;">Run your wash.<br>Not your <span>paperwork.</span></h1>
-        <p class="lead reveal in" style="transition-delay: 0.2s;"><strong>Foamia puts bookings, memberships, staff and payments in one dashboard</strong> — so you spend your day on the forecourt, not the spreadsheet.</p>
+        <p class="lead reveal in" style="transition-delay: 0.2s;"><strong>Foamia puts bookings, memberships, staff and
+            payments in one dashboard</strong> — so you spend your day on the forecourt, not the spreadsheet.</p>
+
         <div class="hero-ctas reveal in" style="transition-delay: 0.3s;">
           <button class="btn btn-lime">Get a demo</button>
-          <button class="btn btn-outline">See how it works ↓</button>
+          <a href="#how-it-works" class="btn btn-outline">See how it works ↓</a>
         </div>
+
         <div class="hero-stats reveal in" id="heroStats" style="transition-delay: 0.4s;">
           <div class="hero-stat-item" data-target="12400" data-suffix="+" data-speed="1800">
             <b class="hero-stat-val">0</b>
@@ -2681,57 +3296,157 @@
       </div>
 
       <div class="phone-stage reveal in" style="transition-delay: 0.2s;">
+        <div class="phone-glow-platform"></div>
+
         <div class="phone">
           <div class="phone-screen">
             <div class="status-bar">
               <span>10:32</span>
               <div class="phone-status-icons" style="color: var(--ink);">
-                <svg viewBox="0 0 24 24" class="status-icon"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4"/></svg>
-                <svg viewBox="0 0 24 24" class="status-icon"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-                <svg viewBox="0 0 24 24" class="status-icon"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+                <svg viewBox="0 0 24 24" class="status-icon">
+                  <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4" />
+                </svg>
+                <svg viewBox="0 0 24 24" class="status-icon">
+                  <path
+                    d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
+                </svg>
+                <svg viewBox="0 0 24 24" class="status-icon">
+                  <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+                  <line x1="22" y1="11" x2="22" y2="13" />
+                </svg>
               </div>
             </div>
+
             <div class="app-topbar">
               <img src="Foamia%20Logo-Light.png" alt="Foamia" style="height: 18px; object-fit: contain;">
-              <div class="avatar"></div>
-            </div>
-            <div class="app-card-hero">
-              <div class="lbl">Today's revenue</div>
-              <div class="val">₹18,240</div>
-              <div class="grow">▲ 22% vs yesterday</div>
-            </div>
-            <div class="mini-stats">
-              <div class="mini-stat">
-                <div class="lbl">Bookings</div>
-                <div class="val">27</div>
-              </div>
-              <div class="mini-stat">
-                <div class="lbl">Members</div>
-                <div class="val">146</div>
+              <div class="avatar"
+                style="background: radial-gradient(circle at 30% 30%, #9BCB2B, #0A0A0A); border: 1px solid rgba(155, 203, 43, 0.4);">
               </div>
             </div>
-            <div class="list-title">Upcoming bookings</div>
-            <div class="booking-row"><span class="dot"></span>
-              <div class="info">
-                <div class="t1">Anoop K. — Sedan wash</div>
-                <div class="t2">Bay 2 · Full wash</div>
-              </div>
-              <div class="time">10:45</div>
+
+            <!-- Interactive Mode Switcher Tabs -->
+            <div class="phone-tab-bar" id="heroPhoneTabs">
+              <button type="button" class="phone-tab-btn active" data-tab="bays">🚗 Live Bays</button>
+              <button type="button" class="phone-tab-btn" data-tab="pos">💳 Quick POS</button>
+              <button type="button" class="phone-tab-btn" data-tab="members">👑 Members</button>
             </div>
-            <div class="booking-row"><span class="dot"></span>
-              <div class="info">
-                <div class="t1">Fathima R. — SUV detail</div>
-                <div class="t2">Bay 1 · Premium</div>
+
+            <!-- Panel 1: Live Bays -->
+            <div class="phone-tab-panel active" id="heroTab-bays">
+              <div class="app-card-hero">
+                <div class="lbl">Today's revenue</div>
+                <div class="val">₹18,240</div>
+                <div class="grow">▲ 22% vs yesterday</div>
               </div>
-              <div class="time">11:15</div>
-            </div>
-            <div class="booking-row"><span class="dot"></span>
-              <div class="info">
-                <div class="t1">Sujith M. — Bike wash</div>
-                <div class="t2">Bay 3 · Express</div>
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="lbl">Bookings</div>
+                  <div class="val">27</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="lbl">Members</div>
+                  <div class="val">146</div>
+                </div>
               </div>
-              <div class="time">11:30</div>
+              <div class="list-title">Live forecourt bays</div>
+              <div class="booking-row"><span class="dot" style="animation: pulseRadar 2s infinite;"></span>
+                <div class="info">
+                  <div class="t1">Anoop K. — Sedan wash</div>
+                  <div class="t2">Bay 1 · Foam Wash (85%)</div>
+                </div>
+                <div class="time">10:45</div>
+              </div>
+              <div class="booking-row"><span class="dot" style="background: #38bdf8;"></span>
+                <div class="info">
+                  <div class="t1">Fathima R. — SUV detail</div>
+                  <div class="t2">Bay 2 · Ready for pickup</div>
+                </div>
+                <div class="time">11:15</div>
+              </div>
+              <div class="booking-row"><span class="dot" style="background: #a1a1aa;"></span>
+                <div class="info">
+                  <div class="t1">Sujith M. — Bike wash</div>
+                  <div class="t2">Bay 3 · Express · Next</div>
+                </div>
+                <div class="time">11:30</div>
+              </div>
             </div>
+
+            <!-- Panel 2: Quick POS -->
+            <div class="phone-tab-panel" id="heroTab-pos">
+              <div class="app-card-hero"
+                style="background: linear-gradient(135deg, rgba(20, 30, 15, 0.95), rgba(10, 15, 10, 0.95)); border: 1px solid rgba(155, 203, 43, 0.3);">
+                <div class="lbl" style="color: var(--lime);">Express Checkout Terminal</div>
+                <div class="val" style="color: var(--white); margin: 4px 0 2px;">₹850.00</div>
+                <div class="grow" style="color: #4ade80;">✓ UPI Payment Received • Instant</div>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="lbl">Method</div>
+                  <div class="val" style="font-size: 13px;">GPay / QR</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="lbl">Receipt</div>
+                  <div class="val" style="font-size: 13px; color: var(--lime);">WhatsApp Sent</div>
+                </div>
+              </div>
+              <div class="list-title">Recent transactions</div>
+              <div class="booking-row">
+                <span class="dot" style="background:#4ade80;"></span>
+                <div class="info">
+                  <div class="t1">KL-07-CF-4492 • Full Polish</div>
+                  <div class="t2">Cashier: Rahul • Bay 2</div>
+                </div>
+                <div class="time" style="color: var(--lime); font-weight: 800;">+₹1,400</div>
+              </div>
+              <div class="booking-row">
+                <span class="dot" style="background:#4ade80;"></span>
+                <div class="info">
+                  <div class="t1">KL-01-BK-8821 • Foam Express</div>
+                  <div class="t2">UPI Scan • Bay 1</div>
+                </div>
+                <div class="time" style="color: var(--lime); font-weight: 800;">+₹450</div>
+              </div>
+            </div>
+
+            <!-- Panel 3: Members -->
+            <div class="phone-tab-panel" id="heroTab-members">
+              <div class="app-card-hero"
+                style="background: linear-gradient(135deg, rgba(30, 25, 10, 0.95), rgba(15, 12, 5, 0.95)); border: 1px solid rgba(251, 191, 36, 0.35);">
+                <div class="lbl" style="color: #fbbf24;">Forecourt Member Pass</div>
+                <div class="val" style="font-size: 20px; color: var(--white); margin: 4px 0 2px;">VIP Platinum Club
+                </div>
+                <div class="grow" style="color: #fbbf24;">⚡ Auto Plate Recognition Gate</div>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="lbl">Active Passes</div>
+                  <div class="val">146</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="lbl">MRR Revenue</div>
+                  <div class="val" style="color: #fbbf24;">₹2.92L</div>
+                </div>
+              </div>
+              <div class="list-title">Member arrivals</div>
+              <div class="booking-row">
+                <span class="dot" style="background:#fbbf24;"></span>
+                <div class="info">
+                  <div class="t1">Dr. Rajesh V. (Audi A6)</div>
+                  <div class="t2">Unlimited Tier • Check-in 10:40</div>
+                </div>
+                <div class="time" style="color: #fbbf24; font-weight: 700;">Gate Pass</div>
+              </div>
+              <div class="booking-row">
+                <span class="dot" style="background:#fbbf24;"></span>
+                <div class="info">
+                  <div class="t1">Kiran Roy (BMW X5)</div>
+                  <div class="t2">Gold Tier • Check-in 10:22</div>
+                </div>
+                <div class="time" style="color: #fbbf24; font-weight: 700;">Gate Pass</div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -2793,9 +3508,11 @@
     <p>Trusted by wash centres across Kerala &amp; beyond</p>
     <div class="marquee-container">
       <div class="marquee-track">
-        <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car Care</span><span>QuickShine</span><span>WashPoint</span>
+        <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car
+          Care</span><span>QuickShine</span><span>WashPoint</span>
         <!-- Duplicate for seamless looping -->
-        <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car Care</span><span>QuickShine</span><span>WashPoint</span>
+        <span>Ravi's Auto Spa</span><span>SudsHub</span><span>Marina Car
+          Care</span><span>QuickShine</span><span>WashPoint</span>
       </div>
     </div>
   </div>
@@ -2808,7 +3525,9 @@
 
       <!-- Floating Ambient Tech Badges around 3D Phone -->
       <div class="floating-badge badge-left-1">
-        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg></span>
         <div>
           <b>3.2× Faster Checkout</b>
           <span>Single-tap UPI billing</span>
@@ -2816,7 +3535,11 @@
       </div>
 
       <div class="floating-badge badge-right-1">
-        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+          </svg></span>
         <div>
           <b>Live Bay Analytics</b>
           <span>Real-time utilization</span>
@@ -2824,7 +3547,9 @@
       </div>
 
       <div class="floating-badge badge-left-2">
-        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg></span>
         <div>
           <b>Automated Alerts</b>
           <span>WhatsApp notifications</span>
@@ -2833,7 +3558,11 @@
 
 
       <div class="floating-badge badge-right-2">
-        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+        <span class="icon"><svg viewBox="0 0 24 24" class="svg-icon">
+            <polyline points="23 4 23 10 17 10" />
+            <polyline points="1 20 1 14 7 14" />
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+          </svg></span>
         <div>
           <b>Multi-Location Sync</b>
           <span>All centres in one view</span>
@@ -2852,9 +3581,17 @@
               <div class="phone-status-bar">
                 <span class="phone-status-time">9:41</span>
                 <div class="phone-status-icons">
-                  <svg viewBox="0 0 24 24" class="status-icon"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4"/></svg>
-                  <svg viewBox="0 0 24 24" class="status-icon"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-                  <svg viewBox="0 0 24 24" class="status-icon"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+                  <svg viewBox="0 0 24 24" class="status-icon">
+                    <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4" />
+                  </svg>
+                  <svg viewBox="0 0 24 24" class="status-icon">
+                    <path
+                      d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" />
+                  </svg>
+                  <svg viewBox="0 0 24 24" class="status-icon">
+                    <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+                    <line x1="22" y1="11" x2="22" y2="13" />
+                  </svg>
                 </div>
               </div>
               <div class="phone-app-bar">
@@ -2872,45 +3609,75 @@
               <div class="cards-stack">
                 <div class="feature-card" style="--i: 0;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                   </div>
                   <h3>24/7 Booking &amp; Capture</h3>
-                  <p><strong>Capture bookings via WhatsApp</strong>, your custom web link, or Google Maps directly into your live dashboard.</p>
+                  <p><strong>Capture bookings via WhatsApp</strong>, your custom web link, or Google Maps directly into
+                    your live dashboard.</p>
                 </div>
                 <div class="feature-card" style="--i: 1;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <path
+                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                      <circle cx="7" cy="17" r="2" />
+                      <circle cx="17" cy="17" r="2" />
+                    </svg>
                   </div>
                   <h3>Customer History &amp; Plates</h3>
-                  <p><strong>Store vehicle history</strong>, license plates, and preferred wash services so attendants know client details instantly.</p>
+                  <p><strong>Store vehicle history</strong>, license plates, and preferred wash services so attendants
+                    know client details instantly.</p>
                 </div>
                 <div class="feature-card" style="--i: 2;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><path d="M17 2.1l4 4-4 4M3 22v-6h6M21 12A9 9 0 0 0 4.8 6.8L3 8M3 12a9 9 0 0 0 16.2 5.2l1.8-1.2"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <path d="M17 2.1l4 4-4 4M3 22v-6h6M21 12A9 9 0 0 0 4.8 6.8L3 8M3 12a9 9 0 0 0 16.2 5.2l1.8-1.2" />
+                    </svg>
                   </div>
                   <h3>Unlimited Wash Memberships</h3>
-                  <p><strong>Sell and automate memberships</strong> with recurring UPI mandates or card billing directly from the app.</p>
+                  <p><strong>Sell and automate memberships</strong> with recurring UPI mandates or card billing directly
+                    from the app.</p>
                 </div>
                 <div class="feature-card" style="--i: 3;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <rect x="3" y="3" width="7" height="9" />
+                      <rect x="14" y="3" width="7" height="5" />
+                      <rect x="14" y="12" width="7" height="9" />
+                      <rect x="3" y="16" width="7" height="5" />
+                    </svg>
                   </div>
                   <h3>Bay Workflow Dispatch</h3>
-                  <p><strong>Route vehicles dynamically</strong> to the right bay, tracking active wash stages from pre-soak to dry.</p>
+                  <p><strong>Route vehicles dynamically</strong> to the right bay, tracking active wash stages from
+                    pre-soak to dry.</p>
                 </div>
                 <div class="feature-card" style="--i: 4;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <rect x="2" y="5" width="20" height="14" rx="2" ry="2" />
+                      <line x1="2" y1="10" x2="22" y2="10" />
+                    </svg>
                   </div>
                   <h3>POS &amp; Cash Tally Audits</h3>
-                  <p><strong>Prevent staff leakages</strong> by audit-tracking cash drawers, supervisor overrides, and digital checkouts.</p>
+                  <p><strong>Prevent staff leakages</strong> by audit-tracking cash drawers, supervisor overrides, and
+                    digital checkouts.</p>
                 </div>
                 <div class="feature-card" style="--i: 5;">
                   <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" class="svg-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                      <circle cx="12" cy="12" r="4" />
+                      <path
+                        d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+                    </svg>
                   </div>
                   <h3>Multi-Location Owner Hub</h3>
-                  <p><strong>Track real-time cameras</strong>, revenue collection, and attendant shifts across all your centres, anywhere.</p>
+                  <p><strong>Track real-time cameras</strong>, revenue collection, and attendant shifts across all your
+                    centres, anywhere.</p>
                 </div>
               </div>
               <!-- Dot progress indicator at phone screen bottom -->
@@ -2966,7 +3733,8 @@
             <div class="tree-card">
               <span class="tree-card-num">1</span>
               <h3>Set up your centre</h3>
-              <p><strong>Add your bays, services and pricing</strong> — Foamia's team helps with the first setup call.</p>
+              <p><strong>Add your bays, services and pricing</strong> — Foamia's team helps with the first setup call.
+              </p>
               <div class="tree-node-dot"></div>
             </div>
           </div>
@@ -2986,7 +3754,8 @@
             <div class="tree-card">
               <span class="tree-card-num">3</span>
               <h3>Share your booking link</h3>
-              <p><strong>Share your link</strong> on WhatsApp, Instagram or your storefront — customers book straight into your queue.</p>
+              <p><strong>Share your link</strong> on WhatsApp, Instagram or your storefront — customers book straight
+                into your queue.</p>
               <div class="tree-node-dot"></div>
             </div>
           </div>
@@ -3031,10 +3800,14 @@
             <div class="card-inner">
               <div class="card-header">
                 <span class="usecase-tag">Single centre</span>
-                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg></span>
               </div>
               <h3>Independent wash owners</h3>
-              <p><strong>Replace the notebook and walk-in queue</strong> with online bookings and a clear daily revenue view.</p>
+              <p><strong>Replace the notebook and walk-in queue</strong> with online bookings and a clear daily revenue
+                view.</p>
               <div class="card-footer-link">
                 <span>Explore Single-Bay POS Setup</span>
                 <span class="arrow">→</span>
@@ -3046,10 +3819,17 @@
             <div class="card-inner">
               <div class="card-header">
                 <span class="usecase-tag highlight">Multi-location</span>
-                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="16"/><line x1="15" y1="22" x2="15" y2="16"/><line x1="9" y1="16" x2="15" y2="16"/><path d="M8 6h2v2H8zm4 0h2v2h-2zm-4 4h2v2H8zm4 0h2v2h-2zm-4 4h2v2H8zm4 0h2v2h-2z"/></svg></span>
+                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                    <line x1="9" y1="22" x2="9" y2="16" />
+                    <line x1="15" y1="22" x2="15" y2="16" />
+                    <line x1="9" y1="16" x2="15" y2="16" />
+                    <path d="M8 6h2v2H8zm4 0h2v2h-2zm-4 4h2v2H8zm4 0h2v2h-2zm-4 4h2v2H8zm4 0h2v2h-2z" />
+                  </svg></span>
               </div>
               <h3>Growing chains</h3>
-              <p><strong>Compare bay utilisation and revenue</strong> across every centre from one owner login — no separate spreadsheets per site.</p>
+              <p><strong>Compare bay utilisation and revenue</strong> across every centre from one owner login — no
+                separate spreadsheets per site.</p>
               <div class="card-footer-link">
                 <span>View Multi-Centre Dashboard</span>
                 <span class="arrow">→</span>
@@ -3061,10 +3841,16 @@
             <div class="card-inner">
               <div class="card-header">
                 <span class="usecase-tag">Mobile &amp; on-demand</span>
-                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+                <span class="card-badge-icon"><svg viewBox="0 0 24 24" class="svg-icon" style="color: var(--lime);">
+                    <rect x="1" y="3" width="15" height="13" />
+                    <polygon points="16 8 20 8 23 11 23 16 16 16" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg></span>
               </div>
               <h3>Doorstep detailing</h3>
-              <p><strong>Route mobile detailing requests</strong> to the nearest available team and track jobs from booking to completion.</p>
+              <p><strong>Route mobile detailing requests</strong> to the nearest available team and track jobs from
+                booking to completion.</p>
               <div class="card-footer-link">
                 <span>Explore Doorstep Dispatching</span>
                 <span class="arrow">→</span>
@@ -3093,30 +3879,66 @@
   <section class="proof" id="proofSec">
     <canvas class="proof-bubbles-canvas" id="proofBubblesCanvas"></canvas>
     <div class="wrap proof-inner">
-      <div class="reveal" style="grid-column: 1 / -1; text-align: center; margin-bottom: 24px;">
+      <div class="proof-header reveal">
         <span class="sec-eyebrow"
-          style="color:var(--lime); font-weight:800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;">04
+          style="color:var(--lime); font-weight:800; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;">04
           &mdash; Proven Results</span>
+        <h2 class="proof-heading">Real impact from real forecourts</h2>
       </div>
-      <div class="reveal">
-        <blockquote>"We were losing 10 to 15 washes every Saturday to missed calls and double-bookings. With Foamia, cashiers just tap to bill, and our attendants see the queue on their tablets. Reconciliation takes 5 minutes instead of 2 hours, and our revenue is up 22% simply by capturing every vehicle."</blockquote>
-        <cite>— Owner, Ravi's Auto Spa, Thrissur</cite>
+
+      <!-- Testimonial Spotlight Card -->
+      <div class="proof-quote-card reveal">
+        <div class="quote-icon-badge">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path
+              d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+        </div>
+        <blockquote>"We were losing 10 to 15 washes every Saturday to missed calls and double-bookings. With Foamia,
+          cashiers just tap to bill, and our attendants see the queue on their tablets. Reconciliation takes <strong>5
+            minutes instead of 2 hours</strong>, and our revenue is <strong>up 22%</strong> simply by capturing every
+          vehicle."</blockquote>
+        <div class="proof-author-wrap">
+          <div class="proof-author-avatar">RV</div>
+          <div class="proof-author-info">
+            <cite class="proof-author-name">Ravi Varma</cite>
+            <span class="proof-author-desc">Managing Owner, Ravi's Auto Spa • Thrissur</span>
+          </div>
+          <div class="proof-verified-badge">
+            <span class="verified-check">✓</span>
+            <span>Verified 3-Bay Centre</span>
+          </div>
+        </div>
       </div>
+
+      <!-- 4 High Impact Metric Cards -->
       <div class="proof-stats reveal" id="proofStats">
         <div class="proof-stat" data-target="35" data-suffix="%">
-          <b class="stat-num">0%</b>
+          <div class="stat-top-row">
+            <b class="stat-num">0%</b>
+            <span class="stat-trend">▲ +35%</span>
+          </div>
           <span>Increase in booking capture</span>
         </div>
         <div class="proof-stat" data-target="3.2" data-suffix="×" data-decimals="1">
-          <b class="stat-num">0.0×</b>
+          <div class="stat-top-row">
+            <b class="stat-num">0.0×</b>
+            <span class="stat-trend">⚡ Speed</span>
+          </div>
           <span>Faster cashier reconciliation</span>
         </div>
         <div class="proof-stat" data-target="98" data-suffix="%">
-          <b class="stat-num">0%</b>
+          <div class="stat-top-row">
+            <b class="stat-num">0%</b>
+            <span class="stat-trend">★ Gold</span>
+          </div>
           <span>Monthly retention on wash plans</span>
         </div>
         <div class="proof-stat">
-          <b>&lt;1 wk</b>
+          <div class="stat-top-row">
+            <b class="stat-num">&lt;1 wk</b>
+            <span class="stat-trend">🚀 Fast</span>
+          </div>
           <span>Time to go live</span>
         </div>
       </div>
@@ -3155,33 +3977,51 @@
       </div>
       <div class="faq-list">
         <div class="faq-item reveal">
-          <div class="faq-q"><span>Do I need to buy new hardware or receipt printers?</span><span class="plus">+</span></div>
+          <div class="faq-q"><span>Do I need to buy new hardware or receipt printers?</span><span class="plus">+</span>
+          </div>
           <div class="faq-a">
-            <div class="faq-a-inner">No. Foamia runs on any standard Android or iOS tablet or phone you already own. For receipts, our app connects directly via Bluetooth, WiFi, or USB to standard ESC/POS thermal receipt printers. Alternatively, you can send automated digital receipts straight to customers via WhatsApp or SMS.</div>
+            <div class="faq-a-inner">No. Foamia runs on any standard Android or iOS tablet or phone you already own. For
+              receipts, our app connects directly via Bluetooth, WiFi, or USB to standard ESC/POS thermal receipt
+              printers. Alternatively, you can send automated digital receipts straight to customers via WhatsApp or
+              SMS.</div>
           </div>
         </div>
         <div class="faq-item reveal">
-          <div class="faq-q"><span>How does Foamia prevent cash leakage at the cashier counter?</span><span class="plus">+</span></div>
+          <div class="faq-q"><span>How does Foamia prevent cash leakage at the cashier counter?</span><span
+              class="plus">+</span></div>
           <div class="faq-a">
-            <div class="faq-a-inner">We build cash control directly into the workflow. Cashiers must perform a shift open-and-close tally audit, entering physical cash counts that are cross-referenced with system sales. Any voided tickets or supervisor discount overrides trigger instant logs and require a supervisor override PIN, ensuring every rupee is accounted for.</div>
+            <div class="faq-a-inner">We build cash control directly into the workflow. Cashiers must perform a shift
+              open-and-close tally audit, entering physical cash counts that are cross-referenced with system sales. Any
+              voided tickets or supervisor discount overrides trigger instant logs and require a supervisor override
+              PIN, ensuring every rupee is accounted for.</div>
           </div>
         </div>
         <div class="faq-item reveal">
-          <div class="faq-q"><span>What happens if the internet drops at my wash centre?</span><span class="plus">+</span></div>
+          <div class="faq-q"><span>What happens if the internet drops at my wash centre?</span><span
+              class="plus">+</span></div>
           <div class="faq-a">
-            <div class="faq-a-inner">Foamia has a robust local offline queue cache. If your Wi-Fi drops, attendants can still check in vehicles, track bay wash stages, and log cash transactions. All data syncs back to the cloud automatically once connection is restored, so your forecourt never grinds to a halt.</div>
+            <div class="faq-a-inner">Foamia has a robust local offline queue cache. If your Wi-Fi drops, attendants can
+              still check in vehicles, track bay wash stages, and log cash transactions. All data syncs back to the
+              cloud automatically once connection is restored, so your forecourt never grinds to a halt.</div>
           </div>
         </div>
         <div class="faq-item reveal">
-          <div class="faq-q"><span>Do my customers need to download an app to book a wash?</span><span class="plus">+</span></div>
+          <div class="faq-q"><span>Do my customers need to download an app to book a wash?</span><span
+              class="plus">+</span></div>
           <div class="faq-a">
-            <div class="faq-a-inner">No. Customers book via a clean, zero-install mobile web page. They simply scan your QR code at the entrance or click the booking link on your social profiles, select their vehicle and package, and get placed in your live virtual queue. They receive real-time queue position updates directly over WhatsApp.</div>
+            <div class="faq-a-inner">No. Customers book via a clean, zero-install mobile web page. They simply scan your
+              QR code at the entrance or click the booking link on your social profiles, select their vehicle and
+              package, and get placed in your live virtual queue. They receive real-time queue position updates directly
+              over WhatsApp.</div>
           </div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q"><span>How does dynamic UPI QR code generation work?</span><span class="plus">+</span></div>
           <div class="faq-a">
-            <div class="faq-a-inner">At checkout, the cashier screen automatically generates a dynamic UPI QR code display specific to that ticket's exact value. The customer scans it with any UPI app (GPay, PhonePe, Paytm). The system detects the payment confirmation instantly in real-time, opens the bay gate or prints the ticket, and logs the transaction automatically under the cashier's shift report.</div>
+            <div class="faq-a-inner">At checkout, the cashier screen automatically generates a dynamic UPI QR code
+              display specific to that ticket's exact value. The customer scans it with any UPI app (GPay, PhonePe,
+              Paytm). The system detects the payment confirmation instantly in real-time, opens the bay gate or prints
+              the ticket, and logs the transaction automatically under the cashier's shift report.</div>
           </div>
         </div>
       </div>
@@ -3288,7 +4128,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          
+
           headerNavLinks.forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
           });
@@ -3327,9 +4167,9 @@
           const elapsed = now - startTime;
           const progress = Math.min(1, elapsed / speed);
           const ease = 1 - Math.pow(1 - progress, 3); // cubic ease out
-          
+
           const current = ease * target;
-          
+
           if (decimals > 0) {
             valEl.textContent = current.toFixed(decimals) + suffix;
           } else {
@@ -3340,8 +4180,32 @@
             requestAnimationFrame(update);
           }
         }
-        
+
         requestAnimationFrame(update);
+      });
+    })();
+
+    // Hero Phone Mockup Interactive Tab Switcher
+    (function initHeroPhoneTabs() {
+      const tabContainer = document.getElementById('heroPhoneTabs');
+      if (!tabContainer) return;
+      const tabBtns = tabContainer.querySelectorAll('.phone-tab-btn');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTab = btn.getAttribute('data-tab');
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const panels = document.querySelectorAll('.phone-tab-panel');
+          panels.forEach(panel => {
+            if (panel.id === `heroTab-${targetTab}`) {
+              panel.classList.add('active');
+            } else {
+              panel.classList.remove('active');
+            }
+          });
+        });
       });
     })();
 
@@ -3549,12 +4413,20 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // 3D Parallax Mouse Control
+        // 3D Parallax Mouse & Touch Control
         let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
         window.addEventListener('mousemove', (e) => {
           targetX = (e.clientX / window.innerWidth - 0.5) * 40;
           targetY = (e.clientY / window.innerHeight - 0.5) * 25;
-        });
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+          if (e.touches && e.touches.length > 0) {
+            const t = e.touches[0];
+            targetX = (t.clientX / window.innerWidth - 0.5) * 35;
+            targetY = (t.clientY / window.innerHeight - 0.5) * 20;
+          }
+        }, { passive: true });
 
         // 3D Floating Soap Bubbles
         const bubbles = Array.from({ length: 12 }, () => ({
@@ -3797,10 +4669,10 @@
           const ext = '.jpg';
           const padLen = 3;
           const maxFrames = 100; // Known total frames
-          
+
           frames = new Array(maxFrames);
           let loadedCount = 0;
-          
+
           const loadingText = document.querySelector('#wash-loading .wash-loading-text');
           const loadingWrap = document.getElementById('wash-loading');
 
@@ -3809,13 +4681,13 @@
             if (loadingText) {
               loadingText.textContent = `Loading interactive wash... ${pct}%`;
             }
-            
+
             // Set isLoaded once first frame is ready (so we can draw frame 1 immediately)
             if (frames[0] && frames[0].complete && !isLoaded) {
               isLoaded = true;
               targetFrameFloat = progress * (maxFrames - 1);
               currentFrameFloat = targetFrameFloat;
-              
+
               // Remove CSS blur filter from canvas wrap smoothly
               if (container) {
                 container.style.filter = 'none';
@@ -3838,13 +4710,13 @@
               const numStr = String(i).padStart(padLen, '0');
               const url = `${dir}${prefix}${numStr}${ext}`;
               const img = new Image();
-              
+
               img.onload = () => {
                 frames[i - 1] = img;
                 loadedCount++;
                 loadedCritical++;
                 checkProgress();
-                
+
                 // Once critical frames are done, trigger loading the rest of the frames
                 if (loadedCritical === criticalFrames.length) {
                   loadRemainingBatch();
@@ -3871,7 +4743,7 @@
               const numStr = String(i).padStart(padLen, '0');
               const url = `${dir}${prefix}${numStr}${ext}`;
               const img = new Image();
-              
+
               img.onload = () => {
                 frames[i - 1] = img;
                 loadedCount++;
