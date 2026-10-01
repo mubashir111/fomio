@@ -345,7 +345,7 @@
     .hero-grid {
       position: relative;
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.05fr .95fr;
       gap: 56px;
       align-items: stretch;
     }
@@ -438,188 +438,6 @@
       font-size: 18px;
       letter-spacing: 1px;
       white-space: nowrap;
-    }
-
-    /* Hero visual: a staggered 2x3 tile grid that tells Clean → Check → Complete.
-       Rhythm: tall/short tiles zig-zag across the two columns with one gap size.
-       Variety: photo / white card / red brand tile. It stretches to the copy height. */
-    .hero-visual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(3, 1fr);
-      gap: 14px;
-      min-height: 540px;
-    }
-
-    .tile {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-    }
-
-    .tile-clean {
-      grid-column: 1;
-      grid-row: 1 / span 2;
-    }
-
-    .tile-check {
-      grid-column: 1;
-      grid-row: 3;
-    }
-
-    .tile-kpi {
-      grid-column: 2;
-      grid-row: 1;
-    }
-
-    .tile-done {
-      grid-column: 2;
-      grid-row: 2 / span 2;
-    }
-
-    .tile-photo {
-      background: var(--dark);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .tile-photo img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: contrast(.9) brightness(1.05);
-      transition: transform .8s cubic-bezier(.2, .8, .2, 1);
-    }
-
-    .tile-photo:hover img {
-      transform: scale(1.05);
-    }
-
-    .tile-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(18, 18, 19, .45), transparent 40%);
-    }
-
-    .step-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px 6px 6px;
-      border-radius: 999px;
-      background: #fff;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--ink);
-      white-space: nowrap;
-    }
-
-    .tile-photo .step-chip {
-      position: absolute;
-      left: 14px;
-      bottom: 14px;
-      z-index: 1;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
-    }
-
-    .step-chip i {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-style: normal;
-      font-size: 11px;
-      font-weight: 800;
-      color: #fff;
-      background: var(--c);
-    }
-
-    .step-chip span {
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    .tile-check {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .tile-check .step-chip {
-      background: #FFF2D6;
-      align-self: flex-start;
-    }
-
-
-
-
-
-
-
-
-    .tile-kpi {
-      background: var(--red);
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .kpi-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .kpi-label .ping {
-      background: #fff;
-    }
-
-    .tile-kpi::after {
-      display: none;
-      content: '';
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      right: -50px;
-      top: -60px;
-      border-radius: 50%;
-      border: 26px solid rgba(255, 255, 255, .1);
-    }
-
-    .tile-kpi small {
-      font-size: 13px;
-      font-weight: 600;
-      opacity: .85;
-    }
-
-    .tile-kpi strong {
-      display: block;
-      font-family: var(--head);
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .tile-kpi .meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .tile-kpi .meta span:last-child {
-      opacity: .85;
-      font-weight: 600;
     }
 
     /* ---------- Made for ---------- */
@@ -1571,8 +1389,7 @@
 
     .quote,
     .metric strong,
-    .fstep h3,
-    .tile-kpi strong {
+    .fstep h3 {
       font-family: var(--serif);
       font-weight: 400;
     }
@@ -1868,97 +1685,6 @@
       }
     }
 
-    /* Live hero tiles: Clean → Check → Complete cycles */
-    .tile {
-      transition: outline-color .5s var(--ease), box-shadow .5s var(--ease);
-      outline: 2px solid transparent;
-      outline-offset: 4px;
-    }
-
-    .tile.is-active {
-      outline-color: var(--c);
-    }
-
-    .tile-photo img {
-      translate: 0 var(--py, 0px);
-      scale: 1.12;
-      transform: none;
-      transition: scale 1.2s var(--ease);
-    }
-
-    .tile-photo:hover img {
-      transform: none;
-      scale: 1.18;
-    }
-
-    .tile .step-chip i {
-      position: relative;
-    }
-
-    .tile.is-active .step-chip i::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: var(--c);
-      animation: ping 1.6s var(--ease) infinite;
-      z-index: -1;
-    }
-
-    .tile-kpi .live {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .tile-kpi .live .ping {
-      background: #fff;
-    }
-
-    .tile-kpi strong {
-      font-size: 40px;
-      font-weight: 400;
-    }
-
-    .bump {
-      position: absolute;
-      right: 20px;
-      top: 44%;
-      font-size: 14px;
-      font-weight: 800;
-      color: #fff;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .bump.go {
-      animation: bump 1.4s var(--ease);
-    }
-
-    @keyframes bump {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      25% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(-26px);
-      }
-    }
-
     /* Ticker */
     .ticker {
       overflow: hidden;
@@ -2201,55 +1927,12 @@
       color: #7A5200;
     }
 
-    /* Hero check tile: live job */
-    .job {
-      display: grid;
-      gap: 8px;
-      padding: 12px;
-      border-radius: 14px;
-      background: var(--paper);
-    }
-
-    .job-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--ink);
-    }
-
-    .job-top span,
-    .job-meta {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-
     /* ---------- Brand harmony: one red focal point, warm-toned photos ---------- */
-    /* Earnings tile: black instead of a second big red block */
-    .tile-kpi {
-      background: var(--ink);
-    }
-
-    .tile-kpi strong {
-      color: #fff;
-    }
-
-    .tile-kpi .meta span:first-child {
-      color: #7BD88F;
-    }
-
-    .kpi-label .ping {
-      background: var(--red-on-dark);
-    }
-
     /* Photos: grade the cool grey shots into the warm cream / red palette */
-    .tile-photo img,
     .fstep-img img {
       filter: grayscale(1) sepia(.16) saturate(1.2) contrast(1.02) brightness(1.03);
     }
 
-    .tile-photo::before,
     .fstep-img::before {
       content: '';
       position: absolute;
@@ -2258,6 +1941,563 @@
       pointer-events: none;
       background: linear-gradient(150deg, rgba(189, 32, 37, .28), rgba(189, 32, 37, 0) 50%);
       mix-blend-mode: multiply;
+    }
+
+
+    /* ---------- Hero: owner dashboard mockup (shows the product, not a car wash) ---------- */
+    .hero-visual {
+      position: relative;
+      display: flex;
+    }
+
+    .dash {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      min-height: 520px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .dash-rail {
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 0;
+    }
+
+    .rail-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+    }
+
+    .rail-i {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .rail-i.on {
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+    }
+
+    .rail-logo svg,
+    .rail-i svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .dash-main {
+      min-width: 0;
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .dash-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .dash-top small {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .dash-top b {
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .branch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .branch-pill svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .dash-kpis {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .dk {
+      min-width: 0;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--paper);
+    }
+
+    .dk small {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .dk strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 1.25;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .dk-main {
+      background: var(--ink);
+    }
+
+    .dk-main small {
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .dk-main strong {
+      color: #fff;
+    }
+
+    .dk em {
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 700;
+      color: #7BD88F;
+    }
+
+    .dash-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .dash-head b {
+      color: var(--ink);
+    }
+
+    .dash-head span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .jobs {
+      flex: 1;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .jrow {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px 8px 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      transition: border-color .4s var(--ease), background .4s var(--ease);
+    }
+
+    .jrow.ready {
+      border-color: #BFE3CB;
+      background: #F6FBF7;
+    }
+
+    .thumb {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: cover;
+      filter: grayscale(1) sepia(.16) saturate(1.2);
+    }
+
+    .jt {
+      min-width: 0;
+      line-height: 1.3;
+    }
+
+    .jt b {
+      display: block;
+      font-size: 13px;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+
+    .jt span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .jstat {
+      width: 92px;
+      display: grid;
+      justify-items: end;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      background: #EEF0EC;
+      color: var(--ink-2);
+    }
+
+    .jrow.prog .pill {
+      background: #FFF2D6;
+      color: #7A5200;
+    }
+
+    .jrow.ready .pill {
+      background: var(--ok-soft);
+      color: var(--ok);
+    }
+
+    .jbar {
+      width: 100%;
+      height: 5px;
+      border-radius: 9px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .jbar i {
+      display: block;
+      width: var(--p, 0%);
+      height: 100%;
+      border-radius: 9px;
+      background: #C98A00;
+      transition: width .9s var(--ease), background .4s;
+    }
+
+    .jrow.ready .jbar i {
+      background: var(--ok);
+    }
+
+    .stock-alert {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--red-soft);
+      font-size: 12px;
+      color: var(--ink-2);
+    }
+
+    .stock-alert svg {
+      width: 16px;
+      height: 16px;
+      color: var(--red);
+    }
+
+    .stock-alert b {
+      color: var(--red);
+    }
+
+    .stock-alert span:last-child {
+      margin-left: auto;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .pay-toast {
+      position: absolute;
+      left: -32px;
+      bottom: 64px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px 10px 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      transform: translateY(10px) scale(.97);
+      transition: opacity .5s var(--ease), transform .6s var(--ease);
+      pointer-events: none;
+    }
+
+    .pay-toast.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    .pay-toast .ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--ok);
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .pay-toast .ic svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .pay-toast b {
+      display: block;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .pay-toast span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
+    /* ---------- Hero: phone (mobile app) in front of the ERP dashboard ---------- */
+    .hero .dash {
+      margin-left: 130px;
+    }
+
+    .hero .pay-toast {
+      left: auto;
+      right: -16px;
+      bottom: -14px;
+    }
+
+    .phone {
+      position: absolute;
+      left: 0;
+      bottom: 28px;
+      z-index: 2;
+      width: 184px;
+      height: 380px;
+      padding: 7px;
+      background: #121213;
+      border-radius: 34px;
+      box-shadow: 0 30px 60px rgba(20, 20, 20, .28), 0 0 0 1px rgba(255, 255, 255, .08) inset;
+    }
+
+    .phone-screen {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 8px 11px 12px;
+      border-radius: 28px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      width: 58px;
+      height: 16px;
+      margin: 0 auto;
+      border-radius: 10px;
+      background: #121213;
+      flex-shrink: 0;
+    }
+
+    .ph-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ph-head small {
+      display: block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ph-head b {
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .ph-av {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .ph-job {
+      display: grid;
+      gap: 9px;
+      padding: 11px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .ph-plate {
+      justify-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 7px;
+      border: 1.5px solid var(--ink);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: var(--ink);
+    }
+
+    .ph-plate small {
+      font-size: 7px;
+      letter-spacing: .1em;
+      padding-right: 6px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .ph-svc {
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .ph-svc b {
+      display: block;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    .ph-steps {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--ink-2);
+    }
+
+    .ph-steps li {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color .3s;
+    }
+
+    .ph-steps li::before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid #CFCBC4;
+      transition: background .3s, border-color .3s;
+    }
+
+    .ph-steps li.done {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .ph-steps li.done::before {
+      border-color: var(--ok);
+      background: var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 9px no-repeat;
+    }
+
+    .ph-next {
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px dashed #D6D1CA;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+
+    .ph-next b {
+      color: var(--ink);
+    }
+
+    .ph-btn {
+      margin-top: auto;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .4s var(--ease);
+    }
+
+    .ph-btn.done {
+      background: var(--ok);
+    }
+
+    .erp-note {
+      display: none;
+    }
+
+    /* Logo inside the app mockups */
+    .app-logo {
+      display: block;
+      height: 26px;
+      width: auto;
+      margin-bottom: 4px;
+    }
+
+    .app-logo.sm {
+      height: 18px;
+      margin-bottom: 2px;
+    }
+
+    .dash-top small {
+      letter-spacing: .04em;
+      text-transform: none;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     /* ---------- Responsive ---------- */
@@ -2273,8 +2513,10 @@
 
       .hero-visual {
         max-width: 640px;
-        min-height: 0;
-        grid-template-rows: repeat(3, 150px);
+      }
+
+      .hero .dash {
+        margin-left: 150px;
       }
 
       .madefor-box {
@@ -2403,42 +2645,65 @@
         gap: 4px;
       }
 
-      .hero-visual {
-        grid-template-rows: repeat(3, 128px);
-        gap: 10px;
+      .dash {
+        grid-template-columns: 1fr;
+        min-height: 0;
       }
 
-      .tile {
-        border-radius: 18px;
-      }
-
-      .tile-kpi {
-        padding: 14px;
-      }
-
-      .tile-kpi strong {
-        font-size: 26px;
-      }
-
-      .tile-check {
-        padding: 10px;
-      }
-
-      .tile-check .step-chip span,
-      .tile-photo .step-chip span,
-      .job-meta {
+      .dash-rail {
         display: none;
       }
 
-      .job {
-        padding: 8px;
+      .dash-main {
+        padding: 14px;
       }
 
-      .tile-photo .step-chip {
-        left: 10px;
-        bottom: 10px;
+      .dash-kpis {
+        grid-template-columns: 1fr 1fr;
       }
 
+      .dk-main {
+        grid-column: span 2;
+      }
+
+      .jstat {
+        width: 78px;
+      }
+
+      .hero-visual {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .hero .dash {
+        display: none;
+      }
+
+      .phone {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: 230px;
+        height: 400px;
+      }
+
+      .erp-note {
+        display: inline-flex;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--line);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .hero .pay-toast {
+        right: 0;
+        bottom: auto;
+        top: 40px;
+      }
 
       .madefor-box {
         padding: 22px 16px;
@@ -2631,14 +2896,15 @@
     <section class="hero" id="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="hero-eyebrow reveal">Car wash &amp; oil change software</div>
+          <div class="hero-eyebrow reveal">Mobile app + ERP for car wash owners</div>
           <h1 aria-label="Run your whole car wash from one app.">
             <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your</span></span>
             <span class="hl-row hl-2" aria-hidden="true"><span class="hl-in" style="--d:.24s"><em>whole car wash</em></span></span>
             <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.38s">from one app.</span></span>
           </h1>
-          <p class="lead reveal" style="--d:.55s">Car washing, oil changes, customers, invoices, payments, staff,
-            branches and stock — in one simple app. <strong>Know every car. Count every dirham.</strong></p>
+          <p class="lead reveal" style="--d:.55s">A mobile app for your team and an ERP dashboard for you — washes,
+            oil changes, customers, invoices, payments, branches and stock, always in sync. <strong>Know every car.
+              Count every dirham.</strong></p>
           <div class="hero-ctas reveal" style="--d:.65s">
             <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
             <a class="btn btn-ghost" href="#how-it-works"><svg class="icon"><use href="#i-play" /></svg> See how it
@@ -2648,36 +2914,81 @@
             <span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span>
             <span><strong>4.8</strong> from 340+ car wash centres</span>
             <span class="sep"></span>
-            <span>No new hardware · Live in a week</span>
+            <span>iOS &amp; Android app · Web ERP</span>
           </p>
         </div>
 
-        <div class="hero-visual" aria-label="How a car moves through Foamia: clean, check, complete">
-          <div class="tile tile-photo tile-clean reveal" data-step="0" style="--d:.5s;--c:#1F6FE0">
-            <img src="images/hero-foam-wash.jpg" alt="Car covered in foam in a wash bay"
-              style="object-position:22% 60%" width="1920" height="1080" fetchpriority="high">
-            <span class="step-chip"><i style="--c:#1F6FE0">01</i>Clean</span>
-          </div>
-          <div class="tile tile-kpi reveal" style="--d:.6s">
-            <small class="kpi-label">Earned today <i class="ping"></i></small>
-            <span class="bump" id="bump">+AED 45</span>
-            <div>
-              <strong id="kpiAmt">AED 2,140</strong>
-              <div class="meta"><span>▲ 22%</span><span><b id="kpiCars">27</b> cars</span></div>
+        <div class="hero-visual reveal" style="--d:.45s">
+          <div class="dash" role="img" aria-label="Foamia owner dashboard showing today's revenue, live wash and oil change jobs, and a low stock alert">
+            <div class="dash-rail" aria-hidden="true">
+              <span class="rail-logo"><svg class="icon"><use href="#i-drop" /></svg></span>
+              <span class="rail-i on"><svg class="icon"><use href="#i-gauge" /></svg></span>
+              <span class="rail-i"><svg class="icon"><use href="#i-car" /></svg></span>
+              <span class="rail-i"><svg class="icon"><use href="#i-receipt" /></svg></span>
+              <span class="rail-i"><svg class="icon"><use href="#i-box" /></svg></span>
+              <span class="rail-i"><svg class="icon"><use href="#i-building" /></svg></span>
+              <span class="rail-i"><svg class="icon"><use href="#i-users" /></svg></span>
+            </div>
+            <div class="dash-main" aria-hidden="true">
+              <div class="dash-top">
+                <div><img class="app-logo" src="images/foamia-logo.png" alt="" width="5159" height="1520"><small>Owner dashboard</small></div>
+                <span class="branch-pill"><svg class="icon"><use href="#i-building" /></svg>Dubai Marina</span>
+              </div>
+              <div class="dash-kpis">
+                <div class="dk dk-main"><small>Revenue today</small><strong id="kpiAmt">AED 2,140</strong><em>▲ 22%</em></div>
+                <div class="dk"><small>Cars today</small><strong id="kpiCars">27</strong></div>
+                <div class="dk"><small>In progress</small><strong id="kpiProg">2</strong></div>
+              </div>
+              <div class="dash-head"><b>Live jobs</b><span>Wash &amp; oil change</span></div>
+              <div class="jobs" id="jobs">
+              <div class="jrow" data-p="70" data-amt="215">
+                <img class="thumb" src="images/hero-foam-wash.jpg" alt="" width="1920" height="1080">
+                <div class="jt"><b>Dubai K 48211</b><span>Oil change · Ahmed</span></div>
+                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
+              </div>
+              <div class="jrow" data-p="35" data-amt="60">
+                <img class="thumb" src="images/step-clean.jpg" alt="" width="1920" height="1080">
+                <div class="jt"><b>Dubai A 30982</b><span>Full wash · Faisal</span></div>
+                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
+              </div>
+              <div class="jrow" data-p="100" data-amt="275">
+                <img class="thumb" src="images/step-complete.jpg" alt="" width="1920" height="1080">
+                <div class="jt"><b>Dubai C 77120</b><span>Wash + oil · Sami</span></div>
+                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
+              </div>
+              <div class="jrow" data-p="0" data-amt="35">
+                <img class="thumb" src="images/step-check.jpg" alt="" width="1920" height="1080">
+                <div class="jt"><b>Dubai P 12034</b><span>Exterior wash · Ahmed</span></div>
+                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
+              </div>
+              </div>
+              <div class="stock-alert"><svg class="icon"><use href="#i-box" /></svg>Car shampoo low — <b>3 L left</b><span>Reorder</span></div>
             </div>
           </div>
-          <div class="tile tile-check reveal" data-step="1" style="--d:.7s;--c:#C98A00">
-            <span class="step-chip"><i style="--c:#C98A00">02</i>Check</span>
-            <div class="job">
-              <div class="job-top"><b>Dubai K 48211</b><span>Oil change</span></div>
-              <span class="bar"><i style="--w:70%;background:#C98A00"></i></span>
-              <span class="job-meta">In progress · 70%</span>
+          <div class="phone" role="img" aria-label="Foamia mobile app: a technician's job card for an oil change">
+            <div class="phone-screen" aria-hidden="true">
+              <span class="phone-notch"></span>
+              <div class="ph-head">
+                <div><img class="app-logo sm" src="images/foamia-logo.png" alt="" width="5159" height="1520"><b>My jobs</b></div>
+                <span class="ph-av">AH</span>
+              </div>
+              <div class="ph-job">
+                <span class="ph-plate"><small>DUBAI</small>K 48211</span>
+                <div class="ph-svc"><b>Oil change · 5W-30</b>Land Cruiser · Bay 2</div>
+                <ul class="ph-steps" id="phSteps">
+                  <li>Drain old oil</li>
+                  <li>Replace filter</li>
+                  <li>Refill &amp; check</li>
+                </ul>
+              </div>
+              <div class="ph-next">Next: <b>Dubai P 12034</b> · Exterior wash</div>
+              <span class="ph-btn" id="phBtn">Mark as ready</span>
             </div>
           </div>
-          <div class="tile tile-photo tile-done reveal" data-step="2" style="--d:.8s;--c:var(--ok)">
-            <img src="images/step-complete.jpg" alt="Clean, shining black car ready for pickup"
-              style="object-position:30% 60%" width="1920" height="1080">
-            <span class="step-chip"><i style="--c:var(--ok)">03</i>Complete</span>
+          <span class="erp-note">+ ERP dashboard for owners on the web</span>
+          <div class="pay-toast" id="payToast" aria-hidden="true">
+            <span class="ic"><svg class="icon"><use href="#i-check" /></svg></span>
+            <div><b id="payTitle">Invoice #1042 paid</b><span id="payTxt">AED 275 · Card</span></div>
           </div>
         </div>
       </div>
@@ -3025,8 +3336,10 @@
             <p>Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.</p>
           </details>
           <details class="reveal">
-            <summary>Do I need to buy new hardware?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>No. Foamia runs on the phones, tablets and computers you already have.</p>
+            <summary>What do I get — an app or a dashboard?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>Both. Your staff use the Foamia mobile app (iOS and Android) to check in cars, update jobs and take
+              payments. You and your managers use the ERP dashboard in any web browser to see revenue, invoices,
+              branches, staff and stock. Everything stays in sync in real time — no new hardware needed.</p>
           </details>
           <details class="reveal">
             <summary>How does Foamia stop cash going missing?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
@@ -3186,21 +3499,52 @@
     }), { threshold: .6 });
     document.querySelectorAll('[data-count]').forEach(el => counter.observe(el));
 
-    // Hero: cycle Clean → Check → Complete; each completed car adds to today's earnings
-    const steps = [...document.querySelectorAll('.hero [data-step]')];
-    const amtEl = document.getElementById('kpiAmt'), carsEl = document.getElementById('kpiCars'), bump = document.getElementById('bump');
-    let amt = 2140, cars = 27, cur = -1;
-    function setStep(i) {
-      steps.forEach(t => t.classList.toggle('is-active', +t.dataset.step === i));
-      if (i === 2) {
-        if (cars >= 30) { amt = 2140; cars = 27; }
-        amt += 45; cars += 1;
-        amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
-        carsEl.textContent = cars;
-        bump.classList.remove('go'); void bump.offsetWidth; bump.classList.add('go');
-      }
+    // Hero dashboard: jobs progress live; finished jobs become paid invoices and add to revenue
+    const jobRows = [...document.querySelectorAll('#jobs .jrow')].map(el => ({ el, p: +el.dataset.p, amt: +el.dataset.amt, hold: 0, wait: 0 }));
+    const amtEl = document.getElementById('kpiAmt'), carsEl = document.getElementById('kpiCars'), progEl = document.getElementById('kpiProg');
+    const toast = document.getElementById('payToast'), payTitle = document.getElementById('payTitle'), payTxt = document.getElementById('payTxt');
+    const phSteps = [...document.querySelectorAll('#phSteps li')], phBtn = document.getElementById('phBtn');
+    let amt = 2140, cars = 27, invoice = 1041, toastTimer;
+    function renderJobs() {
+      jobRows.forEach(r => {
+        const ready = r.p >= 100, prog = r.p > 0 && !ready;
+        r.el.classList.toggle('ready', ready);
+        r.el.classList.toggle('prog', prog);
+        r.el.querySelector('.pill').textContent = ready ? 'Ready' : prog ? 'In progress' : 'Waiting';
+        r.el.querySelector('.jbar i').style.setProperty('--p', r.p + '%');
+      });
+      progEl.textContent = jobRows.filter(r => r.p > 0 && r.p < 100).length;
+      // the phone shows the technician's view of the first job
+      const r0 = jobRows[0], done = r0.p >= 100 ? 3 : r0.p >= 67 ? 2 : r0.p >= 34 ? 1 : 0;
+      phSteps.forEach((li, i) => li.classList.toggle('done', i < done));
+      phBtn.classList.toggle('done', r0.p >= 100);
+      phBtn.textContent = r0.p >= 100 ? '✓ Marked ready' : r0.p === 0 ? 'Start job' : 'Mark as ready';
     }
-    if (!reduce) setTimeout(() => setInterval(() => setStep(cur = (cur + 1) % 3), 2000), 1800);
+    function completeJob(r) {
+      if (cars >= 34) { amt = 2140; cars = 27; }
+      amt += r.amt; cars += 1; invoice += 1;
+      amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
+      carsEl.textContent = cars;
+      payTitle.textContent = 'Invoice #' + invoice + ' paid';
+      payTxt.textContent = 'AED ' + r.amt + ' · ' + (invoice % 2 ? 'Card' : 'Cash');
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+    function tickJobs() {
+      let completed = false;
+      jobRows.forEach(r => {
+        if (r.p >= 100) { if (++r.hold > 2) { r.p = 0; r.hold = 0; } }
+        else if (r.p === 0) { if (++r.wait > 1) { r.p = 10; r.wait = 0; } }
+        else {
+          r.p = Math.min(100, r.p + 12 + Math.round(Math.random() * 12));
+          if (r.p >= 100) { if (completed) r.p = 95; else { completed = true; completeJob(r); } }
+        }
+      });
+      renderJobs();
+    }
+    renderJobs();
+    if (!reduce) setTimeout(() => setInterval(tickJobs, 1700), 1800);
 
     // Manifesto: split into words, light them up with scroll progress
     const man = document.getElementById('manifesto');
@@ -3224,7 +3568,7 @@
     })(man, false);
 
     // One rAF loop for scroll-driven effects: manifesto words + gentle image parallax
-    const plx = [...document.querySelectorAll('.tile-photo img, .fstep-img img')];
+    const plx = [...document.querySelectorAll('.fstep-img img')];
     const heroEl = document.getElementById('hero');
     let ticking = false;
     function frame() {
@@ -3253,7 +3597,7 @@
       let mx = innerWidth / 2, my = innerHeight / 2, ox = mx, oy = my, vx = 0, vy = 0, ix = mx, iy = my;
       addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
       document.addEventListener('mouseover', e => {
-        root.classList.toggle('cur-hover', !!e.target.closest('a, button, summary, .tile, .card, .case'));
+        root.classList.toggle('cur-hover', !!e.target.closest('a, button, summary, .dash, .card, .case'));
         root.classList.toggle('cur-dark', !!e.target.closest('.flow, .proof, footer, .cta-box'));
       });
       (function loop() {
