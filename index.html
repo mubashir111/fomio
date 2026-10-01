@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foamia — Car Wash Management App</title>
   <meta name="description"
-    content="Foamia is the all-in-one app for car wash owners: bookings, bays, staff, memberships and payments in one place. Clean. Check. Complete.">
+    content="Foamia is the all-in-one app for car wash and oil change businesses: jobs, customers, work progress, invoices, payments, staff, branches and stock. Clean. Check. Complete.">
   <link rel="icon" href="images/foamia-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,6 +152,15 @@
 
     .btn-ghost:hover {
       border-color: var(--ink);
+    }
+
+    .btn-ink {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-ink:hover {
+      background: #2A2A2D;
     }
 
     .btn-white {
@@ -548,53 +557,12 @@
       align-self: flex-start;
     }
 
-    .car-line {
-      font-size: 14px;
-      color: var(--muted);
-      padding-left: 4px;
-    }
 
-    .car-line b {
-      color: var(--ink);
-      letter-spacing: .02em;
-    }
 
-    .wa {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: var(--paper);
-    }
 
-    .wa .ic {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: #25A244;
-      color: #fff;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
 
-    .wa .ic svg {
-      width: 16px;
-      height: 16px;
-    }
 
-    .wa b {
-      display: block;
-      font-size: 13px;
-      color: var(--ink);
-      line-height: 1.25;
-    }
 
-    .wa span {
-      font-size: 12px;
-      color: var(--muted);
-    }
 
     .tile-kpi {
       background: var(--red);
@@ -1000,45 +968,10 @@
       align-items: center;
     }
 
-    .channels {
-      width: 100%;
-      display: grid;
-      gap: 10px;
-    }
 
-    .ch {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: var(--paper);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-    }
 
-    .ch .dot {
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-    }
 
-    .ch .dot svg {
-      width: 16px;
-      height: 16px;
-    }
 
-    .ch em {
-      margin-left: auto;
-      font-style: normal;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
 
     .plate {
       display: inline-flex;
@@ -1087,48 +1020,10 @@
       font-weight: 600;
     }
 
-    .member {
-      width: 100%;
-      border-radius: 16px;
-      padding: 18px;
-      background: linear-gradient(135deg, var(--red), #7E1216);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
 
-    .member::after {
-      content: '';
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      right: -45px;
-      top: -60px;
-      background: rgba(255, 255, 255, .12);
-    }
 
-    .member small {
-      font-size: 11px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      font-weight: 800;
-      opacity: .85;
-    }
 
-    .member b {
-      display: block;
-      font-family: var(--head);
-      font-size: 19px;
-      margin: 4px 0 14px;
-    }
 
-    .member div {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      opacity: .8;
-    }
 
     .tally {
       width: 100%;
@@ -1224,27 +1119,8 @@
       background: var(--c);
     }
 
-    .devices {
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      color: var(--ink);
-    }
 
-    .devices svg {
-      stroke-width: 1.6;
-    }
 
-    .offline {
-      margin-left: auto;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ok);
-      background: var(--ok-soft);
-      padding: 5px 10px;
-      border-radius: 999px;
-    }
 
     /* ---------- Proof (dark) ---------- */
     .proof {
@@ -2274,6 +2150,116 @@
       }
     }
 
+
+    /* Service / stock lists */
+    .rows-list {
+      width: 100%;
+      display: grid;
+      gap: 8px;
+    }
+
+    .rows-list>div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: var(--paper);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .rows-list b {
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .rows-list b.low {
+      color: var(--red);
+    }
+
+    .rows-list.compact>div {
+      padding: 9px 12px;
+      font-size: 13px;
+    }
+
+    .svc-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .svc-tag.wash {
+      background: #E4F0FB;
+      color: #155C93;
+    }
+
+    .svc-tag.oil {
+      background: #FFF2D6;
+      color: #7A5200;
+    }
+
+    /* Hero check tile: live job */
+    .job {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--paper);
+    }
+
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .job-top span,
+    .job-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
+    /* ---------- Brand harmony: one red focal point, warm-toned photos ---------- */
+    /* Earnings tile: black instead of a second big red block */
+    .tile-kpi {
+      background: var(--ink);
+    }
+
+    .tile-kpi strong {
+      color: #fff;
+    }
+
+    .tile-kpi .meta span:first-child {
+      color: #7BD88F;
+    }
+
+    .kpi-label .ping {
+      background: var(--red-on-dark);
+    }
+
+    /* Photos: grade the cool grey shots into the warm cream / red palette */
+    .tile-photo img,
+    .fstep-img img {
+      filter: grayscale(1) sepia(.16) saturate(1.2) contrast(1.02) brightness(1.03);
+    }
+
+    .tile-photo::before,
+    .fstep-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(150deg, rgba(189, 32, 37, .28), rgba(189, 32, 37, 0) 50%);
+      mix-blend-mode: multiply;
+    }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 1080px) {
       .hero-grid {
@@ -2438,14 +2424,13 @@
         padding: 10px;
       }
 
-      .car-line,
       .tile-check .step-chip span,
       .tile-photo .step-chip span,
-      .wa span {
+      .job-meta {
         display: none;
       }
 
-      .wa {
+      .job {
         padding: 8px;
       }
 
@@ -2585,6 +2570,10 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></symbol>
     <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5M12 22V12" /></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /><path d="M16 8h-6M16 12h-6M13 16h-3" /></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></symbol>
     <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 22h12M4 9h10M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18" /><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L18 5" /></symbol>
     <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></symbol>
@@ -2621,7 +2610,7 @@
       </ul>
       <div class="nav-cta">
         <a class="nav-login" href="#">Log in</a>
-        <a class="btn btn-red btn-sm" href="#demo">Book a free demo</a>
+        <a class="btn btn-ink btn-sm" href="#demo">Book a free demo</a>
       </div>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
         <svg class="icon"><use href="#i-menu" /></svg>
@@ -2642,14 +2631,14 @@
     <section class="hero" id="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="hero-eyebrow reveal">Car wash management app</div>
+          <div class="hero-eyebrow reveal">Car wash &amp; oil change software</div>
           <h1 aria-label="Run your whole car wash from one app.">
             <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your</span></span>
             <span class="hl-row hl-2" aria-hidden="true"><span class="hl-in" style="--d:.24s"><em>whole car wash</em></span></span>
             <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.38s">from one app.</span></span>
           </h1>
-          <p class="lead reveal" style="--d:.55s">Bookings, bays, staff, wash plans and payments — in one simple
-            app. <strong>No missed customers. No missing cash.</strong></p>
+          <p class="lead reveal" style="--d:.55s">Car washing, oil changes, customers, invoices, payments, staff,
+            branches and stock — in one simple app. <strong>Know every car. Count every dirham.</strong></p>
           <div class="hero-ctas reveal" style="--d:.65s">
             <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
             <a class="btn btn-ghost" href="#how-it-works"><svg class="icon"><use href="#i-play" /></svg> See how it
@@ -2679,9 +2668,10 @@
           </div>
           <div class="tile tile-check reveal" data-step="1" style="--d:.7s;--c:#C98A00">
             <span class="step-chip"><i style="--c:#C98A00">02</i>Check</span>
-            <div class="wa">
-              <span class="ic"><svg class="icon"><use href="#i-chat" /></svg></span>
-              <div><b>“Your car is ready!”</b><span>Sent on WhatsApp</span></div>
+            <div class="job">
+              <div class="job-top"><b>Dubai K 48211</b><span>Oil change</span></div>
+              <span class="bar"><i style="--w:70%;background:#C98A00"></i></span>
+              <span class="job-meta">In progress · 70%</span>
             </div>
           </div>
           <div class="tile tile-photo tile-done reveal" data-step="2" style="--d:.8s;--c:var(--ok)">
@@ -2696,8 +2686,8 @@
     <!-- ============ TICKER ============ -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>Online bookings</span><span>Bay queue</span><span>Staff logins</span><span>Monthly wash plans</span><span>Card &amp; cash payments</span><span>Cash tally</span><span>WhatsApp receipts</span><span>Works offline</span>
-        <span>Online bookings</span><span>Bay queue</span><span>Staff logins</span><span>Monthly wash plans</span><span>Card &amp; cash payments</span><span>Cash tally</span><span>WhatsApp receipts</span><span>Works offline</span>
+        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch management</span><span>Stock management</span>
+        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch management</span><span>Stock management</span>
       </div>
     </div>
 
@@ -2705,12 +2695,12 @@
     <div class="madefor" id="who">
       <div class="wrap">
         <div class="madefor-box reveal">
-          <h2>Made for every <em>car wash</em> business</h2>
+          <h2>Made for <em>car wash</em> &amp; service businesses</h2>
           <ul class="types">
             <li><span class="ti"><svg class="icon"><use href="#i-drop" /></svg></span>Car wash centres</li>
             <li><span class="ti"><svg class="icon"><use href="#i-sparkle" /></svg></span>Detailing studios</li>
+            <li><span class="ti"><svg class="icon"><use href="#i-wrench" /></svg></span>Oil change &amp; lube centres</li>
             <li><span class="ti"><svg class="icon"><use href="#i-fuel" /></svg></span>Fuel station washes</li>
-            <li><span class="ti"><svg class="icon"><use href="#i-truck" /></svg></span>Doorstep &amp; mobile wash</li>
             <li><span class="ti"><svg class="icon"><use href="#i-building" /></svg></span>Multi-branch chains</li>
           </ul>
         </div>
@@ -2721,9 +2711,9 @@
     <section class="manifesto" aria-label="Why we built Foamia">
       <div class="wrap">
         <span class="eyebrow">Why Foamia</span>
-        <p id="manifesto">You started a car wash to wash cars — not to chase missed calls, count cash at midnight, or
-          guess which bay is free. So we built Foamia: every booking, bay, washer and dirham in <span data-accent>one
-          app.</span> Your cars leave clean. Your evenings stay yours.</p>
+        <p id="manifesto">You started a car wash to wash cars — not to chase paper job cards, count cash at midnight,
+          or find out you're out of oil in the middle of a busy day. So we built Foamia: every car, job, invoice and
+          dirham in <span data-accent>one app.</span> Your cars leave clean. Your evenings stay yours.</p>
       </div>
     </section>
 
@@ -2733,54 +2723,54 @@
         <div class="sec-head center reveal">
           <span class="eyebrow">Sound familiar?</span>
           <h2>Running a car wash <em>shouldn't</em> feel this hard</h2>
-          <p>These are the problems we hear from car wash owners every day. Foamia fixes each one.</p>
+          <p>These are the problems we hear from car wash and oil change owners every day. Foamia fixes each one.</p>
         </div>
         <div class="problems">
           <div class="prob reveal">
             <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
               <div><small>Today</small>
-                <p>Customers call, nobody picks up — and they drive to the next car wash.</p>
+                <p>Job cards are on paper — nobody knows which car is ready.</p>
               </div>
             </div>
             <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
               <div><small>With Foamia</small>
-                <p>Customers book a slot 24/7 from WhatsApp, Google Maps or your own link.</p>
+                <p>Every job's progress is tracked live: waiting, in progress or ready.</p>
               </div>
             </div>
           </div>
           <div class="prob reveal" style="--d:.06s">
             <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
               <div><small>Today</small>
-                <p>Cash in the drawer never matches the number of cars washed.</p>
+                <p>Customer details and oil-change history live in a notebook — or nowhere.</p>
               </div>
             </div>
             <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
               <div><small>With Foamia</small>
-                <p>Every payment is recorded, and each shift closes with a cash count check.</p>
+                <p>Every customer and car is saved: plate, phone, past washes and oil changes.</p>
               </div>
             </div>
           </div>
           <div class="prob reveal">
             <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
               <div><small>Today</small>
-                <p>Cars wait in line and staff don't know which car goes to which bay.</p>
+                <p>Payments go into a drawer and the day's totals never add up.</p>
               </div>
             </div>
             <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
               <div><small>With Foamia</small>
-                <p>Every washer sees their own bay's queue on their phone.</p>
+                <p>Every payment is entered against an invoice, by a named staff member.</p>
               </div>
             </div>
           </div>
           <div class="prob reveal" style="--d:.06s">
             <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
               <div><small>Today</small>
-                <p>You find out how much you earned only at night — from a notebook.</p>
+                <p>Oil, filters or shampoo run out in the middle of a busy day.</p>
               </div>
             </div>
             <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
               <div><small>With Foamia</small>
-                <p>See today's cars and earnings live on your phone, from anywhere.</p>
+                <p>Track stock at every branch and reorder before you run out.</p>
               </div>
             </div>
           </div>
@@ -2794,53 +2784,52 @@
         <div class="sec-head center reveal">
           <span class="eyebrow">How it works</span>
           <h2 class="flow-title">Clean. <em>Check.</em> Complete.</h2>
-          <p>Every car that comes into your wash goes through three simple steps in Foamia — and you can see every one
-            of them live.</p>
+          <p>Every car — in for a wash, an oil change or both — goes through three simple steps in Foamia, and you
+            can see every one of them live.</p>
         </div>
         <ol class="flow-steps">
           <li class="fstep reveal">
             <div class="fstep-img">
               <img src="images/step-clean.jpg" style="object-position:50% 30%" alt="Car being sprayed with water in a wash bay"
                 loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:#155C93"><use href="#i-drop" /></svg>Dubai K 48211 →
-                Bay 1</span>
+              <span class="chip"><svg class="icon" style="color:#155C93"><use href="#i-drop" /></svg>Dubai K 48211 · Wash + Oil</span>
             </div>
             <div class="fstep-body">
               <div class="fstep-num"><b>STEP 01</b><i></i></div>
               <h3>Clean</h3>
-              <span class="sub">Car comes in, goes to a bay.</span>
-              <p>Booked or walk-in, just enter the number plate. Foamia shows the car's history and sends it to a free
-                bay. Your washer sees the job on their phone and updates it — pre-wash, foam, rinse, dry.</p>
+              <span class="sub">Car checks in, the job starts.</span>
+              <p>Enter the number plate and Foamia brings up the customer and the car's history. Create the job — wash,
+                oil change or both — and assign it to a staff member.</p>
             </div>
           </li>
           <li class="fstep reveal" style="--d:.08s">
             <div class="fstep-img">
               <img src="images/step-check.jpg" alt="Freshly rinsed car being checked"
                 loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:#25A244"><use href="#i-chat" /></svg>“Your car is
-                ready!”</span>
+              <span class="chip"><svg class="icon" style="color:#C98A00"><use href="#i-gauge" /></svg>In progress ·
+                70%</span>
             </div>
             <div class="fstep-body">
               <div class="fstep-num"><b>STEP 02</b><i></i></div>
               <h3>Check</h3>
-              <span class="sub">Final check, customer informed.</span>
-              <p>Your staff give the car a final check and mark it done. The customer automatically gets a WhatsApp
-                message that their car is ready for pickup.</p>
+              <span class="sub">Track the work, live.</span>
+              <p>Staff update each job as it moves along. You see which cars are waiting, in progress or ready — at
+                every branch, from one screen.</p>
             </div>
           </li>
           <li class="fstep reveal" style="--d:.16s">
             <div class="fstep-img">
               <img src="images/step-complete.jpg" alt="Clean, shining black car ready for pickup"
                 loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:var(--ok)"><use href="#i-check" /></svg>AED 45 paid ·
-                Card</span>
+              <span class="chip"><svg class="icon" style="color:var(--ok)"><use href="#i-check" /></svg>Invoice #1042 ·
+                Paid</span>
             </div>
             <div class="fstep-body">
               <div class="fstep-num"><b>STEP 03</b><i></i></div>
               <h3>Complete</h3>
-              <span class="sub">Paid, receipted, recorded.</span>
-              <p>The customer pays by card, Apple Pay or cash. The receipt goes on WhatsApp, and the sale is added to the
-                cashier's shift and your dashboard — automatically.</p>
+              <span class="sub">Invoice, payment, done.</span>
+              <p>Create the invoice in seconds and enter the payment. It's saved against the customer, the staff member
+                and the branch — so every dirham is accounted for.</p>
             </div>
           </li>
         </ol>
@@ -2852,76 +2841,91 @@
       <div class="wrap">
         <div class="sec-head reveal">
           <span class="eyebrow">Features</span>
-          <h2>Everything else your <em>car wash</em> needs</h2>
-          <p>Replace the notebook, the WhatsApp group and the cash box with one simple app your whole team can use.</p>
+          <h2>Everything your car wash needs, in <em>one app</em></h2>
+          <p>From the first wash to the final invoice — every part of your business, connected.</p>
         </div>
 
         <div class="bento">
           <article class="card span-2 reveal">
             <div>
-              <div class="ficon"><svg class="icon"><use href="#i-cal" /></svg></div>
-              <h3>Take bookings 24/7</h3>
-              <p>Customers book a wash from WhatsApp, Google Maps or your own booking link — no app download needed.
-                Every booking lands in one live queue, even while you sleep.</p>
+              <div class="ficon"><svg class="icon"><use href="#i-drop" /></svg></div>
+              <h3>Car washing &amp; oil change</h3>
+              <p>Set up every service you offer — exterior washes, full details, oil and filter changes — with your own
+                prices. Add a wash and an oil change to the same job.</p>
             </div>
             <div class="viz">
-              <div class="channels">
-                <div class="ch"><span class="dot" style="background:#25A244"><svg class="icon"><use href="#i-chat" /></svg></span>WhatsApp<em>Sedan wash · 10:45</em></div>
-                <div class="ch"><span class="dot" style="background:var(--ink)"><svg class="icon"><use href="#i-link" /></svg></span>Your booking link<em>SUV detail · 11:15</em></div>
-                <div class="ch"><span class="dot" style="background:#1F6FE0"><svg class="icon"><use href="#i-pin" /></svg></span>Google Maps<em>Interior detail · 11:30</em></div>
+              <div class="rows-list">
+                <div><span class="svc-tag wash">Wash</span>Exterior wash<b>AED 35</b></div>
+                <div><span class="svc-tag wash">Wash</span>Full wash &amp; vacuum<b>AED 60</b></div>
+                <div><span class="svc-tag oil">Oil</span>Oil change · 5W-30<b>AED 180</b></div>
+                <div><span class="svc-tag oil">Oil</span>Oil filter<b>AED 35</b></div>
               </div>
             </div>
           </article>
 
           <article class="card reveal" style="--d:.05s">
             <div class="ficon"><svg class="icon"><use href="#i-car" /></svg></div>
-            <h3>Remember every car</h3>
-            <p>Type a number plate and see that customer's past washes and preferences.</p>
+            <h3>Customer management</h3>
+            <p>Type a number plate and see the customer, their cars and every past service.</p>
             <div class="viz">
               <div class="history">
                 <span class="plate"><small>DUBAI</small>K 48211</span>
                 <ul>
-                  <li><b>Full polish</b><span>12 Sep</span></li>
-                  <li><b>Foam wash</b><span>28 Aug</span></li>
+                  <li><b>Oil change · 5W-30</b><span>12 Sep</span></li>
+                  <li><b>Full wash</b><span>28 Aug</span></li>
                 </ul>
               </div>
             </div>
           </article>
 
           <article class="card reveal">
-            <div class="ficon"><svg class="icon"><use href="#i-repeat" /></svg></div>
-            <h3>Sell monthly wash plans</h3>
-            <p>Offer memberships with automatic card billing. Regular income, renewals run on their own.</p>
+            <div class="ficon"><svg class="icon"><use href="#i-gauge" /></svg></div>
+            <h3>Work progress</h3>
+            <p>See every job live — waiting, in progress or ready for pickup.</p>
             <div class="viz">
-              <div class="member">
-                <small>Gold member</small>
-                <b>Unlimited washes</b>
-                <div><span>Omar H. · Land Cruiser</span><span>Renews 12 Oct</span></div>
+              <div class="locs">
+                <div class="loc">K 48211<span class="bar"><i style="--w:70%"></i></span><span>Oil</span></div>
+                <div class="loc">A 30982<span class="bar"><i style="--w:40%"></i></span><span>Wash</span></div>
+                <div class="loc">C 77120<span class="bar"><i style="--w:100%;background:var(--ok)"></i></span><span>Ready</span></div>
               </div>
             </div>
           </article>
 
           <article class="card span-2 reveal" style="--d:.05s">
             <div>
-              <div class="ficon"><svg class="icon"><use href="#i-shield" /></svg></div>
-              <h3>Stop cash leakage</h3>
-              <p>Bill in two taps — card, Apple Pay or cash. At the end of every shift, cash in the drawer is matched against
-                sales. Discounts and cancelled bills need a supervisor PIN — so every dirham is accounted for.</p>
+              <div class="ficon"><svg class="icon"><use href="#i-receipt" /></svg></div>
+              <h3>Invoices &amp; payment entry</h3>
+              <p>Turn a finished job into an invoice in seconds, then enter the payment against it. Every payment is
+                linked to the customer, the staff member and the branch — so the day's totals always add up.</p>
             </div>
             <div class="viz">
               <div class="tally">
-                <div><span>Card &amp; Apple Pay</span><b>AED 1,480</b></div>
-                <div><span>Cash counted</span><b>AED 660</b></div>
-                <div><span>Discounts &amp; cancellations</span><b>1 · approved</b></div>
-                <div><span>Shift closed</span><span>✓ Cash matched</span></div>
+                <div><span>Invoice #1042 · Dubai K 48211</span><b>14 Oct</b></div>
+                <div><span>Full wash &amp; vacuum</span><b>AED 60</b></div>
+                <div><span>Oil change · 5W-30 + filter</span><b>AED 215</b></div>
+                <div><span>Paid · AED 275</span><span>✓ Payment entered</span></div>
               </div>
             </div>
           </article>
 
           <article class="card reveal">
+            <div class="ficon"><svg class="icon"><use href="#i-users" /></svg></div>
+            <h3>User management</h3>
+            <p>Give every staff member a login and a role, so each person sees only what they need.</p>
+            <div class="viz">
+              <div class="roles">
+                <span style="--c:var(--red)">Owner</span>
+                <span style="--c:#E3A008">Manager</span>
+                <span style="--c:#1F6FE0">Cashier</span>
+                <span style="--c:#25A244">Technician</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" style="--d:.05s">
             <div class="ficon"><svg class="icon"><use href="#i-building" /></svg></div>
-            <h3>All your branches, one screen</h3>
-            <p>Compare earnings and bays across every centre from one owner login.</p>
+            <h3>Branch management</h3>
+            <p>Run every location from one owner login and compare them side by side.</p>
             <div class="viz">
               <div class="locs">
                 <div class="loc">Dubai Marina<span class="bar"><i style="--w:100%"></i></span><span>AED 2.1k</span></div>
@@ -2931,30 +2935,15 @@
             </div>
           </article>
 
-          <article class="card reveal" style="--d:.05s">
-            <div class="ficon"><svg class="icon"><use href="#i-users" /></svg></div>
-            <h3>A login for every role</h3>
-            <p>Owners, managers, cashiers and washers each see only what they need.</p>
-            <div class="viz">
-              <div class="roles">
-                <span style="--c:var(--red)">Owner</span>
-                <span style="--c:#E3A008">Manager</span>
-                <span style="--c:#1F6FE0">Cashier</span>
-                <span style="--c:#25A244">Washer</span>
-              </div>
-            </div>
-          </article>
-
           <article class="card reveal" style="--d:.1s">
-            <div class="ficon"><svg class="icon"><use href="#i-phone" /></svg></div>
-            <h3>Works on what you have</h3>
-            <p>Any Android or iPhone, tablet or computer. Keeps working when the internet drops.</p>
+            <div class="ficon"><svg class="icon"><use href="#i-box" /></svg></div>
+            <h3>Stock management</h3>
+            <p>Keep track of oil, filters, shampoo and supplies at each branch.</p>
             <div class="viz">
-              <div class="devices">
-                <svg class="icon" style="width:26px;height:26px"><use href="#i-phone" /></svg>
-                <svg class="icon" style="width:34px;height:34px"><use href="#i-tablet" /></svg>
-                <svg class="icon" style="width:42px;height:42px"><use href="#i-laptop" /></svg>
-                <span class="offline">Works offline</span>
+              <div class="rows-list compact">
+                <div>Engine oil · 5W-30<b>42 L</b></div>
+                <div>Oil filters<b>18 pcs</b></div>
+                <div>Car shampoo<b class="low">3 L · Low</b></div>
               </div>
             </div>
           </article>
@@ -2967,18 +2956,18 @@
       <div class="wrap proof-grid">
         <figure class="reveal">
           <span class="eyebrow">Real results</span>
-          <blockquote class="quote">“We were losing 10 to 15 washes every weekend to missed calls and double
-            bookings. Now cashiers just tap to bill and washers see the queue on their tablets. Counting cash takes
-            <mark>5 minutes instead of 2 hours</mark>, and our income is <mark>up 22%</mark>.”</blockquote>
+          <blockquote class="quote">“Our job cards used to be on paper and nobody knew which car was ready. Now every
+            wash and oil change is tracked, invoices take seconds, and closing the day takes <mark>5 minutes instead of
+            2 hours</mark>. We haven't run out of oil since.”</blockquote>
           <figcaption class="author">
             <span class="av">KM</span>
             <div><b>Khalid Al Mansoori</b><span>Owner, Shine Auto Spa · Dubai · 3 bays</span></div>
           </figcaption>
         </figure>
         <div class="metrics">
-          <div class="metric reveal"><strong>+<span data-count="35">35</span><em>%</em></strong><span>more bookings captured</span></div>
-          <div class="metric reveal" style="--d:.06s"><strong><span data-count="3.2" data-dec="1">3.2</span><em>×</em></strong><span>faster cash counting</span></div>
-          <div class="metric reveal" style="--d:.12s"><strong><span data-count="98">98</span><em>%</em></strong><span>of members renew their plan each month</span></div>
+          <div class="metric reveal"><strong>+<span data-count="35">35</span><em>%</em></strong><span>more cars handled per day</span></div>
+          <div class="metric reveal" style="--d:.06s"><strong><span data-count="3.2" data-dec="1">3.2</span><em>×</em></strong><span>faster invoicing</span></div>
+          <div class="metric reveal" style="--d:.12s"><strong><span data-count="100">100</span><em>%</em></strong><span>of payments recorded against an invoice</span></div>
           <div class="metric reveal" style="--d:.18s"><strong>&lt;1<em> wk</em></strong><span>from sign-up to going live</span></div>
         </div>
       </div>
@@ -2997,25 +2986,25 @@
             <div class="num">1</div>
             <span class="day">Day 1</span>
             <h3>Set up your centre</h3>
-            <p>We add your bays, services and prices with you on a call.</p>
+            <p>We add your services and prices — washes, oil changes and add-ons — with you on a call.</p>
           </li>
           <li class="step reveal" style="--d:.08s">
             <div class="num">2</div>
             <span class="day">Day 2</span>
             <h3>Add your staff</h3>
-            <p>Each washer and cashier gets their own simple login.</p>
+            <p>Every staff member gets their own login and role.</p>
           </li>
           <li class="step reveal" style="--d:.16s">
             <div class="num">3</div>
             <span class="day">Day 3</span>
-            <h3>Share your booking link</h3>
-            <p>Post it on WhatsApp, Instagram or at your entrance as a QR code.</p>
+            <h3>Load your stock</h3>
+            <p>Add your oil, filters, shampoo and supplies for each branch.</p>
           </li>
           <li class="step reveal" style="--d:.24s">
             <div class="num"><svg class="icon"><use href="#i-check" /></svg></div>
             <span class="day">Day 7</span>
             <h3>Run your wash on Foamia</h3>
-            <p>Cars, bookings and earnings update live from day one.</p>
+            <p>Jobs, invoices and payments update live from day one.</p>
           </li>
         </ol>
       </div>
@@ -3032,37 +3021,28 @@
         </div>
         <div class="faq-list">
           <details class="reveal" open>
-            <summary>Is Foamia only for car washes?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Yes — Foamia is built specifically for vehicle washing businesses: car wash centres, detailing studios,
-              fuel station washes, doorstep/mobile wash teams and multi-branch chains. Every screen uses car wash language —
-              bays, washes, number plates and wash plans.</p>
+            <summary>Does Foamia handle oil changes as well as washing?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.</p>
           </details>
           <details class="reveal">
-            <summary>Do I need to buy new hardware or printers?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>No. Foamia runs on any Android or iOS phone or tablet you already own. It can connect to standard thermal
-              receipt printers over Bluetooth, Wi-Fi or USB — or you can simply send receipts to customers on WhatsApp
-              or SMS.</p>
+            <summary>Do I need to buy new hardware?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>No. Foamia runs on the phones, tablets and computers you already have.</p>
           </details>
           <details class="reveal">
             <summary>How does Foamia stop cash going missing?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Cashiers open and close each shift by counting the cash, and Foamia matches it against the sales
-              recorded. Cancelled bills and discounts are logged and need a supervisor PIN, so every dirham is
-              accounted for.</p>
+            <p>Every payment is entered against an invoice by a named staff member. You can see who collected what, when and at which branch — so the day's totals always add up.</p>
           </details>
           <details class="reveal">
-            <summary>What if the internet stops working at my wash?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Foamia keeps working offline. Staff can still check in cars, update bays and record cash sales.
-              Everything syncs automatically when the internet comes back.</p>
+            <summary>Can I manage more than one branch?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>Yes. Branch management lets you run every location from one owner login and compare jobs, invoices, payments and stock branch by branch.</p>
           </details>
           <details class="reveal">
-            <summary>Do my customers need to download an app?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>No. Customers book on a simple web page — they scan your QR code or tap your link, choose their vehicle
-              and wash, and join your queue. Updates arrive on WhatsApp.</p>
+            <summary>Can I control what each staff member can see?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or technician — and only sees what their role allows.</p>
           </details>
           <details class="reveal">
-            <summary>Which payment methods can my customers use?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Cash, debit and credit cards, and Apple Pay. Every payment is saved against the bill and the cashier's
-              shift automatically, so your card and cash totals are ready at the end of the day.</p>
+            <summary>How does stock management work?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <p>Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you have and what to reorder.</p>
           </details>
         </div>
       </div>
@@ -3094,7 +3074,7 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <img src="images/foamia-logo.png" alt="Foamia — Clean. Check. Complete." width="5159" height="1520">
-          <p>The all-in-one app for car wash owners — bookings, bays, staff, memberships and payments in one place.</p>
+          <p>The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff, branches and stock.</p>
         </div>
         <div>
           <h4>Product</h4>
