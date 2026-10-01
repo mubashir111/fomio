@@ -2500,6 +2500,80 @@
       font-weight: 600;
     }
 
+    /* ---------- Hero: car drives bottom-left → top-right ---------- */
+    .drive {
+      position: absolute;
+      inset: -40px -40px -50px -110px;
+      pointer-events: none;
+    }
+
+    .road {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .road line {
+      stroke: rgba(189, 32, 37, .28);
+      stroke-width: 2;
+      stroke-dasharray: 2 9;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .hero-visual>.dash,
+    .hero-visual>.phone {
+      z-index: 2;
+    }
+
+    .car {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 56px;
+      height: 28px;
+      margin: -14px 0 0 -28px;
+      z-index: 4;
+      rotate: var(--ang, -40deg);
+      filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .25));
+      animation: drive 7s cubic-bezier(.45, 0, .35, 1) infinite;
+      opacity: 0;
+    }
+
+    .car svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* foam trail behind the car */
+    .car::before {
+      content: '';
+      position: absolute;
+      right: 92%;
+      top: 50%;
+      width: 90px;
+      height: 14px;
+      margin-top: -7px;
+      border-radius: 99px;
+      background: linear-gradient(to left, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0));
+      box-shadow: 0 0 12px rgba(255, 255, 255, .6);
+    }
+
+    @keyframes drive {
+      0% { left: 0; top: 100%; opacity: 0; }
+      8% { opacity: 1; }
+      78% { opacity: 1; }
+      86% { left: 100%; top: 0; opacity: 0; }
+      100% { left: 100%; top: 0; opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .drive { display: none; }
+    }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 1080px) {
       .hero-grid {
@@ -2874,7 +2948,6 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="nav-login" href="#">Log in</a>
         <a class="btn btn-ink btn-sm" href="#demo">Book a free demo</a>
       </div>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -2886,7 +2959,6 @@
       <a href="#features">Features</a>
       <a href="#who">Who it's for</a>
       <a href="#faq">FAQ</a>
-      <a href="#">Log in</a>
       <a class="btn btn-red" href="#demo">Book a free demo</a>
     </div>
   </header>
@@ -2919,6 +2991,21 @@
         </div>
 
         <div class="hero-visual reveal" style="--d:.45s">
+          <div class="drive" id="drive" aria-hidden="true">
+            <svg class="road" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" /></svg>
+            <div class="car">
+              <svg viewBox="0 0 64 32">
+                <rect x="2" y="3" width="60" height="26" rx="9" fill="#BD2025" />
+                <rect x="34" y="6" width="13" height="20" rx="3" fill="#1a1a1c" />
+                <rect x="14" y="7" width="10" height="18" rx="3" fill="#1a1a1c" opacity=".85" />
+                <rect x="24" y="6" width="10" height="20" rx="2" fill="#9C1A1E" />
+                <rect x="57" y="6" width="4" height="6" rx="2" fill="#FFF3C4" />
+                <rect x="57" y="20" width="4" height="6" rx="2" fill="#FFF3C4" />
+                <rect x="2" y="7" width="3" height="5" rx="1.5" fill="#FF8A8D" />
+                <rect x="2" y="20" width="3" height="5" rx="1.5" fill="#FF8A8D" />
+              </svg>
+            </div>
+          </div>
           <div class="dash" role="img" aria-label="Foamia owner dashboard showing today's revenue, live wash and oil change jobs, and a low stock alert">
             <div class="dash-rail" aria-hidden="true">
               <span class="rail-logo"><svg class="icon"><use href="#i-drop" /></svg></span>
@@ -3482,6 +3569,15 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Hero car: angle the car along the diagonal road
+    const drive = document.getElementById('drive');
+    const aimCar = () => {
+      const r = drive.getBoundingClientRect();
+      drive.style.setProperty('--ang', (-Math.atan2(r.height, r.width) * 180 / Math.PI).toFixed(1) + 'deg');
+    };
+    aimCar();
+    addEventListener('resize', aimCar);
 
     // Count-up numbers when they scroll into view
     const counter = new IntersectionObserver(entries => entries.forEach(e => {
