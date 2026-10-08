@@ -8084,6 +8084,787 @@
         display: none;
       }
     }
+  
+    /* ================= Editorial grid hero ================= */
+    .hero.hg {
+      padding: 0 !important;
+      min-height: 0 !important;
+      display: block !important;
+      overflow: visible;
+      --rule: rgba(20, 20, 20, .14);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hg-cell {
+      position: relative;
+      border-left: 1px solid var(--rule);
+      min-width: 0;
+    }
+
+    .hg-cell:first-child {
+      border-left: 0;
+    }
+
+    /* clocks */
+    .hg-clocks {
+      height: 40px;
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+
+    .hg-clock-track {
+      display: flex;
+      width: max-content;
+      height: 100%;
+      align-items: center;
+      animation: marquee 40s linear infinite;
+    }
+
+    .hg-clock {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      margin: 0 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      transition: background .5s, color .5s;
+    }
+
+    .hg-clock em {
+      font-style: normal;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hg-clock.hot {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .hg-clock.hot em {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .hg-sep {
+      color: #C7C1B9;
+      font-size: 11px;
+    }
+
+    /* media row */
+    .hg-media {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      height: min(58vh, 560px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hg-video {
+      overflow: hidden;
+      background: #0B0B0C;
+    }
+
+    .hg-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hg-tag {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .92);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .hg-tag::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-right: 7px;
+      animation: blink 1.6s infinite;
+    }
+
+    .hg-slides {
+      overflow: hidden;
+      background: #0B0B0C;
+    }
+
+    .hg-slide {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 1.1s cubic-bezier(.65, 0, .35, 1);
+    }
+
+    .hg-slide.on {
+      clip-path: inset(0 0 0 0);
+      z-index: 1;
+    }
+
+    .hg-slide.out {
+      clip-path: inset(0 0 0 0);
+      z-index: 0;
+    }
+
+    .hg-slide img {
+      width: 100%;
+      height: 118%;
+      object-fit: cover;
+      transform: translateY(var(--py, 0px)) scale(1.06);
+      filter: grayscale(1) sepia(.16) saturate(1.2);
+    }
+
+    .hg-slide figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .hg-slide figcaption b {
+      color: var(--red);
+      font-size: 11px;
+      letter-spacing: .1em;
+    }
+
+    .hg-dots {
+      position: absolute;
+      right: 16px;
+      bottom: 22px;
+      z-index: 2;
+      display: flex;
+      gap: 6px;
+    }
+
+    .hg-dots i {
+      width: 18px;
+      height: 3px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .4);
+      transition: background .4s, width .4s;
+    }
+
+    .hg-dots i.on {
+      width: 30px;
+      background: #fff;
+    }
+
+    /* text row */
+    .hg-text {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr .75fr;
+    }
+
+    .hg-head {
+      padding: 36px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hg-head .hero-eyebrow {
+      justify-content: flex-start !important;
+      margin-bottom: 18px !important;
+    }
+
+    .hg-head h1 {
+      font-size: clamp(40px, 4.6vw, 72px) !important;
+      line-height: .98 !important;
+      letter-spacing: -0.045em !important;
+      text-align: left;
+      margin: 0 !important;
+    }
+
+    .hg-head h1 .hl-sub {
+      font-size: .72em;
+      margin-top: .12em !important;
+    }
+
+    .hg-copy {
+      padding: 36px 32px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 22px;
+    }
+
+    .hg-copy .lead {
+      text-align: left;
+      max-width: none !important;
+      margin: 0 !important;
+      font-size: 16px;
+    }
+
+    .hg-copy .hero-ctas {
+      justify-content: flex-start !important;
+      margin: 0 !important;
+    }
+
+    .hg-copy .btn {
+      height: 48px;
+      padding: 0 20px;
+      font-size: 15px;
+    }
+
+    .hg-side {
+      padding: 36px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+    .hg-side-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hg-roles {
+      list-style: none;
+      display: grid;
+      gap: 4px;
+    }
+
+    .hg-roles li {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #B5AFA6;
+      transition: color .5s var(--ease), transform .5s var(--ease);
+    }
+
+    .hg-roles li.on {
+      color: var(--red);
+      transform: translateX(6px);
+    }
+
+    .hg-side .proof2 {
+      justify-items: start !important;
+      text-align: left;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .hg-side .pr-top {
+      font-size: 13px !important;
+    }
+
+    .hg-side .pr-sub {
+      font-size: 12px !important;
+      margin: 0 !important;
+    }
+
+    /* ---------- Text roll on hover (nav + buttons) ---------- */
+    .roll {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+
+    .roll>span {
+      display: block;
+      transition: transform .45s cubic-bezier(.65, 0, .35, 1);
+    }
+
+    .roll>span+span {
+      position: absolute;
+      left: 0;
+      top: 100%;
+    }
+
+    a:hover>.roll>span,
+    button:hover>.roll>span,
+    .roll-host:hover .roll>span {
+      transform: translateY(-100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .roll>span {
+        transition: none;
+      }
+
+      .hg-clock-track {
+        animation: none;
+      }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1080px) {
+      .hg-text {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hg-head {
+        grid-column: 1 / -1;
+        border-left: 0;
+        border-bottom: 1px solid var(--rule);
+        padding: 32px 24px;
+      }
+
+      .hg-copy {
+        border-left: 0;
+      }
+
+      .hg-copy,
+      .hg-side {
+        padding: 28px 24px 32px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hg-media {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .hg-video {
+        aspect-ratio: 16 / 10;
+      }
+
+      .hg-slides {
+        display: none;
+      }
+
+      .hg-text {
+        grid-template-columns: 1fr;
+      }
+
+      .hg-head,
+      .hg-copy,
+      .hg-side {
+        border-left: 0;
+        padding: 26px 20px;
+      }
+
+      .hg-copy {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .hg-head h1 {
+        font-size: 40px !important;
+      }
+
+      .hg-copy .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hg-roles li {
+        font-size: 17px;
+      }
+
+      .hg-clock {
+        margin: 0 8px;
+      }
+    }
+
+    /* text row first on phones, media after */
+    @media (max-width: 760px) {
+      .hero.hg {
+        display: flex !important;
+        flex-direction: column;
+      }
+
+      .hg-clocks {
+        order: 0;
+      }
+
+      .hg-text {
+        order: 1;
+      }
+
+      .hg-media {
+        order: 2;
+        border-bottom: 0;
+        border-top: 1px solid var(--rule);
+      }
+    }
+
+    [dir="rtl"] .hg-cell {
+      border-left: 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    [dir="rtl"] .hg-cell:first-child {
+      border-right: 0;
+    }
+
+    [dir="rtl"] .hg-head h1,
+    [dir="rtl"] .hg-copy .lead,
+    [dir="rtl"] .hg-side .proof2 {
+      text-align: right;
+    }
+
+    [dir="rtl"] .hg-roles li.on {
+      transform: translateX(-6px);
+    }
+
+    [dir="rtl"] .hg-clocks {
+      direction: ltr;
+    }
+
+    [dir="rtl"] .roll>span+span {
+      left: auto;
+      right: 0;
+    }
+  
+    /* editorial hero: fit above the fold */
+    .hg-media {
+      height: clamp(300px, 46vh, 470px) !important;
+    }
+
+    .hg-text {
+      grid-template-columns: 1.75fr 1fr .8fr !important;
+    }
+
+    .hg-head,
+    .hg-copy,
+    .hg-side {
+      padding-top: 30px !important;
+      padding-bottom: 32px !important;
+    }
+
+    .hg-head h1 {
+      font-size: clamp(38px, 4.1vw, 64px) !important;
+    }
+
+    .hg-head .hero-eyebrow {
+      margin-bottom: 14px !important;
+    }
+
+    .hg-roles li {
+      font-size: 17px;
+    }
+
+    .hg-copy .lead {
+      font-size: 15.5px;
+    }
+
+    @media (max-width: 760px) {
+      .hg-copy .hero-ctas {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+      }
+
+      .hg-copy .hero-ctas .btn {
+        width: 100%;
+        flex: 0 0 auto !important;
+      }
+
+      .hg-copy .btn-ghost {
+        border: 0 !important;
+        background: none !important;
+        height: 40px !important;
+      }
+
+      .hg-text {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 1080px) and (min-width: 761px) {
+      .hg-text {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+  
+    @media (min-width: 761px) {
+      .hg-media {
+        height: clamp(210px, calc(100vh - 490px), 470px) !important;
+      }
+
+      .hg-head h1 {
+        font-size: clamp(34px, 3.3vw, 60px) !important;
+      }
+    }
+  
+    @media (min-width: 761px) and (max-height: 780px) {
+      .hg-head,
+      .hg-copy,
+      .hg-side {
+        padding-top: 20px !important;
+        padding-bottom: 22px !important;
+      }
+
+      .hg-copy {
+        gap: 14px !important;
+      }
+
+      .hg-copy .lead-2,
+      .hg-side .pr-sub {
+        display: none !important;
+      }
+
+      .hg-roles li {
+        font-size: 15px !important;
+      }
+
+      .hg-roles {
+        gap: 1px !important;
+      }
+
+      .hg-copy .btn {
+        height: 42px !important;
+      }
+
+      .hg-copy .hero-ctas {
+        gap: 8px !important;
+      }
+    }
+  
+    /* ================= Intro sequence (mijobello-style) ================= */
+    #loader {
+      display: none !important;
+    }
+
+    .hero .hl-in {
+      transform: none !important;
+      animation: none !important;
+    }
+
+    /* intro overlay: 12-column curtain + counter + travelling media card */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      pointer-events: none;
+    }
+
+    .intro-cols {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .intro-cols i {
+      background: var(--paper);
+      border-left: 1px solid rgba(20, 20, 20, .1);
+      clip-path: inset(0 0 0 0);
+      transition: clip-path .46s cubic-bezier(.65, 0, .35, 1);
+      transition-delay: calc(var(--k) * 26ms);
+    }
+
+    .intro-cols i:first-child {
+      border-left: 0;
+    }
+
+    .intro.wipe .intro-cols i {
+      clip-path: inset(0 0 100% 0);
+    }
+
+    .intro-count {
+      position: absolute;
+      left: 24px;
+      bottom: 18px;
+      font-size: clamp(64px, 12vw, 180px);
+      font-weight: 800;
+      line-height: .8;
+      letter-spacing: -0.06em;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      transition: opacity .4s ease, transform .6s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .intro-count small {
+      font-size: .3em;
+      color: var(--red);
+      margin-left: 6px;
+    }
+
+    .intro-tag {
+      position: absolute;
+      right: 24px;
+      bottom: 26px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: opacity .4s ease;
+    }
+
+    .intro-logo {
+      position: absolute;
+      left: 24px;
+      top: 22px;
+      height: 34px;
+      width: auto;
+      transition: opacity .4s ease;
+    }
+
+    .intro.travel .intro-count,
+    .intro.travel .intro-tag,
+    .intro.travel .intro-logo {
+      opacity: 0;
+    }
+
+    .intro.travel .intro-count {
+      transform: translateY(30px);
+    }
+
+    .intro-box {
+      position: absolute;
+      overflow: hidden;
+      background: #0B0B0C;
+      clip-path: inset(50% 50% 50% 50%);
+      transition: clip-path 1s cubic-bezier(.16, 1, .3, 1),
+        top .9s cubic-bezier(.65, 0, .35, 1), left .9s cubic-bezier(.65, 0, .35, 1),
+        width .9s cubic-bezier(.65, 0, .35, 1), height .9s cubic-bezier(.65, 0, .35, 1);
+    }
+
+    .intro-box.open {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .intro-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.15);
+      transition: transform 2.2s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .intro-box.open img {
+      transform: none;
+    }
+
+    /* hero entrance (runs after the curtain) */
+    .js .hero.hg .hg-video {
+      clip-path: inset(0% 37%);
+      transition: clip-path 1.2s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .js .hero.hg .hg-slides {
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path 1.1s cubic-bezier(.16, 1, .3, 1) .35s;
+    }
+
+    .js .hero.hg.go .hg-video,
+    .js .hero.hg.go .hg-slides {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .js .hero.hg.skip-video .hg-video {
+      clip-path: inset(0 0 0 0);
+      transition: none;
+    }
+
+    .hch {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .85s cubic-bezier(.16, 1, .3, 1), transform .85s cubic-bezier(.16, 1, .3, 1);
+      transition-delay: calc(.35s + var(--i) * 45ms);
+    }
+
+    .hwd {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .hero.go .hch {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .hero.hg .hg-roles li,
+    .js .hero.hg .hg-side-label,
+    .js .hero.hg .hg-clocks {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1), color .5s;
+    }
+
+    .js .hero.hg .hg-clocks {
+      transform: translateY(-100%);
+    }
+
+    .js .hero.hg.go .hg-roles li,
+    .js .hero.hg.go .hg-side-label,
+    .js .hero.hg.go .hg-clocks {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .hero.hg.go .hg-roles li.on {
+      transform: translateX(6px);
+    }
+
+    .js .hero.hg.go .hg-roles li:nth-child(1) { transition-delay: .55s; }
+    .js .hero.hg.go .hg-roles li:nth-child(2) { transition-delay: .62s; }
+    .js .hero.hg.go .hg-roles li:nth-child(3) { transition-delay: .69s; }
+    .js .hero.hg.go .hg-roles li:nth-child(4) { transition-delay: .76s; }
+    .js .hero.hg.go .hg-roles li:nth-child(5) { transition-delay: .83s; }
+
+    /* grid lines draw in */
+    .js .hero.hg .hg-text .hg-cell::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      background: var(--paper);
+      transform-origin: bottom;
+      transition: transform 1s cubic-bezier(.65, 0, .35, 1) .2s;
+    }
+
+    .js .hero.hg.go .hg-text .hg-cell::before {
+      transform: scaleY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .intro {
+        display: none;
+      }
+
+      .hch,
+      .js .hero.hg .hg-video,
+      .js .hero.hg .hg-slides,
+      .js .hero.hg .hg-roles li,
+      .js .hero.hg .hg-side-label,
+      .js .hero.hg .hg-clocks {
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -8244,20 +9025,50 @@
 
   <main>
     <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="wrap hx-head">
-        <div class="hero-eyebrow reveal">Your team. Your branches. One system.</div>
-        <h1 aria-label="Run your entire car wash. From one powerful platform.">
+    <section class="hero hg" id="hero">
+      <!-- GCC live clock strip -->
+      <div class="hg-clocks" aria-hidden="true">
+        <div class="hg-clock-track" id="hgClocks"></div>
+      </div>
+
+      <!-- media row -->
+      <div class="hg-media">
+        <div class="hg-cell hg-video">
+          <video id="heroVideo" src="video/foamia-web.mp4" poster="images/video-poster.jpg" muted loop playsinline
+            preload="metadata" aria-label="Foamia product video: owner dashboard, branches and live performance"></video>
+          <span class="hg-tag">Foamia · Live</span>
+          <button class="hv-sound" id="heroSound" type="button" aria-label="Turn sound on">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" />
+              <path id="hvWave" d="M23 9l-6 6M17 9l6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="hg-cell hg-slides" aria-hidden="true">
+          <figure class="hg-slide on"><img src="images/step-clean.jpg" alt="" width="1920" height="1080"><figcaption><b>01</b> Clean</figcaption></figure>
+          <figure class="hg-slide"><img src="images/step-check.jpg" alt="" width="1920" height="1080" loading="lazy"><figcaption><b>02</b> Check</figcaption></figure>
+          <figure class="hg-slide"><img src="images/step-complete.jpg" alt="" width="1920" height="1080" loading="lazy"><figcaption><b>03</b> Complete</figcaption></figure>
+          <span class="hg-dots"><i class="on"></i><i></i><i></i></span>
+        </div>
+      </div>
+
+      <!-- text row -->
+      <div class="hg-text">
+        <div class="hg-cell hg-head">
+          <div class="hero-eyebrow reveal">Your team. Your branches. One system.</div>
+          <h1 aria-label="Run your entire car wash. From one powerful platform.">
           <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>entire car
                 wash.</em></span></span>
           <span class="hl-row hl-sub" aria-hidden="true"><span class="hl-in" style="--d:.24s">From one <span
                 class="hide-sm">powerful </span>platform.</span></span>
         </h1>
-        <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every payment
+        </div>
+        <div class="hg-cell hg-copy">
+          <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every payment
           accounted
           for — in real time. <span class="lead-2 hide-sm"><b>Mobile app</b> for your team. <b>Owner dashboard (ERP)</b>
             for you.</span></p>
-        <div class="hero-ctas reveal" style="--d:.55s">
+          <div class="hero-ctas reveal" style="--d:.55s">
           <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon">
               <use href="#i-arrow" />
             </svg></a>
@@ -8265,23 +9076,20 @@
               <use href="#i-arrow" />
             </svg></a>
         </div>
-        <div class="proof2 reveal" style="--d:.65s">
+        </div>
+        <div class="hg-cell hg-side" id="who">
+          <span class="hg-side-label">Built for</span>
+          <ul class="hg-roles">
+            <li>Car wash centres</li>
+            <li>Oil change &amp; lube</li>
+            <li>Detailing studios</li>
+            <li>Petrol station car washes</li>
+            <li>Multi-branch chains</li>
+          </ul>
+          <div class="proof2 reveal" style="--d:.65s">
           <p class="pr-top"><strong>VAT-ready invoices</strong> · Connected to <strong>ERP</strong></p>
           <p class="pr-sub">iOS &amp; Android app · Owner dashboard on the web</p>
         </div>
-      </div>
-
-      <div class="wrap hx-stage">
-        <div class="hx-video reveal" style="--d:.5s">
-          <video id="heroVideo" src="video/foamia-web.mp4" poster="images/video-poster.jpg" muted loop playsinline
-            preload="metadata"
-            aria-label="Foamia product video: owner dashboard, branches and live performance"></video>
-          <button class="hv-sound" id="heroSound" type="button" aria-label="Turn sound on">
-            <svg class="icon" viewBox="0 0 24 24">
-              <path d="M11 5 6 9H2v6h4l5 4V5z" />
-              <path id="hvWave" d="M23 9l-6 6M17 9l6 6" />
-            </svg>
-          </button>
         </div>
       </div>
     </section>
@@ -8295,30 +9103,6 @@
         <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work
           progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch
           management</span><span>Stock management</span>
-      </div>
-    </div>
-
-    <!-- ============ BUILT FOR ============ -->
-    <div class="builtfor" id="who">
-      <div class="wrap bf-row reveal">
-        <span class="bf-label">Built for</span>
-        <ul>
-          <li><svg class="icon">
-              <use href="#i-drop" />
-            </svg>Car wash centres</li>
-          <li><svg class="icon">
-              <use href="#i-sparkle" />
-            </svg>Detailing studios</li>
-          <li><svg class="icon">
-              <use href="#i-wrench" />
-            </svg>Oil change &amp; lube</li>
-          <li><svg class="icon">
-              <use href="#i-fuel" />
-            </svg>Petrol station car washes</li>
-          <li><svg class="icon">
-              <use href="#i-building" />
-            </svg>Multi-branch chains</li>
-        </ul>
       </div>
     </div>
 
@@ -8841,7 +9625,7 @@
     root.classList.add('js');
 
     // ================= Arabic (RTL) version =================
-    const AR = { "Foamia home": "الصفحة الرئيسية لـ Foamia", "How it works": "كيف يعمل", "Features": "المزايا", "Who it's for": "لمن هو", "FAQ": "الأسئلة الشائعة", "Book a free demo": "احجز عرضاً مجانياً", "Open menu": "فتح القائمة", "Close menu": "إغلاق القائمة", "Your team. Your branches. One system.": "فريقك. فروعك. نظام واحد.", "Run your entire car wash. From one powerful platform.": "أدِر مغسلتك بالكامل. من منصة واحدة قوية.", "Run your": "أدِر", "entire car wash.": "مغسلتك بالكامل.", "From one": "من منصة", "powerful": "قوية", "platform.": "واحدة.", "Keep every job moving, every branch connected and every payment accounted for — in real time.": "كل مهمة تسير، وكل فرع متصل، وكل دفعة محسوبة — لحظة بلحظة.", "Mobile app": "تطبيق جوال", "for your team.": "لفريقك.", "Owner dashboard (ERP)": "لوحة تحكم المالك (ERP)", "for you.": "لك.", "See how it works": "شاهد كيف يعمل", "VAT-ready invoices": "فواتير متوافقة مع ضريبة القيمة المضافة", "· Connected to": "· متصل بـ", "iOS & Android app · Owner dashboard on the web": "تطبيق iOS و Android · لوحة تحكم المالك على الويب", "Foamia product video: owner dashboard, branches and live performance": "فيديو Foamia: لوحة تحكم المالك والفروع والأداء المباشر", "Turn sound on": "تشغيل الصوت", "Mute": "كتم الصوت", "Car washing": "غسيل السيارات", "Oil change": "تغيير الزيت", "Customer management": "إدارة العملاء", "Work progress": "متابعة العمل", "Invoices": "الفواتير", "Payment entry": "تسجيل المدفوعات", "User management": "إدارة المستخدمين", "Branch management": "إدارة الفروع", "Stock management": "إدارة المخزون", "Built for": "مصمم لـ", "Car wash centres": "مراكز غسيل السيارات", "Detailing studios": "استوديوهات العناية بالسيارات", "Oil change & lube": "مراكز تغيير الزيت", "Petrol station car washes": "مغاسل محطات الوقود", "Multi-branch chains": "السلاسل متعددة الفروع", "Why we built Foamia": "لماذا بنينا Foamia", "Why Foamia": "لماذا Foamia", "You started a car wash to wash cars — not to chase paper job cards, count cash at midnight, or find out you're out of oil in the middle of a busy day. So we built Foamia: every car, job, invoice and payment in": "بدأت مغسلتك لتغسل السيارات — لا لتلاحق بطاقات العمل الورقية، أو تعدّ النقود في منتصف الليل، أو تكتشف نفاد الزيت في منتصف يوم مزدحم. لذلك بنينا Foamia: كل سيارة، وكل مهمة، وكل فاتورة، وكل دفعة في", "one app.": "تطبيق واحد.", "Your cars leave clean. Your evenings stay yours.": "سياراتك تخرج نظيفة. وأمسياتك تبقى لك.", "Before & after": "قبل وبعد", "Running a car wash shouldn't feel": "إدارة مغسلة سيارات لا يجب أن تكون", "this hard.": "بهذه الصعوبة.", "The problems car wash and oil change owners tell us about every day — and what changes with Foamia.": "المشكلات التي يخبرنا بها أصحاب مغاسل السيارات ومراكز تغيير الزيت كل يوم — وما الذي يتغير مع Foamia.", "Compare": "مقارنة", "Without Foamia": "بدون Foamia", "With Foamia": "مع Foamia", "Job tracking": "متابعة المهام", "Which car is ready?": "أي سيارة جاهزة؟", "Paper job cards and shouting across the bay.": "بطاقات عمل ورقية وصراخ بين المسارات.", "3 Ready": "3 جاهزة", "2 In progress": "2 قيد التنفيذ", "1 Waiting": "1 بالانتظار", "Live status for every job, on every phone.": "حالة مباشرة لكل مهمة، على كل جوال.", "Customers": "العملاء", "Who is this customer?": "من هذا العميل؟", "History lives in a notebook — or nowhere.": "السجل في دفتر — أو لا يوجد أصلاً.", "Omar · 12 visits": "عمر · 12 زيارة", "Plate, phone, past washes and oil changes.": "اللوحة والهاتف والغسلات وتغييرات الزيت السابقة.", "Payments": "المدفوعات", "The drawer never matches the day's sales.": "الدرج لا يطابق مبيعات اليوم أبداً.", "✓ Matched": "✓ مطابق", "Every payment against an invoice, by a named staff member.": "كل دفعة مقابل فاتورة، وباسم موظف محدد.", "Stock": "المخزون", "Out of shampoo.": "نفد الشامبو.", "Found out in the middle of a busy Saturday.": "اكتشفت ذلك في منتصف سبت مزدحم.", "Reorder car shampoo": "أعد طلب شامبو السيارات", "3 L left": "متبقٍ 3 لتر", "Low-stock alert at every branch — before you run out.": "تنبيه بانخفاض المخزون في كل فرع — قبل أن ينفد.", "Clean.": "نظّف.", "Check.": "افحص.", "Complete.": "أنجِز.", "Every car — in for a wash, an oil change or both — moves through three steps. Your team updates each job from the app. You see every step live on the dashboard.": "كل سيارة — سواء للغسيل أو تغيير الزيت أو كليهما — تمر بثلاث خطوات. فريقك يحدّث كل مهمة من التطبيق، وأنت ترى كل خطوة مباشرة على لوحة التحكم.", "Clean": "نظّف", "· check in": "· الاستلام", "Enter the plate, create the job and assign it — wash, oil change or both.": "أدخل رقم اللوحة، وأنشئ المهمة وعيّنها — غسيل أو تغيير زيت أو كلاهما.", "Check": "افحص", "· track work": "· متابعة العمل", "Staff tick off each step on their phone. You see progress live.": "يؤشر الموظفون على كل خطوة من جوالاتهم، وأنت ترى التقدم مباشرة.", "Complete": "أنجِز", "· invoice & pay": "· الفاتورة والدفع", "Create the invoice, enter the payment — saved to customer, staff and branch.": "أنشئ الفاتورة وسجّل الدفعة — تُحفظ للعميل والموظف والفرع.", "Foamia · Dubai Marina": "Foamia · دبي مارينا", "New job": "مهمة جديدة", "Check in a car": "استلام سيارة", "Omar Al Hashimi": "عمر الهاشمي", "Land Cruiser · Last visit 12 Sep · Oil change": "لاند كروزر · آخر زيارة 12 سبتمبر · تغيير زيت", "Services": "الخدمات", "✓ Full wash": "✓ غسيل كامل", "✓ Oil change 5W-30": "✓ تغيير زيت 5W-30", "Interior vacuum": "تنظيف داخلي بالمكنسة", "Polish": "تلميع", "Assigned to": "مُسندة إلى", "Ahmed · Bay 2": "أحمد · المسار 2", "Total": "الإجمالي", "Start job": "ابدأ المهمة", "Job · Ahmed · Bay 2": "مهمة · أحمد · المسار 2", "In progress": "قيد التنفيذ", "Pre-wash rinse": "شطف مبدئي", "Foam wash": "غسيل بالرغوة", "Oil change · 5W-30": "تغيير زيت · 5W-30", "Final check": "الفحص النهائي", "Next": "التالي", "Owner dashboard": "لوحة تحكم المالك", "● Updated live": "● محدّث مباشرة", "Invoice": "فاتورة", "Paid": "مدفوعة", "Full wash": "غسيل كامل", "Oil change 5W-30 + filter": "تغيير زيت 5W-30 + فلتر", "Payment": "الدفع", "Card · Ahmed's shift": "بطاقة · وردية أحمد", "Revenue today": "إيرادات اليوم", "Everything your car wash needs, in": "كل ما تحتاجه مغسلتك، في", "From the first wash to the final invoice — every part of your business, connected.": "من أول غسلة حتى آخر فاتورة — كل جزء من عملك، متصل.", "Operations": "العمليات", "Keep every car moving.": "اجعل كل سيارة تتحرك.", "Set up every wash service with your own prices and add-ons.": "أعدّ كل خدمات الغسيل بأسعارك وإضافاتك.", "Exterior wash": "غسيل خارجي", "Full wash & vacuum": "غسيل كامل وتنظيف داخلي", "Interior detail": "تنظيف داخلي عميق", "Track oil, filters and each car's next service due.": "تابع الزيت والفلاتر وموعد الخدمة القادمة لكل سيارة.", "Oil filter": "فلتر الزيت", "Next service due": "الخدمة القادمة", "Keep customer history, vehicles and every visit in one place.": "احفظ سجل العملاء وسياراتهم وكل زيارة في مكان واحد.", "12 Sep": "12 سبتمبر", "28 Aug": "28 أغسطس", "See every job live — waiting, in progress or ready.": "شاهد كل مهمة مباشرة — بالانتظار أو قيد التنفيذ أو جاهزة.", "Oil": "زيت", "Wash": "غسيل", "Ready": "جاهزة", "Money": "المال", "Know where every payment goes.": "اعرف أين تذهب كل دفعة.", "VAT-ready invoices in seconds — synced to ERPNext.": "فواتير متوافقة مع ضريبة القيمة المضافة في ثوانٍ — متزامنة مع ERPNext.", "Invoice #1042": "فاتورة #1042", "Full wash + oil change": "غسيل كامل + تغيير زيت", "VAT 5% included": "شاملة ضريبة القيمة المضافة 5%", "✓ Synced": "✓ متزامن", "Record card or cash payments, linked to staff and branch.": "سجّل المدفوعات بالبطاقة أو نقداً، مرتبطة بالموظف والفرع.", "Card": "بطاقة", "Cash": "نقداً", "Today": "اليوم", "Control": "التحكم", "Run every branch from one place.": "أدِر كل فروعك من مكان واحد.", "Give every staff member a login and the right role.": "امنح كل موظف حساب دخول والصلاحية المناسبة.", "Owner": "المالك", "Manager": "المدير", "Cashier": "الكاشير", "Technician": "الفني", "Run every location from one owner login.": "أدِر كل المواقع من حساب مالك واحد.", "Dubai Marina": "دبي مارينا", "Al Quoz": "القوز", "Sharjah": "الشارقة", "Track oil, filters and shampoo at every branch.": "تابع الزيت والفلاتر والشامبو في كل فرع.", "Engine oil · 5W-30": "زيت المحرك · 5W-30", "Oil filters": "فلاتر الزيت", "18 pcs": "18 قطعة", "Car shampoo": "شامبو السيارات", "3 L · Low": "3 لتر · منخفض", "42 L": "42 لتر", "Real results": "نتائج حقيقية", "What changes in the": "ما الذي يتغير في", "first month.": "الشهر الأول.", "An example of what changes for a typical 3-bay car wash in its first month on Foamia.": "مثال على ما يتغير في مغسلة نموذجية من 3 مسارات خلال شهرها الأول على Foamia.", "min": "دقائق", "To close the day — down from 2 hours": "لإغلاق اليوم — بدلاً من ساعتين", "Counting cash and matching it to sales used to take two hours. With every payment entered against an invoice, it takes five minutes.": "كان عدّ النقود ومطابقتها مع المبيعات يستغرق ساعتين. ومع تسجيل كل دفعة مقابل فاتورة، أصبح يستغرق خمس دقائق.", "Before": "قبل", "2 hours": "ساعتان", "5 min": "5 دقائق", "more cars per day": "سيارات أكثر يومياً", "faster invoicing": "فوترة أسرع", "3 min": "3 دقائق", "55 sec": "55 ثانية", "payments matched": "مدفوعات مطابقة", "Getting started": "البدء", "Live in": "جاهز خلال", "one week.": "أسبوع واحد.", "You don't need to be good with computers. Our team sets up your car wash with you, step by step.": "لا تحتاج لخبرة في الحاسوب. فريقنا يجهّز مغسلتك معك، خطوة بخطوة.", "Day 1": "اليوم 1", "Set up your centre": "جهّز مركزك", "We add your services and prices with you on a call.": "نضيف خدماتك وأسعارك معك في مكالمة.", "Day 2": "اليوم 2", "Add your staff": "أضف موظفيك", "Every staff member gets a login and role.": "كل موظف يحصل على حساب دخول وصلاحية.", "Day 3": "اليوم 3", "Load your stock": "أدخل مخزونك", "Oil, filters and supplies for each branch.": "الزيت والفلاتر والمستلزمات لكل فرع.", "Day 7 · You're live": "اليوم 7 · أنت جاهز", "Run your wash on Foamia": "أدِر مغسلتك على Foamia", "Jobs, invoices and payments update live from day one.": "المهام والفواتير والمدفوعات تتحدث مباشرة من اليوم الأول.", "Questions owners": "أسئلة", "ask.": "يطرحها الملاك.", "Can't find your answer?": "لم تجد إجابتك؟", "Talk to our team": "تحدث مع فريقنا", "Are Foamia invoices VAT-ready?": "هل فواتير Foamia متوافقة مع ضريبة القيمة المضافة؟", "Yes. Foamia creates VAT-ready invoices for every job, and it is connected to ERPNext — so invoices, payments and stock flow straight into your accounting without re-typing anything.": "نعم. ينشئ Foamia فواتير متوافقة مع ضريبة القيمة المضافة لكل مهمة، وهو متصل بـ ERPNext — فتنتقل الفواتير والمدفوعات والمخزون مباشرة إلى حساباتك دون إعادة إدخال أي شيء.", "Does Foamia handle oil changes as well as washing?": "هل يدعم Foamia تغيير الزيت إلى جانب الغسيل؟", "Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.": "نعم. مهام الغسيل وتغيير الزيت تعمل في نفس التطبيق — ويمكنك إضافتهما معاً في مهمة واحدة وفاتورة واحدة. ويُحفظ سجل تغيير الزيت لكل سيارة، فيعرف فريقك دائماً ما تم في المرة السابقة.", "What do I get — an app or a dashboard?": "ماذا أحصل — تطبيق أم لوحة تحكم؟", "Both. Your staff use the Foamia mobile app (iOS and Android) to check in cars, update jobs and take payments. You and your managers use the ERP dashboard in any web browser to see revenue, invoices, branches, staff and stock. Everything stays in sync in real time — no new hardware needed.": "كلاهما. يستخدم موظفوك تطبيق Foamia للجوال (iOS و Android) لاستلام السيارات وتحديث المهام وتحصيل المدفوعات. وتستخدم أنت ومديروك لوحة تحكم ERP من أي متصفح لمتابعة الإيرادات والفواتير والفروع والموظفين والمخزون. كل شيء متزامن لحظة بلحظة — دون الحاجة لأجهزة جديدة.", "How does Foamia stop cash going missing?": "كيف يمنع Foamia ضياع النقود؟", "Every payment is entered against an invoice by a named staff member. You can see who collected what, when and at which branch — so the day's totals always add up.": "تُسجَّل كل دفعة مقابل فاتورة وباسم موظف محدد. فترى من حصّل ماذا، ومتى، وفي أي فرع — فتتطابق مجاميع اليوم دائماً.", "Can I manage more than one branch?": "هل يمكنني إدارة أكثر من فرع؟", "Yes. Branch management lets you run every location from one owner login and compare jobs, invoices, payments and stock branch by branch.": "نعم. تتيح لك إدارة الفروع تشغيل كل المواقع من حساب مالك واحد، ومقارنة المهام والفواتير والمدفوعات والمخزون بين الفروع.", "Can I control what each staff member can see?": "هل يمكنني التحكم فيما يراه كل موظف؟", "Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or technician — and only sees what their role allows.": "نعم. مع إدارة المستخدمين، يحصل كل موظف على حساب دخول وصلاحية خاصة به — مالك أو مدير أو كاشير أو فني — ولا يرى إلا ما تسمح به صلاحيته.", "How does stock management work?": "كيف تعمل إدارة المخزون؟", "Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you have and what to reorder.": "تابع الزيت والفلاتر والشامبو وباقي المستلزمات في كل فرع، لتعرف دائماً ما لديك وما يجب إعادة طلبه.", "CLEAN. CHECK. COMPLETE.": "نظّف. افحص. أنجِز.", "See Foamia running": "شاهد Foamia وهو يدير", "your car wash.": "مغسلتك.", "Book a free 20-minute demo and see Foamia with your own services and prices — no commitment.": "احجز عرضاً مجانياً لمدة 20 دقيقة وشاهد Foamia بخدماتك وأسعارك — دون أي التزام.", "No commitment · Live in under a week": "دون التزام · جاهز خلال أقل من أسبوع", "The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff, branches and stock.": "التطبيق المتكامل لأعمال غسيل السيارات وتغيير الزيت — المهام والعملاء والفواتير والمدفوعات والموظفين والفروع والمخزون.", "Product": "المنتج", "Company": "الشركة", "About": "من نحن", "Contact": "تواصل معنا", "Support": "الدعم", "© 2026 Foamia Wash Tech. All rights reserved.": "© 2026 Foamia Wash Tech. جميع الحقوق محفوظة.", "Legal": "قانوني", "Privacy": "الخصوصية", "Terms": "الشروط", "Foamia — Clean. Check. Complete.": "Foamia — نظّف. افحص. أنجِز." };
+    const AR = { "Foamia · Live":"Foamia · مباشر","Foamia home": "الصفحة الرئيسية لـ Foamia", "How it works": "كيف يعمل", "Features": "المزايا", "Who it's for": "لمن هو", "FAQ": "الأسئلة الشائعة", "Book a free demo": "احجز عرضاً مجانياً", "Open menu": "فتح القائمة", "Close menu": "إغلاق القائمة", "Your team. Your branches. One system.": "فريقك. فروعك. نظام واحد.", "Run your entire car wash. From one powerful platform.": "أدِر مغسلتك بالكامل. من منصة واحدة قوية.", "Run your": "أدِر", "entire car wash.": "مغسلتك بالكامل.", "From one": "من منصة", "powerful": "قوية", "platform.": "واحدة.", "Keep every job moving, every branch connected and every payment accounted for — in real time.": "كل مهمة تسير، وكل فرع متصل، وكل دفعة محسوبة — لحظة بلحظة.", "Mobile app": "تطبيق جوال", "for your team.": "لفريقك.", "Owner dashboard (ERP)": "لوحة تحكم المالك (ERP)", "for you.": "لك.", "See how it works": "شاهد كيف يعمل", "VAT-ready invoices": "فواتير متوافقة مع ضريبة القيمة المضافة", "· Connected to": "· متصل بـ", "iOS & Android app · Owner dashboard on the web": "تطبيق iOS و Android · لوحة تحكم المالك على الويب", "Foamia product video: owner dashboard, branches and live performance": "فيديو Foamia: لوحة تحكم المالك والفروع والأداء المباشر", "Turn sound on": "تشغيل الصوت", "Mute": "كتم الصوت", "Car washing": "غسيل السيارات", "Oil change": "تغيير الزيت", "Customer management": "إدارة العملاء", "Work progress": "متابعة العمل", "Invoices": "الفواتير", "Payment entry": "تسجيل المدفوعات", "User management": "إدارة المستخدمين", "Branch management": "إدارة الفروع", "Stock management": "إدارة المخزون", "Built for": "مصمم لـ", "Car wash centres": "مراكز غسيل السيارات", "Detailing studios": "استوديوهات العناية بالسيارات", "Oil change & lube": "مراكز تغيير الزيت", "Petrol station car washes": "مغاسل محطات الوقود", "Multi-branch chains": "السلاسل متعددة الفروع", "Why we built Foamia": "لماذا بنينا Foamia", "Why Foamia": "لماذا Foamia", "You started a car wash to wash cars — not to chase paper job cards, count cash at midnight, or find out you're out of oil in the middle of a busy day. So we built Foamia: every car, job, invoice and payment in": "بدأت مغسلتك لتغسل السيارات — لا لتلاحق بطاقات العمل الورقية، أو تعدّ النقود في منتصف الليل، أو تكتشف نفاد الزيت في منتصف يوم مزدحم. لذلك بنينا Foamia: كل سيارة، وكل مهمة، وكل فاتورة، وكل دفعة في", "one app.": "تطبيق واحد.", "Your cars leave clean. Your evenings stay yours.": "سياراتك تخرج نظيفة. وأمسياتك تبقى لك.", "Before & after": "قبل وبعد", "Running a car wash shouldn't feel": "إدارة مغسلة سيارات لا يجب أن تكون", "this hard.": "بهذه الصعوبة.", "The problems car wash and oil change owners tell us about every day — and what changes with Foamia.": "المشكلات التي يخبرنا بها أصحاب مغاسل السيارات ومراكز تغيير الزيت كل يوم — وما الذي يتغير مع Foamia.", "Compare": "مقارنة", "Without Foamia": "بدون Foamia", "With Foamia": "مع Foamia", "Job tracking": "متابعة المهام", "Which car is ready?": "أي سيارة جاهزة؟", "Paper job cards and shouting across the bay.": "بطاقات عمل ورقية وصراخ بين المسارات.", "3 Ready": "3 جاهزة", "2 In progress": "2 قيد التنفيذ", "1 Waiting": "1 بالانتظار", "Live status for every job, on every phone.": "حالة مباشرة لكل مهمة، على كل جوال.", "Customers": "العملاء", "Who is this customer?": "من هذا العميل؟", "History lives in a notebook — or nowhere.": "السجل في دفتر — أو لا يوجد أصلاً.", "Omar · 12 visits": "عمر · 12 زيارة", "Plate, phone, past washes and oil changes.": "اللوحة والهاتف والغسلات وتغييرات الزيت السابقة.", "Payments": "المدفوعات", "The drawer never matches the day's sales.": "الدرج لا يطابق مبيعات اليوم أبداً.", "✓ Matched": "✓ مطابق", "Every payment against an invoice, by a named staff member.": "كل دفعة مقابل فاتورة، وباسم موظف محدد.", "Stock": "المخزون", "Out of shampoo.": "نفد الشامبو.", "Found out in the middle of a busy Saturday.": "اكتشفت ذلك في منتصف سبت مزدحم.", "Reorder car shampoo": "أعد طلب شامبو السيارات", "3 L left": "متبقٍ 3 لتر", "Low-stock alert at every branch — before you run out.": "تنبيه بانخفاض المخزون في كل فرع — قبل أن ينفد.", "Clean.": "نظّف.", "Check.": "افحص.", "Complete.": "أنجِز.", "Every car — in for a wash, an oil change or both — moves through three steps. Your team updates each job from the app. You see every step live on the dashboard.": "كل سيارة — سواء للغسيل أو تغيير الزيت أو كليهما — تمر بثلاث خطوات. فريقك يحدّث كل مهمة من التطبيق، وأنت ترى كل خطوة مباشرة على لوحة التحكم.", "Clean": "نظّف", "· check in": "· الاستلام", "Enter the plate, create the job and assign it — wash, oil change or both.": "أدخل رقم اللوحة، وأنشئ المهمة وعيّنها — غسيل أو تغيير زيت أو كلاهما.", "Check": "افحص", "· track work": "· متابعة العمل", "Staff tick off each step on their phone. You see progress live.": "يؤشر الموظفون على كل خطوة من جوالاتهم، وأنت ترى التقدم مباشرة.", "Complete": "أنجِز", "· invoice & pay": "· الفاتورة والدفع", "Create the invoice, enter the payment — saved to customer, staff and branch.": "أنشئ الفاتورة وسجّل الدفعة — تُحفظ للعميل والموظف والفرع.", "Foamia · Dubai Marina": "Foamia · دبي مارينا", "New job": "مهمة جديدة", "Check in a car": "استلام سيارة", "Omar Al Hashimi": "عمر الهاشمي", "Land Cruiser · Last visit 12 Sep · Oil change": "لاند كروزر · آخر زيارة 12 سبتمبر · تغيير زيت", "Services": "الخدمات", "✓ Full wash": "✓ غسيل كامل", "✓ Oil change 5W-30": "✓ تغيير زيت 5W-30", "Interior vacuum": "تنظيف داخلي بالمكنسة", "Polish": "تلميع", "Assigned to": "مُسندة إلى", "Ahmed · Bay 2": "أحمد · المسار 2", "Total": "الإجمالي", "Start job": "ابدأ المهمة", "Job · Ahmed · Bay 2": "مهمة · أحمد · المسار 2", "In progress": "قيد التنفيذ", "Pre-wash rinse": "شطف مبدئي", "Foam wash": "غسيل بالرغوة", "Oil change · 5W-30": "تغيير زيت · 5W-30", "Final check": "الفحص النهائي", "Next": "التالي", "Owner dashboard": "لوحة تحكم المالك", "● Updated live": "● محدّث مباشرة", "Invoice": "فاتورة", "Paid": "مدفوعة", "Full wash": "غسيل كامل", "Oil change 5W-30 + filter": "تغيير زيت 5W-30 + فلتر", "Payment": "الدفع", "Card · Ahmed's shift": "بطاقة · وردية أحمد", "Revenue today": "إيرادات اليوم", "Everything your car wash needs, in": "كل ما تحتاجه مغسلتك، في", "From the first wash to the final invoice — every part of your business, connected.": "من أول غسلة حتى آخر فاتورة — كل جزء من عملك، متصل.", "Operations": "العمليات", "Keep every car moving.": "اجعل كل سيارة تتحرك.", "Set up every wash service with your own prices and add-ons.": "أعدّ كل خدمات الغسيل بأسعارك وإضافاتك.", "Exterior wash": "غسيل خارجي", "Full wash & vacuum": "غسيل كامل وتنظيف داخلي", "Interior detail": "تنظيف داخلي عميق", "Track oil, filters and each car's next service due.": "تابع الزيت والفلاتر وموعد الخدمة القادمة لكل سيارة.", "Oil filter": "فلتر الزيت", "Next service due": "الخدمة القادمة", "Keep customer history, vehicles and every visit in one place.": "احفظ سجل العملاء وسياراتهم وكل زيارة في مكان واحد.", "12 Sep": "12 سبتمبر", "28 Aug": "28 أغسطس", "See every job live — waiting, in progress or ready.": "شاهد كل مهمة مباشرة — بالانتظار أو قيد التنفيذ أو جاهزة.", "Oil": "زيت", "Wash": "غسيل", "Ready": "جاهزة", "Money": "المال", "Know where every payment goes.": "اعرف أين تذهب كل دفعة.", "VAT-ready invoices in seconds — synced to ERPNext.": "فواتير متوافقة مع ضريبة القيمة المضافة في ثوانٍ — متزامنة مع ERPNext.", "Invoice #1042": "فاتورة #1042", "Full wash + oil change": "غسيل كامل + تغيير زيت", "VAT 5% included": "شاملة ضريبة القيمة المضافة 5%", "✓ Synced": "✓ متزامن", "Record card or cash payments, linked to staff and branch.": "سجّل المدفوعات بالبطاقة أو نقداً، مرتبطة بالموظف والفرع.", "Card": "بطاقة", "Cash": "نقداً", "Today": "اليوم", "Control": "التحكم", "Run every branch from one place.": "أدِر كل فروعك من مكان واحد.", "Give every staff member a login and the right role.": "امنح كل موظف حساب دخول والصلاحية المناسبة.", "Owner": "المالك", "Manager": "المدير", "Cashier": "الكاشير", "Technician": "الفني", "Run every location from one owner login.": "أدِر كل المواقع من حساب مالك واحد.", "Dubai Marina": "دبي مارينا", "Al Quoz": "القوز", "Sharjah": "الشارقة", "Track oil, filters and shampoo at every branch.": "تابع الزيت والفلاتر والشامبو في كل فرع.", "Engine oil · 5W-30": "زيت المحرك · 5W-30", "Oil filters": "فلاتر الزيت", "18 pcs": "18 قطعة", "Car shampoo": "شامبو السيارات", "3 L · Low": "3 لتر · منخفض", "42 L": "42 لتر", "Real results": "نتائج حقيقية", "What changes in the": "ما الذي يتغير في", "first month.": "الشهر الأول.", "An example of what changes for a typical 3-bay car wash in its first month on Foamia.": "مثال على ما يتغير في مغسلة نموذجية من 3 مسارات خلال شهرها الأول على Foamia.", "min": "دقائق", "To close the day — down from 2 hours": "لإغلاق اليوم — بدلاً من ساعتين", "Counting cash and matching it to sales used to take two hours. With every payment entered against an invoice, it takes five minutes.": "كان عدّ النقود ومطابقتها مع المبيعات يستغرق ساعتين. ومع تسجيل كل دفعة مقابل فاتورة، أصبح يستغرق خمس دقائق.", "Before": "قبل", "2 hours": "ساعتان", "5 min": "5 دقائق", "more cars per day": "سيارات أكثر يومياً", "faster invoicing": "فوترة أسرع", "3 min": "3 دقائق", "55 sec": "55 ثانية", "payments matched": "مدفوعات مطابقة", "Getting started": "البدء", "Live in": "جاهز خلال", "one week.": "أسبوع واحد.", "You don't need to be good with computers. Our team sets up your car wash with you, step by step.": "لا تحتاج لخبرة في الحاسوب. فريقنا يجهّز مغسلتك معك، خطوة بخطوة.", "Day 1": "اليوم 1", "Set up your centre": "جهّز مركزك", "We add your services and prices with you on a call.": "نضيف خدماتك وأسعارك معك في مكالمة.", "Day 2": "اليوم 2", "Add your staff": "أضف موظفيك", "Every staff member gets a login and role.": "كل موظف يحصل على حساب دخول وصلاحية.", "Day 3": "اليوم 3", "Load your stock": "أدخل مخزونك", "Oil, filters and supplies for each branch.": "الزيت والفلاتر والمستلزمات لكل فرع.", "Day 7 · You're live": "اليوم 7 · أنت جاهز", "Run your wash on Foamia": "أدِر مغسلتك على Foamia", "Jobs, invoices and payments update live from day one.": "المهام والفواتير والمدفوعات تتحدث مباشرة من اليوم الأول.", "Questions owners": "أسئلة", "ask.": "يطرحها الملاك.", "Can't find your answer?": "لم تجد إجابتك؟", "Talk to our team": "تحدث مع فريقنا", "Are Foamia invoices VAT-ready?": "هل فواتير Foamia متوافقة مع ضريبة القيمة المضافة؟", "Yes. Foamia creates VAT-ready invoices for every job, and it is connected to ERPNext — so invoices, payments and stock flow straight into your accounting without re-typing anything.": "نعم. ينشئ Foamia فواتير متوافقة مع ضريبة القيمة المضافة لكل مهمة، وهو متصل بـ ERPNext — فتنتقل الفواتير والمدفوعات والمخزون مباشرة إلى حساباتك دون إعادة إدخال أي شيء.", "Does Foamia handle oil changes as well as washing?": "هل يدعم Foamia تغيير الزيت إلى جانب الغسيل؟", "Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.": "نعم. مهام الغسيل وتغيير الزيت تعمل في نفس التطبيق — ويمكنك إضافتهما معاً في مهمة واحدة وفاتورة واحدة. ويُحفظ سجل تغيير الزيت لكل سيارة، فيعرف فريقك دائماً ما تم في المرة السابقة.", "What do I get — an app or a dashboard?": "ماذا أحصل — تطبيق أم لوحة تحكم؟", "Both. Your staff use the Foamia mobile app (iOS and Android) to check in cars, update jobs and take payments. You and your managers use the ERP dashboard in any web browser to see revenue, invoices, branches, staff and stock. Everything stays in sync in real time — no new hardware needed.": "كلاهما. يستخدم موظفوك تطبيق Foamia للجوال (iOS و Android) لاستلام السيارات وتحديث المهام وتحصيل المدفوعات. وتستخدم أنت ومديروك لوحة تحكم ERP من أي متصفح لمتابعة الإيرادات والفواتير والفروع والموظفين والمخزون. كل شيء متزامن لحظة بلحظة — دون الحاجة لأجهزة جديدة.", "How does Foamia stop cash going missing?": "كيف يمنع Foamia ضياع النقود؟", "Every payment is entered against an invoice by a named staff member. You can see who collected what, when and at which branch — so the day's totals always add up.": "تُسجَّل كل دفعة مقابل فاتورة وباسم موظف محدد. فترى من حصّل ماذا، ومتى، وفي أي فرع — فتتطابق مجاميع اليوم دائماً.", "Can I manage more than one branch?": "هل يمكنني إدارة أكثر من فرع؟", "Yes. Branch management lets you run every location from one owner login and compare jobs, invoices, payments and stock branch by branch.": "نعم. تتيح لك إدارة الفروع تشغيل كل المواقع من حساب مالك واحد، ومقارنة المهام والفواتير والمدفوعات والمخزون بين الفروع.", "Can I control what each staff member can see?": "هل يمكنني التحكم فيما يراه كل موظف؟", "Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or technician — and only sees what their role allows.": "نعم. مع إدارة المستخدمين، يحصل كل موظف على حساب دخول وصلاحية خاصة به — مالك أو مدير أو كاشير أو فني — ولا يرى إلا ما تسمح به صلاحيته.", "How does stock management work?": "كيف تعمل إدارة المخزون؟", "Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you have and what to reorder.": "تابع الزيت والفلاتر والشامبو وباقي المستلزمات في كل فرع، لتعرف دائماً ما لديك وما يجب إعادة طلبه.", "CLEAN. CHECK. COMPLETE.": "نظّف. افحص. أنجِز.", "See Foamia running": "شاهد Foamia وهو يدير", "your car wash.": "مغسلتك.", "Book a free 20-minute demo and see Foamia with your own services and prices — no commitment.": "احجز عرضاً مجانياً لمدة 20 دقيقة وشاهد Foamia بخدماتك وأسعارك — دون أي التزام.", "No commitment · Live in under a week": "دون التزام · جاهز خلال أقل من أسبوع", "The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff, branches and stock.": "التطبيق المتكامل لأعمال غسيل السيارات وتغيير الزيت — المهام والعملاء والفواتير والمدفوعات والموظفين والفروع والمخزون.", "Product": "المنتج", "Company": "الشركة", "About": "من نحن", "Contact": "تواصل معنا", "Support": "الدعم", "© 2026 Foamia Wash Tech. All rights reserved.": "© 2026 Foamia Wash Tech. جميع الحقوق محفوظة.", "Legal": "قانوني", "Privacy": "الخصوصية", "Terms": "الشروط", "Foamia — Clean. Check. Complete.": "Foamia — نظّف. افحص. أنجِز." };
     const qsLang = new URLSearchParams(location.search).get('lang');
     let lang = qsLang || (() => { try { return localStorage.getItem('lang'); } catch (e) { return null; } })() || 'en';
     try { if (qsLang) localStorage.setItem('lang', qsLang); } catch (e) { }
@@ -8884,7 +9668,8 @@
     ]).then(() => {
       root.classList.add('loaded');
 
-      document.querySelectorAll('.hero .reveal').forEach(el => { el.classList.add('in'); io.unobserve(el); });
+      window.__heroReady = true;
+      document.dispatchEvent(new Event('hero:ready'));
     });
 
     // Sticky nav border, mobile menu, mobile sticky CTA
@@ -9240,6 +10025,158 @@
       navMap.forEach(([a, sec]) => a.classList.toggle('active', sec === e.target));
     }), { rootMargin: '-45% 0px -50% 0px' });
     navMap.forEach(([, sec]) => navSpy.observe(sec));
+
+    // ================= Editorial hero =================
+    // GCC live clocks
+    const hgClocks = document.getElementById('hgClocks');
+    if (hgClocks) {
+      const AR_ON = document.documentElement.lang === 'ar';
+      const cities = [['Dubai', 'دبي', 'Asia/Dubai', 'GST'], ['Riyadh', 'الرياض', 'Asia/Riyadh', 'AST'], ['Doha', 'الدوحة', 'Asia/Qatar', 'AST'],
+        ['Kuwait City', 'الكويت', 'Asia/Kuwait', 'AST'], ['Muscat', 'مسقط', 'Asia/Muscat', 'GST'], ['Manama', 'المنامة', 'Asia/Bahrain', 'AST']];
+      const one = cities.map((c, k) => `<span class="hg-clock" data-k="${k}">${AR_ON ? c[1] : c[0]} <b data-tz="${c[2]}">--:--:--</b> <em>${c[3]}</em></span><span class="hg-sep">/</span>`).join('');
+      hgClocks.innerHTML = one + one;
+      const tick = () => hgClocks.querySelectorAll('b[data-tz]').forEach(b => {
+        b.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: b.dataset.tz, hour12: false });
+      });
+      tick(); setInterval(tick, 1000);
+      let hot = 0;
+      const heat = () => { hgClocks.querySelectorAll('.hg-clock').forEach(c => c.classList.toggle('hot', +c.dataset.k === hot)); hot = (hot + 1) % cities.length; };
+      heat(); if (!reduce) setInterval(heat, 2500);
+    }
+
+    // Clean → Check → Complete slides (wipe transition) + business types roll
+    const slides = [...document.querySelectorAll('.hg-slide')], dots = [...document.querySelectorAll('.hg-dots i')];
+    const roles = [...document.querySelectorAll('.hg-roles li')];
+    if (slides.length && !reduce) {
+      let si = 0;
+      setInterval(() => {
+        const prev = slides[si];
+        si = (si + 1) % slides.length;
+        slides.forEach(sl => sl.classList.remove('out'));
+        prev.classList.remove('on'); prev.classList.add('out');
+        slides[si].classList.add('on');
+        dots.forEach((d, k) => d.classList.toggle('on', k === si));
+      }, 3200);
+    }
+    if (roles.length) {
+      let ri = 0; roles[0].classList.add('on');
+      if (!reduce) setInterval(() => { roles[ri].classList.remove('on'); ri = (ri + 1) % roles.length; roles[ri].classList.add('on'); }, 1800);
+    }
+
+    // Parallax on the slide images
+    if (!reduce) {
+      const sImgs = [...document.querySelectorAll('.hg-slide img')];
+      const plx2 = () => { const y = Math.min(scrollY, 900); sImgs.forEach(im => im.style.setProperty('--py', (-y * .12).toFixed(1) + 'px')); };
+      addEventListener('scroll', plx2, { passive: true }); plx2();
+    }
+
+    // Text roll: duplicate the label of nav links and buttons
+    document.querySelectorAll('.nav-links a, .btn, .lang-btn').forEach(el => {
+      const tn = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (!tn) return;
+      const label = tn.textContent.trim();
+      const r = document.createElement('span');
+      r.className = 'roll';
+      r.innerHTML = '<span></span><span aria-hidden="true"></span>';
+      r.children[0].textContent = label; r.children[1].textContent = label;
+      tn.replaceWith(r);
+      el.insertBefore(document.createTextNode(''), r);
+    });
+
+    // Smooth momentum scrolling (desktop, mouse/trackpad)
+    if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const ls = document.createElement('script');
+      ls.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
+      ls.onload = () => {
+        if (!window.Lenis) return;
+        const lenis = new Lenis({ duration: 1.1, smoothWheel: true, anchors: { offset: -80 } });
+        root.style.scrollBehavior = 'auto';
+        (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+      };
+      document.head.appendChild(ls);
+    }
+
+    // ================= Intro sequence (mijobello-style) =================
+    (function () {
+      const hero = document.querySelector('.hero.hg');
+      if (!hero) return;
+      const isAr = root.lang === 'ar';
+
+      // 1. split the headline into letters (words kept together); Arabic splits by word to keep letters joined
+      const h1 = hero.querySelector('h1');
+      let n = 0;
+      (function walk(node) {
+        [...node.childNodes].forEach(c => {
+          if (c.nodeType === 3) {
+            const f = document.createDocumentFragment();
+            c.textContent.split(/(\s+)/).forEach(w => {
+              if (!w) return;
+              if (/^\s+$/.test(w)) { f.appendChild(document.createTextNode(' ')); return; }
+              const wd = document.createElement('span'); wd.className = 'hwd';
+              (isAr ? [w] : [...w]).forEach(ch => {
+                const sp = document.createElement('span'); sp.className = 'hch'; sp.style.setProperty('--i', n++); sp.textContent = ch; wd.appendChild(sp);
+              });
+              f.appendChild(wd);
+            });
+            c.replaceWith(f);
+          } else if (c.nodeType === 1) walk(c);
+        });
+      })(h1);
+
+      const play = () => {
+        hero.classList.add('go');
+        hero.querySelectorAll('.reveal').forEach(el => { el.classList.add('in'); io.unobserve(el); });
+      };
+
+      // 2. full intro only on the first visit of the session
+      let seen = false;
+      try { seen = sessionStorage.getItem('fx-intro') === '1'; sessionStorage.setItem('fx-intro', '1'); } catch (e) {}
+      if (reduce || seen) {
+        const go = () => requestAnimationFrame(() => requestAnimationFrame(play));
+        window.__heroReady ? go() : document.addEventListener('hero:ready', go, { once: true });
+        return;
+      }
+
+      const ov = document.createElement('div');
+      ov.className = 'intro'; ov.setAttribute('aria-hidden', 'true');
+      ov.innerHTML = '<div class="intro-cols">' + Array.from({ length: 12 }, (_, k) => `<i style="--k:${k}"></i>`).join('') + '</div>' +
+        '<img class="intro-logo" src="images/foamia-logo.png" alt="">' +
+        '<div class="intro-box"><img src="images/video-poster.jpg" alt=""></div>' +
+        '<div class="intro-count"><span>0</span><small>%</small></div>' +
+        '<div class="intro-tag">' + (isAr ? 'نظّف. افحص. أنجِز.' : 'Clean. Check. Complete.') + '</div>';
+      document.body.appendChild(ov);
+      root.style.overflow = 'hidden';
+      const box = ov.querySelector('.intro-box'), num = ov.querySelector('.intro-count span');
+      const W = innerWidth, H = innerHeight;
+      Object.assign(box.style, { left: (W * 7 / 24) + 'px', top: (H * 2 / 7) + 'px', width: (W * 5 / 12) + 'px', height: (H * 3 / 7) + 'px' });
+      requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('open')));
+
+      // counter 0 → 100 (ease-out)
+      const t0 = performance.now(), dur = 1500;
+      (function count(t) {
+        const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        num.textContent = Math.round(e * 100);
+        if (p < 1) requestAnimationFrame(count);
+      })(t0);
+
+      // the media card travels into the hero video cell
+      setTimeout(() => {
+        ov.classList.add('travel');
+        hero.classList.add('skip-video');
+        const r = hero.querySelector('.hg-video').getBoundingClientRect();
+        Object.assign(box.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+      }, 1650);
+
+      // curtain wipes column by column, then the hero animates in
+      setTimeout(() => {
+        ov.classList.add('wipe');
+        box.style.transition = 'opacity .3s ease'; box.style.opacity = '0';
+        root.style.overflow = '';
+        const go = () => play();
+        window.__heroReady ? go() : document.addEventListener('hero:ready', go, { once: true });
+      }, 2600);
+      setTimeout(() => ov.remove(), 3600);
+    })();
   </script>
 </body>
 <!-- I need from you:
