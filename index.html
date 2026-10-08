@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -37,7 +37,7 @@
       --shadow: 0 2px 4px rgba(20, 20, 20, .04), 0 14px 34px rgba(20, 20, 20, .09);
       --shadow-lg: 0 4px 10px rgba(20, 20, 20, .06), 0 32px 64px rgba(20, 20, 20, .18);
       --head: 'Archivo', 'Plus Jakarta Sans', system-ui, sans-serif;
-      --serif: 'Fraunces', Georgia, serif;
+      --serif: 'Plus Jakarta Sans', system-ui, sans-serif;
       --ease: cubic-bezier(.16, 1, .3, 1);
     }
 
@@ -2934,6 +2934,1581 @@
         display: none;
       }
     }
+
+    /* ---------- Fit the hero on short laptop screens ---------- */
+    .hero h1 {
+      line-height: 1.08;
+    }
+
+    @media (min-width: 1081px) and (max-height: 820px) {
+      .hero {
+        padding-top: 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(44px, 8.6vh, 72px);
+      }
+
+      .hero-eyebrow {
+        margin-bottom: 20px;
+      }
+
+      .hero .lead,
+      .hero .hero-ctas {
+        margin-bottom: 24px;
+      }
+
+      .hero-visual {
+        zoom: .88;
+      }
+    }
+
+    @media (min-width: 1081px) and (max-height: 700px) {
+      .hero-visual {
+        zoom: .78;
+      }
+    }
+
+    /* ---------- Review round: edges, fold, phone breathing room ---------- */
+    /* keep the invoice popup inside the content edge */
+    .hero .pay-toast {
+      right: 12px;
+    }
+
+    /* phone: room below the button + home indicator */
+    .phone {
+      height: 404px;
+    }
+
+    .phone-screen {
+      padding-bottom: 22px;
+      position: relative;
+    }
+
+    .phone-screen::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      width: 64px;
+      height: 4px;
+      margin-left: -32px;
+      border-radius: 4px;
+      background: rgba(20, 20, 20, .25);
+    }
+
+    /* desktop: hero fills the first screen so the ticker never peeks in half-cut */
+    @media (min-width: 1081px) {
+      .hero {
+        min-height: calc(100vh - 76px);
+        display: flex;
+        align-items: center;
+      }
+
+      .hero>.wrap {
+        width: 100%;
+      }
+
+      .ticker {
+        background: #fff;
+        padding: 26px 0;
+      }
+    }
+
+    /* ---------- Sans-serif display type (matches the app UI) ---------- */
+    h1,
+    h2 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+    }
+
+    h1 em,
+    h2 em,
+    .hero h1 em {
+      font-weight: 800;
+    }
+
+    .sec-head h2 {
+      line-height: 1.08;
+    }
+
+    .dk strong,
+    .metric strong,
+    .fstep h3 {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .dk strong {
+      font-size: 20px;
+    }
+
+    .quote,
+    .manifesto p {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .ticker-track span {
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .pa-sum b {
+      font-weight: 800;
+    }
+
+    /* 3. crisper dashboard edge */
+    .hero .dash {
+      border: 1px solid rgba(20, 20, 20, .08);
+    }
+
+    .metric strong span {
+      font-size: inherit;
+      color: inherit;
+    }
+
+    /* paragraph: lighter body text so the bold punchline pops */
+    .hero .lead {
+      color: #4A4A50;
+    }
+
+    .hero .lead strong {
+      color: var(--ink);
+    }
+
+    /* car route ends inside the content edge */
+    .drive {
+      right: 0 !important;
+      top: -20px !important;
+    }
+
+    /* invoice popup: quick, clean exit instead of a slow half-transparent fade */
+    .hero .pay-toast:not(.show) {
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    /* ================= Hero v2: message on top, product stage below ================= */
+    .hero::before,
+    .hero::after {
+      display: none !important;
+    }
+
+    .hero {
+      display: block !important;
+      min-height: 0 !important;
+      padding: 72px 0 0 !important;
+      overflow: hidden;
+    }
+
+    .hx-head {
+      text-align: center;
+      max-width: 1040px;
+    }
+
+    .hx-head .hero-eyebrow {
+      justify-content: center;
+    }
+
+    .hx-head h1 {
+      font-size: clamp(38px, 5.1vw, 74px);
+      line-height: 1.04;
+      margin-bottom: 24px;
+    }
+
+    .hx-head .lead {
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+
+    .hx-head .hero-ctas {
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .hx-head .hero-proof {
+      justify-content: center;
+    }
+
+    /* Product stage */
+    .hx-stage {
+      position: relative;
+      margin-top: 64px;
+      padding-bottom: 72px;
+    }
+
+    .hx-stage .dash {
+      position: relative;
+      z-index: 1;
+      width: min(920px, 100%);
+      margin: 0 auto;
+      min-height: 0;
+      grid-template-columns: 64px 1fr;
+      border-radius: 16px;
+      border: 1px solid rgba(20, 20, 20, .08);
+      box-shadow: 0 40px 80px -24px rgba(20, 20, 20, .22), 0 12px 24px -12px rgba(20, 20, 20, .08);
+    }
+
+    .hx-stage .dash-main {
+      padding: 22px 26px 24px;
+      gap: 16px;
+    }
+
+    .hx-stage .dash-kpis {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+
+    .hx-stage .dk {
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .hx-stage .dk strong {
+      font-size: 26px;
+    }
+
+    .hx-stage .jrow {
+      border-radius: 10px;
+      padding: 10px 14px 10px 10px;
+    }
+
+    .hx-stage .jstat {
+      width: 120px;
+    }
+
+    .hx-stage .jobs {
+      padding-right: 0;
+    }
+
+    .dk.bump {
+      outline: 2px solid var(--red);
+      outline-offset: 2px;
+      transition: outline-color .3s;
+    }
+
+    /* phone overlaps the dashboard's lower-left */
+    .hx-stage .phone {
+      position: absolute;
+      z-index: 3;
+      left: calc(50% - 560px);
+      bottom: 24px;
+      top: auto;
+      height: 404px;
+    }
+
+    /* sync chip between the phone and the dashboard */
+    .sync-chip {
+      position: absolute;
+      z-index: 4;
+      left: calc(50% - 360px);
+      bottom: 230px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity .3s var(--ease), transform .5s var(--ease);
+      pointer-events: none;
+    }
+
+    .sync-chip svg {
+      width: 14px;
+      height: 14px;
+      color: var(--red-on-dark);
+    }
+
+    .sync-chip.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* floating module cards */
+    .fc {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid rgba(20, 20, 20, .07);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(20, 20, 20, .18), 0 8px 16px -8px rgba(20, 20, 20, .06);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .fc b {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .fc small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .fc-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .fc-ic svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .fc-ic.warn {
+      background: var(--red);
+    }
+
+    .fc-ic.ok {
+      background: var(--ok);
+    }
+
+    .fc-rev {
+      top: 0;
+      left: calc(50% - 610px);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      width: 170px;
+    }
+
+    .fc-rev b {
+      font-size: 24px;
+      color: var(--ok);
+    }
+
+    .spark {
+      width: 100%;
+      height: 32px;
+    }
+
+    .spark polyline {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fc-jobs {
+      top: -34px;
+      right: calc(50% - 610px);
+    }
+
+    .fc-stock {
+      top: 34%;
+      right: calc(50% - 650px);
+    }
+
+    .fc-inv {
+      bottom: 44px;
+      right: calc(50% - 560px);
+      transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s;
+    }
+
+    .fc-inv.show {
+      transform: scale(1.06);
+      box-shadow: 0 0 0 3px rgba(30, 122, 60, .25), 0 25px 50px -12px rgba(20, 20, 20, .2);
+    }
+
+    .js .fc.reveal.in.show {
+      transform: scale(1.06);
+    }
+
+    /* tablet: drop the outer cards, keep phone + dashboard */
+    @media (max-width: 1240px) {
+      .fc-rev,
+      .fc-stock {
+        display: none;
+      }
+
+      .hx-stage .phone {
+        left: 0;
+      }
+
+      .hx-stage .dash {
+        width: auto;
+        margin-left: 150px;
+      }
+
+      .sync-chip {
+        left: 200px;
+      }
+
+      .fc-jobs {
+        right: 0;
+      }
+
+      .fc-inv {
+        right: 0;
+      }
+    }
+
+    /* phones: show the mobile app centred, dashboard hidden */
+    @media (max-width: 860px) {
+      .hero {
+        padding-top: 40px !important;
+      }
+
+      .hx-stage {
+        margin-top: 40px;
+        padding-bottom: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .hx-stage .dash,
+      .fc-jobs,
+      .sync-chip {
+        display: none;
+      }
+
+      .hx-head h1 {
+        font-size: clamp(34px, 9.4vw, 44px);
+        text-wrap: balance;
+      }
+
+      .hx-head h1 .hl-row {
+        display: inline;
+      }
+
+      .hx-head h1 .hl-row+.hl-row::before {
+        content: ' ';
+      }
+
+      .hx-stage .phone {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: 230px;
+        height: 420px;
+      }
+
+      .fc-inv {
+        position: relative;
+        right: auto;
+        bottom: auto;
+      }
+    }
+
+    /* ===== Hero v2.1: one axis, tighter rhythm, compact product stage ===== */
+    .hero {
+      padding-top: 48px !important;
+    }
+
+    .hx-head .hero-eyebrow {
+      margin-bottom: 18px;
+    }
+
+    .hx-head h1 {
+      margin-bottom: 18px;
+    }
+
+    .hx-head .lead {
+      margin-bottom: 26px;
+    }
+
+    .hx-head .hero-ctas {
+      margin-bottom: 18px;
+    }
+
+    .hx-stage {
+      --dw: 840px;
+      margin-top: 44px;
+      padding-bottom: 80px;
+    }
+
+    .hx-stage .dash {
+      width: min(var(--dw), 100%);
+    }
+
+    .hx-stage .dash-main {
+      padding: 20px 22px 20px;
+      gap: 14px;
+    }
+
+    /* phone tucked into the dashboard's lower-left */
+    .hx-stage .phone {
+      left: calc(50% - var(--dw) / 2 - 80px);
+      bottom: 40px;
+    }
+
+    .sync-chip {
+      left: calc(50% - var(--dw) / 2 + 150px);
+      bottom: 250px;
+    }
+
+    /* two cards only, both on the right edge */
+    .fc-jobs {
+      top: -46px;
+      right: calc(50% - var(--dw) / 2 - 56px);
+    }
+
+    .fc-inv {
+      bottom: 104px;
+      right: calc(50% - var(--dw) / 2 - 64px);
+    }
+
+    @media (max-width: 1240px) {
+      .hx-stage {
+        --dw: 760px;
+      }
+
+      .hx-stage .dash {
+        width: min(var(--dw), 100%);
+        margin: 0 auto;
+      }
+
+      .hx-stage .phone {
+        left: max(0px, calc(50% - var(--dw) / 2 - 80px));
+      }
+
+      .fc-jobs,
+      .fc-inv {
+        right: max(0px, calc(50% - var(--dw) / 2 - 40px));
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hx-stage .dash {
+        width: auto;
+        margin-left: 150px;
+      }
+
+      .fc-inv {
+        bottom: -10px;
+      }
+    }
+
+    /* ===== Hero v2.2: denser, asymmetric product stage ===== */
+    .proof2 {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: var(--ink-2);
+    }
+
+    .proof2 .stars {
+      font-size: 16px;
+    }
+
+    .proof2 strong {
+      color: var(--ink);
+    }
+
+    .plat {
+      padding: 4px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: #fff;
+    }
+
+    /* product attached to the promise, shifted right for tension */
+    .hx-stage {
+      --dx: 48px;
+      margin-top: 28px;
+    }
+
+    .hx-stage .dash {
+      position: relative;
+      left: var(--dx);
+    }
+
+    .hx-stage .phone {
+      left: calc(50% - var(--dw) / 2 + var(--dx) - 150px);
+      bottom: 28px;
+    }
+
+    .sync-chip {
+      left: calc(50% - var(--dw) / 2 + var(--dx) + 80px);
+    }
+
+    .fc-jobs {
+      top: -54px;
+      right: calc(50% - var(--dw) / 2 - var(--dx) - 56px);
+    }
+
+    .fc-inv {
+      right: calc(50% - var(--dw) / 2 - var(--dx) - 64px);
+    }
+
+    /* entrances: phone from the left, cards from the right */
+    .js .hx-stage .reveal.from-left:not(.in) {
+      transform: translateX(-60px);
+    }
+
+    .js .hx-stage .reveal.from-right:not(.in) {
+      transform: translateX(48px);
+    }
+
+    @media (max-width: 1240px) {
+      .hx-stage {
+        --dx: 0px;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hx-stage .dash {
+        left: 0;
+      }
+    }
+
+    /* ===== Hero v3: one product showcase on a tinted, cropped stage ===== */
+    .hx-head h1 {
+      font-size: clamp(36px, 4.7vw, 68px);
+    }
+
+    .plat.plain {
+      padding: 0;
+      border: 0;
+      background: none;
+      font-size: 13px;
+    }
+
+    .hx-stage {
+      --dw: 680px;
+      --dx: 40px;
+      margin-top: 36px;
+      padding: 0;
+    }
+
+    .hx-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0 24px;
+      border-radius: 28px 28px 0 0;
+      background: #EFEAE5;
+    }
+
+    .hx-clip {
+      position: relative;
+      height: 470px;
+      overflow: hidden;
+      padding-top: 48px;
+    }
+
+    .hx-stage .dash {
+      border-radius: 14px;
+      box-shadow: 0 30px 60px -20px rgba(20, 20, 20, .2);
+    }
+
+    .hx-stage .phone {
+      bottom: -100px;
+      left: calc(50% - var(--dw) / 2 + var(--dx) - 140px);
+    }
+
+    .sync-chip {
+      bottom: 170px;
+    }
+
+    .fc-jobs {
+      top: 150px;
+      right: calc(50% - var(--dw) / 2 - var(--dx) - 150px);
+    }
+
+    .fc-inv,
+    .fc.fc-inv {
+      display: none !important;
+    }
+
+    @media (max-width: 1240px) {
+      .hx-stage {
+        --dw: 640px;
+        --dx: 40px;
+      }
+
+      .hx-stage .phone {
+        left: calc(50% - var(--dw) / 2 + var(--dx) - 140px);
+      }
+
+      .fc-jobs {
+        top: 150px;
+        right: 40px;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hx-stage .dash {
+        margin: 0 auto;
+        width: min(var(--dw), calc(100% - 140px));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hx-stage::before {
+        inset: 0;
+      }
+
+      .hx-clip {
+        height: 420px;
+        padding-top: 32px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hx-stage .phone {
+        position: relative;
+        left: auto;
+        bottom: auto;
+      }
+    }
+
+    /* ===== Hero v3.1: typographic hierarchy ===== */
+    .hx-head .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: .16em;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hx-head .hero-eyebrow::before {
+      width: 16px;
+      height: 1.5px;
+      opacity: .6;
+    }
+
+    .hx-head h1 {
+      font-size: clamp(38px, 5.2vw, 78px);
+    }
+
+    .hx-head h1 em {
+      font-weight: 700;
+      color: #C42A2F;
+    }
+
+    .hx-head h1 .hl-sub {
+      font-size: .8em;
+      font-weight: 700;
+      color: #2A2A2D;
+      margin-top: .08em;
+    }
+
+    .hx-head .lead {
+      font-size: 18px;
+      max-width: 520px;
+      margin-bottom: 30px;
+    }
+
+    .proof2 {
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .proof2 .stars {
+      font-size: 14px;
+    }
+
+    .plat.plain {
+      font-size: 12px;
+      color: #8E8E93;
+      font-weight: 500;
+    }
+
+    /* product quieter than the headline */
+    .hx-stage .dash {
+      box-shadow: 0 24px 48px -20px rgba(20, 20, 20, .14);
+    }
+
+    .hx-stage::before {
+      background: #F0ECE7;
+    }
+
+    @media (max-width: 860px) {
+      .hx-head h1 .hl-sub {
+        display: block;
+      }
+
+      .hx-head .hero-eyebrow {
+        font-size: 10.5px;
+        letter-spacing: .1em;
+      }
+
+      .hx-head .hero-eyebrow::before {
+        display: none;
+      }
+    }
+
+    /* ===== Hero v4: live operating-system feel ===== */
+    .hx-head .hero-eyebrow::before {
+      display: none;
+    }
+
+    .hx-head .lead {
+      max-width: 580px;
+    }
+
+    /* tighter stage around the product */
+    .hx-stage::before {
+      inset: 0 max(24px, calc(50% - 560px));
+    }
+
+    .hx-clip {
+      padding-top: 72px;
+    }
+
+    .live-bar {
+      position: absolute;
+      z-index: 3;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 16px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, .75);
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    .live-bar b {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .lb-dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red-on-dark);
+    }
+
+    .lb-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: inherit;
+      animation: ping 1.8s var(--ease) infinite;
+    }
+
+    .lb-sep {
+      width: 1px;
+      height: 12px;
+      background: rgba(255, 255, 255, .2);
+    }
+
+    /* sync chip always visible as the link between app and dashboard */
+    .sync-chip {
+      opacity: 1;
+      transform: none;
+      top: 128px;
+      bottom: auto;
+      left: calc(50% - var(--dw) / 2 + var(--dx) - 210px);
+    }
+
+    .sync-chip.show {
+      background: var(--red);
+    }
+
+    .sync-chip.show svg {
+      color: #fff;
+    }
+
+    @media (max-width: 860px) {
+      .live-bar .lb-x {
+        display: none;
+      }
+
+      .hx-clip {
+        padding-top: 70px !important;
+      }
+
+      .hx-clip {
+        padding-top: 64px;
+      }
+    }
+
+    /* ===== Hero product video ===== */
+    .hx-stage {
+      padding: 40px 0 0;
+    }
+
+    .hx-video {
+      position: relative;
+      z-index: 1;
+      width: min(980px, calc(100% - 80px));
+      margin: 0 auto;
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+      background: #0B0B0C;
+      box-shadow: 0 30px 60px -20px rgba(20, 20, 20, .3);
+      aspect-ratio: 16 / 9;
+    }
+
+    .hx-video video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hv-sound {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(18, 18, 19, .7);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .hv-sound svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 860px) {
+      .hx-stage {
+        padding-top: 20px;
+      }
+
+      .hx-video {
+        width: calc(100% - 32px);
+        border-radius: 12px 12px 0 0;
+      }
+    }
+
+    /* ================= Sections redesign: one system ================= */
+    .sec,
+    #features,
+    .start,
+    #faq {
+      padding: 120px 0;
+    }
+
+    /* split section header: title left, explanation right */
+    .shead {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      column-gap: 64px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+
+    .shead .eyebrow {
+      grid-column: 1;
+      margin-bottom: 14px;
+    }
+
+    .shead h2 {
+      grid-column: 1;
+      font-size: clamp(32px, 3.6vw, 50px);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      margin: 0;
+      max-width: 16ch;
+      text-wrap: balance;
+    }
+
+    .shead p {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: end;
+      padding-bottom: 6px;
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0;
+    }
+
+    h1 em,
+    h2 em,
+    .manifesto .w.accent {
+      font-style: normal;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .16em;
+    }
+
+    /* ticker: quieter */
+    .ticker {
+      padding: 20px 0 !important;
+      margin-bottom: 0;
+      background: transparent !important;
+    }
+
+    .ticker-track span {
+      font-size: 17px !important;
+      font-weight: 600 !important;
+      color: var(--muted);
+      gap: 28px;
+      padding-right: 28px;
+    }
+
+    .ticker-track span::after {
+      font-size: 10px;
+    }
+
+    /* built for */
+    .builtfor {
+      padding: 48px 0 0;
+    }
+
+    .bf-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+    }
+
+    .bf-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .bf-row ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 26px;
+    }
+
+    .bf-row li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .bf-row li svg {
+      width: 18px;
+      height: 18px;
+      color: var(--red);
+    }
+
+    /* manifesto: calmer */
+    .manifesto {
+      padding: 96px 0 24px !important;
+    }
+
+    .manifesto .wrap {
+      max-width: 940px;
+      text-align: center;
+    }
+
+    .manifesto p {
+      font-size: clamp(24px, 2.8vw, 38px) !important;
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    .manifesto .w.accent {
+      color: var(--red);
+    }
+
+    /* before / after comparison */
+    .cmp {
+      border-top: 1px solid var(--line);
+    }
+
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 1fr;
+      gap: 0 32px;
+      align-items: stretch;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cmp-head span {
+      padding: 16px 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cmp-head span:last-child {
+      color: var(--ink);
+      padding-left: 24px;
+    }
+
+    .cmp-topic {
+      padding: 26px 0;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .cmp-row p {
+      display: flex;
+      gap: 12px;
+      padding: 26px 0;
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .cmp-row p svg {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .cmp-no {
+      color: var(--muted);
+    }
+
+    .cmp-no svg {
+      color: #B8B3AC;
+    }
+
+    .cmp-yes {
+      color: var(--ink);
+      font-weight: 600;
+      background: #fff;
+      padding-left: 24px !important;
+      padding-right: 24px !important;
+    }
+
+    .cmp-yes svg {
+      color: var(--ok);
+    }
+
+    /* how it works: dark panel, product UI per step */
+    .flow.sec {
+      margin: 0 12px;
+      border-radius: 32px;
+      background: var(--dark);
+    }
+
+    .flow .shead h2,
+    .flow h3 {
+      color: #fff;
+    }
+
+    .flow .shead p {
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .flow .shead h2 em {
+      color: var(--red-on-dark);
+    }
+
+    .hiw {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .hiw-step {
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      border-radius: 18px;
+      background: #1B1B1D;
+      border: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .hiw-num {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      color: var(--red-on-dark);
+      margin-bottom: 18px;
+    }
+
+    .hiw-step h3 {
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hiw-step>p {
+      color: rgba(255, 255, 255, .6);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .ui {
+      margin-top: auto;
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .ui-top,
+    .ui-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ui-line {
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .ui-line b {
+      color: var(--ink);
+    }
+
+    .ui-line b.up {
+      color: var(--ok);
+    }
+
+    .ui-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--paper);
+      color: var(--ink-2);
+    }
+
+    .ui-tag.ok {
+      background: var(--ok-soft);
+      color: var(--ok);
+    }
+
+    .plate.sm {
+      font-size: 13px;
+      padding: 4px 9px;
+      gap: 7px;
+      border-width: 1.5px;
+      border-radius: 7px;
+    }
+
+    .plate.sm small {
+      font-size: 8px;
+      padding-right: 7px;
+    }
+
+    .ui-prog {
+      display: grid;
+      grid-template-columns: 82px 1fr 40px;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .ui-prog b {
+      text-align: right;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    /* features: same card language */
+    #features .card {
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: none;
+    }
+
+    #features .card:hover {
+      transform: none;
+      border-color: #D9D3CB;
+    }
+
+    #features .ficon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    #features .ficon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* proof: metrics without boxes */
+    .proof {
+      margin: 0 12px;
+      border-radius: 32px;
+    }
+
+    .metric {
+      background: none !important;
+      border: 0 !important;
+      border-left: 1px solid rgba(255, 255, 255, .12) !important;
+      border-radius: 0 !important;
+      padding: 8px 0 8px 24px !important;
+    }
+
+    /* getting started */
+    .start {
+      background: transparent !important;
+      border: 0 !important;
+    }
+
+    .steps .num {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .steps::before {
+      top: 23px;
+    }
+
+    /* faq: dividers, not boxes */
+    .faq-list {
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    details,
+    details[open] {
+      background: none;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    summary {
+      padding: 24px 0;
+      font-size: 18px;
+    }
+
+    details p {
+      padding: 0 0 24px;
+    }
+
+    .faq-grid .sec-head h2 {
+      font-size: clamp(32px, 3.6vw, 50px);
+      line-height: 1.06;
+    }
+
+    /* final cta: black, with the one red action */
+    .cta-box {
+      background: var(--ink) !important;
+      border-radius: 28px;
+    }
+
+    .cta-box::after {
+      border-color: rgba(255, 255, 255, .05) !important;
+    }
+
+    .cta h2 em {
+      color: var(--red-on-dark) !important;
+      opacity: 1 !important;
+    }
+
+    .cta-tagline {
+      color: var(--red-on-dark);
+      opacity: 1;
+    }
+
+    .cta p,
+    .cta-actions small {
+      color: rgba(255, 255, 255, .7) !important;
+    }
+
+    @media (max-width: 1080px) {
+      .shead {
+        grid-template-columns: 1fr;
+      }
+
+      .shead p {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 18px;
+      }
+
+      .hiw {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .sec,
+      #features,
+      .start,
+      #faq {
+        padding: 80px 0;
+      }
+
+      .cmp-head {
+        display: none;
+      }
+
+      .cmp-row {
+        grid-template-columns: 1fr;
+        padding: 18px 0;
+      }
+
+      .cmp-topic,
+      .cmp-row p {
+        padding: 6px 0;
+      }
+
+      .cmp-yes {
+        padding: 14px 16px !important;
+        border-radius: 12px;
+        margin-top: 6px !important;
+      }
+
+      .flow.sec,
+      .proof {
+        margin: 0 8px;
+        border-radius: 24px;
+      }
+
+      .metric {
+        padding-left: 16px !important;
+      }
+    }
+
+    /* ================= Mobile hero composition ================= */
+    @media (max-width: 640px) {
+      .hide-sm {
+        display: none;
+      }
+
+      .nav .nav-inner {
+        height: 56px;
+        margin-top: 8px;
+      }
+
+      .nav .nav-logo img {
+        height: 28px;
+      }
+
+      .hero {
+        padding-top: 28px !important;
+      }
+
+      .hx-head .hero-eyebrow {
+        font-size: 10.5px;
+        margin-bottom: 14px;
+      }
+
+      .hx-head h1 {
+        font-size: 38px !important;
+        line-height: 1.04;
+        margin-bottom: 14px;
+      }
+
+      .hx-head h1 .hl-row {
+        display: block !important;
+      }
+
+      .hx-head h1 .hl-row+.hl-row::before {
+        content: none;
+      }
+
+      .hx-head h1 .hl-sub {
+        font-size: .62em;
+        margin-top: .3em;
+      }
+
+      .hx-head .lead {
+        font-size: 16px;
+        margin-bottom: 22px;
+      }
+
+      .hx-head .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .hx-head .hero-ctas .btn-red {
+        height: 52px !important;
+        flex: 0 0 auto !important;
+      }
+
+      .hx-head .hero-ctas .btn-ghost {
+        flex: 0 0 auto !important;
+      }
+
+      .hx-head .hero-ctas .btn-ghost {
+        height: 40px;
+        border: 0;
+        background: none;
+        padding: 0;
+        font-size: 15px;
+      }
+
+      .proof2 {
+        font-size: 13px;
+      }
+
+      .proof2 .plat {
+        display: none;
+      }
+
+      .hx-stage {
+        margin-top: 24px;
+        padding-top: 16px;
+      }
+
+      .hx-stage::before {
+        inset: 0 !important;
+        border-radius: 22px 22px 0 0;
+      }
+
+      .hx-video {
+        width: calc(100% - 24px);
+      }
+    }
   </style>
 </head>
 
@@ -2964,7 +4539,7 @@
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="m10 8 6 4-6 4V8z" /></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" /></symbol>
     <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.7s-6 6.4-6 11.3a6 6 0 0 0 12 0c0-4.9-6-11.3-6-11.3Z" /></symbol>
     <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" /><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" /></symbol>
     <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></symbol>
@@ -3005,117 +4580,32 @@
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="hero-eyebrow reveal">Mobile app + ERP for car wash owners</div>
-          <h1 aria-label="Run your whole car wash from one app.">
-            <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your</span></span>
-            <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.24s"><em>whole car wash</em></span></span>
-            <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.38s">from one app.</span></span>
-          </h1>
-          <p class="lead reveal" style="--d:.55s">A mobile app for your team and an ERP dashboard for you — washes,
-            oil changes, customers, invoices, payments, branches and stock, always in sync. <strong>Know every car.
-              Count every dirham.</strong></p>
-          <div class="hero-ctas reveal" style="--d:.65s">
-            <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
-            <a class="btn btn-ghost" href="#how-it-works"><svg class="icon"><use href="#i-play" /></svg> See how it
-              works</a>
-          </div>
-          <p class="hero-proof reveal" style="--d:.75s">
-            <span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span>
-            <span><strong>4.8</strong> from 340+ car wash centres</span>
-            <span class="sep"></span>
-            <span>iOS &amp; Android app · Web ERP</span>
-          </p>
+      <div class="wrap hx-head">
+        <div class="hero-eyebrow reveal">Your team. Your branches. One system.</div>
+        <h1 aria-label="Run your whole car wash. From one powerful platform.">
+          <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>whole car wash.</em></span></span>
+          <span class="hl-row hl-sub" aria-hidden="true"><span class="hl-in" style="--d:.24s">From one <span class="hide-sm">powerful </span>platform.</span></span>
+        </h1>
+        <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every dirham accounted
+          for — in real time. <strong class="hide-sm">Mobile app for your team, ERP dashboard for you.</strong></p>
+        <div class="hero-ctas reveal" style="--d:.55s">
+          <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
+          <a class="btn btn-ghost" href="#how-it-works">See how it works <svg class="icon"><use href="#i-arrow" /></svg></a>
         </div>
+        <div class="proof2 reveal" style="--d:.65s">
+          <p><span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span> <strong>4.8/5</strong> · Trusted by
+            <strong>340+ car wash centres</strong></p>
+          <span class="plat plain">iOS &amp; Android app · Web ERP</span>
+        </div>
+      </div>
 
-        <div class="hero-visual">
-          <div class="drive" id="drive" aria-hidden="true">
-            <svg class="road" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" /></svg>
-            <div class="car">
-              <svg viewBox="0 0 64 32">
-                <rect x="2" y="3" width="60" height="26" rx="9" fill="#BD2025" />
-                <rect x="34" y="6" width="13" height="20" rx="3" fill="#1a1a1c" />
-                <rect x="14" y="7" width="10" height="18" rx="3" fill="#1a1a1c" opacity=".85" />
-                <rect x="24" y="6" width="10" height="20" rx="2" fill="#9C1A1E" />
-                <rect x="57" y="6" width="4" height="6" rx="2" fill="#FFF3C4" />
-                <rect x="57" y="20" width="4" height="6" rx="2" fill="#FFF3C4" />
-                <rect x="2" y="7" width="3" height="5" rx="1.5" fill="#FF8A8D" />
-                <rect x="2" y="20" width="3" height="5" rx="1.5" fill="#FF8A8D" />
-              </svg>
-            </div>
-          </div>
-          <div class="dash reveal" style="--d:.5s" role="img" aria-label="Foamia owner dashboard showing today's revenue, live wash and oil change jobs, and a low stock alert">
-            <div class="dash-rail" aria-hidden="true">
-              <span class="rail-logo"><svg class="icon"><use href="#i-drop" /></svg></span>
-              <span class="rail-i on"><svg class="icon"><use href="#i-gauge" /></svg></span>
-              <span class="rail-i"><svg class="icon"><use href="#i-car" /></svg></span>
-              <span class="rail-i"><svg class="icon"><use href="#i-receipt" /></svg></span>
-              <span class="rail-i"><svg class="icon"><use href="#i-box" /></svg></span>
-              <span class="rail-i"><svg class="icon"><use href="#i-building" /></svg></span>
-              <span class="rail-i"><svg class="icon"><use href="#i-users" /></svg></span>
-            </div>
-            <div class="dash-main" aria-hidden="true">
-              <div class="dash-top">
-                <div><img class="app-logo" src="images/foamia-logo.png" alt="" width="5159" height="1520"><small>Owner dashboard</small></div>
-                <span class="branch-pill"><svg class="icon"><use href="#i-building" /></svg>Dubai Marina</span>
-              </div>
-              <div class="dash-kpis">
-                <div class="dk dk-main"><small>Revenue today</small><strong id="kpiAmt">AED 2,140</strong><em>▲ 22%</em></div>
-                <div class="dk"><small>Cars today</small><strong id="kpiCars">27</strong></div>
-                <div class="dk"><small>In progress</small><strong id="kpiProg">2</strong></div>
-              </div>
-              <div class="dash-head"><b>Live jobs</b><span>Wash &amp; oil change</span></div>
-              <div class="jobs" id="jobs">
-              <div class="jrow" data-p="70" data-amt="215">
-                <img class="thumb" src="images/hero-foam-wash.jpg" alt="" width="1920" height="1080">
-                <div class="jt"><b>Dubai K 48211</b><span>Oil change · Ahmed</span></div>
-                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
-              </div>
-              <div class="jrow" data-p="35" data-amt="60">
-                <img class="thumb" src="images/step-clean.jpg" alt="" width="1920" height="1080">
-                <div class="jt"><b>Dubai A 30982</b><span>Full wash · Faisal</span></div>
-                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
-              </div>
-              <div class="jrow" data-p="100" data-amt="275">
-                <img class="thumb" src="images/step-complete.jpg" alt="" width="1920" height="1080">
-                <div class="jt"><b>Dubai C 77120</b><span>Wash + oil · Sami</span></div>
-                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
-              </div>
-              <div class="jrow" data-p="0" data-amt="35">
-                <img class="thumb" src="images/step-check.jpg" alt="" width="1920" height="1080">
-                <div class="jt"><b>Dubai P 12034</b><span>Exterior wash · Ahmed</span></div>
-                <div class="jstat"><span class="pill">Waiting</span><span class="jbar"><i></i></span></div>
-              </div>
-              </div>
-              <div class="stock-alert"><svg class="icon"><use href="#i-box" /></svg>Car shampoo low — <b>3 L left</b><span>Reorder</span></div>
-            </div>
-          </div>
-          <div class="phone reveal" style="--d:.75s" role="img" aria-label="Foamia mobile app: a technician's job card for an oil change">
-            <div class="phone-screen" aria-hidden="true">
-              <span class="phone-notch"></span>
-              <div class="ph-head">
-                <div><img class="app-logo sm" src="images/foamia-logo.png" alt="" width="5159" height="1520"><b>My jobs</b></div>
-                <span class="ph-av">AH</span>
-              </div>
-              <div class="ph-job">
-                <span class="ph-plate"><small>DUBAI</small>K 48211</span>
-                <div class="ph-svc"><b>Oil change · 5W-30</b>Land Cruiser · Bay 2</div>
-                <ul class="ph-steps" id="phSteps">
-                  <li>Drain old oil</li>
-                  <li>Replace filter</li>
-                  <li>Refill &amp; check</li>
-                </ul>
-              </div>
-              <div class="ph-next">Next: <b>Dubai P 12034</b> · Exterior wash</div>
-              <span class="ph-btn" id="phBtn">Mark as ready</span>
-            </div>
-          </div>
-          <span class="erp-note">+ ERP dashboard for owners on the web</span>
-          <div class="pay-toast" id="payToast" aria-hidden="true">
-            <span class="ic"><svg class="icon"><use href="#i-check" /></svg></span>
-            <div><b id="payTitle">Invoice #1042 paid</b><span id="payTxt">AED 275 · Card</span></div>
-          </div>
+      <div class="wrap hx-stage">
+        <div class="hx-video reveal" style="--d:.5s">
+          <video id="heroVideo" src="video/foamia-web.mp4" poster="images/video-poster.jpg" muted loop playsinline
+            preload="metadata" aria-label="Foamia product video: owner dashboard, branches and live performance"></video>
+          <button class="hv-sound" id="heroSound" type="button" aria-label="Turn sound on">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z" /><path id="hvWave" d="M23 9l-6 6M17 9l6 6" /></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -3128,19 +4618,17 @@
       </div>
     </div>
 
-    <!-- ============ MADE FOR ============ -->
-    <div class="madefor" id="who">
-      <div class="wrap">
-        <div class="madefor-box reveal">
-          <h2>Made for <em>car wash</em> &amp; service businesses</h2>
-          <ul class="types">
-            <li><span class="ti"><svg class="icon"><use href="#i-drop" /></svg></span>Car wash centres</li>
-            <li><span class="ti"><svg class="icon"><use href="#i-sparkle" /></svg></span>Detailing studios</li>
-            <li><span class="ti"><svg class="icon"><use href="#i-wrench" /></svg></span>Oil change &amp; lube centres</li>
-            <li><span class="ti"><svg class="icon"><use href="#i-fuel" /></svg></span>Fuel station washes</li>
-            <li><span class="ti"><svg class="icon"><use href="#i-building" /></svg></span>Multi-branch chains</li>
-          </ul>
-        </div>
+    <!-- ============ BUILT FOR ============ -->
+    <div class="builtfor" id="who">
+      <div class="wrap bf-row reveal">
+        <span class="bf-label">Built for</span>
+        <ul>
+          <li><svg class="icon"><use href="#i-drop" /></svg>Car wash centres</li>
+          <li><svg class="icon"><use href="#i-sparkle" /></svg>Detailing studios</li>
+          <li><svg class="icon"><use href="#i-wrench" /></svg>Oil change &amp; lube</li>
+          <li><svg class="icon"><use href="#i-fuel" /></svg>Fuel station washes</li>
+          <li><svg class="icon"><use href="#i-building" /></svg>Multi-branch chains</li>
+        </ul>
       </div>
     </div>
 
@@ -3154,119 +4642,78 @@
       </div>
     </section>
 
-    <!-- ============ PROBLEMS ============ -->
-    <section id="problems">
+    <!-- ============ BEFORE / AFTER ============ -->
+    <section class="sec" id="problems">
       <div class="wrap">
-        <div class="sec-head center reveal">
-          <span class="eyebrow">Sound familiar?</span>
-          <h2>Running a car wash <em>shouldn't</em> feel this hard</h2>
-          <p>These are the problems we hear from car wash and oil change owners every day. Foamia fixes each one.</p>
+        <div class="shead reveal">
+          <span class="eyebrow">Before &amp; after</span>
+          <h2>Running a car wash shouldn't feel <em>this hard.</em></h2>
+          <p>The problems car wash and oil change owners tell us about every day — and what changes with Foamia.</p>
         </div>
-        <div class="problems">
-          <div class="prob reveal">
-            <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
-              <div><small>Today</small>
-                <p>Job cards are on paper — nobody knows which car is ready.</p>
-              </div>
-            </div>
-            <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
-              <div><small>With Foamia</small>
-                <p>Every job's progress is tracked live: waiting, in progress or ready.</p>
-              </div>
-            </div>
+        <div class="cmp">
+          <div class="cmp-row cmp-head" aria-hidden="true"><span></span><span>Without Foamia</span><span>With Foamia</span></div>
+          <div class="cmp-row reveal">
+            <b class="cmp-topic">Job tracking</b>
+            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Paper job cards — nobody knows which car is ready.</p>
+            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Live status for every job: waiting, in progress or ready.</p>
           </div>
-          <div class="prob reveal" style="--d:.06s">
-            <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
-              <div><small>Today</small>
-                <p>Customer details and oil-change history live in a notebook — or nowhere.</p>
-              </div>
-            </div>
-            <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
-              <div><small>With Foamia</small>
-                <p>Every customer and car is saved: plate, phone, past washes and oil changes.</p>
-              </div>
-            </div>
+          <div class="cmp-row reveal" style="--d:0.05s">
+            <b class="cmp-topic">Customers</b>
+            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Customer details and oil-change history live in a notebook — or nowhere.</p>
+            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Every customer and car saved: plate, phone, past washes and oil changes.</p>
           </div>
-          <div class="prob reveal">
-            <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
-              <div><small>Today</small>
-                <p>Payments go into a drawer and the day's totals never add up.</p>
-              </div>
-            </div>
-            <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
-              <div><small>With Foamia</small>
-                <p>Every payment is entered against an invoice, by a named staff member.</p>
-              </div>
-            </div>
+          <div class="cmp-row reveal" style="--d:0.10s">
+            <b class="cmp-topic">Payments</b>
+            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Cash goes into a drawer and the day's totals never add up.</p>
+            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Every payment entered against an invoice, by a named staff member.</p>
           </div>
-          <div class="prob reveal" style="--d:.06s">
-            <div class="prob-before"><span class="mk"><svg class="icon"><use href="#i-x" /></svg></span>
-              <div><small>Today</small>
-                <p>Oil, filters or shampoo run out in the middle of a busy day.</p>
-              </div>
-            </div>
-            <div class="prob-after"><span class="mk"><svg class="icon"><use href="#i-check" /></svg></span>
-              <div><small>With Foamia</small>
-                <p>Track stock at every branch and reorder before you run out.</p>
-              </div>
-            </div>
+          <div class="cmp-row reveal" style="--d:0.15s">
+            <b class="cmp-topic">Stock</b>
+            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Oil, filters or shampoo run out in the middle of a busy day.</p>
+            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Stock tracked at every branch, with a low-stock alert before you run out.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ CLEAN. CHECK. COMPLETE. ============ -->
-    <section class="flow" id="how-it-works">
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="flow sec" id="how-it-works">
       <div class="wrap">
-        <div class="sec-head center reveal">
+        <div class="shead reveal">
           <span class="eyebrow">How it works</span>
-          <h2 class="flow-title">Clean. <em>Check.</em> Complete.</h2>
-          <p>Every car — in for a wash, an oil change or both — goes through three simple steps in Foamia, and you
-            can see every one of them live.</p>
+          <h2>Clean. <em>Check.</em> Complete.</h2>
+          <p>Every car — in for a wash, an oil change or both — moves through three steps. Your team updates it on
+            the app; you see it live on the dashboard.</p>
         </div>
-        <ol class="flow-steps">
-          <li class="fstep reveal">
-            <div class="fstep-img">
-              <img src="images/step-clean.jpg" style="object-position:50% 30%" alt="Car being sprayed with water in a wash bay"
-                loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:#155C93"><use href="#i-drop" /></svg>Dubai K 48211 · Wash + Oil</span>
-            </div>
-            <div class="fstep-body">
-              <div class="fstep-num"><b>STEP 01</b><i></i></div>
-              <h3>Clean</h3>
-              <span class="sub">Car checks in, the job starts.</span>
-              <p>Enter the number plate and Foamia brings up the customer and the car's history. Create the job — wash,
-                oil change or both — and assign it to a staff member.</p>
+        <ol class="hiw">
+          <li class="hiw-step reveal">
+            <span class="hiw-num">01</span>
+            <h3>Clean</h3>
+            <p>Enter the plate. Foamia brings up the customer and their history. Create the job and assign it.</p>
+            <div class="ui">
+              <div class="ui-top"><span class="plate sm"><small>DUBAI</small>K 48211</span><span class="ui-tag">New job</span></div>
+              <div class="ui-line"><span>Full wash + Oil change</span><b>AED 275</b></div>
+              <div class="ui-line"><span>Assigned to</span><b>Ahmed · Bay 2</b></div>
             </div>
           </li>
-          <li class="fstep reveal" style="--d:.08s">
-            <div class="fstep-img">
-              <img src="images/step-check.jpg" alt="Freshly rinsed car being checked"
-                loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:#C98A00"><use href="#i-gauge" /></svg>In progress ·
-                70%</span>
-            </div>
-            <div class="fstep-body">
-              <div class="fstep-num"><b>STEP 02</b><i></i></div>
-              <h3>Check</h3>
-              <span class="sub">Track the work, live.</span>
-              <p>Staff update each job as it moves along. You see which cars are waiting, in progress or ready — at
-                every branch, from one screen.</p>
+          <li class="hiw-step reveal" style="--d:.08s">
+            <span class="hiw-num">02</span>
+            <h3>Check</h3>
+            <p>Staff tick off each step on their phone. You see which cars are waiting, in progress or ready.</p>
+            <div class="ui">
+              <div class="ui-prog"><span>Foam wash</span><span class="bar"><i style="--w:100%;background:var(--ok)"></i></span><b>Done</b></div>
+              <div class="ui-prog"><span>Oil change</span><span class="bar"><i style="--w:70%;background:#C98A00"></i></span><b>70%</b></div>
+              <div class="ui-prog"><span>Final check</span><span class="bar"><i style="--w:0%"></i></span><b>Next</b></div>
             </div>
           </li>
-          <li class="fstep reveal" style="--d:.16s">
-            <div class="fstep-img">
-              <img src="images/step-complete.jpg" alt="Clean, shining black car ready for pickup"
-                loading="lazy" width="1920" height="1080">
-              <span class="chip"><svg class="icon" style="color:var(--ok)"><use href="#i-check" /></svg>Invoice #1042 ·
-                Paid</span>
-            </div>
-            <div class="fstep-body">
-              <div class="fstep-num"><b>STEP 03</b><i></i></div>
-              <h3>Complete</h3>
-              <span class="sub">Invoice, payment, done.</span>
-              <p>Create the invoice in seconds and enter the payment. It's saved against the customer, the staff member
-                and the branch — so every dirham is accounted for.</p>
+          <li class="hiw-step reveal" style="--d:.16s">
+            <span class="hiw-num">03</span>
+            <h3>Complete</h3>
+            <p>Create the invoice in seconds and enter the payment — saved to the customer, staff and branch.</p>
+            <div class="ui">
+              <div class="ui-top"><b>Invoice #1042</b><span class="ui-tag ok">Paid</span></div>
+              <div class="ui-line"><span>Card · Ahmed's shift</span><b>AED 275</b></div>
+              <div class="ui-line"><span>Revenue today</span><b class="up">AED 2,415 ▲</b></div>
             </div>
           </li>
         </ol>
@@ -3276,9 +4723,9 @@
     <!-- ============ FEATURES ============ -->
     <section id="features">
       <div class="wrap">
-        <div class="sec-head reveal">
+        <div class="shead reveal">
           <span class="eyebrow">Features</span>
-          <h2>Everything your car wash needs, in <em>one app</em></h2>
+          <h2>Everything your car wash needs, in <em>one app.</em></h2>
           <p>From the first wash to the final invoice — every part of your business, connected.</p>
         </div>
 
@@ -3413,10 +4860,10 @@
     <!-- ============ GET STARTED ============ -->
     <section class="start" id="get-started">
       <div class="wrap">
-        <div class="sec-head center reveal">
+        <div class="shead reveal">
           <span class="eyebrow">Getting started</span>
-          <h2>Up and running in <em>one week</em></h2>
-          <p>You don't need to be good with computers. Our team sets up your car wash with you.</p>
+          <h2>Live in <em>one week.</em></h2>
+          <p>You don't need to be good with computers. Our team sets up your car wash with you, step by step.</p>
         </div>
         <ol class="steps">
           <li class="step reveal">
@@ -3452,7 +4899,7 @@
       <div class="wrap faq-grid">
         <div class="sec-head reveal">
           <span class="eyebrow">FAQ</span>
-          <h2>Questions car wash <em>owners</em> ask</h2>
+          <h2>Questions owners <em>ask.</em></h2>
           <p>Can't find your answer? <a href="#demo" style="color:var(--red);font-weight:700;text-decoration:underline">Talk
               to our team</a>.</p>
         </div>
@@ -3493,11 +4940,11 @@
         <div class="cta-box reveal">
           <div style="position:relative;z-index:1">
             <span class="cta-tagline">CLEAN. CHECK. COMPLETE.</span>
-            <h2>See Foamia running <em>your</em> car wash</h2>
+            <h2>See Foamia running <em>your car wash.</em></h2>
             <p>Book a free 20-minute demo. We'll set up your centre live on the call — no commitment.</p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-white" href="#">Book my free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
+            <a class="btn btn-red" href="#">Book my free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
             <a class="btn btn-outline-white" href="#">Talk to our team</a>
             <small><svg class="icon" style="width:16px;height:16px"><use href="#i-check" /></svg>No card needed · Live
               in under a week</small>
@@ -3536,7 +4983,6 @@
           <ul>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#">Help centre</a></li>
-            <li><a href="#">Log in</a></li>
           </ul>
         </div>
       </div>
@@ -3563,12 +5009,7 @@
       new Promise(r => setTimeout(r, 2500))
     ]).then(() => {
       root.classList.add('loaded');
-      // invoice popup snaps in once the dashboard and phone have landed
-      if (!reduce) setTimeout(() => {
-        const t = document.getElementById('payToast');
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 2600);
-      }, 1500);
+
       document.querySelectorAll('.hero .reveal').forEach(el => { el.classList.add('in'); io.unobserve(el); });
     });
 
@@ -3615,15 +5056,6 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // Hero car: angle the car along the diagonal road
-    const drive = document.getElementById('drive');
-    const aimCar = () => {
-      const r = drive.getBoundingClientRect();
-      drive.style.setProperty('--ang', (-Math.atan2(r.height, r.width) * 180 / Math.PI).toFixed(1) + 'deg');
-    };
-    aimCar();
-    addEventListener('resize', aimCar);
-
     // Count-up numbers when they scroll into view
     const counter = new IntersectionObserver(entries => entries.forEach(e => {
       if (!e.isIntersecting) return;
@@ -3640,6 +5072,7 @@
     }), { threshold: .6 });
     document.querySelectorAll('[data-count]').forEach(el => counter.observe(el));
 
+    if (document.getElementById('jobs')) {
     // Hero dashboard: jobs progress live; finished jobs become paid invoices and add to revenue
     const jobRows = [...document.querySelectorAll('#jobs .jrow')].map(el => ({ el, p: +el.dataset.p, amt: +el.dataset.amt, hold: 0, wait: 0 }));
     const amtEl = document.getElementById('kpiAmt'), carsEl = document.getElementById('kpiCars'), progEl = document.getElementById('kpiProg');
@@ -3661,16 +5094,30 @@
       phBtn.classList.toggle('done', r0.p >= 100);
       phBtn.textContent = r0.p >= 100 ? '✓ Marked ready' : r0.p === 0 ? 'Start job' : 'Mark as ready';
     }
+    // staff app → Foamia → owner dashboard
+    const syncChip = document.getElementById('syncChip'), jobsDone = document.getElementById('jobsDone');
+    let done = 12, syncTimer;
     function completeJob(r) {
-      if (cars >= 34) { amt = 2140; cars = 27; }
-      amt += r.amt; cars += 1; invoice += 1;
-      amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
-      carsEl.textContent = cars;
-      payTitle.textContent = 'Invoice #' + invoice + ' paid';
-      payTxt.textContent = 'AED ' + r.amt + ' · ' + (invoice % 2 ? 'Card' : 'Cash');
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+      const fromPhone = r === jobRows[0];
+      if (fromPhone) {
+        syncChip.classList.add('show');
+        clearTimeout(syncTimer);
+        syncTimer = setTimeout(() => syncChip.classList.remove('show'), 1800);
+      }
+      setTimeout(() => {
+        if (cars >= 34) { amt = 2140; cars = 27; done = 12; }
+        amt += r.amt; cars += 1; invoice += 1; done += 1;
+        amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
+        carsEl.textContent = cars;
+        document.getElementById('lbCars').textContent = cars;
+        jobsDone.textContent = done;
+        payTitle.textContent = 'Invoice #' + invoice + ' · Paid';
+        payTxt.textContent = 'AED ' + r.amt + ' · ' + (invoice % 2 ? 'Card' : 'Cash');
+        toast.classList.add('show');
+        amtEl.parentElement.classList.add('bump');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { toast.classList.remove('show'); amtEl.parentElement.classList.remove('bump'); }, 1400);
+      }, fromPhone ? 700 : 0);
     }
     function tickJobs() {
       let completed = false;
@@ -3686,6 +5133,23 @@
     }
     renderJobs();
     if (!reduce) setTimeout(() => setInterval(tickJobs, 1700), 1800);
+
+    }
+
+    // Hero video: start after the page has loaded, pause when off-screen
+    const hv = document.getElementById('heroVideo');
+    if (hv) {
+      const tryPlay = () => { if (!reduce) hv.play().catch(() => {}); };
+      addEventListener('load', () => setTimeout(tryPlay, 400));
+      new IntersectionObserver(([e]) => e.isIntersecting ? tryPlay() : hv.pause(), { threshold: .25 }).observe(hv);
+      const snd = document.getElementById('heroSound'), wave = document.getElementById('hvWave');
+      snd.addEventListener('click', () => {
+        hv.muted = !hv.muted;
+        if (!hv.muted) { hv.currentTime = 0; hv.play(); }
+        snd.setAttribute('aria-label', hv.muted ? 'Turn sound on' : 'Mute');
+        wave.setAttribute('d', hv.muted ? 'M23 9l-6 6M17 9l6 6' : 'M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14');
+      });
+    }
 
     // Manifesto: split into words, light them up with scroll progress
     const man = document.getElementById('manifesto');
