@@ -2505,15 +2505,37 @@
     }
 
     @keyframes drive {
-      0% { left: 0; top: 100%; opacity: 0; }
-      8% { opacity: 1; }
-      78% { opacity: 1; }
-      86% { left: 100%; top: 0; opacity: 0; }
-      100% { left: 100%; top: 0; opacity: 0; }
+      0% {
+        left: 0;
+        top: 100%;
+        opacity: 0;
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      78% {
+        opacity: 1;
+      }
+
+      86% {
+        left: 100%;
+        top: 0;
+        opacity: 0;
+      }
+
+      100% {
+        left: 100%;
+        top: 0;
+        opacity: 0;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .drive { display: none; }
+      .drive {
+        display: none;
+      }
     }
 
     /* Headline accent: same serif, upright and bold — confident, not playful */
@@ -3342,6 +3364,7 @@
 
     /* tablet: drop the outer cards, keep phone + dashboard */
     @media (max-width: 1240px) {
+
       .fc-rev,
       .fc-stock {
         display: none;
@@ -4509,6 +4532,2612 @@
         width: calc(100% - 24px);
       }
     }
+
+    /* ===== Hero live layer over the video ===== */
+    .eb-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 12px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fff;
+      letter-spacing: .1em;
+    }
+
+    .eb-live i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red-on-dark);
+      animation: blink 1.6s infinite;
+    }
+
+    .hx-stage {
+      margin-top: 24px !important;
+      padding-top: 32px !important;
+    }
+
+    .hx-stage .live-bar {
+      top: 26px;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      width: max-content;
+      margin: 0 auto;
+      translate: none;
+    }
+
+    .js .hx-stage .live-bar.reveal.in,
+    .js .hx-stage .live-bar.reveal {
+      transform: none;
+    }
+
+    .ev-card {
+      position: absolute;
+      z-index: 3;
+      top: 46%;
+      left: max(16px, calc(50% - 490px - 28px));
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px 12px 12px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(20, 20, 20, .3), 0 8px 16px -8px rgba(20, 20, 20, .1);
+      white-space: nowrap;
+      transition: opacity .35s var(--ease), transform .35s var(--ease);
+    }
+
+    .ev-card.swap {
+      opacity: 0 !important;
+      transform: translateY(8px) !important;
+    }
+
+    .ev-ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--ok);
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .ev-ic svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .ev-card b {
+      display: block;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .ev-card small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      .eb-live {
+        display: none;
+      }
+
+      .hx-stage {
+        padding-top: 36px !important;
+      }
+
+      .hx-stage .live-bar {
+        top: 18px;
+        font-size: 11.5px;
+      }
+
+      .ev-card {
+        top: auto;
+        bottom: 14px;
+        left: 22px;
+        padding: 8px 12px 8px 8px;
+      }
+
+      .ev-ic {
+        width: 28px;
+        height: 28px;
+      }
+
+      .ev-card b {
+        font-size: 12.5px;
+      }
+
+      .ev-card small {
+        font-size: 11px;
+      }
+    }
+
+    /* ===== How it works: guided walkthrough ===== */
+    .wt {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .wt-steps {
+      list-style: none;
+      position: relative;
+      display: grid;
+      gap: 6px;
+    }
+
+    .wt-steps::before {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 30px;
+      bottom: 30px;
+      width: 1px;
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .wt-step {
+      position: relative;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px 20px 20px 0;
+      border: 0;
+      border-radius: 14px;
+      background: none;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background .4s var(--ease);
+    }
+
+    .wt-n {
+      position: relative;
+      z-index: 1;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #1B1B1D;
+      border: 1px solid rgba(255, 255, 255, .14);
+      font-size: 14px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, .5);
+      transition: all .4s var(--ease);
+    }
+
+    .wt-t b {
+      display: block;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, .45);
+      margin: 10px 0 6px;
+      transition: color .4s;
+    }
+
+    .wt-t small {
+      display: block;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, .4);
+      max-width: 380px;
+      transition: color .4s;
+    }
+
+    .wt-step.on {
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .wt-step.on .wt-n {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    .wt-step.on .wt-t b {
+      color: #fff;
+    }
+
+    .wt-step.on .wt-t small {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .wt-bar {
+      position: absolute;
+      left: 74px;
+      right: 20px;
+      bottom: 0;
+      height: 2px;
+      background: var(--red-on-dark);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .wt-step.on .wt-bar {
+      animation: wtfill 4.5s linear forwards;
+    }
+
+    @keyframes wtfill {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .wt-screen {
+      position: relative;
+      background: #fff;
+      border-radius: 18px;
+      color: var(--ink);
+      min-height: 480px;
+      box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
+      overflow: hidden;
+    }
+
+    .wt-chrome {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .wt-chrome i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D6D1CA;
+    }
+
+    .wt-chrome span {
+      margin-left: 8px;
+    }
+
+    .wt-pane>* {
+      flex-shrink: 0;
+    }
+
+    .wt-pane {
+      position: absolute;
+      inset: 45px 0 0;
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .45s var(--ease), transform .55s var(--ease);
+      pointer-events: none;
+    }
+
+    .wt-pane.on {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .wp-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wp-head small {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .wp-head b {
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .wp-cust {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--paper);
+    }
+
+    .wp-cust b {
+      display: block;
+      font-size: 14px;
+    }
+
+    .wp-cust small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .wp-av {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .wp-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: -6px;
+    }
+
+    .wp-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .wp-chips span {
+      padding: 6px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .wp-chips span.on {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .wp-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .wp-row b {
+      color: var(--ink);
+    }
+
+    .wp-row b.ok {
+      color: var(--ok);
+    }
+
+    .wp-row.total {
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 16px;
+    }
+
+    .wp-row.total span {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .wp-btn {
+      margin-top: auto;
+      flex-shrink: 0;
+      height: 46px;
+      border-radius: 10px;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .wp-pill {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 7px;
+    }
+
+    .wp-pill.amber {
+      background: #FFF2D6;
+      color: #7A5200;
+    }
+
+    .wp-pill.green {
+      background: var(--ok-soft);
+      color: var(--ok);
+    }
+
+    .wp-check {
+      list-style: none;
+      display: grid;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .wp-check li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .wp-check li span {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid #CFCBC4;
+      flex-shrink: 0;
+    }
+
+    .wp-check li.done {
+      color: var(--ink);
+    }
+
+    .wp-check li.done span {
+      border-color: var(--ok);
+      background: var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
+    }
+
+    .wp-check li.doing {
+      color: var(--ink);
+    }
+
+    .wp-check li.doing span {
+      border-color: #C98A00;
+      border-width: 3px;
+    }
+
+    .wp-check em {
+      margin-left: auto;
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .wp-mini {
+      width: 90px;
+      height: 6px;
+      border-radius: 6px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .wp-mini i {
+      display: block;
+      height: 100%;
+      background: #C98A00;
+      border-radius: 6px;
+    }
+
+    .wp-rev {
+      margin-top: auto;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, .6);
+      font-size: 13px;
+    }
+
+    .wp-rev b {
+      margin-left: auto;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .wp-rev em {
+      font-style: normal;
+      font-weight: 700;
+      color: #7BD88F;
+    }
+
+    @media (max-width: 1080px) {
+      .wt {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wt-t b {
+        font-size: 21px;
+        margin-top: 6px;
+      }
+
+      .wt-t small {
+        font-size: 14px;
+      }
+
+      .wt-step {
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+        padding: 14px 14px 16px 0;
+      }
+
+      .wt-n {
+        width: 44px;
+        height: 44px;
+        font-size: 12px;
+      }
+
+      .wt-steps::before {
+        left: 21px;
+      }
+
+      .wt-bar {
+        left: 58px;
+      }
+
+      .wt-screen {
+        min-height: 0;
+      }
+
+      .wt-pane {
+        position: static;
+        display: none;
+        transform: none;
+      }
+
+      .wt-pane.on {
+        display: flex;
+      }
+
+      .wt-pane {
+        padding: 20px 18px;
+      }
+    }
+
+    /* ===== Features: uniform 3x3 module grid ===== */
+    .mods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mod {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition: border-color .3s, box-shadow .3s;
+    }
+
+    .mod:hover {
+      border-color: #D6D0C8;
+      box-shadow: 0 20px 40px -24px rgba(20, 20, 20, .18);
+    }
+
+    .mod-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .mod-ic {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .mod-ic svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .mod-n {
+      font-size: 12px;
+      font-weight: 700;
+      color: #B8B3AC;
+      letter-spacing: .08em;
+    }
+
+    .mod h3 {
+      font-size: 19px;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .mod>p {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .mod-prev {
+      margin-top: auto;
+      height: 128px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 9px;
+      font-size: 13px;
+    }
+
+    .mp-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--ink-2);
+    }
+
+    .mp-row b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .mp-row.muted span,
+    .mp-row.muted b {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .mp-row.strong {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .mp-row b.low {
+      color: var(--red);
+    }
+
+    .mp-row b.tag-ok {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--ok-soft);
+      color: var(--ok);
+    }
+
+    .mod-prev .plate.sm {
+      align-self: flex-start;
+      background: #fff;
+    }
+
+    .mp-bar {
+      display: grid;
+      grid-template-columns: 86px 1fr 38px;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .mp-bar i {
+      height: 6px;
+      border-radius: 6px;
+      background: #E6E1DA;
+      overflow: hidden;
+    }
+
+    .mp-bar em {
+      display: block;
+      height: 100%;
+      border-radius: 6px;
+      background: var(--red);
+    }
+
+    .mp-bar b {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mp-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mp-chips span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .mp-chips span::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c);
+    }
+
+    @media (max-width: 1080px) {
+      .mods {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mods {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== Features: interactive module index ===== */
+    .idx {
+      list-style: none;
+      border-top: 1px solid var(--ink);
+    }
+
+    .idx-group {
+      padding: 28px 0 10px;
+    }
+
+    .idx-group span {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .idx-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 64px minmax(260px, 1.1fr) 1fr 48px;
+      align-items: center;
+      gap: 24px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: default;
+      transition: padding .5s var(--ease);
+    }
+
+    .idx-n {
+      font-size: 13px;
+      font-weight: 700;
+      color: #B8B3AC;
+      letter-spacing: .06em;
+    }
+
+    .idx-row h3 {
+      font-size: clamp(24px, 2.6vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      transition: color .3s, transform .5s var(--ease);
+    }
+
+    .idx-row p {
+      font-size: 16px;
+      color: var(--muted);
+      transition: color .3s;
+    }
+
+    .idx-go {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      transition: all .4s var(--ease);
+    }
+
+    .idx-go svg {
+      width: 18px;
+      height: 18px;
+      transform: rotate(-45deg);
+      transition: transform .4s var(--ease);
+    }
+
+    .idx-prev {
+      display: none;
+    }
+
+    @media (hover: hover) {
+      .idx-row:hover h3 {
+        color: var(--red);
+        transform: translateX(8px);
+      }
+
+      .idx-row:hover p {
+        color: var(--ink-2);
+      }
+
+      .idx-row:hover .idx-go {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+      }
+
+      .idx-row:hover .idx-go svg {
+        transform: none;
+      }
+    }
+
+    .idx-float {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 60;
+      width: 300px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 30px 60px -18px rgba(20, 20, 20, .35), 0 0 0 1px rgba(20, 20, 20, .06);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .idx-float.on {
+      opacity: 1;
+    }
+
+    .idx-float .plate.sm {
+      align-self: flex-start;
+    }
+
+    @media (max-width: 860px) {
+      .idx-row {
+        grid-template-columns: 40px 1fr;
+        gap: 6px 14px;
+        padding: 22px 0;
+      }
+
+      .idx-row p {
+        grid-column: 2;
+        font-size: 15px;
+      }
+
+      .idx-go,
+      .idx-float {
+        display: none;
+      }
+
+      .idx-prev {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 14px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--line);
+        font-size: 13px;
+      }
+
+      .idx-prev .plate.sm {
+        align-self: flex-start;
+      }
+    }
+
+    /* ===== Before / after switch ===== */
+    .ba-toggle {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: max-content;
+      margin: 0 auto 40px;
+      padding: 6px;
+      border-radius: 999px;
+      background: #EAE5DF;
+    }
+
+    .ba-toggle button {
+      position: relative;
+      z-index: 1;
+      padding: 14px 30px;
+      border: 0;
+      background: none;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color .4s var(--ease);
+    }
+
+    .ba-knob {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      left: 6px;
+      width: calc(50% - 6px);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 6px 16px -6px rgba(20, 20, 20, .25);
+      transition: transform .6s var(--ease), background .6s var(--ease);
+    }
+
+    .ba[data-state="no"] .ba-toggle button[data-s="no"] {
+      color: var(--ink);
+    }
+
+    .ba[data-state="yes"] .ba-knob {
+      transform: translateX(100%);
+      background: var(--red);
+    }
+
+    .ba[data-state="yes"] .ba-toggle button[data-s="yes"] {
+      color: #fff;
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ba-tile {
+      position: relative;
+      min-height: 250px;
+      padding: 24px;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: background .6s var(--ease), border-color .6s var(--ease), transform .6s var(--ease), box-shadow .6s var(--ease);
+    }
+
+    .ba-topic {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      transition: color .5s;
+    }
+
+    .ba-no,
+    .ba-yes {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 64px;
+      bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: opacity .45s var(--ease), transform .6s var(--ease), filter .6s;
+    }
+
+    .ba-no b {
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #8B857D;
+      text-decoration: line-through;
+      text-decoration-color: rgba(189, 32, 37, .55);
+      text-decoration-thickness: 2px;
+    }
+
+    .ba-tile p {
+      margin-top: auto;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+
+    .ba-no p {
+      color: #9A948C;
+    }
+
+    .ba-yes p {
+      color: var(--muted);
+    }
+
+    /* without: paper / chaos */
+    .ba[data-state="no"] .ba-tile {
+      background: #ECE7E0;
+      border: 1.5px dashed #CFC8BE;
+    }
+
+    .ba[data-state="no"] .ba-tile:nth-child(odd) {
+      transform: rotate(-1.2deg);
+    }
+
+    .ba[data-state="no"] .ba-tile:nth-child(even) {
+      transform: rotate(1deg) translateY(6px);
+    }
+
+    .ba[data-state="no"] .ba-topic {
+      color: #A39C93;
+    }
+
+    .ba[data-state="no"] .ba-yes {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+    }
+
+    /* with: crisp Foamia */
+    .ba[data-state="yes"] .ba-tile {
+      background: #fff;
+      border: 1.5px solid #fff;
+      box-shadow: 0 24px 48px -26px rgba(20, 20, 20, .25);
+    }
+
+    .ba[data-state="yes"] .ba-topic {
+      color: var(--red);
+    }
+
+    .ba[data-state="yes"] .ba-no {
+      opacity: 0;
+      transform: translateY(-16px);
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .by-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .by-pills span {
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--paper);
+      color: var(--ink-2);
+    }
+
+    .by-pills .g {
+      background: var(--ok-soft);
+      color: var(--ok);
+    }
+
+    .by-pills .a {
+      background: #FFF2D6;
+      color: #7A5200;
+    }
+
+    .by-cust {
+      display: grid;
+      gap: 10px;
+      justify-items: start;
+    }
+
+    .by-cust b {
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .by-big {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .by-big em {
+      display: block;
+      font-style: normal;
+      font-size: 14px;
+      color: var(--ok);
+      margin-top: 4px;
+    }
+
+    .by-alert {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 2px 10px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--red-soft);
+    }
+
+    .by-alert span {
+      grid-row: span 2;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .by-alert b {
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .by-alert small {
+      font-size: 12px;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    @media (max-width: 1080px) {
+      .ba-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .ba-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ba-tile {
+        min-height: 200px;
+      }
+
+      .ba-toggle button {
+        padding: 12px 18px;
+        font-size: 14px;
+      }
+    }
+
+    /* ===== Results: before → after bars ===== */
+    .proof.sec {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .proof .shead h2 {
+      color: #fff;
+    }
+
+    .proof .shead h2 em {
+      color: var(--red-on-dark);
+    }
+
+    .proof .shead p {
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .rs {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .rs-list {
+      border-top: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .rs-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 26px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .rs-head b {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .6);
+      margin-bottom: 4px;
+    }
+
+    .rs-big {
+      display: block;
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .rs-big span {
+      color: inherit;
+    }
+
+    .rs-head small {
+      font-size: 13px;
+      color: var(--red-on-dark);
+      font-weight: 600;
+    }
+
+    .rs-bars {
+      display: grid;
+      gap: 12px;
+    }
+
+    .rs-bar {
+      display: grid;
+      grid-template-columns: 62px 1fr 64px;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+    }
+
+    .rs-bar span {
+      color: rgba(255, 255, 255, .45);
+      font-weight: 600;
+    }
+
+    .rs-bar i {
+      height: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .06);
+      overflow: hidden;
+    }
+
+    .rs-bar em {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 10px;
+      transition: width 1.4s var(--ease);
+    }
+
+    .rs-row.in .rs-bar em {
+      width: var(--w);
+    }
+
+    .rs-bar.before em {
+      background: rgba(255, 255, 255, .28);
+    }
+
+    .rs-bar.after em {
+      background: var(--red-on-dark);
+      transition-delay: .3s;
+    }
+
+    .rs-bar b {
+      text-align: right;
+      color: rgba(255, 255, 255, .55);
+      font-weight: 700;
+    }
+
+    .rs-bar.after span,
+    .rs-bar.after b {
+      color: #fff;
+    }
+
+    .rs-quote {
+      position: sticky;
+      top: 110px;
+      margin: 0;
+      padding: 32px;
+      border-radius: 20px;
+      background: #fff;
+      color: var(--ink-2);
+    }
+
+    .rs-mark {
+      display: block;
+      font-size: 72px;
+      line-height: .6;
+      font-weight: 800;
+      color: var(--red);
+      height: 34px;
+    }
+
+    .rs-quote blockquote {
+      font-size: 19px;
+      line-height: 1.5;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .rs-quote mark {
+      background: none;
+      color: var(--red);
+    }
+
+    .rs-quote figcaption {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rs-quote .av {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .rs-quote figcaption b {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .rs-quote figcaption small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .rs-stars {
+      margin-top: 18px;
+      color: #E3A008;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    .rs-stars span {
+      margin-left: 6px;
+      font-size: 13px;
+      letter-spacing: 0;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 1080px) {
+      .rs {
+        grid-template-columns: 1fr;
+      }
+
+      .rs-quote {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .rs-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 22px 0;
+      }
+
+      .rs-big {
+        font-size: 36px;
+      }
+
+      .rs-quote {
+        padding: 24px;
+      }
+    }
+
+    /* ===== Results: contrast hierarchy ===== */
+    .rs-head b {
+      color: rgba(255, 255, 255, .75);
+      font-size: 15px;
+    }
+
+    .rs-big {
+      font-size: 52px;
+    }
+
+    .rs-head small {
+      color: rgba(255, 255, 255, .45);
+      font-weight: 500;
+    }
+
+    .rs-bar span,
+    .rs-bar.before b {
+      color: rgba(255, 255, 255, .35);
+    }
+
+    .rs-bar.before em {
+      background: rgba(255, 255, 255, .16);
+    }
+
+    .rs-bar.after span {
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .rs-bar.after b {
+      color: #fff;
+    }
+
+    /* quote: supporting, not competing */
+    .rs-quote {
+      background: #1B1B1D;
+      border: 1px solid rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .rs-mark {
+      color: var(--red-on-dark);
+      opacity: .8;
+    }
+
+    .rs-quote blockquote {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .rs-quote mark {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .rs-quote figcaption {
+      border-bottom-color: rgba(255, 255, 255, .1);
+    }
+
+    .rs-quote .av {
+      background: var(--red);
+    }
+
+    .rs-quote figcaption b {
+      color: #fff;
+    }
+
+    .rs-quote figcaption small,
+    .rs-stars span {
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .rs-stars {
+      font-size: 14px;
+    }
+
+    /* ===== Before/after cards: one consistent structure ===== */
+    .ba-tile {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 0;
+      padding: 22px;
+    }
+
+    .ba-topic {
+      margin-bottom: 14px;
+    }
+
+    .ba-no,
+    .ba-yes {
+      position: static;
+      grid-area: 2 / 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ba-tile p {
+      margin-top: 0;
+      font-size: 14.5px;
+      line-height: 1.5;
+    }
+
+    /* the visual sits in a same-size "app screen" panel */
+    .ba-no>b,
+    .ba-yes>:first-child {
+      height: 116px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+
+    .ba-yes>:first-child {
+      background: var(--paper);
+    }
+
+    .ba-no>b {
+      background: rgba(255, 255, 255, .45);
+      border: 1.5px dashed #D3CCC2;
+      font-size: 22px;
+    }
+
+    .by-pills {
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: flex-start !important;
+    }
+
+    .by-pills span {
+      background: #fff;
+    }
+
+    .by-cust {
+      align-items: flex-start;
+    }
+
+    .by-big {
+      font-size: 30px;
+    }
+
+    .by-alert {
+      background: var(--paper) !important;
+      padding: 14px 16px !important;
+      display: grid !important;
+      align-content: center;
+    }
+
+    .ba[data-state="yes"] .ba-tile {
+      box-shadow: 0 1px 2px rgba(20, 20, 20, .04), 0 18px 36px -28px rgba(20, 20, 20, .3);
+      border: 1px solid var(--line);
+    }
+
+    .ba[data-state="yes"] .ba-topic {
+      color: var(--ink);
+    }
+
+    /* ===== How it works: refinements ===== */
+    .flow .shead {
+      margin-bottom: 44px;
+    }
+
+    .wt {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+
+    .wt-screen {
+      max-width: 540px;
+      justify-self: end;
+      width: 100%;
+    }
+
+    /* inactive steps readable (~50%) */
+    .wt-t b {
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .wt-t small {
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .wt-n {
+      color: rgba(255, 255, 255, .6);
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    .wt-steps::before {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    /* progress indicator: quiet white, not another red accent */
+    .wt-bar {
+      height: 2px;
+      background: rgba(255, 255, 255, .35);
+    }
+
+    /* ===== Features index: refined ===== */
+    .idx-group {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      padding: 56px 0 14px;
+    }
+
+    .idx-group:first-child {
+      padding-top: 36px;
+    }
+
+    .idx-group b {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .idx-row h3 {
+      font-size: clamp(22px, 2.2vw, 30px);
+    }
+
+    .idx-row p {
+      font-size: 16px;
+      color: var(--ink-2);
+    }
+
+    @media (hover: hover) and (min-width: 861px) {
+      .idx-go {
+        opacity: 0;
+        transform: translateX(-8px);
+      }
+
+      .idx-row:hover .idx-go {
+        opacity: 1;
+        transform: none;
+      }
+
+      .idx-row:hover h3 {
+        color: var(--ink);
+        transform: translateX(6px);
+      }
+
+      .idx-row:hover .idx-n {
+        color: var(--red);
+      }
+
+      /* preview anchored to its own row, replacing the description */
+      .idx-prev {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: absolute;
+        z-index: 5;
+        right: 76px;
+        top: 50%;
+        width: 340px;
+        padding: 14px 16px;
+        font-size: 13px;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 24px 48px -18px rgba(20, 20, 20, .3), 0 0 0 1px rgba(20, 20, 20, .06);
+        opacity: 0;
+        transform: translateY(-50%) scale(.96);
+        transition: opacity .3s var(--ease), transform .4s var(--ease);
+        pointer-events: none;
+      }
+
+      .idx-prev .plate.sm {
+        align-self: flex-start;
+      }
+
+      .idx-row:hover .idx-prev {
+        opacity: 1;
+        transform: translateY(-50%);
+      }
+
+      .idx-row:hover p {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .idx-group {
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 40px;
+      }
+
+      .idx-group b {
+        font-size: 19px;
+      }
+    }
+
+    /* ===== Features: spotlight list + sticky product panel ===== */
+    .idx-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .idx-group {
+      padding: 44px 0 10px !important;
+    }
+
+    .idx-group:first-child {
+      padding-top: 28px !important;
+    }
+
+    .idx-group b {
+      font-size: 17px !important;
+      font-weight: 600 !important;
+      color: var(--muted) !important;
+    }
+
+    .idx-row {
+      grid-template-columns: 44px 1fr !important;
+      gap: 0 16px !important;
+      padding: 18px 0 18px 16px !important;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .idx-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      border-radius: 3px;
+      background: var(--red);
+      transform: scaleY(0);
+      transition: transform .5s var(--ease);
+    }
+
+    .idx-row h3 {
+      grid-column: 2;
+      font-size: clamp(22px, 2.1vw, 30px) !important;
+      color: #BDB6AD !important;
+      transform: none !important;
+      transition: color .4s var(--ease) !important;
+    }
+
+    .idx-row p {
+      grid-column: 2;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0 !important;
+      transition: max-height .5s var(--ease), opacity .4s, margin .5s var(--ease);
+    }
+
+    .idx-n {
+      grid-row: 1;
+      transition: color .4s;
+    }
+
+    .idx-go,
+    .idx-row .idx-prev {
+      display: none !important;
+    }
+
+    .idx-row.on::before {
+      transform: none;
+    }
+
+    .idx-row.on h3 {
+      color: var(--ink) !important;
+    }
+
+    .idx-row.on .idx-n {
+      color: var(--red) !important;
+    }
+
+    .idx-row.on p {
+      max-height: 60px;
+      opacity: 1 !important;
+      margin-top: 6px;
+    }
+
+    .idx-panel {
+      position: sticky;
+      top: 120px;
+      padding-top: 28px;
+    }
+
+    .ip-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: 0 30px 60px -30px rgba(20, 20, 20, .25);
+      overflow: hidden;
+    }
+
+    .ip-chrome {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .ip-chrome i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D6D1CA;
+    }
+
+    .ip-chrome span {
+      margin-left: 8px;
+    }
+
+    .ip-chrome b {
+      color: var(--red);
+    }
+
+    .ip-body {
+      padding: 28px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      transition: opacity .18s ease, transform .3s var(--ease);
+    }
+
+    .ip-body.swap {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .ip-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: .08em;
+    }
+
+    .ip-body h4 {
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      margin: 6px 0 6px;
+    }
+
+    .ip-body p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .ip-prev {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: var(--paper);
+      font-size: 15px;
+    }
+
+    .ip-prev .plate.sm {
+      align-self: flex-start;
+      background: #fff;
+    }
+
+    .ip-prev .mp-bar {
+      grid-template-columns: 110px 1fr 44px;
+    }
+
+    @media (max-width: 860px) {
+      .idx-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .idx-panel {
+        display: none;
+      }
+
+      .idx-row h3 {
+        color: var(--ink) !important;
+      }
+
+      .idx-row p {
+        max-height: none;
+        opacity: 1 !important;
+        margin-top: 6px;
+      }
+
+      .idx-row .idx-prev {
+        display: flex !important;
+        grid-column: 2;
+      }
+
+      .idx-row::before {
+        display: none;
+      }
+    }
+
+    /* ===== Results v3: one hero stat, three supporting, quote strip ===== */
+    .rs2 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .rs-hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 44px 48px;
+      border-radius: 22px;
+      background: #1B1B1D;
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .rh-num {
+      font-size: clamp(88px, 11vw, 160px);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: .9;
+      color: var(--red-on-dark);
+    }
+
+    .rh-num span {
+      color: inherit;
+    }
+
+    .rh-copy b {
+      display: block;
+      font-size: 24px;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .rh-copy p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, .55);
+      max-width: 480px;
+      margin-bottom: 22px;
+    }
+
+    .rh-bars {
+      display: grid;
+      gap: 10px;
+      max-width: 520px;
+    }
+
+    .rh-bars .rs-bar {
+      grid-template-columns: 62px 1fr 72px;
+    }
+
+    .rh-bars .rs-bar b {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .rs-hero.in .rs-bar em {
+      width: var(--w);
+    }
+
+    .rs-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .rs-card {
+      padding: 28px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .rc-num {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .rc-num span {
+      color: inherit;
+    }
+
+    .rs-card>b {
+      display: block;
+      margin: 8px 0 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .rc-ba {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      font-size: 14px;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    .rc-ba svg {
+      width: 16px;
+      height: 16px;
+      color: var(--red-on-dark);
+    }
+
+    .rc-ba strong {
+      color: #fff;
+    }
+
+    .rs-strip {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 26px 32px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .rs-strip blockquote {
+      font-size: 17px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .rs-strip mark {
+      background: none;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .rs-strip figcaption {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .rs-strip .av {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .rs-strip figcaption b {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .rs-strip figcaption small {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .rs-strip .rs-stars {
+      margin: 0 0 0 8px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+
+      .rs-hero,
+      .rs-strip {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .rs-hero {
+        padding: 32px 26px;
+      }
+
+      .rs-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== How it works: hierarchy pass ===== */
+    /* header: heading leads, paragraph quieter */
+    .flow .shead p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    /* inactive steps: compact and quiet; active: big and bright */
+    .wt-step {
+      padding: 14px 20px 16px 0;
+    }
+
+    .wt-t b {
+      font-size: 21px;
+      margin: 13px 0 0;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .wt-t small {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .5s var(--ease), opacity .4s, margin .5s var(--ease);
+    }
+
+    .wt-n {
+      width: 48px;
+      height: 48px;
+      font-size: 13px;
+    }
+
+    .wt-step {
+      grid-template-columns: 48px 1fr;
+    }
+
+    .wt-steps::before {
+      left: 23px;
+    }
+
+    .wt-step.on {
+      background: none;
+      padding: 18px 20px 22px 0;
+    }
+
+    .wt-step.on .wt-t b {
+      font-size: 32px;
+      margin-top: 6px;
+      color: #fff;
+    }
+
+    .wt-step.on .wt-t small {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 8px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .wt-step.on .wt-n {
+      width: 48px;
+      height: 48px;
+      box-shadow: 0 0 0 6px rgba(189, 32, 37, .2);
+    }
+
+    .wt-bar {
+      left: 66px;
+      background: var(--red-on-dark);
+      height: 2px;
+    }
+
+    /* product screen: smaller and slightly recessed, so the step leads */
+    .wt-screen {
+      max-width: 480px;
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7);
+    }
+
+    .wt-pane {
+      padding: 22px 24px;
+    }
+
+    .wp-head b {
+      font-size: 18px;
+    }
+
+    .wp-check li {
+      padding: 10px 4px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .wt-step.on .wt-t b {
+        font-size: 26px;
+      }
+    }
+
+    .wt {
+      align-items: center;
+    }
+
+    /* ===== Before/after: hierarchy pass ===== */
+    /* toggle: a control, not a headline */
+    .ba-toggle {
+      margin-bottom: 32px;
+      padding: 4px;
+      background: #ECE7E0;
+    }
+
+    .ba-toggle button {
+      padding: 10px 22px;
+      font-size: 14px;
+    }
+
+    .ba-knob {
+      top: 4px;
+      bottom: 4px;
+      left: 4px;
+      width: calc(50% - 4px);
+    }
+
+    .ba[data-state="yes"] .ba-knob {
+      background: var(--ink);
+    }
+
+    /* card order: visual (hero) → label → description */
+    .ba-tile {
+      padding: 18px;
+    }
+
+    .ba-topic {
+      font-size: 11px !important;
+      letter-spacing: .14em;
+      color: #A39C93 !important;
+      margin-bottom: 12px;
+    }
+
+    .ba[data-state="yes"] .ba-tile:hover .ba-topic {
+      color: var(--red) !important;
+    }
+
+    .ba-yes>:first-child {
+      height: 128px;
+    }
+
+    .ba-tile p {
+      font-size: 14px !important;
+      color: #8E8A84 !important;
+    }
+
+    .by-big {
+      font-size: 32px;
+    }
+
+    .by-cust b {
+      font-size: 17px;
+    }
+
+    /* ===== Getting started: progress to Day 7 ===== */
+    .gs {
+      position: relative;
+    }
+
+    .gs-track {
+      position: absolute;
+      left: 0;
+      right: 28%;
+      top: 7px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .gs-track i {
+      display: block;
+      height: 100%;
+      background: var(--red);
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    .gs-steps {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.3fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .gs-dot {
+      display: block;
+      position: relative;
+      z-index: 1;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      margin-bottom: 26px;
+    }
+
+    .gs-step small,
+    .gs-goal small {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .gs-step h3 {
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .gs-step p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .gs-goal {
+      position: relative;
+      margin-top: -28px;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, .65);
+      box-shadow: 0 30px 60px -30px rgba(20, 20, 20, .5);
+    }
+
+    .gs-dot.goal {
+      width: 40px;
+      height: 40px;
+      border: 0;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+
+    .gs-dot.goal svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .gs-goal small {
+      color: var(--red-on-dark);
+    }
+
+    .gs-goal h3 {
+      font-size: 24px;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .gs-goal p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .gs-steps {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding-left: 30px;
+      }
+
+      .gs-track {
+        left: 7px;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        height: auto;
+      }
+
+      .gs-track i {
+        height: 100%;
+        transform-origin: top;
+      }
+
+      .gs-dot {
+        position: absolute;
+        left: -30px;
+        margin: 0;
+      }
+
+      .gs-goal {
+        margin-top: 0;
+      }
+
+      .gs-dot.goal {
+        position: static;
+      }
+    }
+
+
+    /* ================= Responsive overrides (keep last) ================= */
+    @media (max-width: 1080px) {
+      .wt {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+
+      .wt-screen {
+        max-width: 560px !important;
+        justify-self: start !important;
+        min-height: 0 !important;
+      }
+
+      .wt-pane {
+        position: static !important;
+        display: none !important;
+        transform: none !important;
+      }
+
+      .wt-pane.on {
+        display: flex !important;
+      }
+
+      .wt-steps {
+        display: grid;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      .flow.sec,
+      .proof,
+      .proof.sec {
+        margin: 0 8px !important;
+        border-radius: 24px !important;
+      }
+
+      /* how it works */
+      .wt-step {
+        grid-template-columns: 40px 1fr !important;
+        gap: 14px !important;
+      }
+
+      .wt-n {
+        width: 40px !important;
+        height: 40px !important;
+      }
+
+      .wt-steps::before {
+        left: 19px !important;
+      }
+
+      .wt-bar {
+        left: 54px !important;
+      }
+
+      .wt-step.on .wt-t b {
+        font-size: 24px !important;
+      }
+
+      .wt-pane {
+        padding: 18px !important;
+        gap: 12px !important;
+      }
+
+      .wp-head {
+        flex-wrap: wrap;
+      }
+
+      .wp-head .plate {
+        font-size: 15px;
+      }
+
+      .wp-chips span {
+        font-size: 12px;
+      }
+
+      .wp-rev b {
+        font-size: 18px;
+      }
+
+      /* results */
+      .rs-hero {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 26px 22px !important;
+      }
+
+      .rs-hero>* {
+        min-width: 0;
+      }
+
+      .rh-num {
+        font-size: 76px !important;
+      }
+
+      .rh-copy b {
+        font-size: 20px;
+      }
+
+      .rh-bars .rs-bar {
+        grid-template-columns: 52px 1fr 58px !important;
+        gap: 10px !important;
+      }
+
+      .rs-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      .rs-card {
+        padding: 22px;
+      }
+
+      .rc-num {
+        font-size: 40px;
+      }
+
+      .rs-strip {
+        grid-template-columns: 1fr !important;
+        padding: 22px !important;
+        gap: 16px !important;
+      }
+
+      .rs-strip figcaption {
+        flex-wrap: wrap;
+        white-space: normal;
+      }
+
+      /* getting started */
+      .gs-steps {
+        grid-template-columns: 1fr !important;
+        padding-left: 32px !important;
+        gap: 26px !important;
+      }
+
+      .gs-step,
+      .gs-goal {
+        position: relative;
+      }
+
+      .gs-track {
+        left: 7px !important;
+        right: auto !important;
+        top: 4px !important;
+        bottom: 40px !important;
+        width: 2px !important;
+        height: auto !important;
+      }
+
+      .gs-track i {
+        transform-origin: top !important;
+      }
+
+      .gs-step .gs-dot {
+        position: absolute !important;
+        left: -32px !important;
+        top: 2px;
+        margin: 0 !important;
+      }
+
+      .gs-goal {
+        margin-top: 0 !important;
+        padding: 22px !important;
+      }
+
+      /* before / after */
+      .ba-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .ba-toggle button {
+        padding: 10px 16px !important;
+      }
+
+      /* features */
+      .idx-row {
+        padding-left: 0 !important;
+      }
+
+      .idx-row h3 {
+        font-size: 22px !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+
+      .gs-step,
+      .gs-goal {
+        position: relative;
+      }
+
+      .gs-step .gs-dot {
+        position: absolute !important;
+        left: -30px !important;
+        top: 2px;
+        margin: 0 !important;
+      }
+
+      .gs-track {
+        bottom: 40px !important;
+      }
+    }
   </style>
 </head>
 
@@ -4521,33 +7150,119 @@
   <div id="progress" aria-hidden="true"></div>
   <!-- SVG icon sprite -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></symbol>
-    <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /></symbol>
-    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></symbol>
-    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5M12 22V12" /></symbol>
-    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /><path d="M16 8h-6M16 12h-6M13 16h-3" /></symbol>
-    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></symbol>
-    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 22h12M4 9h10M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18" /><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L18 5" /></symbol>
-    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></symbol>
-    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" /></symbol>
-    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><circle cx="17" cy="18" r="2" /><circle cx="7" cy="18" r="2" /></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
-    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol>
-    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" /></symbol>
-    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.7s-6 6.4-6 11.3a6 6 0 0 0 12 0c0-4.9-6-11.3-6-11.3Z" /></symbol>
-    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" /><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" /></symbol>
-    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="m9 14 2 2 4-4" /></symbol>
-    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5" /><path d="M11 18h2" /></symbol>
-    <symbol id="i-tablet" viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2.5" /><path d="M11 18h2" /></symbol>
-    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="1.5" /><path d="M2 19h20" /></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <path d="M16 2v4M8 2v4M3 10h18" />
+    </symbol>
+    <symbol id="i-car" viewBox="0 0 24 24">
+      <path
+        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+      <circle cx="7" cy="17" r="2" />
+      <circle cx="17" cy="17" r="2" />
+    </symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24">
+      <path
+        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24">
+      <rect x="2" y="5" width="20" height="14" rx="2" />
+      <path d="M2 10h20" />
+    </symbol>
+    <symbol id="i-box" viewBox="0 0 24 24">
+      <path
+        d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+      <path d="m3.3 7 8.7 5 8.7-5M12 22V12" />
+    </symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24">
+      <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+      <path d="M16 8h-6M16 12h-6M13 16h-3" />
+    </symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24">
+      <path d="m12 14 4-4" />
+      <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+    </symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24">
+      <path d="M3 22h12M4 9h10M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18" />
+      <path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L18 5" />
+    </symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24">
+      <path d="m17 2 4 4-4 4" />
+      <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+      <path d="m7 22-4-4 4-4" />
+      <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </symbol>
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24">
+      <path
+        d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+      <circle cx="17" cy="18" r="2" />
+      <circle cx="7" cy="18" r="2" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="M20 6 9 17l-5-5" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M18 6 6 18M6 6l12 12" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" />
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </symbol>
+    <symbol id="i-link" viewBox="0 0 24 24">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M7 4.5v15l12-7.5z" />
+    </symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24">
+      <path d="M12 2.7s-6 6.4-6 11.3a6 6 0 0 0 12 0c0-4.9-6-11.3-6-11.3Z" />
+    </symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24">
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+      <path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z" />
+    </symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24">
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <path d="m9 14 2 2 4-4" />
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <rect x="6" y="2" width="12" height="20" rx="2.5" />
+      <path d="M11 18h2" />
+    </symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24">
+      <rect x="3" y="2" width="18" height="20" rx="2.5" />
+      <path d="M11 18h2" />
+    </symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="11" rx="1.5" />
+      <path d="M2 19h20" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </symbol>
   </svg>
 
   <!-- ============ NAV ============ -->
@@ -4565,7 +7280,9 @@
         <a class="btn btn-ink btn-sm" href="#demo">Book a free demo</a>
       </div>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <svg class="icon"><use href="#i-menu" /></svg>
+        <svg class="icon">
+          <use href="#i-menu" />
+        </svg>
       </button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
@@ -4583,18 +7300,25 @@
       <div class="wrap hx-head">
         <div class="hero-eyebrow reveal">Your team. Your branches. One system.</div>
         <h1 aria-label="Run your whole car wash. From one powerful platform.">
-          <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>whole car wash.</em></span></span>
-          <span class="hl-row hl-sub" aria-hidden="true"><span class="hl-in" style="--d:.24s">From one <span class="hide-sm">powerful </span>platform.</span></span>
+          <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>whole car
+                wash.</em></span></span>
+          <span class="hl-row hl-sub" aria-hidden="true"><span class="hl-in" style="--d:.24s">From one <span
+                class="hide-sm">powerful </span>platform.</span></span>
         </h1>
         <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every dirham accounted
           for — in real time. <strong class="hide-sm">Mobile app for your team, ERP dashboard for you.</strong></p>
         <div class="hero-ctas reveal" style="--d:.55s">
-          <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
-          <a class="btn btn-ghost" href="#how-it-works">See how it works <svg class="icon"><use href="#i-arrow" /></svg></a>
+          <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon">
+              <use href="#i-arrow" />
+            </svg></a>
+          <a class="btn btn-ghost" href="#how-it-works">See how it works <svg class="icon">
+              <use href="#i-arrow" />
+            </svg></a>
         </div>
         <div class="proof2 reveal" style="--d:.65s">
           <p><span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span> <strong>4.8/5</strong> · Trusted by
-            <strong>340+ car wash centres</strong></p>
+            <strong>340+ car wash centres</strong>
+          </p>
           <span class="plat plain">iOS &amp; Android app · Web ERP</span>
         </div>
       </div>
@@ -4602,9 +7326,13 @@
       <div class="wrap hx-stage">
         <div class="hx-video reveal" style="--d:.5s">
           <video id="heroVideo" src="video/foamia-web.mp4" poster="images/video-poster.jpg" muted loop playsinline
-            preload="metadata" aria-label="Foamia product video: owner dashboard, branches and live performance"></video>
+            preload="metadata"
+            aria-label="Foamia product video: owner dashboard, branches and live performance"></video>
           <button class="hv-sound" id="heroSound" type="button" aria-label="Turn sound on">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z" /><path id="hvWave" d="M23 9l-6 6M17 9l6 6" /></svg>
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" />
+              <path id="hvWave" d="M23 9l-6 6M17 9l6 6" />
+            </svg>
           </button>
         </div>
       </div>
@@ -4613,8 +7341,12 @@
     <!-- ============ TICKER ============ -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch management</span><span>Stock management</span>
-        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch management</span><span>Stock management</span>
+        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work
+          progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch
+          management</span><span>Stock management</span>
+        <span>Car washing</span><span>Oil change</span><span>Customer management</span><span>Work
+          progress</span><span>Invoices</span><span>Payment entry</span><span>User management</span><span>Branch
+          management</span><span>Stock management</span>
       </div>
     </div>
 
@@ -4623,11 +7355,21 @@
       <div class="wrap bf-row reveal">
         <span class="bf-label">Built for</span>
         <ul>
-          <li><svg class="icon"><use href="#i-drop" /></svg>Car wash centres</li>
-          <li><svg class="icon"><use href="#i-sparkle" /></svg>Detailing studios</li>
-          <li><svg class="icon"><use href="#i-wrench" /></svg>Oil change &amp; lube</li>
-          <li><svg class="icon"><use href="#i-fuel" /></svg>Fuel station washes</li>
-          <li><svg class="icon"><use href="#i-building" /></svg>Multi-branch chains</li>
+          <li><svg class="icon">
+              <use href="#i-drop" />
+            </svg>Car wash centres</li>
+          <li><svg class="icon">
+              <use href="#i-sparkle" />
+            </svg>Detailing studios</li>
+          <li><svg class="icon">
+              <use href="#i-wrench" />
+            </svg>Oil change &amp; lube</li>
+          <li><svg class="icon">
+              <use href="#i-fuel" />
+            </svg>Fuel station washes</li>
+          <li><svg class="icon">
+              <use href="#i-building" />
+            </svg>Multi-branch chains</li>
         </ul>
       </div>
     </div>
@@ -4650,27 +7392,55 @@
           <h2>Running a car wash shouldn't feel <em>this hard.</em></h2>
           <p>The problems car wash and oil change owners tell us about every day — and what changes with Foamia.</p>
         </div>
-        <div class="cmp">
-          <div class="cmp-row cmp-head" aria-hidden="true"><span></span><span>Without Foamia</span><span>With Foamia</span></div>
-          <div class="cmp-row reveal">
-            <b class="cmp-topic">Job tracking</b>
-            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Paper job cards — nobody knows which car is ready.</p>
-            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Live status for every job: waiting, in progress or ready.</p>
+        <div class="ba" id="ba" data-state="no">
+          <div class="ba-toggle reveal" role="tablist" aria-label="Compare">
+            <button role="tab" data-s="no" aria-selected="true">Without Foamia</button>
+            <button role="tab" data-s="yes" aria-selected="false">With Foamia</button>
+            <i class="ba-knob"></i>
           </div>
-          <div class="cmp-row reveal" style="--d:0.05s">
-            <b class="cmp-topic">Customers</b>
-            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Customer details and oil-change history live in a notebook — or nowhere.</p>
-            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Every customer and car saved: plate, phone, past washes and oil changes.</p>
-          </div>
-          <div class="cmp-row reveal" style="--d:0.10s">
-            <b class="cmp-topic">Payments</b>
-            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Cash goes into a drawer and the day's totals never add up.</p>
-            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Every payment entered against an invoice, by a named staff member.</p>
-          </div>
-          <div class="cmp-row reveal" style="--d:0.15s">
-            <b class="cmp-topic">Stock</b>
-            <p class="cmp-no"><svg class="icon"><use href="#i-x" /></svg>Oil, filters or shampoo run out in the middle of a busy day.</p>
-            <p class="cmp-yes"><svg class="icon"><use href="#i-check" /></svg>Stock tracked at every branch, with a low-stock alert before you run out.</p>
+          <div class="ba-grid">
+            <div class="ba-tile reveal" style="--d:0.00s">
+              <span class="ba-topic">Job tracking</span>
+              <div class="ba-no"><b>Which car is ready?</b>
+                <p>Paper job cards and shouting across the bay.</p>
+              </div>
+              <div class="ba-yes">
+                <div class="by-pills"><span class="g">3 Ready</span><span class="a">2 In progress</span><span>1
+                    Waiting</span></div>
+                <p>Live status for every job, on every phone.</p>
+              </div>
+            </div>
+            <div class="ba-tile reveal" style="--d:0.06s">
+              <span class="ba-topic">Customers</span>
+              <div class="ba-no"><b>Who is this customer?</b>
+                <p>History lives in a notebook — or nowhere.</p>
+              </div>
+              <div class="ba-yes">
+                <div class="by-cust"><span class="plate sm"><small>DUBAI</small>K 48211</span><b>Khalid · 12 visits</b>
+                </div>
+                <p>Plate, phone, past washes and oil changes.</p>
+              </div>
+            </div>
+            <div class="ba-tile reveal" style="--d:0.12s">
+              <span class="ba-topic">Payments</span>
+              <div class="ba-no"><b>AED ???</b>
+                <p>The drawer never matches the day's sales.</p>
+              </div>
+              <div class="ba-yes">
+                <div class="by-big">AED 2,140 <em>✓ Matched</em></div>
+                <p>Every payment against an invoice, by a named staff member.</p>
+              </div>
+            </div>
+            <div class="ba-tile reveal" style="--d:0.18s">
+              <span class="ba-topic">Stock</span>
+              <div class="ba-no"><b>Out of shampoo.</b>
+                <p>Found out in the middle of a busy Saturday.</p>
+              </div>
+              <div class="ba-yes">
+                <div class="by-alert"><span>!</span><b>Reorder car shampoo</b><small>3 L left</small></div>
+                <p>Low-stock alert at every branch — before you run out.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -4682,41 +7452,67 @@
         <div class="shead reveal">
           <span class="eyebrow">How it works</span>
           <h2>Clean. <em>Check.</em> Complete.</h2>
-          <p>Every car — in for a wash, an oil change or both — moves through three steps. Your team updates it on
-            the app; you see it live on the dashboard.</p>
+          <p>Every car — in for a wash, an oil change or both — moves through three steps. Your team updates each
+            job from the app. You see every step live on the dashboard.</p>
         </div>
-        <ol class="hiw">
-          <li class="hiw-step reveal">
-            <span class="hiw-num">01</span>
-            <h3>Clean</h3>
-            <p>Enter the plate. Foamia brings up the customer and their history. Create the job and assign it.</p>
-            <div class="ui">
-              <div class="ui-top"><span class="plate sm"><small>DUBAI</small>K 48211</span><span class="ui-tag">New job</span></div>
-              <div class="ui-line"><span>Full wash + Oil change</span><b>AED 275</b></div>
-              <div class="ui-line"><span>Assigned to</span><b>Ahmed · Bay 2</b></div>
+        <div class="wt">
+          <ol class="wt-steps" role="tablist">
+            <li><button class="wt-step on" role="tab" aria-selected="true" data-i="0"><span class="wt-n">01</span><span
+                  class="wt-t"><b>Clean</b><small>Enter the plate, create the job and assign it — wash, oil change or
+                    both.</small></span><i class="wt-bar"></i></button></li>
+            <li><button class="wt-step" role="tab" aria-selected="false" data-i="1"><span class="wt-n">02</span><span
+                  class="wt-t"><b>Check</b><small>Staff tick off each step on their phone. You see progress
+                    live.</small></span><i class="wt-bar"></i></button></li>
+            <li><button class="wt-step" role="tab" aria-selected="false" data-i="2"><span class="wt-n">03</span><span
+                  class="wt-t"><b>Complete</b><small>Create the invoice, enter the payment — saved to customer, staff
+                    and branch.</small></span><i class="wt-bar"></i></button></li>
+          </ol>
+
+          <div class="wt-screen" aria-live="polite">
+            <div class="wt-chrome"><i></i><i></i><i></i><span>Foamia · Dubai Marina</span></div>
+
+            <div class="wt-pane on" data-i="0">
+              <div class="wp-head">
+                <div><small>New job</small><b>Check in a car</b></div><span class="plate"><small>DUBAI</small>K
+                  48211</span>
+              </div>
+              <div class="wp-cust"><span class="wp-av">KM</span>
+                <div><b>Khalid Al Mansoori</b><small>Land Cruiser · Last visit 12 Sep · Oil change</small></div>
+              </div>
+              <div class="wp-label">Services</div>
+              <div class="wp-chips"><span class="on">✓ Full wash</span><span class="on">✓ Oil change
+                  5W-30</span><span>Interior vacuum</span><span>Polish</span></div>
+              <div class="wp-row"><span>Assigned to</span><b>Ahmed · Bay 2</b></div>
+              <div class="wp-row"><span>Total</span><b>AED 275</b></div>
+              <span class="wp-btn">Start job</span>
             </div>
-          </li>
-          <li class="hiw-step reveal" style="--d:.08s">
-            <span class="hiw-num">02</span>
-            <h3>Check</h3>
-            <p>Staff tick off each step on their phone. You see which cars are waiting, in progress or ready.</p>
-            <div class="ui">
-              <div class="ui-prog"><span>Foam wash</span><span class="bar"><i style="--w:100%;background:var(--ok)"></i></span><b>Done</b></div>
-              <div class="ui-prog"><span>Oil change</span><span class="bar"><i style="--w:70%;background:#C98A00"></i></span><b>70%</b></div>
-              <div class="ui-prog"><span>Final check</span><span class="bar"><i style="--w:0%"></i></span><b>Next</b></div>
+
+            <div class="wt-pane" data-i="1">
+              <div class="wp-head">
+                <div><small>Job · Ahmed · Bay 2</small><b>Dubai K 48211</b></div><span class="wp-pill amber">In
+                  progress</span>
+              </div>
+              <ul class="wp-check">
+                <li class="done"><span></span>Pre-wash rinse<em>09:42</em></li>
+                <li class="done"><span></span>Foam wash<em>09:51</em></li>
+                <li class="doing"><span></span>Oil change · 5W-30<em class="wp-mini"><i style="width:70%"></i></em></li>
+                <li><span></span>Final check<em>Next</em></li>
+              </ul>
+              <div class="wp-row"><span>Owner dashboard</span><b class="ok">● Updated live</b></div>
             </div>
-          </li>
-          <li class="hiw-step reveal" style="--d:.16s">
-            <span class="hiw-num">03</span>
-            <h3>Complete</h3>
-            <p>Create the invoice in seconds and enter the payment — saved to the customer, staff and branch.</p>
-            <div class="ui">
-              <div class="ui-top"><b>Invoice #1042</b><span class="ui-tag ok">Paid</span></div>
-              <div class="ui-line"><span>Card · Ahmed's shift</span><b>AED 275</b></div>
-              <div class="ui-line"><span>Revenue today</span><b class="up">AED 2,415 ▲</b></div>
+
+            <div class="wt-pane" data-i="2">
+              <div class="wp-head">
+                <div><small>Invoice</small><b>#1042 · Dubai K 48211</b></div><span class="wp-pill green">Paid</span>
+              </div>
+              <div class="wp-row"><span>Full wash</span><b>AED 60</b></div>
+              <div class="wp-row"><span>Oil change 5W-30 + filter</span><b>AED 215</b></div>
+              <div class="wp-row total"><span>Total</span><b>AED 275</b></div>
+              <div class="wp-row"><span>Payment</span><b>Card · Ahmed's shift</b></div>
+              <div class="wp-rev"><span>Revenue today</span><b>AED 2,415</b><em>▲ AED 275</em></div>
             </div>
-          </li>
-        </ol>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -4729,130 +7525,189 @@
           <p>From the first wash to the final invoice — every part of your business, connected.</p>
         </div>
 
-        <div class="bento">
-          <article class="card span-2 reveal">
-            <div>
-              <div class="ficon"><svg class="icon"><use href="#i-drop" /></svg></div>
-              <h3>Car washing &amp; oil change</h3>
-              <p>Set up every service you offer — exterior washes, full details, oil and filter changes — with your own
-                prices. Add a wash and an oil change to the same job.</p>
+        <div class="idx-wrap">
+        <ol class="idx">
+          <li class="idx-group reveal"><span>Operations</span><b>Keep every car moving.</b></li>
+          <li class="idx-row reveal">
+            <span class="idx-n">01</span>
+            <h3>Car washing</h3>
+            <p>Set up every wash service with your own prices and add-ons.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-row"><span>Exterior wash</span><b>AED 35</b></div>
+              <div class="mp-row"><span>Full wash &amp; vacuum</span><b>AED 60</b></div>
+              <div class="mp-row"><span>Interior detail</span><b>AED 120</b></div>
             </div>
-            <div class="viz">
-              <div class="rows-list">
-                <div><span class="svc-tag wash">Wash</span>Exterior wash<b>AED 35</b></div>
-                <div><span class="svc-tag wash">Wash</span>Full wash &amp; vacuum<b>AED 60</b></div>
-                <div><span class="svc-tag oil">Oil</span>Oil change · 5W-30<b>AED 180</b></div>
-                <div><span class="svc-tag oil">Oil</span>Oil filter<b>AED 35</b></div>
-              </div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">02</span>
+            <h3>Oil change</h3>
+            <p>Track oil, filters and each car's next service due.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-row"><span>Oil change · 5W-30</span><b>AED 180</b></div>
+              <div class="mp-row"><span>Oil filter</span><b>AED 35</b></div>
+              <div class="mp-row muted"><span>Next service due</span><b>+5,000 km</b></div>
             </div>
-          </article>
-
-          <article class="card reveal" style="--d:.05s">
-            <div class="ficon"><svg class="icon"><use href="#i-car" /></svg></div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">03</span>
             <h3>Customer management</h3>
-            <p>Type a number plate and see the customer, their cars and every past service.</p>
-            <div class="viz">
-              <div class="history">
-                <span class="plate"><small>DUBAI</small>K 48211</span>
-                <ul>
-                  <li><b>Oil change · 5W-30</b><span>12 Sep</span></li>
-                  <li><b>Full wash</b><span>28 Aug</span></li>
-                </ul>
-              </div>
+            <p>Keep customer history, vehicles and every visit in one place.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev"><span class="plate sm"><small>DUBAI</small>K 48211</span>
+              <div class="mp-row"><span>Oil change · 5W-30</span><b>12 Sep</b></div>
+              <div class="mp-row"><span>Full wash</span><b>28 Aug</b></div>
             </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="ficon"><svg class="icon"><use href="#i-gauge" /></svg></div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">04</span>
             <h3>Work progress</h3>
-            <p>See every job live — waiting, in progress or ready for pickup.</p>
-            <div class="viz">
-              <div class="locs">
-                <div class="loc">K 48211<span class="bar"><i style="--w:70%"></i></span><span>Oil</span></div>
-                <div class="loc">A 30982<span class="bar"><i style="--w:40%"></i></span><span>Wash</span></div>
-                <div class="loc">C 77120<span class="bar"><i style="--w:100%;background:var(--ok)"></i></span><span>Ready</span></div>
+            <p>See every job live — waiting, in progress or ready.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-bar"><span>K 48211</span><i><em style="width:70%;background:#C98A00"></em></i><b>Oil</b>
               </div>
-            </div>
-          </article>
-
-          <article class="card span-2 reveal" style="--d:.05s">
-            <div>
-              <div class="ficon"><svg class="icon"><use href="#i-receipt" /></svg></div>
-              <h3>Invoices &amp; payment entry</h3>
-              <p>Turn a finished job into an invoice in seconds, then enter the payment against it. Every payment is
-                linked to the customer, the staff member and the branch — so the day's totals always add up.</p>
-            </div>
-            <div class="viz">
-              <div class="tally">
-                <div><span>Invoice #1042 · Dubai K 48211</span><b>14 Oct</b></div>
-                <div><span>Full wash &amp; vacuum</span><b>AED 60</b></div>
-                <div><span>Oil change · 5W-30 + filter</span><b>AED 215</b></div>
-                <div><span>Paid · AED 275</span><span>✓ Payment entered</span></div>
+              <div class="mp-bar"><span>A 30982</span><i><em style="width:40%;background:#C98A00"></em></i><b>Wash</b>
               </div>
+              <div class="mp-bar"><span>C 77120</span><i><em
+                    style="width:100%;background:var(--ok)"></em></i><b>Ready</b></div>
             </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="ficon"><svg class="icon"><use href="#i-users" /></svg></div>
+          </li>
+          <li class="idx-group reveal"><span>Money</span><b>Know where every dirham goes.</b></li>
+          <li class="idx-row reveal">
+            <span class="idx-n">05</span>
+            <h3>Invoices</h3>
+            <p>Turn a finished job into an invoice in seconds.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-row strong"><span>Invoice #1042</span><b class="tag-ok">Paid</b></div>
+              <div class="mp-row"><span>Full wash + oil change</span><b>AED 275</b></div>
+              <div class="mp-row"><span>Dubai K 48211</span><b>14 Oct</b></div>
+            </div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">06</span>
+            <h3>Payment entry</h3>
+            <p>Record card or cash payments, linked to staff and branch.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-row"><span>Card</span><b>AED 1,480</b></div>
+              <div class="mp-row"><span>Cash</span><b>AED 660</b></div>
+              <div class="mp-row strong"><span>Today</span><b>AED 2,140</b></div>
+            </div>
+          </li>
+          <li class="idx-group reveal"><span>Control</span><b>Run every branch from one place.</b></li>
+          <li class="idx-row reveal">
+            <span class="idx-n">07</span>
             <h3>User management</h3>
-            <p>Give every staff member a login and a role, so each person sees only what they need.</p>
-            <div class="viz">
-              <div class="roles">
-                <span style="--c:var(--red)">Owner</span>
-                <span style="--c:#E3A008">Manager</span>
-                <span style="--c:#1F6FE0">Cashier</span>
-                <span style="--c:#25A244">Technician</span>
-              </div>
+            <p>Give every staff member a login and the right role.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-chips"><span style="--c:var(--red)">Owner</span><span
+                  style="--c:#E3A008">Manager</span><span style="--c:#1F6FE0">Cashier</span><span
+                  style="--c:var(--ok)">Technician</span></div>
             </div>
-          </article>
-
-          <article class="card reveal" style="--d:.05s">
-            <div class="ficon"><svg class="icon"><use href="#i-building" /></svg></div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">08</span>
             <h3>Branch management</h3>
-            <p>Run every location from one owner login and compare them side by side.</p>
-            <div class="viz">
-              <div class="locs">
-                <div class="loc">Dubai Marina<span class="bar"><i style="--w:100%"></i></span><span>AED 2.1k</span></div>
-                <div class="loc">Al Quoz<span class="bar"><i style="--w:82%"></i></span><span>AED 1.7k</span></div>
-                <div class="loc">Sharjah<span class="bar"><i style="--w:62%"></i></span><span>AED 1.3k</span></div>
-              </div>
+            <p>Run every location from one owner login.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-bar"><span>Dubai Marina</span><i><em style="width:100%"></em></i><b>2.1k</b></div>
+              <div class="mp-bar"><span>Al Quoz</span><i><em style="width:80%"></em></i><b>1.7k</b></div>
+              <div class="mp-bar"><span>Sharjah</span><i><em style="width:62%"></em></i><b>1.3k</b></div>
             </div>
-          </article>
-
-          <article class="card reveal" style="--d:.1s">
-            <div class="ficon"><svg class="icon"><use href="#i-box" /></svg></div>
+          </li>
+          <li class="idx-row reveal">
+            <span class="idx-n">09</span>
             <h3>Stock management</h3>
-            <p>Keep track of oil, filters, shampoo and supplies at each branch.</p>
-            <div class="viz">
-              <div class="rows-list compact">
-                <div>Engine oil · 5W-30<b>42 L</b></div>
-                <div>Oil filters<b>18 pcs</b></div>
-                <div>Car shampoo<b class="low">3 L · Low</b></div>
+            <p>Track oil, filters and shampoo at every branch.</p>
+            <span class="idx-go"><svg class="icon">
+                <use href="#i-arrow" />
+              </svg></span>
+            <div class="idx-prev">
+              <div class="mp-row"><span>Engine oil · 5W-30</span><b>42 L</b></div>
+              <div class="mp-row"><span>Oil filters</span><b>18 pcs</b></div>
+              <div class="mp-row"><span>Car shampoo</span><b class="low">3 L · Low</b></div>
+            </div>
+          </li>
+        </ol>
+          <aside class="idx-panel" aria-hidden="true">
+            <div class="ip-card">
+              <div class="ip-chrome"><i></i><i></i><i></i><span>Foamia · <b id="ipCat">Operations</b></span></div>
+              <div class="ip-body" id="ipBody">
+                <span class="ip-num" id="ipNum">01</span>
+                <h4 id="ipTitle">Car washing</h4>
+                <p id="ipDesc"></p>
+                <div class="ip-prev" id="ipPrev"></div>
               </div>
             </div>
-          </article>
+          </aside>
         </div>
       </div>
     </section>
 
     <!-- ============ PROOF ============ -->
-    <section class="proof" id="results">
-      <div class="wrap proof-grid">
-        <figure class="reveal">
+    <section class="proof sec" id="results">
+      <div class="wrap">
+        <div class="shead reveal">
           <span class="eyebrow">Real results</span>
-          <blockquote class="quote">“Our job cards used to be on paper and nobody knew which car was ready. Now every
-            wash and oil change is tracked, invoices take seconds, and closing the day takes <mark>5 minutes instead of
-            2 hours</mark>. We haven't run out of oil since.”</blockquote>
-          <figcaption class="author">
-            <span class="av">KM</span>
-            <div><b>Khalid Al Mansoori</b><span>Owner, Shine Auto Spa · Dubai · 3 bays</span></div>
-          </figcaption>
-        </figure>
-        <div class="metrics">
-          <div class="metric reveal"><strong>+<span data-count="35">35</span><em>%</em></strong><span>more cars handled per day</span></div>
-          <div class="metric reveal" style="--d:.06s"><strong><span data-count="3.2" data-dec="1">3.2</span><em>×</em></strong><span>faster invoicing</span></div>
-          <div class="metric reveal" style="--d:.12s"><strong><span data-count="100">100</span><em>%</em></strong><span>of payments recorded against an invoice</span></div>
-          <div class="metric reveal" style="--d:.18s"><strong>&lt;1<em> wk</em></strong><span>from sign-up to going live</span></div>
+          <h2>What changes in the <em>first month.</em></h2>
+          <p>Average results from car wash and oil change centres in their first 30 days on Foamia.</p>
+        </div>
+        <div class="rs2">
+          <div class="rs-hero reveal">
+            <div class="rh-num">−<span data-count="96">96</span>%</div>
+            <div class="rh-copy">
+              <b>Less time closing the day</b>
+              <p>Counting cash and matching it to sales used to take two hours. With every payment entered against
+                an invoice, it takes five minutes.</p>
+              <div class="rh-bars">
+                <div class="rs-bar before"><span>Before</span><i><em style="--w:100%"></em></i><b>2 hours</b></div>
+                <div class="rs-bar after"><span>Foamia</span><i><em style="--w:4%"></em></i><b>5 min</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="rs-cards">
+            <div class="rs-card reveal">
+              <div class="rc-num">+<span data-count="35">35</span>%</div>
+              <b>more cars per day</b>
+              <div class="rc-ba"><span>24</span><svg class="icon"><use href="#i-arrow" /></svg><strong>32</strong></div>
+            </div>
+            <div class="rs-card reveal" style="--d:.08s">
+              <div class="rc-num"><span data-count="3.2" data-dec="1">3.2</span>×</div>
+              <b>faster invoicing</b>
+              <div class="rc-ba"><span>3 min</span><svg class="icon"><use href="#i-arrow" /></svg><strong>55 sec</strong></div>
+            </div>
+            <div class="rs-card reveal" style="--d:.16s">
+              <div class="rc-num"><span data-count="100">100</span>%</div>
+              <b>payments matched</b>
+              <div class="rc-ba"><span>60%</span><svg class="icon"><use href="#i-arrow" /></svg><strong>100%</strong></div>
+            </div>
+          </div>
+          <figure class="rs-strip reveal">
+            <blockquote>“Our job cards used to be on paper and nobody knew which car was ready. Now closing the day
+              takes <mark>5 minutes</mark> — and we haven't run out of oil since.”</blockquote>
+            <figcaption><span class="av">KM</span><div><b>Khalid Al Mansoori</b><small>Owner, Shine Auto Spa · Dubai</small></div><span class="rs-stars">★★★★★</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -4865,32 +7720,21 @@
           <h2>Live in <em>one week.</em></h2>
           <p>You don't need to be good with computers. Our team sets up your car wash with you, step by step.</p>
         </div>
-        <ol class="steps">
-          <li class="step reveal">
-            <div class="num">1</div>
-            <span class="day">Day 1</span>
-            <h3>Set up your centre</h3>
-            <p>We add your services and prices — washes, oil changes and add-ons — with you on a call.</p>
-          </li>
-          <li class="step reveal" style="--d:.08s">
-            <div class="num">2</div>
-            <span class="day">Day 2</span>
-            <h3>Add your staff</h3>
-            <p>Every staff member gets their own login and role.</p>
-          </li>
-          <li class="step reveal" style="--d:.16s">
-            <div class="num">3</div>
-            <span class="day">Day 3</span>
-            <h3>Load your stock</h3>
-            <p>Add your oil, filters, shampoo and supplies for each branch.</p>
-          </li>
-          <li class="step reveal" style="--d:.24s">
-            <div class="num"><svg class="icon"><use href="#i-check" /></svg></div>
-            <span class="day">Day 7</span>
-            <h3>Run your wash on Foamia</h3>
-            <p>Jobs, invoices and payments update live from day one.</p>
-          </li>
-        </ol>
+        <div class="gs">
+          <div class="gs-track" aria-hidden="true"><i id="gsFill"></i></div>
+          <ol class="gs-steps">
+            <li class="gs-step reveal"><span class="gs-dot"></span><small>Day 1</small><h3>Set up your centre</h3><p>We add your services and prices with you on a call.</p></li>
+            <li class="gs-step reveal" style="--d:.1s"><span class="gs-dot"></span><small>Day 2</small><h3>Add your staff</h3><p>Every staff member gets a login and role.</p></li>
+            <li class="gs-step reveal" style="--d:.2s"><span class="gs-dot"></span><small>Day 3</small><h3>Load your stock</h3><p>Oil, filters and supplies for each branch.</p></li>
+            <li class="gs-goal reveal" style="--d:.3s">
+              <span class="gs-dot goal"><svg class="icon"><use href="#i-check" /></svg></span>
+              <small>Day 7 · You're live</small>
+              <h3>Run your wash on Foamia</h3>
+              <p>Jobs, invoices and payments update live from day one.</p>
+              <a class="btn btn-red btn-sm" href="#demo">Book your setup call <svg class="icon"><use href="#i-arrow" /></svg></a>
+            </li>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -4900,35 +7744,53 @@
         <div class="sec-head reveal">
           <span class="eyebrow">FAQ</span>
           <h2>Questions owners <em>ask.</em></h2>
-          <p>Can't find your answer? <a href="#demo" style="color:var(--red);font-weight:700;text-decoration:underline">Talk
+          <p>Can't find your answer? <a href="#demo"
+              style="color:var(--red);font-weight:700;text-decoration:underline">Talk
               to our team</a>.</p>
         </div>
         <div class="faq-list">
           <details class="reveal" open>
-            <summary>Does Foamia handle oil changes as well as washing?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.</p>
+            <summary>Does Foamia handle oil changes as well as washing?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one
+              invoice. Each car's oil change history is saved, so your team always knows what was done last time.</p>
           </details>
           <details class="reveal">
-            <summary>What do I get — an app or a dashboard?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
+            <summary>What do I get — an app or a dashboard?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
             <p>Both. Your staff use the Foamia mobile app (iOS and Android) to check in cars, update jobs and take
               payments. You and your managers use the ERP dashboard in any web browser to see revenue, invoices,
               branches, staff and stock. Everything stays in sync in real time — no new hardware needed.</p>
           </details>
           <details class="reveal">
-            <summary>How does Foamia stop cash going missing?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Every payment is entered against an invoice by a named staff member. You can see who collected what, when and at which branch — so the day's totals always add up.</p>
+            <summary>How does Foamia stop cash going missing?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Every payment is entered against an invoice by a named staff member. You can see who collected what, when
+              and at which branch — so the day's totals always add up.</p>
           </details>
           <details class="reveal">
-            <summary>Can I manage more than one branch?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Yes. Branch management lets you run every location from one owner login and compare jobs, invoices, payments and stock branch by branch.</p>
+            <summary>Can I manage more than one branch?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Yes. Branch management lets you run every location from one owner login and compare jobs, invoices,
+              payments and stock branch by branch.</p>
           </details>
           <details class="reveal">
-            <summary>Can I control what each staff member can see?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or technician — and only sees what their role allows.</p>
+            <summary>Can I control what each staff member can see?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or
+              technician — and only sees what their role allows.</p>
           </details>
           <details class="reveal">
-            <summary>How does stock management work?<span class="pm"><svg class="icon"><use href="#i-plus" /></svg></span></summary>
-            <p>Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you have and what to reorder.</p>
+            <summary>How does stock management work?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you
+              have and what to reorder.</p>
           </details>
         </div>
       </div>
@@ -4944,9 +7806,13 @@
             <p>Book a free 20-minute demo. We'll set up your centre live on the call — no commitment.</p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-red" href="#">Book my free demo <svg class="icon"><use href="#i-arrow" /></svg></a>
+            <a class="btn btn-red" href="#">Book my free demo <svg class="icon">
+                <use href="#i-arrow" />
+              </svg></a>
             <a class="btn btn-outline-white" href="#">Talk to our team</a>
-            <small><svg class="icon" style="width:16px;height:16px"><use href="#i-check" /></svg>No card needed · Live
+            <small><svg class="icon" style="width:16px;height:16px">
+                <use href="#i-check" />
+              </svg>No card needed · Live
               in under a week</small>
           </div>
         </div>
@@ -4960,7 +7826,8 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <img src="images/foamia-logo.png" alt="Foamia — Clean. Check. Complete." width="5159" height="1520">
-          <p>The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff, branches and stock.</p>
+          <p>The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff,
+            branches and stock.</p>
         </div>
         <div>
           <h4>Product</h4>
@@ -5073,73 +7940,163 @@
     document.querySelectorAll('[data-count]').forEach(el => counter.observe(el));
 
     if (document.getElementById('jobs')) {
-    // Hero dashboard: jobs progress live; finished jobs become paid invoices and add to revenue
-    const jobRows = [...document.querySelectorAll('#jobs .jrow')].map(el => ({ el, p: +el.dataset.p, amt: +el.dataset.amt, hold: 0, wait: 0 }));
-    const amtEl = document.getElementById('kpiAmt'), carsEl = document.getElementById('kpiCars'), progEl = document.getElementById('kpiProg');
-    const toast = document.getElementById('payToast'), payTitle = document.getElementById('payTitle'), payTxt = document.getElementById('payTxt');
-    const phSteps = [...document.querySelectorAll('#phSteps li')], phBtn = document.getElementById('phBtn');
-    let amt = 2140, cars = 27, invoice = 1041, toastTimer;
-    function renderJobs() {
-      jobRows.forEach(r => {
-        const ready = r.p >= 100, prog = r.p > 0 && !ready;
-        r.el.classList.toggle('ready', ready);
-        r.el.classList.toggle('prog', prog);
-        r.el.querySelector('.pill').textContent = ready ? 'Ready' : prog ? 'In progress' : 'Waiting';
-        r.el.querySelector('.jbar i').style.setProperty('--p', r.p + '%');
-      });
-      progEl.textContent = jobRows.filter(r => r.p > 0 && r.p < 100).length;
-      // the phone shows the technician's view of the first job
-      const r0 = jobRows[0], done = r0.p >= 100 ? 3 : r0.p >= 67 ? 2 : r0.p >= 34 ? 1 : 0;
-      phSteps.forEach((li, i) => li.classList.toggle('done', i < done));
-      phBtn.classList.toggle('done', r0.p >= 100);
-      phBtn.textContent = r0.p >= 100 ? '✓ Marked ready' : r0.p === 0 ? 'Start job' : 'Mark as ready';
-    }
-    // staff app → Foamia → owner dashboard
-    const syncChip = document.getElementById('syncChip'), jobsDone = document.getElementById('jobsDone');
-    let done = 12, syncTimer;
-    function completeJob(r) {
-      const fromPhone = r === jobRows[0];
-      if (fromPhone) {
-        syncChip.classList.add('show');
-        clearTimeout(syncTimer);
-        syncTimer = setTimeout(() => syncChip.classList.remove('show'), 1800);
+      // Hero dashboard: jobs progress live; finished jobs become paid invoices and add to revenue
+      const jobRows = [...document.querySelectorAll('#jobs .jrow')].map(el => ({ el, p: +el.dataset.p, amt: +el.dataset.amt, hold: 0, wait: 0 }));
+      const amtEl = document.getElementById('kpiAmt'), carsEl = document.getElementById('kpiCars'), progEl = document.getElementById('kpiProg');
+      const toast = document.getElementById('payToast'), payTitle = document.getElementById('payTitle'), payTxt = document.getElementById('payTxt');
+      const phSteps = [...document.querySelectorAll('#phSteps li')], phBtn = document.getElementById('phBtn');
+      let amt = 2140, cars = 27, invoice = 1041, toastTimer;
+      function renderJobs() {
+        jobRows.forEach(r => {
+          const ready = r.p >= 100, prog = r.p > 0 && !ready;
+          r.el.classList.toggle('ready', ready);
+          r.el.classList.toggle('prog', prog);
+          r.el.querySelector('.pill').textContent = ready ? 'Ready' : prog ? 'In progress' : 'Waiting';
+          r.el.querySelector('.jbar i').style.setProperty('--p', r.p + '%');
+        });
+        progEl.textContent = jobRows.filter(r => r.p > 0 && r.p < 100).length;
+        // the phone shows the technician's view of the first job
+        const r0 = jobRows[0], done = r0.p >= 100 ? 3 : r0.p >= 67 ? 2 : r0.p >= 34 ? 1 : 0;
+        phSteps.forEach((li, i) => li.classList.toggle('done', i < done));
+        phBtn.classList.toggle('done', r0.p >= 100);
+        phBtn.textContent = r0.p >= 100 ? '✓ Marked ready' : r0.p === 0 ? 'Start job' : 'Mark as ready';
       }
-      setTimeout(() => {
-        if (cars >= 34) { amt = 2140; cars = 27; done = 12; }
-        amt += r.amt; cars += 1; invoice += 1; done += 1;
-        amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
-        carsEl.textContent = cars;
-        document.getElementById('lbCars').textContent = cars;
-        jobsDone.textContent = done;
-        payTitle.textContent = 'Invoice #' + invoice + ' · Paid';
-        payTxt.textContent = 'AED ' + r.amt + ' · ' + (invoice % 2 ? 'Card' : 'Cash');
-        toast.classList.add('show');
-        amtEl.parentElement.classList.add('bump');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => { toast.classList.remove('show'); amtEl.parentElement.classList.remove('bump'); }, 1400);
-      }, fromPhone ? 700 : 0);
-    }
-    function tickJobs() {
-      let completed = false;
-      jobRows.forEach(r => {
-        if (r.p >= 100) { if (++r.hold > 2) { r.p = 0; r.hold = 0; } }
-        else if (r.p === 0) { if (++r.wait > 1) { r.p = 10; r.wait = 0; } }
-        else {
-          r.p = Math.min(100, r.p + 12 + Math.round(Math.random() * 12));
-          if (r.p >= 100) { if (completed) r.p = 95; else { completed = true; completeJob(r); } }
+      // staff app → Foamia → owner dashboard
+      const syncChip = document.getElementById('syncChip'), jobsDone = document.getElementById('jobsDone');
+      let done = 12, syncTimer;
+      function completeJob(r) {
+        const fromPhone = r === jobRows[0];
+        if (fromPhone) {
+          syncChip.classList.add('show');
+          clearTimeout(syncTimer);
+          syncTimer = setTimeout(() => syncChip.classList.remove('show'), 1800);
         }
-      });
+        setTimeout(() => {
+          if (cars >= 34) { amt = 2140; cars = 27; done = 12; }
+          amt += r.amt; cars += 1; invoice += 1; done += 1;
+          amtEl.textContent = 'AED ' + amt.toLocaleString('en-US');
+          carsEl.textContent = cars;
+          document.getElementById('lbCars').textContent = cars;
+          jobsDone.textContent = done;
+          payTitle.textContent = 'Invoice #' + invoice + ' · Paid';
+          payTxt.textContent = 'AED ' + r.amt + ' · ' + (invoice % 2 ? 'Card' : 'Cash');
+          toast.classList.add('show');
+          amtEl.parentElement.classList.add('bump');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => { toast.classList.remove('show'); amtEl.parentElement.classList.remove('bump'); }, 1400);
+        }, fromPhone ? 700 : 0);
+      }
+      function tickJobs() {
+        let completed = false;
+        jobRows.forEach(r => {
+          if (r.p >= 100) { if (++r.hold > 2) { r.p = 0; r.hold = 0; } }
+          else if (r.p === 0) { if (++r.wait > 1) { r.p = 10; r.wait = 0; } }
+          else {
+            r.p = Math.min(100, r.p + 12 + Math.round(Math.random() * 12));
+            if (r.p >= 100) { if (completed) r.p = 95; else { completed = true; completeJob(r); } }
+          }
+        });
+        renderJobs();
+      }
       renderJobs();
-    }
-    renderJobs();
-    if (!reduce) setTimeout(() => setInterval(tickJobs, 1700), 1800);
+      if (!reduce) setTimeout(() => setInterval(tickJobs, 1700), 1800);
 
+    }
+
+    // Features spotlight: active row follows scroll; sticky panel shows its preview
+    const idxRows = [...document.querySelectorAll('.idx-row')];
+    if (idxRows.length) {
+      const ipBody = document.getElementById('ipBody'), ipCat = document.getElementById('ipCat'), ipNum = document.getElementById('ipNum'),
+        ipTitle = document.getElementById('ipTitle'), ipDesc = document.getElementById('ipDesc'), ipPrev = document.getElementById('ipPrev');
+      let cur = -1;
+      const catOf = r => { let e = r.previousElementSibling; while (e && !e.classList.contains('idx-group')) e = e.previousElementSibling; return e ? e.querySelector('span').textContent : ''; };
+      const setIdx = k => {
+        if (k === cur) return;
+        cur = k;
+        idxRows.forEach((r, n) => r.classList.toggle('on', n === k));
+        const r = idxRows[k];
+        ipBody.classList.add('swap');
+        setTimeout(() => {
+          ipCat.textContent = catOf(r);
+          ipNum.textContent = r.querySelector('.idx-n').textContent;
+          ipTitle.textContent = r.querySelector('h3').textContent;
+          ipDesc.textContent = r.querySelector('p').textContent;
+          ipPrev.innerHTML = r.querySelector('.idx-prev').innerHTML;
+          ipBody.classList.remove('swap');
+        }, cur === k && ipTitle.dataset.init ? 180 : 0);
+        ipTitle.dataset.init = 1;
+      };
+      setIdx(0);
+      const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setIdx(idxRows.indexOf(e.target)); }),
+        { rootMargin: '-45% 0px -50% 0px' });
+      idxRows.forEach((r, k) => { spy.observe(r); r.addEventListener('mouseenter', () => setIdx(k)); r.addEventListener('click', () => setIdx(k)); });
+    }
+
+    // Getting started: track fills as the section scrolls through view
+    const gsFill = document.getElementById('gsFill');
+    if (gsFill) {
+      const gs = gsFill.closest('.gs');
+      const fillGs = () => {
+        const r = gs.getBoundingClientRect();
+        const p = reduce ? 1 : Math.min(1, Math.max(0, (innerHeight * .85 - r.top) / (r.height + innerHeight * .2)));
+        gsFill.style.transform = innerWidth <= 760 ? `scaleY(${p})` : `scaleX(${p})`;
+      };
+      addEventListener('scroll', fillGs, { passive: true });
+      fillGs();
+    }
+
+    // Before / after switch: flips once on view, then user-controlled
+    const ba = document.getElementById('ba');
+    if (ba) {
+      const setBA = st => {
+        ba.dataset.state = st;
+        ba.querySelectorAll('.ba-toggle button').forEach(b => b.setAttribute('aria-selected', b.dataset.s === st));
+      };
+      ba.querySelectorAll('.ba-toggle button').forEach(b => b.addEventListener('click', () => { ba.dataset.user = 1; setBA(b.dataset.s); }));
+      new IntersectionObserver(([e], o) => {
+        if (!e.isIntersecting) return;
+        o.disconnect();
+        if (!reduce) setTimeout(() => { if (!ba.dataset.user) setBA('yes'); }, 1800);
+        else setBA('yes');
+      }, { threshold: .5 }).observe(ba);
+    }
+
+    // How it works: guided walkthrough (auto-advances, clickable)
+    const wtSteps = [...document.querySelectorAll('.wt-step')], wtPanes = [...document.querySelectorAll('.wt-pane')];
+    if (wtSteps.length) {
+      let wi = 0, wTimer;
+      const wtShow = i => {
+        wi = i;
+        wtSteps.forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-selected', k === i); });
+        wtPanes.forEach((p, k) => p.classList.toggle('on', k === i));
+      };
+      const wtAuto = () => { clearInterval(wTimer); if (!reduce) wTimer = setInterval(() => wtShow((wi + 1) % 3), 4500); };
+      wtSteps.forEach((b, k) => b.addEventListener('click', () => { wtShow(k); wtAuto(); }));
+      wtAuto();
+    }
+
+    // Hero live events: one real-time event at a time
+    const evCard = document.getElementById('evCard');
+    if (evCard && !reduce) {
+      const evs = [['Job K 48211 completed', 'AED 215 · Dubai Marina'], ['Invoice #1043 paid', 'AED 60 · Card · Al Quoz'],
+      ['Job A 30982 completed', 'AED 275 · Sharjah'], ['Low stock: car shampoo', '3 L left · Dubai Marina']];
+      let ei = 0, carsN = 27;
+      const evT = document.getElementById('evTitle'), evS = document.getElementById('evSub'), lbC = document.getElementById('lbCars');
+      setInterval(() => {
+        evCard.classList.add('swap');
+        setTimeout(() => {
+          ei = (ei + 1) % evs.length;
+          evT.textContent = evs[ei][0]; evS.textContent = evs[ei][1];
+          if (evs[ei][0].startsWith('Job')) { carsN = carsN >= 33 ? 27 : carsN + 1; lbC.textContent = carsN; }
+          evCard.classList.remove('swap');
+        }, 350);
+      }, 3600);
     }
 
     // Hero video: start after the page has loaded, pause when off-screen
     const hv = document.getElementById('heroVideo');
     if (hv) {
-      const tryPlay = () => { if (!reduce) hv.play().catch(() => {}); };
+      const tryPlay = () => { if (!reduce) hv.play().catch(() => { }); };
       addEventListener('load', () => setTimeout(tryPlay, 400));
       new IntersectionObserver(([e]) => e.isIntersecting ? tryPlay() : hv.pause(), { threshold: .25 }).observe(hv);
       const snd = document.getElementById('heroSound'), wave = document.getElementById('hvWave');
