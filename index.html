@@ -7707,7 +7707,7 @@
         margin-bottom: 18px !important;
       }
     }
-  
+
     /* ===== Hero polish round ===== */
     .hero {
       padding-top: 48px !important;
@@ -7783,7 +7783,7 @@
         height: 30px !important;
       }
     }
-  
+
     @media (max-width: 640px) {
       .lead-2.hide-sm {
         display: none !important;
@@ -7795,6 +7795,293 @@
 
       .hx-head h1 .hl-sub {
         margin-top: 6px !important;
+      }
+    }
+
+    /* ================= Motion layer v2 ================= */
+    /* 1. Section headings: word-by-word rise with blur */
+    .sw {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(.45em);
+      transition: opacity .8s var(--ease), filter .8s var(--ease), transform 1s var(--ease);
+      transition-delay: calc(var(--i) * 55ms);
+    }
+
+    .split-in .sw {
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+
+    /* 2. Softer, blurred reveal for everything else */
+    .js .reveal {
+      filter: blur(6px);
+      transition: opacity 1s var(--ease), transform 1.1s var(--ease), filter 1s var(--ease) !important;
+      transition-delay: var(--d, 0s) !important;
+    }
+
+    .js .reveal.in {
+      filter: none;
+    }
+
+    /* 3. Hero video: grows wider as you scroll */
+    .hx-video {
+      transform-origin: 50% 0;
+      will-change: transform;
+    }
+
+    /* 4. Dark panels expand into view */
+    .flow.sec,
+    .proof.sec,
+    .cta-box {
+      transition: clip-path 1.2s var(--ease);
+    }
+
+    .js .grow-panel {
+      clip-path: inset(6% 4% 0 4% round 48px);
+    }
+
+    .js .grow-panel.panel-in {
+      clip-path: inset(0 0 0 0 round 32px);
+    }
+
+    /* 5. Primary buttons: light sweep + magnetic */
+    .btn-red {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .btn-red::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .28) 50%, transparent 70%);
+      transform: translateX(-120%);
+      animation: sweep 4.5s var(--ease) 2s infinite;
+    }
+
+    @keyframes sweep {
+      0% {
+        transform: translateX(-120%);
+      }
+
+      35%,
+      100% {
+        transform: translateX(120%);
+      }
+    }
+
+    .magnetic {
+      transition: transform .5s var(--ease), background .2s, box-shadow .2s;
+    }
+
+    /* 6. Cards lift and tilt slightly toward the cursor */
+    .tilt {
+      transition: transform .6s var(--ease), box-shadow .6s var(--ease);
+      transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0));
+    }
+
+    .tilt:hover {
+      --ty: -4px;
+    }
+
+    /* 7. Scroll-linked progress glow on the active nav link */
+    .nav-links a.active {
+      color: var(--ink) !important;
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .sw,
+      .js .reveal {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+      }
+
+      .js .grow-panel {
+        clip-path: none;
+      }
+
+      .btn-red::after {
+        display: none;
+      }
+
+      .tilt {
+        transform: none !important;
+      }
+    }
+
+    .wt-sub {
+      font-style: normal;
+      font-weight: 500;
+      font-size: .55em;
+      letter-spacing: 0;
+      opacity: .6;
+    }
+
+    @media (max-width: 760px) {
+      .wt-sub {
+        display: none;
+      }
+    }
+
+    /* ================= Language toggle + RTL ================= */
+    .lang-btn {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-2);
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background .2s;
+    }
+
+    .lang-btn:hover {
+      background: rgba(20, 20, 20, .06);
+    }
+
+    .m-lang {
+      color: var(--red) !important;
+    }
+
+    [lang="ar"] body,
+    [lang="ar"] button,
+    [lang="ar"] h1,
+    [lang="ar"] h2,
+    [lang="ar"] h3,
+    [lang="ar"] h4,
+    [lang="ar"] .btn {
+      font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    }
+
+    [lang="ar"] * {
+      letter-spacing: 0 !important;
+    }
+
+    [lang="ar"] .eyebrow,
+    [lang="ar"] .hero-eyebrow,
+    [lang="ar"] .idx-group span,
+    [lang="ar"] .ba-topic,
+    [lang="ar"] .gs-step small,
+    [lang="ar"] .gs-goal small,
+    [lang="ar"] .cta-tagline {
+      text-transform: none;
+    }
+
+    [lang="ar"] h1,
+    [lang="ar"] h2 {
+      line-height: 1.25 !important;
+    }
+
+    [lang="ar"] .hx-head h1 {
+      line-height: 1.2 !important;
+    }
+
+    [lang="ar"] .lead,
+    [lang="ar"] p {
+      line-height: 1.8;
+    }
+
+    [dir="rtl"] .plate,
+    [dir="rtl"] .ticker {
+      direction: ltr;
+    }
+
+    [dir="rtl"] .ticker-track span {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .btn .icon,
+    [dir="rtl"] .rc-ba svg,
+    [dir="rtl"] .idx-go svg {
+      transform: scaleX(-1);
+    }
+
+    [dir="rtl"] .btn:hover .icon {
+      transform: scaleX(-1) translateX(4px);
+    }
+
+    [dir="rtl"] #progress {
+      transform-origin: right;
+    }
+
+    @media (min-width: 861px) {
+      [dir="rtl"] .nav-links {
+        margin: 0 48px 0 auto !important;
+      }
+    }
+
+    [dir="rtl"] .idx-row {
+      padding: 12px 16px 12px 0 !important;
+    }
+
+    [dir="rtl"] .idx-row.on {
+      padding: 20px 16px 20px 0 !important;
+    }
+
+    [dir="rtl"] .idx-row::before {
+      left: auto;
+      right: 0;
+    }
+
+    [dir="rtl"] .wt-steps::before {
+      left: auto;
+      right: 23px;
+    }
+
+    [dir="rtl"] .wt-bar {
+      left: 20px;
+      right: 66px;
+      transform-origin: right;
+    }
+
+    [dir="rtl"] .ba-knob {
+      left: auto;
+      right: 4px;
+    }
+
+    [dir="rtl"] .ba[data-state="yes"] .ba-knob {
+      transform: translateX(-100%);
+    }
+
+    [dir="rtl"] .gs-track {
+      left: 28%;
+      right: 0;
+    }
+
+    [dir="rtl"] .gs-track i {
+      transform-origin: right;
+    }
+
+    @media (max-width: 960px) {
+      [dir="rtl"] .gs-steps {
+        padding-left: 0 !important;
+        padding-right: 32px !important;
+      }
+
+      [dir="rtl"] .gs-track {
+        left: auto !important;
+        right: 7px !important;
+      }
+
+      [dir="rtl"] .gs-step .gs-dot {
+        left: auto !important;
+        right: -32px !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      [dir="rtl"] .wt-steps::before {
+        display: none;
       }
     }
   </style>
@@ -7936,6 +8223,7 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-cta">
+        <a class="lang-btn" href="?lang=ar" data-lang-toggle>عربي</a>
         <a class="btn btn-ink btn-sm" href="#demo">Book a free demo</a>
       </div>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -7945,6 +8233,7 @@
       </button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
+      <a href="?lang=ar" data-lang-toggle class="m-lang">عربي</a>
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
       <a href="#who">Who it's for</a>
@@ -7959,12 +8248,15 @@
       <div class="wrap hx-head">
         <div class="hero-eyebrow reveal">Your team. Your branches. One system.</div>
         <h1 aria-label="Run your entire car wash. From one powerful platform.">
-          <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>entire car wash.</em></span></span>
+          <span class="hl-row" aria-hidden="true"><span class="hl-in" style="--d:.1s">Run your <em>entire car
+                wash.</em></span></span>
           <span class="hl-row hl-sub" aria-hidden="true"><span class="hl-in" style="--d:.24s">From one <span
                 class="hide-sm">powerful </span>platform.</span></span>
         </h1>
-        <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every dirham accounted
-          for — in real time. <span class="lead-2 hide-sm"><b>Mobile app</b> for your team. <b>ERP dashboard</b> for you.</span></p>
+        <p class="lead reveal" style="--d:.45s">Keep every job moving, every branch connected and every payment
+          accounted
+          for — in real time. <span class="lead-2 hide-sm"><b>Mobile app</b> for your team. <b>Owner dashboard (ERP)</b>
+            for you.</span></p>
         <div class="hero-ctas reveal" style="--d:.55s">
           <a class="btn btn-red" href="#demo">Book a free demo <svg class="icon">
               <use href="#i-arrow" />
@@ -7974,9 +8266,8 @@
             </svg></a>
         </div>
         <div class="proof2 reveal" style="--d:.65s">
-          <p class="pr-top"><span class="stars" aria-label="Rated 4.8 out of 5">★★★★★</span> <strong>4.8/5</strong></p>
-          <p class="pr-sub">Trusted by <strong>340+ car wash centres</strong></p>
-          <span class="plat plain">iOS &amp; Android app · Web ERP</span>
+          <p class="pr-top"><strong>VAT-ready invoices</strong> · Connected to <strong>ERP</strong></p>
+          <p class="pr-sub">iOS &amp; Android app · Owner dashboard on the web</p>
         </div>
       </div>
 
@@ -8037,7 +8328,7 @@
         <span class="eyebrow">Why Foamia</span>
         <p id="manifesto">You started a car wash to wash cars — not to chase paper job cards, count cash at midnight,
           or find out you're out of oil in the middle of a busy day. So we built Foamia: every car, job, invoice and
-          dirham in <span data-accent>one app.</span> Your cars leave clean. Your evenings stay yours.</p>
+          payment in <span data-accent>one app.</span> Your cars leave clean. Your evenings stay yours.</p>
       </div>
     </section>
 
@@ -8073,7 +8364,7 @@
                 <p>History lives in a notebook — or nowhere.</p>
               </div>
               <div class="ba-yes">
-                <div class="by-cust"><span class="plate sm"><small>DUBAI</small>K 48211</span><b>Khalid · 12 visits</b>
+                <div class="by-cust"><span class="plate sm"><small>DUBAI</small>K 48211</span><b>Omar · 12 visits</b>
                 </div>
                 <p>Plate, phone, past washes and oil changes.</p>
               </div>
@@ -8115,13 +8406,16 @@
         <div class="wt">
           <ol class="wt-steps" role="tablist">
             <li><button class="wt-step on" role="tab" aria-selected="true" data-i="0"><span class="wt-n">01</span><span
-                  class="wt-t"><b>Clean</b><small>Enter the plate, create the job and assign it — wash, oil change or
+                  class="wt-t"><b>Clean <i class="wt-sub">· check in</i></b><small>Enter the plate, create the job and
+                    assign it — wash, oil change or
                     both.</small></span><i class="wt-bar"></i></button></li>
             <li><button class="wt-step" role="tab" aria-selected="false" data-i="1"><span class="wt-n">02</span><span
-                  class="wt-t"><b>Check</b><small>Staff tick off each step on their phone. You see progress
+                  class="wt-t"><b>Check <i class="wt-sub">· track work</i></b><small>Staff tick off each step on their
+                    phone. You see progress
                     live.</small></span><i class="wt-bar"></i></button></li>
             <li><button class="wt-step" role="tab" aria-selected="false" data-i="2"><span class="wt-n">03</span><span
-                  class="wt-t"><b>Complete</b><small>Create the invoice, enter the payment — saved to customer, staff
+                  class="wt-t"><b>Complete <i class="wt-sub">· invoice &amp; pay</i></b><small>Create the invoice, enter
+                    the payment — saved to customer, staff
                     and branch.</small></span><i class="wt-bar"></i></button></li>
           </ol>
 
@@ -8134,8 +8428,8 @@
                 <div><small>New job</small><b>Check in a car</b></div><span class="plate"><small>DUBAI</small>K
                   48211</span>
               </div>
-              <div class="wp-cust"><span class="wp-av">KM</span>
-                <div><b>Khalid Al Mansoori</b><small>Land Cruiser · Last visit 12 Sep · Oil change</small></div>
+              <div class="wp-cust"><span class="wp-av">OH</span>
+                <div><b>Omar Al Hashimi</b><small>Land Cruiser · Last visit 12 Sep · Oil change</small></div>
               </div>
               <div class="wp-label">Services</div>
               <div class="wp-chips"><span class="on">✓ Full wash</span><span class="on">✓ Oil change
@@ -8184,130 +8478,131 @@
         </div>
 
         <div class="idx-wrap">
-        <ol class="idx">
-          <li class="idx-group reveal"><span>Operations</span><b>Keep every car moving.</b></li>
-          <li class="idx-row reveal">
-            <span class="idx-n">01</span>
-            <h3>Car washing</h3>
-            <p>Set up every wash service with your own prices and add-ons.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-row"><span>Exterior wash</span><b>AED 35</b></div>
-              <div class="mp-row"><span>Full wash &amp; vacuum</span><b>AED 60</b></div>
-              <div class="mp-row"><span>Interior detail</span><b>AED 120</b></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">02</span>
-            <h3>Oil change</h3>
-            <p>Track oil, filters and each car's next service due.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-row"><span>Oil change · 5W-30</span><b>AED 180</b></div>
-              <div class="mp-row"><span>Oil filter</span><b>AED 35</b></div>
-              <div class="mp-row muted"><span>Next service due</span><b>+5,000 km</b></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">03</span>
-            <h3>Customer management</h3>
-            <p>Keep customer history, vehicles and every visit in one place.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev"><span class="plate sm"><small>DUBAI</small>K 48211</span>
-              <div class="mp-row"><span>Oil change · 5W-30</span><b>12 Sep</b></div>
-              <div class="mp-row"><span>Full wash</span><b>28 Aug</b></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">04</span>
-            <h3>Work progress</h3>
-            <p>See every job live — waiting, in progress or ready.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-bar"><span>K 48211</span><i><em style="width:70%;background:#C98A00"></em></i><b>Oil</b>
+          <ol class="idx">
+            <li class="idx-group reveal"><span>Operations</span><b>Keep every car moving.</b></li>
+            <li class="idx-row reveal">
+              <span class="idx-n">01</span>
+              <h3>Car washing</h3>
+              <p>Set up every wash service with your own prices and add-ons.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-row"><span>Exterior wash</span><b>AED 35</b></div>
+                <div class="mp-row"><span>Full wash &amp; vacuum</span><b>AED 60</b></div>
+                <div class="mp-row"><span>Interior detail</span><b>AED 120</b></div>
               </div>
-              <div class="mp-bar"><span>A 30982</span><i><em style="width:40%;background:#C98A00"></em></i><b>Wash</b>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">02</span>
+              <h3>Oil change</h3>
+              <p>Track oil, filters and each car's next service due.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-row"><span>Oil change · 5W-30</span><b>AED 180</b></div>
+                <div class="mp-row"><span>Oil filter</span><b>AED 35</b></div>
+                <div class="mp-row muted"><span>Next service due</span><b>+5,000 km</b></div>
               </div>
-              <div class="mp-bar"><span>C 77120</span><i><em
-                    style="width:100%;background:var(--ok)"></em></i><b>Ready</b></div>
-            </div>
-          </li>
-          <li class="idx-group reveal"><span>Money</span><b>Know where every dirham goes.</b></li>
-          <li class="idx-row reveal">
-            <span class="idx-n">05</span>
-            <h3>Invoices</h3>
-            <p>Turn a finished job into an invoice in seconds.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-row strong"><span>Invoice #1042</span><b class="tag-ok">Paid</b></div>
-              <div class="mp-row"><span>Full wash + oil change</span><b>AED 275</b></div>
-              <div class="mp-row"><span>Dubai K 48211</span><b>14 Oct</b></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">06</span>
-            <h3>Payment entry</h3>
-            <p>Record card or cash payments, linked to staff and branch.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-row"><span>Card</span><b>AED 1,480</b></div>
-              <div class="mp-row"><span>Cash</span><b>AED 660</b></div>
-              <div class="mp-row strong"><span>Today</span><b>AED 2,140</b></div>
-            </div>
-          </li>
-          <li class="idx-group reveal"><span>Control</span><b>Run every branch from one place.</b></li>
-          <li class="idx-row reveal">
-            <span class="idx-n">07</span>
-            <h3>User management</h3>
-            <p>Give every staff member a login and the right role.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-chips"><span style="--c:var(--red)">Owner</span><span
-                  style="--c:#E3A008">Manager</span><span style="--c:#1F6FE0">Cashier</span><span
-                  style="--c:var(--ok)">Technician</span></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">08</span>
-            <h3>Branch management</h3>
-            <p>Run every location from one owner login.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-bar"><span>Dubai Marina</span><i><em style="width:100%"></em></i><b>2.1k</b></div>
-              <div class="mp-bar"><span>Al Quoz</span><i><em style="width:80%"></em></i><b>1.7k</b></div>
-              <div class="mp-bar"><span>Sharjah</span><i><em style="width:62%"></em></i><b>1.3k</b></div>
-            </div>
-          </li>
-          <li class="idx-row reveal">
-            <span class="idx-n">09</span>
-            <h3>Stock management</h3>
-            <p>Track oil, filters and shampoo at every branch.</p>
-            <span class="idx-go"><svg class="icon">
-                <use href="#i-arrow" />
-              </svg></span>
-            <div class="idx-prev">
-              <div class="mp-row"><span>Engine oil · 5W-30</span><b>42 L</b></div>
-              <div class="mp-row"><span>Oil filters</span><b>18 pcs</b></div>
-              <div class="mp-row"><span>Car shampoo</span><b class="low">3 L · Low</b></div>
-            </div>
-          </li>
-        </ol>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">03</span>
+              <h3>Customer management</h3>
+              <p>Keep customer history, vehicles and every visit in one place.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev"><span class="plate sm"><small>DUBAI</small>K 48211</span>
+                <div class="mp-row"><span>Oil change · 5W-30</span><b>12 Sep</b></div>
+                <div class="mp-row"><span>Full wash</span><b>28 Aug</b></div>
+              </div>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">04</span>
+              <h3>Work progress</h3>
+              <p>See every job live — waiting, in progress or ready.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-bar"><span>K 48211</span><i><em style="width:70%;background:#C98A00"></em></i><b>Oil</b>
+                </div>
+                <div class="mp-bar"><span>A 30982</span><i><em style="width:40%;background:#C98A00"></em></i><b>Wash</b>
+                </div>
+                <div class="mp-bar"><span>C 77120</span><i><em
+                      style="width:100%;background:var(--ok)"></em></i><b>Ready</b></div>
+              </div>
+            </li>
+            <li class="idx-group reveal"><span>Money</span><b>Know where every payment goes.</b></li>
+            <li class="idx-row reveal">
+              <span class="idx-n">05</span>
+              <h3>Invoices</h3>
+              <p>VAT-ready invoices in seconds — synced to ERPNext.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-row strong"><span>Invoice #1042</span><b class="tag-ok">Paid</b></div>
+                <div class="mp-row"><span>Full wash + oil change</span><b>AED 275</b></div>
+                <div class="mp-row"><span>VAT 5% included</span><b>AED 13.10</b></div>
+                <div class="mp-row muted"><span>ERPNext</span><b>✓ Synced</b></div>
+              </div>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">06</span>
+              <h3>Payment entry</h3>
+              <p>Record card or cash payments, linked to staff and branch.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-row"><span>Card</span><b>AED 1,480</b></div>
+                <div class="mp-row"><span>Cash</span><b>AED 660</b></div>
+                <div class="mp-row strong"><span>Today</span><b>AED 2,140</b></div>
+              </div>
+            </li>
+            <li class="idx-group reveal"><span>Control</span><b>Run every branch from one place.</b></li>
+            <li class="idx-row reveal">
+              <span class="idx-n">07</span>
+              <h3>User management</h3>
+              <p>Give every staff member a login and the right role.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-chips"><span style="--c:var(--red)">Owner</span><span
+                    style="--c:#E3A008">Manager</span><span style="--c:#1F6FE0">Cashier</span><span
+                    style="--c:var(--ok)">Technician</span></div>
+              </div>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">08</span>
+              <h3>Branch management</h3>
+              <p>Run every location from one owner login.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-bar"><span>Dubai Marina</span><i><em style="width:100%"></em></i><b>2.1k</b></div>
+                <div class="mp-bar"><span>Al Quoz</span><i><em style="width:80%"></em></i><b>1.7k</b></div>
+                <div class="mp-bar"><span>Sharjah</span><i><em style="width:62%"></em></i><b>1.3k</b></div>
+              </div>
+            </li>
+            <li class="idx-row reveal">
+              <span class="idx-n">09</span>
+              <h3>Stock management</h3>
+              <p>Track oil, filters and shampoo at every branch.</p>
+              <span class="idx-go"><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></span>
+              <div class="idx-prev">
+                <div class="mp-row"><span>Engine oil · 5W-30</span><b>42 L</b></div>
+                <div class="mp-row"><span>Oil filters</span><b>18 pcs</b></div>
+                <div class="mp-row"><span>Car shampoo</span><b class="low">3 L · Low</b></div>
+              </div>
+            </li>
+          </ol>
           <aside class="idx-panel" aria-hidden="true">
             <div class="ip-card">
               <div class="ip-chrome"><i></i><i></i><i></i><span>Foamia · <b id="ipCat">Operations</b></span></div>
@@ -8329,7 +8624,7 @@
         <div class="shead reveal">
           <span class="eyebrow">Real results</span>
           <h2>What changes in the <em>first month.</em></h2>
-          <p>Average results from car wash and oil change centres in their first 30 days on Foamia.</p>
+          <p>An example of what changes for a typical 3-bay car wash in its first month on Foamia.</p>
         </div>
         <div class="rs2">
           <div class="rs-hero reveal">
@@ -8346,26 +8641,27 @@
           </div>
           <div class="rs-cards">
             <div class="rs-card reveal">
-              <div class="rc-num">+<span data-count="35">35</span>%</div>
+              <div class="rc-num">+<span data-count="33">33</span>%</div>
               <b>more cars per day</b>
-              <div class="rc-ba"><span>24</span><svg class="icon"><use href="#i-arrow" /></svg><strong>32</strong></div>
+              <div class="rc-ba"><span>24</span><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg><strong>32</strong></div>
             </div>
             <div class="rs-card reveal" style="--d:.08s">
               <div class="rc-num"><span data-count="3.2" data-dec="1">3.2</span>×</div>
               <b>faster invoicing</b>
-              <div class="rc-ba"><span>3 min</span><svg class="icon"><use href="#i-arrow" /></svg><strong>55 sec</strong></div>
+              <div class="rc-ba"><span>3 min</span><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg><strong>55 sec</strong></div>
             </div>
             <div class="rs-card reveal" style="--d:.16s">
               <div class="rc-num"><span data-count="100">100</span>%</div>
               <b>payments matched</b>
-              <div class="rc-ba"><span>60%</span><svg class="icon"><use href="#i-arrow" /></svg><strong>100%</strong></div>
+              <div class="rc-ba"><span>60%</span><svg class="icon">
+                  <use href="#i-arrow" />
+                </svg><strong>100%</strong></div>
             </div>
           </div>
-          <figure class="rs-strip reveal">
-            <blockquote>“Our job cards used to be on paper and nobody knew which car was ready. Now closing the day
-              takes <mark>5 minutes</mark> — and we haven't run out of oil since.”</blockquote>
-            <figcaption><span class="av">KM</span><div><b>Khalid Al Mansoori</b><small>Owner, Shine Auto Spa · Dubai</small></div><span class="rs-stars">★★★★★</span></figcaption>
-          </figure>
         </div>
       </div>
     </section>
@@ -8381,15 +8677,28 @@
         <div class="gs">
           <div class="gs-track" aria-hidden="true"><i id="gsFill"></i></div>
           <ol class="gs-steps">
-            <li class="gs-step reveal"><span class="gs-dot"></span><small>Day 1</small><h3>Set up your centre</h3><p>We add your services and prices with you on a call.</p></li>
-            <li class="gs-step reveal" style="--d:.1s"><span class="gs-dot"></span><small>Day 2</small><h3>Add your staff</h3><p>Every staff member gets a login and role.</p></li>
-            <li class="gs-step reveal" style="--d:.2s"><span class="gs-dot"></span><small>Day 3</small><h3>Load your stock</h3><p>Oil, filters and supplies for each branch.</p></li>
+            <li class="gs-step reveal"><span class="gs-dot"></span><small>Day 1</small>
+              <h3>Set up your centre</h3>
+              <p>We add your services and prices with you on a call.</p>
+            </li>
+            <li class="gs-step reveal" style="--d:.1s"><span class="gs-dot"></span><small>Day 2</small>
+              <h3>Add your staff</h3>
+              <p>Every staff member gets a login and role.</p>
+            </li>
+            <li class="gs-step reveal" style="--d:.2s"><span class="gs-dot"></span><small>Day 3</small>
+              <h3>Load your stock</h3>
+              <p>Oil, filters and supplies for each branch.</p>
+            </li>
             <li class="gs-goal reveal" style="--d:.3s">
-              <span class="gs-dot goal"><svg class="icon"><use href="#i-check" /></svg></span>
+              <span class="gs-dot goal"><svg class="icon">
+                  <use href="#i-check" />
+                </svg></span>
               <small>Day 7 · You're live</small>
               <h3>Run your wash on Foamia</h3>
               <p>Jobs, invoices and payments update live from day one.</p>
-              <a class="btn btn-red btn-sm" href="#demo">Book your setup call <svg class="icon"><use href="#i-arrow" /></svg></a>
+              <a class="btn btn-red btn-sm" href="#demo">Book a free demo <svg class="icon">
+                  <use href="#i-arrow" />
+                </svg></a>
             </li>
           </ol>
         </div>
@@ -8408,6 +8717,13 @@
         </div>
         <div class="faq-list">
           <details class="reveal" open>
+            <summary>Are Foamia invoices VAT-ready?<span class="pm"><svg class="icon">
+                  <use href="#i-plus" />
+                </svg></span></summary>
+            <p>Yes. Foamia creates VAT-ready invoices for every job, and it is connected to ERPNext — so invoices,
+              payments and stock flow straight into your accounting without re-typing anything.</p>
+          </details>
+          <details class="reveal">
             <summary>Does Foamia handle oil changes as well as washing?<span class="pm"><svg class="icon">
                   <use href="#i-plus" />
                 </svg></span></summary>
@@ -8461,17 +8777,16 @@
           <div style="position:relative;z-index:1">
             <span class="cta-tagline">CLEAN. CHECK. COMPLETE.</span>
             <h2>See Foamia running <em>your car wash.</em></h2>
-            <p>Book a free 20-minute demo. We'll set up your centre live on the call — no commitment.</p>
+            <p>Book a free 20-minute demo and see Foamia with your own services and prices — no commitment.</p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-red" href="#">Book my free demo <svg class="icon">
+            <a class="btn btn-red" href="#">Book a free demo <svg class="icon">
                 <use href="#i-arrow" />
               </svg></a>
             <a class="btn btn-outline-white" href="#">Talk to our team</a>
             <small><svg class="icon" style="width:16px;height:16px">
                 <use href="#i-check" />
-              </svg>No card needed · Live
-              in under a week</small>
+              </svg>No commitment · Live in under a week</small>
           </div>
         </div>
       </div>
@@ -8500,14 +8815,12 @@
           <ul>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="#">Careers</a></li>
           </ul>
         </div>
         <div>
           <h4>Support</h4>
           <ul>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#">Help centre</a></li>
           </ul>
         </div>
       </div>
@@ -8526,6 +8839,42 @@
   <script>
     const root = document.documentElement;
     root.classList.add('js');
+
+    // ================= Arabic (RTL) version =================
+    const AR = { "Foamia home": "الصفحة الرئيسية لـ Foamia", "How it works": "كيف يعمل", "Features": "المزايا", "Who it's for": "لمن هو", "FAQ": "الأسئلة الشائعة", "Book a free demo": "احجز عرضاً مجانياً", "Open menu": "فتح القائمة", "Close menu": "إغلاق القائمة", "Your team. Your branches. One system.": "فريقك. فروعك. نظام واحد.", "Run your entire car wash. From one powerful platform.": "أدِر مغسلتك بالكامل. من منصة واحدة قوية.", "Run your": "أدِر", "entire car wash.": "مغسلتك بالكامل.", "From one": "من منصة", "powerful": "قوية", "platform.": "واحدة.", "Keep every job moving, every branch connected and every payment accounted for — in real time.": "كل مهمة تسير، وكل فرع متصل، وكل دفعة محسوبة — لحظة بلحظة.", "Mobile app": "تطبيق جوال", "for your team.": "لفريقك.", "Owner dashboard (ERP)": "لوحة تحكم المالك (ERP)", "for you.": "لك.", "See how it works": "شاهد كيف يعمل", "VAT-ready invoices": "فواتير متوافقة مع ضريبة القيمة المضافة", "· Connected to": "· متصل بـ", "iOS & Android app · Owner dashboard on the web": "تطبيق iOS و Android · لوحة تحكم المالك على الويب", "Foamia product video: owner dashboard, branches and live performance": "فيديو Foamia: لوحة تحكم المالك والفروع والأداء المباشر", "Turn sound on": "تشغيل الصوت", "Mute": "كتم الصوت", "Car washing": "غسيل السيارات", "Oil change": "تغيير الزيت", "Customer management": "إدارة العملاء", "Work progress": "متابعة العمل", "Invoices": "الفواتير", "Payment entry": "تسجيل المدفوعات", "User management": "إدارة المستخدمين", "Branch management": "إدارة الفروع", "Stock management": "إدارة المخزون", "Built for": "مصمم لـ", "Car wash centres": "مراكز غسيل السيارات", "Detailing studios": "استوديوهات العناية بالسيارات", "Oil change & lube": "مراكز تغيير الزيت", "Petrol station car washes": "مغاسل محطات الوقود", "Multi-branch chains": "السلاسل متعددة الفروع", "Why we built Foamia": "لماذا بنينا Foamia", "Why Foamia": "لماذا Foamia", "You started a car wash to wash cars — not to chase paper job cards, count cash at midnight, or find out you're out of oil in the middle of a busy day. So we built Foamia: every car, job, invoice and payment in": "بدأت مغسلتك لتغسل السيارات — لا لتلاحق بطاقات العمل الورقية، أو تعدّ النقود في منتصف الليل، أو تكتشف نفاد الزيت في منتصف يوم مزدحم. لذلك بنينا Foamia: كل سيارة، وكل مهمة، وكل فاتورة، وكل دفعة في", "one app.": "تطبيق واحد.", "Your cars leave clean. Your evenings stay yours.": "سياراتك تخرج نظيفة. وأمسياتك تبقى لك.", "Before & after": "قبل وبعد", "Running a car wash shouldn't feel": "إدارة مغسلة سيارات لا يجب أن تكون", "this hard.": "بهذه الصعوبة.", "The problems car wash and oil change owners tell us about every day — and what changes with Foamia.": "المشكلات التي يخبرنا بها أصحاب مغاسل السيارات ومراكز تغيير الزيت كل يوم — وما الذي يتغير مع Foamia.", "Compare": "مقارنة", "Without Foamia": "بدون Foamia", "With Foamia": "مع Foamia", "Job tracking": "متابعة المهام", "Which car is ready?": "أي سيارة جاهزة؟", "Paper job cards and shouting across the bay.": "بطاقات عمل ورقية وصراخ بين المسارات.", "3 Ready": "3 جاهزة", "2 In progress": "2 قيد التنفيذ", "1 Waiting": "1 بالانتظار", "Live status for every job, on every phone.": "حالة مباشرة لكل مهمة، على كل جوال.", "Customers": "العملاء", "Who is this customer?": "من هذا العميل؟", "History lives in a notebook — or nowhere.": "السجل في دفتر — أو لا يوجد أصلاً.", "Omar · 12 visits": "عمر · 12 زيارة", "Plate, phone, past washes and oil changes.": "اللوحة والهاتف والغسلات وتغييرات الزيت السابقة.", "Payments": "المدفوعات", "The drawer never matches the day's sales.": "الدرج لا يطابق مبيعات اليوم أبداً.", "✓ Matched": "✓ مطابق", "Every payment against an invoice, by a named staff member.": "كل دفعة مقابل فاتورة، وباسم موظف محدد.", "Stock": "المخزون", "Out of shampoo.": "نفد الشامبو.", "Found out in the middle of a busy Saturday.": "اكتشفت ذلك في منتصف سبت مزدحم.", "Reorder car shampoo": "أعد طلب شامبو السيارات", "3 L left": "متبقٍ 3 لتر", "Low-stock alert at every branch — before you run out.": "تنبيه بانخفاض المخزون في كل فرع — قبل أن ينفد.", "Clean.": "نظّف.", "Check.": "افحص.", "Complete.": "أنجِز.", "Every car — in for a wash, an oil change or both — moves through three steps. Your team updates each job from the app. You see every step live on the dashboard.": "كل سيارة — سواء للغسيل أو تغيير الزيت أو كليهما — تمر بثلاث خطوات. فريقك يحدّث كل مهمة من التطبيق، وأنت ترى كل خطوة مباشرة على لوحة التحكم.", "Clean": "نظّف", "· check in": "· الاستلام", "Enter the plate, create the job and assign it — wash, oil change or both.": "أدخل رقم اللوحة، وأنشئ المهمة وعيّنها — غسيل أو تغيير زيت أو كلاهما.", "Check": "افحص", "· track work": "· متابعة العمل", "Staff tick off each step on their phone. You see progress live.": "يؤشر الموظفون على كل خطوة من جوالاتهم، وأنت ترى التقدم مباشرة.", "Complete": "أنجِز", "· invoice & pay": "· الفاتورة والدفع", "Create the invoice, enter the payment — saved to customer, staff and branch.": "أنشئ الفاتورة وسجّل الدفعة — تُحفظ للعميل والموظف والفرع.", "Foamia · Dubai Marina": "Foamia · دبي مارينا", "New job": "مهمة جديدة", "Check in a car": "استلام سيارة", "Omar Al Hashimi": "عمر الهاشمي", "Land Cruiser · Last visit 12 Sep · Oil change": "لاند كروزر · آخر زيارة 12 سبتمبر · تغيير زيت", "Services": "الخدمات", "✓ Full wash": "✓ غسيل كامل", "✓ Oil change 5W-30": "✓ تغيير زيت 5W-30", "Interior vacuum": "تنظيف داخلي بالمكنسة", "Polish": "تلميع", "Assigned to": "مُسندة إلى", "Ahmed · Bay 2": "أحمد · المسار 2", "Total": "الإجمالي", "Start job": "ابدأ المهمة", "Job · Ahmed · Bay 2": "مهمة · أحمد · المسار 2", "In progress": "قيد التنفيذ", "Pre-wash rinse": "شطف مبدئي", "Foam wash": "غسيل بالرغوة", "Oil change · 5W-30": "تغيير زيت · 5W-30", "Final check": "الفحص النهائي", "Next": "التالي", "Owner dashboard": "لوحة تحكم المالك", "● Updated live": "● محدّث مباشرة", "Invoice": "فاتورة", "Paid": "مدفوعة", "Full wash": "غسيل كامل", "Oil change 5W-30 + filter": "تغيير زيت 5W-30 + فلتر", "Payment": "الدفع", "Card · Ahmed's shift": "بطاقة · وردية أحمد", "Revenue today": "إيرادات اليوم", "Everything your car wash needs, in": "كل ما تحتاجه مغسلتك، في", "From the first wash to the final invoice — every part of your business, connected.": "من أول غسلة حتى آخر فاتورة — كل جزء من عملك، متصل.", "Operations": "العمليات", "Keep every car moving.": "اجعل كل سيارة تتحرك.", "Set up every wash service with your own prices and add-ons.": "أعدّ كل خدمات الغسيل بأسعارك وإضافاتك.", "Exterior wash": "غسيل خارجي", "Full wash & vacuum": "غسيل كامل وتنظيف داخلي", "Interior detail": "تنظيف داخلي عميق", "Track oil, filters and each car's next service due.": "تابع الزيت والفلاتر وموعد الخدمة القادمة لكل سيارة.", "Oil filter": "فلتر الزيت", "Next service due": "الخدمة القادمة", "Keep customer history, vehicles and every visit in one place.": "احفظ سجل العملاء وسياراتهم وكل زيارة في مكان واحد.", "12 Sep": "12 سبتمبر", "28 Aug": "28 أغسطس", "See every job live — waiting, in progress or ready.": "شاهد كل مهمة مباشرة — بالانتظار أو قيد التنفيذ أو جاهزة.", "Oil": "زيت", "Wash": "غسيل", "Ready": "جاهزة", "Money": "المال", "Know where every payment goes.": "اعرف أين تذهب كل دفعة.", "VAT-ready invoices in seconds — synced to ERPNext.": "فواتير متوافقة مع ضريبة القيمة المضافة في ثوانٍ — متزامنة مع ERPNext.", "Invoice #1042": "فاتورة #1042", "Full wash + oil change": "غسيل كامل + تغيير زيت", "VAT 5% included": "شاملة ضريبة القيمة المضافة 5%", "✓ Synced": "✓ متزامن", "Record card or cash payments, linked to staff and branch.": "سجّل المدفوعات بالبطاقة أو نقداً، مرتبطة بالموظف والفرع.", "Card": "بطاقة", "Cash": "نقداً", "Today": "اليوم", "Control": "التحكم", "Run every branch from one place.": "أدِر كل فروعك من مكان واحد.", "Give every staff member a login and the right role.": "امنح كل موظف حساب دخول والصلاحية المناسبة.", "Owner": "المالك", "Manager": "المدير", "Cashier": "الكاشير", "Technician": "الفني", "Run every location from one owner login.": "أدِر كل المواقع من حساب مالك واحد.", "Dubai Marina": "دبي مارينا", "Al Quoz": "القوز", "Sharjah": "الشارقة", "Track oil, filters and shampoo at every branch.": "تابع الزيت والفلاتر والشامبو في كل فرع.", "Engine oil · 5W-30": "زيت المحرك · 5W-30", "Oil filters": "فلاتر الزيت", "18 pcs": "18 قطعة", "Car shampoo": "شامبو السيارات", "3 L · Low": "3 لتر · منخفض", "42 L": "42 لتر", "Real results": "نتائج حقيقية", "What changes in the": "ما الذي يتغير في", "first month.": "الشهر الأول.", "An example of what changes for a typical 3-bay car wash in its first month on Foamia.": "مثال على ما يتغير في مغسلة نموذجية من 3 مسارات خلال شهرها الأول على Foamia.", "min": "دقائق", "To close the day — down from 2 hours": "لإغلاق اليوم — بدلاً من ساعتين", "Counting cash and matching it to sales used to take two hours. With every payment entered against an invoice, it takes five minutes.": "كان عدّ النقود ومطابقتها مع المبيعات يستغرق ساعتين. ومع تسجيل كل دفعة مقابل فاتورة، أصبح يستغرق خمس دقائق.", "Before": "قبل", "2 hours": "ساعتان", "5 min": "5 دقائق", "more cars per day": "سيارات أكثر يومياً", "faster invoicing": "فوترة أسرع", "3 min": "3 دقائق", "55 sec": "55 ثانية", "payments matched": "مدفوعات مطابقة", "Getting started": "البدء", "Live in": "جاهز خلال", "one week.": "أسبوع واحد.", "You don't need to be good with computers. Our team sets up your car wash with you, step by step.": "لا تحتاج لخبرة في الحاسوب. فريقنا يجهّز مغسلتك معك، خطوة بخطوة.", "Day 1": "اليوم 1", "Set up your centre": "جهّز مركزك", "We add your services and prices with you on a call.": "نضيف خدماتك وأسعارك معك في مكالمة.", "Day 2": "اليوم 2", "Add your staff": "أضف موظفيك", "Every staff member gets a login and role.": "كل موظف يحصل على حساب دخول وصلاحية.", "Day 3": "اليوم 3", "Load your stock": "أدخل مخزونك", "Oil, filters and supplies for each branch.": "الزيت والفلاتر والمستلزمات لكل فرع.", "Day 7 · You're live": "اليوم 7 · أنت جاهز", "Run your wash on Foamia": "أدِر مغسلتك على Foamia", "Jobs, invoices and payments update live from day one.": "المهام والفواتير والمدفوعات تتحدث مباشرة من اليوم الأول.", "Questions owners": "أسئلة", "ask.": "يطرحها الملاك.", "Can't find your answer?": "لم تجد إجابتك؟", "Talk to our team": "تحدث مع فريقنا", "Are Foamia invoices VAT-ready?": "هل فواتير Foamia متوافقة مع ضريبة القيمة المضافة؟", "Yes. Foamia creates VAT-ready invoices for every job, and it is connected to ERPNext — so invoices, payments and stock flow straight into your accounting without re-typing anything.": "نعم. ينشئ Foamia فواتير متوافقة مع ضريبة القيمة المضافة لكل مهمة، وهو متصل بـ ERPNext — فتنتقل الفواتير والمدفوعات والمخزون مباشرة إلى حساباتك دون إعادة إدخال أي شيء.", "Does Foamia handle oil changes as well as washing?": "هل يدعم Foamia تغيير الزيت إلى جانب الغسيل؟", "Yes. Car washing and oil change jobs run in the same app — you can even add both to one job and one invoice. Each car's oil change history is saved, so your team always knows what was done last time.": "نعم. مهام الغسيل وتغيير الزيت تعمل في نفس التطبيق — ويمكنك إضافتهما معاً في مهمة واحدة وفاتورة واحدة. ويُحفظ سجل تغيير الزيت لكل سيارة، فيعرف فريقك دائماً ما تم في المرة السابقة.", "What do I get — an app or a dashboard?": "ماذا أحصل — تطبيق أم لوحة تحكم؟", "Both. Your staff use the Foamia mobile app (iOS and Android) to check in cars, update jobs and take payments. You and your managers use the ERP dashboard in any web browser to see revenue, invoices, branches, staff and stock. Everything stays in sync in real time — no new hardware needed.": "كلاهما. يستخدم موظفوك تطبيق Foamia للجوال (iOS و Android) لاستلام السيارات وتحديث المهام وتحصيل المدفوعات. وتستخدم أنت ومديروك لوحة تحكم ERP من أي متصفح لمتابعة الإيرادات والفواتير والفروع والموظفين والمخزون. كل شيء متزامن لحظة بلحظة — دون الحاجة لأجهزة جديدة.", "How does Foamia stop cash going missing?": "كيف يمنع Foamia ضياع النقود؟", "Every payment is entered against an invoice by a named staff member. You can see who collected what, when and at which branch — so the day's totals always add up.": "تُسجَّل كل دفعة مقابل فاتورة وباسم موظف محدد. فترى من حصّل ماذا، ومتى، وفي أي فرع — فتتطابق مجاميع اليوم دائماً.", "Can I manage more than one branch?": "هل يمكنني إدارة أكثر من فرع؟", "Yes. Branch management lets you run every location from one owner login and compare jobs, invoices, payments and stock branch by branch.": "نعم. تتيح لك إدارة الفروع تشغيل كل المواقع من حساب مالك واحد، ومقارنة المهام والفواتير والمدفوعات والمخزون بين الفروع.", "Can I control what each staff member can see?": "هل يمكنني التحكم فيما يراه كل موظف؟", "Yes. With user management, every staff member gets their own login and role — owner, manager, cashier or technician — and only sees what their role allows.": "نعم. مع إدارة المستخدمين، يحصل كل موظف على حساب دخول وصلاحية خاصة به — مالك أو مدير أو كاشير أو فني — ولا يرى إلا ما تسمح به صلاحيته.", "How does stock management work?": "كيف تعمل إدارة المخزون؟", "Keep track of your oil, filters, shampoo and other supplies at each branch, so you always know what you have and what to reorder.": "تابع الزيت والفلاتر والشامبو وباقي المستلزمات في كل فرع، لتعرف دائماً ما لديك وما يجب إعادة طلبه.", "CLEAN. CHECK. COMPLETE.": "نظّف. افحص. أنجِز.", "See Foamia running": "شاهد Foamia وهو يدير", "your car wash.": "مغسلتك.", "Book a free 20-minute demo and see Foamia with your own services and prices — no commitment.": "احجز عرضاً مجانياً لمدة 20 دقيقة وشاهد Foamia بخدماتك وأسعارك — دون أي التزام.", "No commitment · Live in under a week": "دون التزام · جاهز خلال أقل من أسبوع", "The all-in-one app for car wash and oil change businesses — jobs, customers, invoices, payments, staff, branches and stock.": "التطبيق المتكامل لأعمال غسيل السيارات وتغيير الزيت — المهام والعملاء والفواتير والمدفوعات والموظفين والفروع والمخزون.", "Product": "المنتج", "Company": "الشركة", "About": "من نحن", "Contact": "تواصل معنا", "Support": "الدعم", "© 2026 Foamia Wash Tech. All rights reserved.": "© 2026 Foamia Wash Tech. جميع الحقوق محفوظة.", "Legal": "قانوني", "Privacy": "الخصوصية", "Terms": "الشروط", "Foamia — Clean. Check. Complete.": "Foamia — نظّف. افحص. أنجِز." };
+    const qsLang = new URLSearchParams(location.search).get('lang');
+    let lang = qsLang || (() => { try { return localStorage.getItem('lang'); } catch (e) { return null; } })() || 'en';
+    try { if (qsLang) localStorage.setItem('lang', qsLang); } catch (e) { }
+    document.querySelectorAll('[data-lang-toggle]').forEach(a => {
+      a.textContent = lang === 'ar' ? 'English' : 'عربي';
+      a.setAttribute('href', '?lang=' + (lang === 'ar' ? 'en' : 'ar'));
+    });
+    if (lang === 'ar') {
+      root.lang = 'ar';
+      root.dir = 'rtl';
+      const fl = document.createElement('link');
+      fl.rel = 'stylesheet';
+      fl.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap';
+      document.head.appendChild(fl);
+      const norm = t => t.replace(/\s+/g, ' ').trim();
+      const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode: n => n.parentElement && !n.parentElement.closest('script,style,svg') && n.textContent.trim() ? 1 : 2
+      });
+      const nodes = []; let tn;
+      while ((tn = tw.nextNode())) nodes.push(tn);
+      nodes.forEach(n => {
+        const k = norm(n.textContent);
+        if (AR[k]) {
+          const lead = /^\s/.test(n.textContent) ? ' ' : '', trail = /\s$/.test(n.textContent) ? ' ' : '';
+          n.textContent = lead + AR[k] + trail;
+        }
+      });
+      document.querySelectorAll('[aria-label],[alt]').forEach(e => {
+        ['aria-label', 'alt'].forEach(at => { const v = e.getAttribute(at); if (v && AR[v.trim()]) e.setAttribute(at, AR[v.trim()]); });
+      });
+      document.title = 'Foamia — تطبيق إدارة مغاسل السيارات';
+    }
+
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Loader: wait for fonts (min 0.9s, max 2.5s), then start the hero line reveal
@@ -8817,7 +9166,89 @@
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
     frame();
 
+
+    // ================= Motion layer v2 =================
+    // 1. Split section headings into words and reveal them in sequence
+    document.querySelectorAll('.shead h2, .sec-head h2, .cta-box h2').forEach(h => {
+      let n = 0;
+      (function walk(node) {
+        [...node.childNodes].forEach(c => {
+          if (c.nodeType === 3) {
+            const f = document.createDocumentFragment();
+            c.textContent.split(/(\s+)/).forEach(w => {
+              if (!w) return;
+              if (/^\s+$/.test(w)) { f.appendChild(document.createTextNode(w)); return; }
+              const sp = document.createElement('span');
+              sp.className = 'sw'; sp.style.setProperty('--i', n++); sp.textContent = w;
+              f.appendChild(sp);
+            });
+            c.replaceWith(f);
+          } else if (c.nodeType === 1) walk(c);
+        });
+      })(h);
+      new IntersectionObserver(([e], o) => { if (e.isIntersecting) { h.classList.add('split-in'); o.disconnect(); } },
+        { threshold: .4 }).observe(h);
+    });
+
+    // 2. Dark panels open up as they enter
+    document.querySelectorAll('.flow.sec, .proof.sec').forEach(el => {
+      el.classList.add('grow-panel');
+      new IntersectionObserver(([e], o) => { if (e.isIntersecting) { el.classList.add('panel-in'); o.disconnect(); } },
+        { threshold: .08 }).observe(el);
+    });
+
+    if (!reduce) {
+      // 3. Hero video widens as you scroll past the headline
+      const hvv = document.querySelector('.hx-video');
+      if (hvv) {
+        const grow = () => {
+          const p = Math.min(1, Math.max(0, scrollY / (innerHeight * .6)));
+          hvv.style.transform = `scale(${(0.94 + p * .06).toFixed(4)})`;
+        };
+        addEventListener('scroll', grow, { passive: true }); grow();
+      }
+
+      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (fine) {
+        // 4. Magnetic primary buttons
+        document.querySelectorAll('.btn-red, .btn-ink').forEach(b => {
+          b.classList.add('magnetic');
+          b.addEventListener('mousemove', e => {
+            const r = b.getBoundingClientRect();
+            b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .3}px)`;
+          });
+          b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+        });
+
+        // 5. Subtle 3D tilt on cards
+        document.querySelectorAll('.ba-tile, .rs-card, .rs-hero, .wt-screen, .ip-card, .gs-goal').forEach(c => {
+          c.classList.add('tilt');
+          c.addEventListener('mousemove', e => {
+            const r = c.getBoundingClientRect();
+            c.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 5 + 'deg');
+            c.style.setProperty('--rx', -((e.clientY - r.top) / r.height - .5) * 5 + 'deg');
+          });
+          c.addEventListener('mouseleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
+        });
+      }
+    }
+
+    // 6. Highlight the nav link of the section in view
+    const navMap = [...document.querySelectorAll('.nav-links a')].map(a => [a, document.querySelector(a.getAttribute('href'))]).filter(x => x[1]);
+    const navSpy = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      navMap.forEach(([a, sec]) => a.classList.toggle('active', sec === e.target));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    navMap.forEach(([, sec]) => navSpy.observe(sec));
   </script>
 </body>
+<!-- I need from you:
+
+Real rating and customer count.
+A real testimonial.
+Pricing approach.
+Whether Foamia supports Arabic, VAT/ZATCA and data import.
+Support details.
+Your WhatsApp number for the demo buttons. -->
 
 </html>
